@@ -631,6 +631,19 @@
     margin-bottom: 1rem;
   }
   .form-success.show { display: block; }
+  .form-error {
+    display: none;
+    padding: 1rem;
+    background: rgba(248, 113, 113, 0.1);
+    border: 1px solid #F87171;
+    border-radius: 4px;
+    color: #F87171;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .form-error.show { display: block; }
+  .btn:disabled { opacity: 0.55; cursor: not-allowed; }
 
   /* ---------- Footer ---------- */
   footer {
@@ -692,7 +705,7 @@
       <a href="#services">Services</a>
       <a href="#industries">Industries</a>
       <a href="#process">Process</a>
-      <a href="#contact" class="nav-cta">GET A QUOTE</a>
+      <a href="/quote" class="nav-cta">GET A QUOTE</a>
     </div>
   </div>
 </nav>
@@ -712,8 +725,8 @@
         Discovery call. Requirements intake. Fixed quote. Clear timeline. Draft review. Final delivery. Every project tailored to what you actually need — nothing you don't. AI-accelerated. Human-crafted. Priced for real budgets.
       </p>
       <div class="hero-cta">
-        <a href="#contact" class="btn btn-primary">
-          Get a quote
+        <a href="/quote" class="btn btn-primary">
+          Get a quote in 2 minutes
           <span class="arrow">→</span>
         </a>
         <a href="#process" class="btn btn-secondary">How it works</a>
@@ -885,8 +898,9 @@
     </div>
 
     <div class="contact-grid">
-      <form class="contact-form" id="contact-form" onsubmit="event.preventDefault(); document.getElementById('form-success').classList.add('show'); this.reset();">
+      <form class="contact-form" id="contact-form">
         <div class="form-success" id="form-success">✓ Thanks — we'll be in touch within 24 hours.</div>
+        <div class="form-error" id="form-error">Something went wrong. Please email us directly at hello@dkinstaweb.com.</div>
         <div class="form-row form-row-split">
           <div>
             <label for="first-name">First name</label>
@@ -901,7 +915,11 @@
           <label for="email">Email</label>
           <input type="email" id="email" name="email" required>
         </div>
-        <button type="submit" class="btn btn-primary form-submit">
+        <div class="form-row">
+          <label for="description">Tell us about your project</label>
+          <textarea id="description" name="description" placeholder="A few lines about what you need, roughly when, and any sites you like." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary form-submit" id="submit-btn">
           Submit
           <span class="arrow">→</span>
         </button>
@@ -958,6 +976,40 @@
   </div>
 </footer>
 
-<!-- build: 2026-09-04 redeploy -->
+<script>
+  document.getElementById('contact-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = document.getElementById('submit-btn');
+    const ok = document.getElementById('form-success');
+    const err = document.getElementById('form-error');
+
+    ok.classList.remove('show');
+    err.classList.remove('show');
+    btn.disabled = true;
+
+    const payload = {
+      first_name: form.querySelector('#first-name').value.trim(),
+      last_name: form.querySelector('#last-name').value.trim(),
+      email: form.querySelector('#email').value.trim(),
+      description: form.querySelector('#description').value.trim()
+    };
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error('Request failed');
+      ok.classList.add('show');
+      form.reset();
+    } catch (_) {
+      err.classList.add('show');
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
 </body>
 </html>
