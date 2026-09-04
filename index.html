@@ -911,9 +911,15 @@
             <input type="text" id="last-name" name="last-name" required>
           </div>
         </div>
-        <div class="form-row">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required>
+        <div class="form-row form-row-split">
+          <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div>
+            <label for="phone">Phone <span style="text-transform:none;letter-spacing:0;color:var(--muted-2)">(optional)</span></label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel">
+          </div>
         </div>
         <div class="form-row">
           <label for="description">Tell us about your project</label>
@@ -992,6 +998,7 @@
       first_name: form.querySelector('#first-name').value.trim(),
       last_name: form.querySelector('#last-name').value.trim(),
       email: form.querySelector('#email').value.trim(),
+      phone: form.querySelector('#phone').value.trim(),
       description: form.querySelector('#description').value.trim()
     };
 
