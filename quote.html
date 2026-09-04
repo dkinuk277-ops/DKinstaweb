@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get a quote — DK Instaweb</title>
+<meta name="description" content="Answer seven quick questions and see indicative pricing for your website build. Fixed quote confirmed within 24 hours.">
+<meta name="theme-color" content="#0A1428">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A1428; --bg-2:#0F1D38;
+    --surface:rgba(255,255,255,.03); --surface-2:rgba(255,255,255,.06);
+    --accent:#F59E0B; --accent-hot:#FBBF24;
+    --text:#F0EDE4; --text-strong:#FFF9EC;
+    --muted:#8B95A5; --muted-2:#6B7688;
+    --line:rgba(255,255,255,.08); --line-strong:rgba(255,255,255,.14);
+    --font-display:'Sora',sans-serif; --font-body:'Inter',sans-serif; --font-mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh}
+  body::before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0}
+
+  .wrap{max-width:820px;margin:0 auto;padding:2.5rem 1.5rem 5rem;position:relative;z-index:1;transition:max-width .3s}
+  .wrap.wide{max-width:1340px}
+
+  header{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:2.5rem}
+  .home-link{display:flex;align-items:center;gap:.55rem;text-decoration:none}
+  .back-home{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.08em;color:var(--muted-2);text-decoration:none;border:1px solid var(--line-strong);padding:.45rem .8rem;border-radius:3px;transition:all .18s}
+  .back-home:hover{color:var(--accent);border-color:var(--accent)}
+  .badge{background:var(--accent);color:var(--bg);padding:4px 8px;border-radius:3px;font-size:.72rem;letter-spacing:.14em;font-weight:700;font-family:var(--font-mono)}
+  .brand{font-family:var(--font-display);font-weight:600;font-size:1.1rem;color:var(--text-strong)}
+
+  .progress-wrap{margin-bottom:2.5rem}
+  .progress-meta{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2);margin-bottom:.6rem}
+  .progress-bar{height:3px;background:var(--surface-2);border-radius:2px;overflow:hidden}
+  .progress-fill{height:100%;background:var(--accent);width:0;transition:width .35s ease}
+
+  .step{display:none;animation:fade .3s ease}
+  .step.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  .q-eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.85rem}
+  h2{font-family:var(--font-display);font-size:clamp(1.5rem,3.2vw,2.15rem);font-weight:500;letter-spacing:-.02em;line-height:1.15;color:var(--text-strong);margin-bottom:.6rem}
+  .q-help{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+
+  .options{display:grid;gap:.7rem;margin-bottom:2rem}
+  .options.two{grid-template-columns:1fr 1fr}
+  @media(max-width:600px){.options.two{grid-template-columns:1fr}}
+
+  .opt{display:flex;align-items:flex-start;gap:.85rem;padding:1.05rem 1.15rem;background:var(--surface);border:1px solid var(--line);border-radius:5px;cursor:pointer;transition:border-color .18s,background .18s;text-align:left}
+  .opt:hover{border-color:var(--line-strong);background:var(--surface-2)}
+  .opt.selected{border-color:var(--accent);background:rgba(245,158,11,.07)}
+  .opt-mark{flex-shrink:0;width:18px;height:18px;border:1.5px solid var(--line-strong);border-radius:50%;margin-top:2px;position:relative;transition:border-color .18s}
+  .opt.multi .opt-mark{border-radius:3px}
+  .opt.selected .opt-mark{border-color:var(--accent)}
+  .opt.selected .opt-mark::after{content:"";position:absolute;inset:3px;background:var(--accent);border-radius:inherit}
+  .opt-body{flex:1}
+  .opt-title{font-family:var(--font-display);font-size:1rem;font-weight:500;color:var(--text-strong);letter-spacing:-.005em;display:block}
+  .opt-desc{font-size:.85rem;color:var(--muted);margin-top:.15rem;display:block}
+
+  .nav-row{display:flex;justify-content:space-between;gap:1rem;padding-top:1.5rem;border-top:1px solid var(--line)}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.4rem;border-radius:3px;font-family:var(--font-body);font-weight:600;font-size:.92rem;cursor:pointer;border:1.5px solid transparent;transition:all .18s}
+  .btn-primary{background:var(--accent);color:var(--bg);border-color:var(--accent);font-weight:700}
+  .btn-primary:hover{background:var(--accent-hot);border-color:var(--accent-hot)}
+  .btn-primary:disabled{opacity:.35;cursor:not-allowed}
+  .btn-ghost{background:transparent;color:var(--muted);border-color:var(--line-strong)}
+  .btn-ghost:hover{color:var(--text);border-color:var(--muted)}
+  .btn-outline{background:transparent;color:var(--text);border-color:var(--line-strong);font-weight:600}
+  .btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+
+  .result-head{text-align:center;margin-bottom:2.25rem}
+  .summary-chips{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;margin-top:1.25rem}
+  .chip{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.06em;padding:.35rem .65rem;background:var(--surface-2);border:1px solid var(--line);border-radius:100px;color:var(--muted)}
+
+  .scope-bar{display:flex;align-items:center;gap:1rem;padding:1rem 1.35rem;background:var(--surface);border:1px solid var(--line);border-radius:5px;margin-bottom:2rem;flex-wrap:wrap}
+  .scope-label{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2)}
+  .scope-val{font-family:var(--font-display);font-size:1.05rem;font-weight:500;color:var(--accent)}
+  .scope-meter{flex:1;min-width:140px;height:4px;background:var(--surface-2);border-radius:2px;overflow:hidden}
+  .scope-meter span{display:block;height:100%;background:var(--accent);transition:width .5s ease}
+
+  .plans{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem;align-items:stretch}
+  @media(max-width:1080px){.plans{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:620px){.plans{grid-template-columns:1fr;max-width:460px;margin-left:auto;margin-right:auto}}
+  .plan.dim{opacity:.62}
+  .plan.dim:hover{opacity:1;transition:opacity .2s}
+
+  .plan{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:1.45rem;display:flex;flex-direction:column;position:relative}
+  .plan.rec{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 14px 44px -14px rgba(245,158,11,.35);background:rgba(245,158,11,.04)}
+  .rec-tag{position:absolute;top:-11px;left:1.45rem;background:var(--accent);color:var(--bg);font-family:var(--font-mono);font-size:.62rem;font-weight:700;letter-spacing:.12em;padding:3px 9px;border-radius:2px;white-space:nowrap}
+  .plan-name{font-family:var(--font-display);font-size:1.3rem;font-weight:500;color:var(--text-strong);letter-spacing:-.015em}
+  .plan-scale{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);margin-top:.35rem}
+  .plan-tagline{font-size:.85rem;color:var(--muted);margin-top:.6rem;min-height:3.4em;line-height:1.5}
+  .plan-price{padding:1.1rem 0;margin:1.1rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .plan-from{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2);display:block;margin-bottom:.35rem}
+  .plan-amt{font-family:var(--font-display);font-size:1.9rem;font-weight:500;letter-spacing:-.03em;line-height:1;color:var(--text-strong)}
+  .plan-timeline{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;color:var(--accent);text-transform:uppercase;margin-bottom:1.1rem}
+  .plan-feats{list-style:none;display:flex;flex-direction:column;gap:.55rem;flex-grow:1;margin-bottom:1.4rem}
+  .plan-feats li{font-size:.85rem;color:var(--text);padding-left:1.25rem;position:relative;line-height:1.45}
+  .plan-feats li::before{content:"";position:absolute;left:0;top:.52rem;width:7px;height:2px;background:var(--accent)}
+  .plan-feats li.extra{color:var(--accent-hot)}
+  .plan-cta{width:100%;justify-content:center}
+
+  .result-note{padding:1.2rem 1.4rem;background:var(--surface);border-left:3px solid var(--accent);border-radius:2px;font-size:.9rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.6}
+  .result-note strong{color:var(--text)}
+  .restart{display:block;text-align:center;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.08em;color:var(--muted-2);background:none;border:none;cursor:pointer;margin:0 auto;text-transform:uppercase}
+  .restart:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <header>
+    <a href="/" class="home-link">
+      <span class="badge">DK</span>
+      <span class="brand">Instaweb</span>
+    </a>
+    <a href="/" class="back-home">← Back to site</a>
+  </header>
+
+  <div class="progress-wrap" id="progress-wrap">
+    <div class="progress-meta">
+      <span id="step-count">Question 1 of 7</span>
+      <span id="step-pct">0%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  </div>
+
+  <div class="step active" data-step="0">
+    <div class="q-eyebrow">About you</div>
+    <h2>Who is this website for?</h2>
+    <p class="q-help">Helps us pitch the scope and tone correctly.</p>
+    <div class="options two" data-key="orgType" data-mode="single">
+      <button class="opt" data-val="individual" data-w="0"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Individual / freelancer</span><span class="opt-desc">Personal brand, portfolio, solo practice</span></span></button>
+      <button class="opt" data-val="small" data-w="1"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Small business</span><span class="opt-desc">1–20 people</span></span></button>
+      <button class="opt" data-val="medium" data-w="3"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Medium business</span><span class="opt-desc">20–250 people</span></span></button>
+      <button class="opt" data-val="large" data-w="5"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Large organisation</span><span class="opt-desc">250+ people or multi-site</span></span></button>
+      <button class="opt" data-val="ngo" data-w="2"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">NGO / charity</span><span class="opt-desc">Non-profit or community organisation</span></span></button>
+      <button class="opt" data-val="gov" data-w="5"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Government / public sector</span><span class="opt-desc">Accessibility and compliance needed</span></span></button>
+    </div>
+    <div class="nav-row"><span></span><button class="btn btn-primary" data-next disabled>Continue <span>→</span></button></div>
+  </div>
+
+  <div class="step" data-step="1">
+    <div class="q-eyebrow">Sector</div>
+    <h2>What industry are you in?</h2>
+    <p class="q-help">Different sectors need different structures and proof points.</p>
+    <div class="options two" data-key="industry" data-mode="single">
+      <button class="opt" data-val="realestate" data-w="2"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Real estate / property</span><span class="opt-desc">Developers, agents, lettings</span></span></button>
+      <button class="opt" data-val="services" data-w="1"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Professional services</span><span class="opt-desc">Consulting, legal, accounting, trades</span></span></button>
+      <button class="opt" data-val="saas" data-w="3"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Startup / SaaS / tech</span><span class="opt-desc">Product or platform business</span></span></button>
+      <button class="opt" data-val="manufacturing" data-w="2"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Manufacturing / industrial</span><span class="opt-desc">Capability, catalogue, technical specs</span></span></button>
+      <button class="opt" data-val="retail" data-w="2"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Retail / hospitality</span><span class="opt-desc">Shops, restaurants, salons, venues</span></span></button>
+      <button class="opt" data-val="other" data-w="1"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Something else</span><span class="opt-desc">Tell us on the call</span></span></button>
+    </div>
+    <div class="nav-row"><button class="btn btn-ghost" data-back>← Back</button><button class="btn btn-primary" data-next disabled>Continue <span>→</span></button></div>
+  </div>
+
+  <div class="step" data-step="2">
+    <div class="q-eyebrow">Scale</div>
+    <h2>Roughly how many pages do you need?</h2>
+    <p class="q-help">A best guess is fine — we'll confirm on the discovery call.</p>
+    <div class="options" data-key="pages" data-mode="single">
+      <button class="opt" data-val="1-3" data-w="0"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">1–3 pages</span><span class="opt-desc">A focused marketing site or single landing page</span></span></button>
+      <button class="opt" data-val="4-5" data-w="4"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">4–5 pages</span><span class="opt-desc">Home, about, services, blog, contact</span></span></button>
+      <button class="opt" data-val="6-10" data-w="8"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">6–10 pages</span><span class="opt-desc">Multi-section site with real navigation depth</span></span></button>
+      <button class="opt" data-val="10+" data-w="12"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">More than 10 pages</span><span class="opt-desc">Large site, or not sure yet</span></span></button>
+    </div>
+    <div class="nav-row"><button class="btn btn-ghost" data-back>← Back</button><button class="btn btn-primary" data-next disabled>Continue <span>→</span></button></div>
+  </div>
+
+  <div class="step" data-step="3">
+    <div class="q-eyebrow">Purpose</div>
+    <h2>What should the website do for you?</h2>
+    <p class="q-help">Pick the single most important goal.</p>
+    <div class="options" data-key="purpose" data-mode="single">
+      <button class="opt" data-val="credibility" data-w="0"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Look credible</span><span class="opt-desc">A professional presence people can check you out on</span></span></button>
+      <button class="opt" data-val="leads" data-w="2"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Generate leads &amp; enquiries</span><span class="opt-desc">Marketing site built to convert visitors into contacts</span></span></button>
+      <button class="opt" data-val="content" data-w="3"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Publish content regularly</span><span class="opt-desc">Blog, newsletter, or resource library</span></span></button>
+      <button class="opt" data-val="ecommerce" data-w="7"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Sell online</span><span class="opt-desc">Products, bookings, or payments</span></span></button>
+      <button class="opt" data-val="donations" data-w="5"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Raise funds / recruit volunteers</span><span class="opt-desc">Donations, campaigns, impact reporting</span></span></button>
+      <button class="opt" data-val="portal" data-w="10"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Portal or web application</span><span class="opt-desc">Logins, dashboards, member or client areas</span></span></button>
+    </div>
+    <div class="nav-row"><button class="btn btn-ghost" data-back>← Back</button><button class="btn btn-primary" data-next disabled>Continue <span>→</span></button></div>
+  </div>
+
+  <div class="step" data-step="4">
+    <div class="q-eyebrow">Content</div>
+    <h2>What needs to go on the site?</h2>
+    <p class="q-help">Select everything that applies.</p>
+    <div class="options two" data-key="features" data-mode="multi">
+      <button class="opt multi" data-val="about" data-w="0"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">About / services pages</span></span></button>
+      <button class="opt multi" data-val="gallery" data-w="1"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Portfolio / project gallery</span></span></button>
+      <button class="opt multi" data-val="blog" data-w="2"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Blog / news section</span></span></button>
+      <button class="opt multi" data-val="newsletter" data-w="2"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Newsletter signup</span></span></button>
+      <button class="opt multi" data-val="team" data-w="1"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Team / careers pages</span></span></button>
+      <button class="opt multi" data-val="booking" data-w="3"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Booking or scheduling</span></span></button>
+      <button class="opt multi" data-val="payments" data-w="4"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Payments or donations</span></span></button>
+      <button class="opt multi" data-val="cms" data-w="2"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Edit content myself (CMS)</span></span></button>
+      <button class="opt multi" data-val="visuals" data-w="2"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Professional visuals &amp; imagery</span></span></button>
+      <button class="opt multi" data-val="multilang" data-w="3"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Multiple languages</span></span></button>
+    </div>
+    <div class="nav-row"><button class="btn btn-ghost" data-back>← Back</button><button class="btn btn-primary" data-next disabled>Continue <span>→</span></button></div>
+  </div>
+
+  <div class="step" data-step="5">
+    <div class="q-eyebrow">Assets</div>
+    <h2>Do you have your content ready?</h2>
+    <p class="q-help">Text, images, and logo. Being honest here keeps the timeline realistic.</p>
+    <div class="options" data-key="content" data-mode="single">
+      <button class="opt" data-val="ready" data-w="0"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Yes, all of it</span><span class="opt-desc">Copy, images, and branding are done</span></span></button>
+      <button class="opt" data-val="partial" data-w="2"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Some of it</span><span class="opt-desc">We have bits, need help with the rest</span></span></button>
+      <button class="opt" data-val="none" data-w="4"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Nothing yet</span><span class="opt-desc">We'd like help writing and sourcing everything</span></span></button>
+    </div>
+    <div class="nav-row"><button class="btn btn-ghost" data-back>← Back</button><button class="btn btn-primary" data-next disabled>Continue <span>→</span></button></div>
+  </div>
+
+  <div class="step" data-step="6">
+    <div class="q-eyebrow">After launch</div>
+    <h2>What do you need once it's live?</h2>
+    <p class="q-help">Most clients want us to keep it running. Some prefer to take it over.</p>
+    <div class="options" data-key="ongoing" data-mode="single">
+      <button class="opt" data-val="handover" data-w="0"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Hand it over completely</span><span class="opt-desc">We'll take the files and run it ourselves</span></span></button>
+      <button class="opt" data-val="hosting" data-w="1"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Just hosting</span><span class="opt-desc">Keep it online and secure, we'll manage content</span></span></button>
+      <button class="opt" data-val="full" data-w="3"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Hosting, updates and support</span><span class="opt-desc">We handle everything — you never touch it</span></span></button>
+      <button class="opt" data-val="managed" data-w="6"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Fully managed, end to end</span><span class="opt-desc">Build, hosting, SEO, ongoing improvements</span></span></button>
+    </div>
+    <div class="nav-row"><button class="btn btn-ghost" data-back>← Back</button><button class="btn btn-primary" data-next>See my plans <span>→</span></button></div>
+  </div>
+
+  <div class="step" data-step="7" id="result">
+    <div class="result-head">
+      <div class="q-eyebrow">Your recommendation</div>
+      <h2 id="result-title">Three ways to build this.</h2>
+      <p class="q-help" id="result-sub" style="margin-bottom:0">Based on what you told us. Final price is fixed after a short discovery call.</p>
+      <div class="summary-chips" id="summary-chips"></div>
+    </div>
+
+    <div class="scope-bar">
+      <span class="scope-label">Assessed scope</span>
+      <span class="scope-val" id="scope-val">—</span>
+      <span class="scope-meter"><span id="scope-fill" style="width:0"></span></span>
+    </div>
+
+    <div class="plans" id="plans"></div>
+
+    <div class="result-note">
+      <strong>These are starting estimates, not a final quote.</strong> Prices depend on final page count, content complexity, and any integrations. Request a quote and we'll confirm a fixed price within 24 hours — no obligation, and it doesn't change once you approve it.
+    </div>
+
+    <button class="restart" onclick="location.reload()">↺ Start over</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  const answers = {};
+  let step = 0;
+  const TOTAL = 7;
+  const steps = [...document.querySelectorAll('.step')];
+
+  const TIERS = [
+    {
+      name:'Starter', scale:'1–3 pages', priceLabel:'£250', time:'Live in 3–5 days',
+      tag:'A focused, high-level marketing site that gets you online and looking credible.',
+      feats:['Up to 3 pages','Mobile-first responsive design','Contact form + enquiry routing','Basic on-page SEO','SSL, backups, uptime monitoring','Domain connection and setup']
+    },
+    {
+      name:'Growth', scale:'Up to 5 pages', priceLabel:'£750', time:'Live in 7–10 days',
+      tag:'Room for real content — blog, newsletter, multi-tab navigation and professional visuals.',
+      feats:['Up to 5 pages with full navigation','Everything in Starter','Blog / news section','Newsletter signup integration','CMS so you can edit content','Professional content and visuals','Advanced SEO + schema markup','30 days post-launch support']
+    },
+    {
+      name:'Professional', scale:'Up to 10 pages', priceLabel:'£1,000–1,250', time:'Live in 2–3 weeks',
+      tag:'A substantial site with deep navigation, custom design and hands-on support throughout.',
+      feats:['Up to 10 pages / sections','Everything in Growth','Bespoke design system to your brand','Advanced navigation and page structure','Professional imagery and visual content','Discovery call + design workshop','Analytics and conversion tracking','Accessibility pass (WCAG 2.2)','90 days support with priority response']
+    },
+    {
+      name:'Managed', scale:'End to end', priceLabel:'£1,500–2,000+', time:'3–6 weeks',
+      tag:'The full service — we build it, host it, maintain it and keep improving it. You never touch it.',
+      feats:['Scope tailored to your requirements','Everything in Professional','Custom functionality and integrations','Fully managed hosting included','Ongoing maintenance and updates','Ongoing SEO and improvements','Priority support with response SLA','Monthly reporting','12 months managed service included']
+    }
+  ];
+
+  function totalWeight(){
+    let w = 0;
+    document.querySelectorAll('.opt.selected').forEach(o => w += parseInt(o.dataset.w||0,10));
+    return w;
+  }
+
+  function updateProgress(){
+    const wrap = document.getElementById('progress-wrap');
+    if(step >= TOTAL){ wrap.style.display='none'; return; }
+    wrap.style.display='block';
+    const pct = Math.round((step/TOTAL)*100);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('step-count').textContent = 'Question ' + (step+1) + ' of ' + TOTAL;
+    document.getElementById('step-pct').textContent = pct + '%';
+  }
+
+  function show(i){
+    steps.forEach(s => s.classList.remove('active'));
+    steps[i].classList.add('active');
+    step = i;
+    if(i >= TOTAL) document.getElementById('wrap').classList.add('wide');
+    updateProgress();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  document.querySelectorAll('.options').forEach(group => {
+    const key = group.dataset.key;
+    const multi = group.dataset.mode === 'multi';
+    group.querySelectorAll('.opt').forEach(opt => {
+      opt.addEventListener('click', () => {
+        if(multi){
+          opt.classList.toggle('selected');
+          answers[key] = [...group.querySelectorAll('.opt.selected')].map(o=>o.dataset.val);
+        } else {
+          group.querySelectorAll('.opt').forEach(o=>o.classList.remove('selected'));
+          opt.classList.add('selected');
+          answers[key] = opt.dataset.val;
+        }
+        const nextBtn = group.closest('.step').querySelector('[data-next]');
+        const has = multi ? (answers[key]||[]).length > 0 : !!answers[key];
+        nextBtn.disabled = !has;
+      });
+    });
+  });
+
+  document.querySelectorAll('[data-next]').forEach(b => b.addEventListener('click', () => {
+    if(step === TOTAL-1){ buildResult(); show(TOTAL); }
+    else show(step+1);
+  }));
+  document.querySelectorAll('[data-back]').forEach(b => b.addEventListener('click', () => show(step-1)));
+
+  const LABELS = {
+    individual:'Individual', small:'Small business', medium:'Medium business', large:'Large organisation', ngo:'NGO / charity', gov:'Public sector',
+    realestate:'Real estate', services:'Professional services', saas:'SaaS / tech', manufacturing:'Manufacturing', retail:'Retail / hospitality', other:'Other sector',
+    '1-3':'1–3 pages','4-5':'4–5 pages','6-10':'6–10 pages','10+':'10+ pages',
+    credibility:'Credibility', leads:'Lead generation', content:'Content publishing', ecommerce:'Sell online', donations:'Fundraising', portal:'Portal / app',
+    ready:'Content ready', partial:'Some content', none:'Needs content help',
+    handover:'Handover', hosting:'Hosting only', full:'Hosting + support', managed:'Fully managed'
+  };
+
+  function buildResult(){
+    const w = totalWeight();
+    const feats = answers.features || [];
+
+    var recIdx, scopeLabel, scopePct;
+    if(w <= 7){ recIdx=0; scopeLabel='Light'; scopePct=22; }
+    else if(w <= 16){ recIdx=1; scopeLabel='Moderate'; scopePct=45; }
+    else if(w <= 27){ recIdx=2; scopeLabel='Substantial'; scopePct=72; }
+    else { recIdx=3; scopeLabel='Complex'; scopePct=95; }
+
+    document.getElementById('scope-val').textContent = scopeLabel;
+    document.getElementById('scope-fill').style.width = scopePct + '%';
+
+    const extras = [];
+    if(answers.content === 'none') extras.push('Full copywriting and image sourcing');
+    else if(answers.content === 'partial') extras.push('Content support where you need it');
+    if(feats.indexOf('multilang') > -1) extras.push('Multi-language setup');
+    if(feats.indexOf('payments') > -1) extras.push('Payment / donation processing');
+    if(feats.indexOf('booking') > -1) extras.push('Booking and scheduling system');
+    if(answers.orgType === 'gov' || answers.orgType === 'ngo') extras.push('Accessibility and compliance review');
+    if(answers.purpose === 'portal') extras.push('User accounts and secure login');
+
+    const chips = document.getElementById('summary-chips');
+    chips.innerHTML = '';
+    ['orgType','industry','pages','purpose','ongoing'].forEach(function(k){
+      if(answers[k]) chips.insertAdjacentHTML('beforeend', '<span class="chip">' + (LABELS[answers[k]]||answers[k]) + '</span>');
+    });
+    if(feats.length) chips.insertAdjacentHTML('beforeend', '<span class="chip">' + feats.length + ' content area' + (feats.length>1?'s':'') + '</span>');
+
+    const container = document.getElementById('plans');
+    container.innerHTML = TIERS.map(function(t, i){
+      const isRec = i === recIdx;
+      const extraLis = isRec ? extras.slice(0,3).map(function(e){ return '<li class="extra">' + e + '</li>'; }).join('') : '';
+      return '<div class="plan' + (isRec ? ' rec' : ' dim') + '">' +
+        (isRec ? '<span class="rec-tag">BEST FIT FOR YOU</span>' : '') +
+        '<div class="plan-name">' + t.name + '</div>' +
+        '<div class="plan-scale">' + t.scale + '</div>' +
+        '<div class="plan-tagline">' + t.tag + '</div>' +
+        '<div class="plan-price"><span class="plan-from">From</span><span class="plan-amt">' + t.priceLabel + '</span></div>' +
+        '<div class="plan-timeline">' + t.time + '</div>' +
+        '<ul class="plan-feats">' + t.feats.map(function(f){ return '<li>' + f + '</li>'; }).join('') + extraLis + '</ul>' +
+        '<a href="/#contact" class="btn ' + (isRec ? 'btn-primary' : 'btn-outline') + ' plan-cta" data-plan="' + t.name + '">Request this quote</a>' +
+      '</div>';
+    }).join('');
+
+    const titles = {
+      'Light':'Starter is the right fit for you.',
+      'Moderate':'Growth is the right fit for you.',
+      'Substantial':'Professional is the right fit for you.',
+      'Complex':'Managed is the right fit for you.'
+    };
+    document.getElementById('result-title').textContent = titles[scopeLabel];
+    document.getElementById('result-sub').textContent =
+      'Every plan is shown below — we\'ve highlighted the one that matches your answers. You can pick any of them.';
+  }
+
+  updateProgress();
+})();
+</script>
+</body>
+</html>
