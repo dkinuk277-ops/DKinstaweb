@@ -59,6 +59,25 @@
   .opt-title{font-family:var(--font-display);font-size:1rem;font-weight:500;color:var(--text-strong);letter-spacing:-.005em;display:block}
   .opt-desc{font-size:.85rem;color:var(--muted);margin-top:.15rem;display:block}
 
+  .field-reveal{display:none;margin:-1rem 0 2rem}
+  .field-reveal.show{display:block;animation:fade .25s ease}
+  .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem}
+  @media(max-width:600px){.field-grid{grid-template-columns:1fr}}
+  .field{display:flex;flex-direction:column}
+  .field label,.field-reveal label{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.45rem}
+  .field input,.field-reveal input{width:100%;padding:.8rem .95rem;background:var(--surface);border:1px solid var(--line-strong);border-radius:4px;color:var(--text);font-family:var(--font-body);font-size:.97rem;transition:border-color .18s,background .18s}
+  .field input:focus,.field-reveal input:focus{outline:none;border-color:var(--accent);background:var(--surface-2)}
+  .field-error{display:none;color:#F87171;font-size:.82rem;margin-top:.45rem}
+  .field-error.show{display:block}
+  .contact-screen{text-align:center;max-width:560px;margin:0 auto;padding:1rem 0 2rem}
+  .contact-icon{width:56px;height:56px;margin:0 auto 1.5rem;border-radius:50%;background:rgba(245,158,11,.1);border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;color:var(--accent)}
+  .contact-screen h2{margin-bottom:.85rem}
+  .contact-screen p{color:var(--muted);font-size:.97rem;line-height:1.65;margin-bottom:1.5rem}
+  .contact-recap{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:1.25rem 1.4rem;margin-bottom:1.75rem}
+  .recap-row{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 0;font-size:.88rem;border-bottom:1px solid var(--line)}
+  .recap-row:last-child{border-bottom:none}
+  .recap-k{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2);flex-shrink:0}
+  .recap-v{color:var(--text);text-align:right}
   .nav-row{display:flex;justify-content:space-between;gap:1rem;padding-top:1.5rem;border-top:1px solid var(--line)}
   .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.4rem;border-radius:3px;font-family:var(--font-body);font-weight:600;font-size:.92rem;cursor:pointer;border:1.5px solid transparent;transition:all .18s}
   .btn-primary{background:var(--accent);color:var(--bg);border-color:var(--accent);font-weight:700}
@@ -103,6 +122,7 @@
 
   .result-note{padding:1.2rem 1.4rem;background:var(--surface);border-left:3px solid var(--accent);border-radius:2px;font-size:.9rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.6}
   .result-note strong{color:var(--text)}
+  .region-note{text-align:center;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.06em;color:var(--muted-2);margin-top:-1rem;margin-bottom:1.75rem}
   .restart{display:block;text-align:center;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.08em;color:var(--muted-2);background:none;border:none;cursor:pointer;margin:0 auto;text-transform:uppercase}
   .restart:hover{color:var(--accent)}
 </style>
@@ -119,13 +139,29 @@
 
   <div class="progress-wrap" id="progress-wrap">
     <div class="progress-meta">
-      <span id="step-count">Question 1 of 7</span>
+      <span id="step-count">Question 1 of 9</span>
       <span id="step-pct">0%</span>
     </div>
     <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
   </div>
 
   <div class="step active" data-step="0">
+    <div class="q-eyebrow">Your location</div>
+    <h2>Where are you based?</h2>
+    <p class="q-help">Pricing and timelines are set for your local market.</p>
+    <div class="options" data-key="region" data-mode="single">
+      <button class="opt" data-val="uk" data-w="0"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">United Kingdom</span></span></button>
+      <button class="opt" data-val="in" data-w="0"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">India</span></span></button>
+      <button class="opt" data-val="other" data-w="0"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Somewhere else</span></span></button>
+    </div>
+    <div class="field-reveal" id="region-other-wrap">
+      <label for="region-other">Which country are you in?</label>
+      <input type="text" id="region-other" placeholder="e.g. United Arab Emirates" autocomplete="country-name">
+    </div>
+    <div class="nav-row"><span></span><button class="btn btn-primary" data-next disabled>Continue <span>→</span></button></div>
+  </div>
+
+  <div class="step" data-step="1">
     <div class="q-eyebrow">About you</div>
     <h2>Who is this website for?</h2>
     <p class="q-help">Helps us pitch the scope and tone correctly.</p>
@@ -140,7 +176,7 @@
     <div class="nav-row"><span></span><button class="btn btn-primary" data-next disabled>Continue <span>→</span></button></div>
   </div>
 
-  <div class="step" data-step="1">
+  <div class="step" data-step="2">
     <div class="q-eyebrow">Sector</div>
     <h2>What industry are you in?</h2>
     <p class="q-help">Different sectors need different structures and proof points.</p>
@@ -155,7 +191,7 @@
     <div class="nav-row"><button class="btn btn-ghost" data-back>← Back</button><button class="btn btn-primary" data-next disabled>Continue <span>→</span></button></div>
   </div>
 
-  <div class="step" data-step="2">
+  <div class="step" data-step="3">
     <div class="q-eyebrow">Scale</div>
     <h2>Roughly how many pages do you need?</h2>
     <p class="q-help">A best guess is fine — we'll confirm on the discovery call.</p>
@@ -168,7 +204,7 @@
     <div class="nav-row"><button class="btn btn-ghost" data-back>← Back</button><button class="btn btn-primary" data-next disabled>Continue <span>→</span></button></div>
   </div>
 
-  <div class="step" data-step="3">
+  <div class="step" data-step="4">
     <div class="q-eyebrow">Purpose</div>
     <h2>What should the website do for you?</h2>
     <p class="q-help">Pick the single most important goal.</p>
@@ -183,7 +219,7 @@
     <div class="nav-row"><button class="btn btn-ghost" data-back>← Back</button><button class="btn btn-primary" data-next disabled>Continue <span>→</span></button></div>
   </div>
 
-  <div class="step" data-step="4">
+  <div class="step" data-step="5">
     <div class="q-eyebrow">Content</div>
     <h2>What needs to go on the site?</h2>
     <p class="q-help">Select everything that applies.</p>
@@ -202,7 +238,7 @@
     <div class="nav-row"><button class="btn btn-ghost" data-back>← Back</button><button class="btn btn-primary" data-next disabled>Continue <span>→</span></button></div>
   </div>
 
-  <div class="step" data-step="5">
+  <div class="step" data-step="6">
     <div class="q-eyebrow">Assets</div>
     <h2>Do you have your content ready?</h2>
     <p class="q-help">Text, images, and logo. Being honest here keeps the timeline realistic.</p>
@@ -214,7 +250,7 @@
     <div class="nav-row"><button class="btn btn-ghost" data-back>← Back</button><button class="btn btn-primary" data-next disabled>Continue <span>→</span></button></div>
   </div>
 
-  <div class="step" data-step="6">
+  <div class="step" data-step="7">
     <div class="q-eyebrow">After launch</div>
     <h2>What do you need once it's live?</h2>
     <p class="q-help">Most clients want us to keep it running. Some prefer to take it over.</p>
@@ -224,10 +260,32 @@
       <button class="opt" data-val="full" data-w="3"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Hosting, updates and support</span><span class="opt-desc">We handle everything — you never touch it</span></span></button>
       <button class="opt" data-val="managed" data-w="6"><span class="opt-mark"></span><span class="opt-body"><span class="opt-title">Fully managed, end to end</span><span class="opt-desc">Build, hosting, SEO, ongoing improvements</span></span></button>
     </div>
-    <div class="nav-row"><button class="btn btn-ghost" data-back>← Back</button><button class="btn btn-primary" data-next>See my plans <span>→</span></button></div>
+    <div class="nav-row"><button class="btn btn-ghost" data-back>← Back</button><button class="btn btn-primary" data-next disabled>Continue <span>→</span></button></div>
   </div>
 
-  <div class="step" data-step="7" id="result">
+  <div class="step" data-step="8">
+    <div class="q-eyebrow">Your details</div>
+    <h2>Who should we send this to?</h2>
+    <p class="q-help">So we can follow up with a fixed quote.</p>
+    <div class="field-grid">
+      <div class="field">
+        <label for="q-first">First name</label>
+        <input type="text" id="q-first" autocomplete="given-name" required>
+      </div>
+      <div class="field">
+        <label for="q-last">Last name</label>
+        <input type="text" id="q-last" autocomplete="family-name" required>
+      </div>
+    </div>
+    <div class="field" style="margin-bottom:2rem">
+      <label for="q-email">Email</label>
+      <input type="email" id="q-email" autocomplete="email" required>
+      <div class="field-error" id="email-error">Please enter a valid email address.</div>
+    </div>
+    <div class="nav-row"><button class="btn btn-ghost" data-back>← Back</button><button class="btn btn-primary" data-next disabled>See my plans <span>→</span></button></div>
+  </div>
+
+  <div class="step" data-step="9" id="result">
     <div class="result-head">
       <div class="q-eyebrow">Your recommendation</div>
       <h2 id="result-title">Three ways to build this.</h2>
@@ -241,7 +299,16 @@
       <span class="scope-meter"><span id="scope-fill" style="width:0"></span></span>
     </div>
 
+    <div class="region-note" id="region-note"></div>
     <div class="plans" id="plans"></div>
+    <div class="contact-screen" id="contact-screen" style="display:none">
+      <div class="contact-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+      <h2 id="contact-heading">Thanks — we'll be in touch.</h2>
+      <p id="contact-body"></p>
+      <div class="contact-recap" id="contact-recap"></div>
+    </div>
 
     <div class="result-note">
       <strong>These are starting estimates, not a final quote.</strong> Prices depend on final page count, content complexity, and any integrations. Request a quote and we'll confirm a fixed price within 24 hours — no obligation, and it doesn't change once you approve it.
@@ -255,27 +322,27 @@
 (function(){
   const answers = {};
   let step = 0;
-  const TOTAL = 7;
+  const TOTAL = 9;
   const steps = [...document.querySelectorAll('.step')];
 
   const TIERS = [
     {
-      name:'Starter', scale:'1–3 pages', priceLabel:'£250', time:'Live in 3–5 days',
+      name:'Starter', scale:'1–3 pages', price:{uk:'£250', in:'₹12,000'}, time:'Live in 3–5 days',
       tag:'A focused, high-level marketing site that gets you online and looking credible.',
       feats:['Up to 3 pages','Mobile-first responsive design','Contact form + enquiry routing','Basic on-page SEO','SSL, backups, uptime monitoring','Domain connection and setup']
     },
     {
-      name:'Growth', scale:'Up to 5 pages', priceLabel:'£750', time:'Live in 7–10 days',
+      name:'Growth', scale:'Up to 5 pages', price:{uk:'£750', in:'₹30,000'}, time:'Live in 7–10 days',
       tag:'Room for real content — blog, newsletter, multi-tab navigation and professional visuals.',
       feats:['Up to 5 pages with full navigation','Everything in Starter','Blog / news section','Newsletter signup integration','CMS so you can edit content','Professional content and visuals','Advanced SEO + schema markup','30 days post-launch support']
     },
     {
-      name:'Professional', scale:'Up to 10 pages', priceLabel:'£1,000–1,250', time:'Live in 2–3 weeks',
+      name:'Professional', scale:'Up to 10 pages', price:{uk:'£1,000–1,250', in:'₹50,000–65,000'}, time:'Live in 2–3 weeks',
       tag:'A substantial site with deep navigation, custom design and hands-on support throughout.',
       feats:['Up to 10 pages / sections','Everything in Growth','Bespoke design system to your brand','Advanced navigation and page structure','Professional imagery and visual content','Discovery call + design workshop','Analytics and conversion tracking','Accessibility pass (WCAG 2.2)','90 days support with priority response']
     },
     {
-      name:'Managed', scale:'End to end', priceLabel:'£1,500–2,000+', time:'3–6 weeks',
+      name:'Managed', scale:'End to end', price:{uk:'£1,500–2,000+', in:'₹85,000–1,20,000+'}, time:'3–6 weeks',
       tag:'The full service — we build it, host it, maintain it and keep improving it. You never touch it.',
       feats:['Scope tailored to your requirements','Everything in Professional','Custom functionality and integrations','Fully managed hosting included','Ongoing maintenance and updates','Ongoing SEO and improvements','Priority support with response SLA','Monthly reporting','12 months managed service included']
     }
@@ -319,20 +386,35 @@
           opt.classList.add('selected');
           answers[key] = opt.dataset.val;
         }
+        if(key === 'region'){
+          const wrap = document.getElementById('region-other-wrap');
+          if(answers.region === 'other'){ wrap.classList.add('show'); }
+          else { wrap.classList.remove('show'); document.getElementById('region-other').value = ''; }
+        }
         const nextBtn = group.closest('.step').querySelector('[data-next]');
         const has = multi ? (answers[key]||[]).length > 0 : !!answers[key];
-        nextBtn.disabled = !has;
+        nextBtn.disabled = !has || (key === 'region' && !regionReady());
       });
     });
   });
 
   document.querySelectorAll('[data-next]').forEach(b => b.addEventListener('click', () => {
-    if(step === TOTAL-1){ buildResult(); show(TOTAL); }
+    if(step === 0 && answers.region === 'other'){
+      answers.regionOther = document.getElementById('region-other').value.trim();
+    }
+    if(step === TOTAL-1){
+      answers.firstName = qFirst.value.trim();
+      answers.lastName  = qLast.value.trim();
+      answers.email     = qEmail.value.trim();
+      buildResult();
+      show(TOTAL);
+    }
     else show(step+1);
   }));
   document.querySelectorAll('[data-back]').forEach(b => b.addEventListener('click', () => show(step-1)));
 
   const LABELS = {
+    uk:'United Kingdom', in:'India', other:'International',
     individual:'Individual', small:'Small business', medium:'Medium business', large:'Large organisation', ngo:'NGO / charity', gov:'Public sector',
     realestate:'Real estate', services:'Professional services', saas:'SaaS / tech', manufacturing:'Manufacturing', retail:'Retail / hospitality', other:'Other sector',
     '1-3':'1–3 pages','4-5':'4–5 pages','6-10':'6–10 pages','10+':'10+ pages',
@@ -341,8 +423,67 @@
     handover:'Handover', hosting:'Hosting only', full:'Hosting + support', managed:'Fully managed'
   };
 
+  function esc(v){
+    return String(v == null ? '' : v)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
   function buildResult(){
     const w = totalWeight();
+    const isPriced = answers.region === 'uk' || answers.region === 'in';
+    const region = answers.region === 'in' ? 'in' : 'uk';
+
+    const plansEl   = document.getElementById('plans');
+    const noteEl    = document.getElementById('region-note');
+    const scopeEl   = document.querySelector('.scope-bar');
+    const screenEl  = document.getElementById('contact-screen');
+    const footNote  = document.querySelector('.result-note');
+
+    // --- International path: no pricing, we follow up ---
+    if(!isPriced){
+      plansEl.style.display = 'none';
+      noteEl.style.display  = 'none';
+      scopeEl.style.display = 'none';
+      if(footNote) footNote.style.display = 'none';
+      screenEl.style.display = 'block';
+      document.getElementById('wrap').classList.remove('wide');
+
+      const country = answers.regionOther || 'your region';
+      document.getElementById('result-title').textContent = 'Thanks, ' + (answers.firstName || 'there') + '.';
+      document.querySelector('#result .result-head .q-eyebrow').textContent = 'Request received';
+      document.querySelector('#result .result-head .q-help').textContent =
+        'We price each international project individually.';
+      document.getElementById('contact-heading').textContent = "We'll be in touch within 24 hours.";
+      document.getElementById('contact-body').textContent =
+        'We work with clients in ' + country + ', and we quote these projects individually rather than from a standard price list. ' +
+        'We\'ll review what you\'ve told us and come back to ' + (answers.email || 'you') + ' with a fixed price and timeline.';
+
+      const recapRows = [
+        ['Name', ((answers.firstName||'') + ' ' + (answers.lastName||'')).trim()],
+        ['Email', answers.email],
+        ['Country', answers.regionOther],
+        ['Organisation', LABELS[answers.orgType]],
+        ['Industry', LABELS[answers.industry]],
+        ['Size', LABELS[answers.pages]],
+        ['Goal', LABELS[answers.purpose]]
+      ].filter(function(r){ return r[1]; });
+
+      document.getElementById('contact-recap').innerHTML = recapRows.map(function(r){
+        return '<div class="recap-row"><span class="recap-k">' + esc(r[0]) + '</span><span class="recap-v">' + esc(r[1]) + '</span></div>';
+      }).join('');
+
+      const chipsI = document.getElementById('summary-chips');
+      chipsI.innerHTML = '';
+      return;
+    }
+
+    // --- Priced path ---
+    plansEl.style.display = '';
+    noteEl.style.display  = '';
+    scopeEl.style.display = '';
+    if(footNote) footNote.style.display = '';
+    screenEl.style.display = 'none';
+    document.querySelector('#result .result-head .q-eyebrow').textContent = 'Your recommendation';
     const feats = answers.features || [];
 
     var recIdx, scopeLabel, scopePct;
@@ -365,7 +506,7 @@
 
     const chips = document.getElementById('summary-chips');
     chips.innerHTML = '';
-    ['orgType','industry','pages','purpose','ongoing'].forEach(function(k){
+    ['region','orgType','industry','pages','purpose','ongoing'].forEach(function(k){
       if(answers[k]) chips.insertAdjacentHTML('beforeend', '<span class="chip">' + (LABELS[answers[k]]||answers[k]) + '</span>');
     });
     if(feats.length) chips.insertAdjacentHTML('beforeend', '<span class="chip">' + feats.length + ' content area' + (feats.length>1?'s':'') + '</span>');
@@ -379,12 +520,19 @@
         '<div class="plan-name">' + t.name + '</div>' +
         '<div class="plan-scale">' + t.scale + '</div>' +
         '<div class="plan-tagline">' + t.tag + '</div>' +
-        '<div class="plan-price"><span class="plan-from">From</span><span class="plan-amt">' + t.priceLabel + '</span></div>' +
+        '<div class="plan-price"><span class="plan-from">From</span><span class="plan-amt">' + t.price[region] + '</span></div>' +
         '<div class="plan-timeline">' + t.time + '</div>' +
         '<ul class="plan-feats">' + t.feats.map(function(f){ return '<li>' + f + '</li>'; }).join('') + extraLis + '</ul>' +
         '<a href="/#contact" class="btn ' + (isRec ? 'btn-primary' : 'btn-outline') + ' plan-cta" data-plan="' + t.name + '">Request this quote</a>' +
       '</div>';
     }).join('');
+
+    document.getElementById('region-note').textContent =
+      region === 'in'
+        ? 'Pricing shown in INR for the India market'
+        : (answers.region === 'other'
+            ? 'Pricing shown in GBP — we work with clients internationally'
+            : 'Pricing shown in GBP for the UK market');
 
     const titles = {
       'Light':'Starter is the right fit for you.',
@@ -396,6 +544,36 @@
     document.getElementById('result-sub').textContent =
       'Every plan is shown below — we\'ve highlighted the one that matches your answers. You can pick any of them.';
   }
+
+  // --- Region "other" free text ---
+  function regionReady(){
+    if(answers.region !== 'other') return !!answers.region;
+    return document.getElementById('region-other').value.trim().length > 1;
+  }
+
+  const regionOther = document.getElementById('region-other');
+  regionOther.addEventListener('input', function(){
+    const btn = regionOther.closest('.step').querySelector('[data-next]');
+    btn.disabled = !regionReady();
+  });
+
+  // --- Name + email step ---
+  const qFirst = document.getElementById('q-first');
+  const qLast  = document.getElementById('q-last');
+  const qEmail = document.getElementById('q-email');
+  const emailError = document.getElementById('email-error');
+
+  function validEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+  function detailsReady(){
+    return qFirst.value.trim() && qLast.value.trim() && validEmail(qEmail.value.trim());
+  }
+  function syncDetails(){
+    const btn = qEmail.closest('.step').querySelector('[data-next]');
+    btn.disabled = !detailsReady();
+    const v = qEmail.value.trim();
+    emailError.classList.toggle('show', v.length > 0 && !validEmail(v));
+  }
+  [qFirst, qLast, qEmail].forEach(function(el){ el.addEventListener('input', syncDetails); });
 
   updateProgress();
 })();
