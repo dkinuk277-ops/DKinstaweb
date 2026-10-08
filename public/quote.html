@@ -428,6 +428,44 @@
       .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
+  var submissionId = null;
+
+  function submitQuote(scopeLabel, recommendedPlan){
+    var payload = {
+      first_name: answers.firstName,
+      last_name: answers.lastName,
+      email: answers.email,
+      region: answers.region,
+      region_other: answers.regionOther || '',
+      org_type: LABELS[answers.orgType] || answers.orgType || '',
+      industry: LABELS[answers.industry] || answers.industry || '',
+      pages: LABELS[answers.pages] || answers.pages || '',
+      purpose: LABELS[answers.purpose] || answers.purpose || '',
+      features: answers.features || [],
+      content_state: LABELS[answers.content] || answers.content || '',
+      ongoing: LABELS[answers.ongoing] || answers.ongoing || '',
+      scope: scopeLabel || '',
+      recommended_plan: recommendedPlan || ''
+    };
+    fetch('/api/quote', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(d){ if(d && d.id) submissionId = d.id; })
+      .catch(function(){});
+  }
+
+  function recordPlanClick(planName){
+    if(!submissionId) return;
+    fetch('/api/quote/plan', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: submissionId, plan: planName })
+    }).catch(function(){});
+  }
+
   function buildResult(){
     const w = totalWeight();
     const isPriced = answers.region === 'uk' || answers.region === 'in';
@@ -474,6 +512,7 @@
 
       const chipsI = document.getElementById('summary-chips');
       chipsI.innerHTML = '';
+      submitQuote('International', 'Custom quote');
       return;
     }
 
@@ -541,6 +580,14 @@
       'Complex':'Managed is the right fit for you.'
     };
     document.getElementById('result-title').textContent = titles[scopeLabel];
+
+    submitQuote(scopeLabel, TIERS[recIdx].name);
+
+    document.querySelectorAll('.plan-cta').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        recordPlanClick(btn.getAttribute('data-plan') || '');
+      });
+    });
     document.getElementById('result-sub').textContent =
       'Every plan is shown below — we\'ve highlighted the one that matches your answers. You can pick any of them.';
   }
