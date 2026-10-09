@@ -282,9 +282,14 @@ function adminPage(rows) {
           const regionLabel =
             r.region === 'in' ? 'India' : r.region === 'uk' ? 'United Kingdom' : r.region_other || r.region || '';
 
+          const headline = isQuote
+            ? (r.selected_plan
+                ? r.selected_plan + (r.selected_price ? ' — ' + r.selected_price : '')
+                : 'Viewed plans' + (r.recommended_plan ? ' · ' + r.recommended_plan + ' suggested' : ''))
+            : (r.description || '').slice(0, 90) + ((r.description || '').length > 90 ? '…' : '');
+
           const details = isQuote
-            ? '<div class="details">' +
-              detailRow('Region', regionLabel) +
+            ? detailRow('Region', regionLabel) +
               detailRow('Organisation', r.org_type) +
               detailRow('Industry', r.industry) +
               detailRow('Pages', r.pages) +
@@ -294,39 +299,42 @@ function adminPage(rows) {
               detailRow('After launch', r.ongoing) +
               detailRow('Assessed scope', r.scope) +
               detailRow('Recommended', r.recommended_plan ? r.recommended_plan + (r.recommended_price ? ' — ' + r.recommended_price : '') : '') +
-              detailRow('Plan requested', r.selected_plan ? r.selected_plan + (r.selected_price ? ' — ' + r.selected_price : '') : '') +
-              '</div>'
-            : '';
+              detailRow('Plan requested', r.selected_plan ? r.selected_plan + (r.selected_price ? ' — ' + r.selected_price : '') : '')
+            : detailRow('Phone', r.phone);
 
           return `
-      <div class="item${r.status === 'new' ? ' is-new' : ''}">
-        <div class="item-head">
-          <div>
-            <div class="item-name">${esc(name)}
-              <span class="kind kind-${isQuote ? 'quote' : 'contact'}">${isQuote ? 'QUOTE' : 'CONTACT'}</span>
-            </div>
-            <a class="item-email" href="mailto:${esc(r.email)}">${esc(r.email)}</a>
-            ${r.phone ? '<a class="item-phone" href="tel:' + esc(r.phone) + '">' + esc(r.phone) + '</a>' : ''}
-          </div>
-          <div class="item-meta">
-            <span class="date">${esc(new Date(r.created_at).toLocaleString('en-GB'))}</span>
+      <details class="item${r.status === 'new' ? ' is-new' : ''}">
+        <summary>
+          <span class="chev">&#9656;</span>
+          <span class="sum-main">
+            <span class="sum-name">${esc(name)}</span>
+            <span class="kind kind-${isQuote ? 'quote' : 'contact'}">${isQuote ? 'QUOTE' : 'CONTACT'}</span>
             ${r.status === 'new' ? '<span class="tag">NEW</span>' : ''}
+            <span class="sum-line">${esc(headline)}</span>
+          </span>
+          <span class="sum-date">${esc(new Date(r.created_at).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }))}</span>
+        </summary>
+        <div class="body">
+          <div class="contactbar">
+            <a href="mailto:${esc(r.email)}">${esc(r.email)}</a>
+            ${r.phone ? '<a href="tel:' + esc(r.phone) + '">' + esc(r.phone) + '</a>' : ''}
+            <span class="full-date">${esc(new Date(r.created_at).toLocaleString('en-GB'))}</span>
+          </div>
+          ${r.description ? '<p class="item-desc">' + esc(r.description) + '</p>' : ''}
+          ${details ? '<div class="details">' + details + '</div>' : ''}
+          <div class="item-actions">
+            <form method="POST" action="/admin/status">
+              <input type="hidden" name="id" value="${r.id}">
+              <input type="hidden" name="status" value="${r.status === 'new' ? 'read' : 'new'}">
+              <button class="ghost" type="submit">Mark as ${r.status === 'new' ? 'read' : 'new'}</button>
+            </form>
+            <form method="POST" action="/admin/delete" onsubmit="return confirm('Delete this submission?')">
+              <input type="hidden" name="id" value="${r.id}">
+              <button class="ghost danger" type="submit">Delete</button>
+            </form>
           </div>
         </div>
-        ${r.description ? '<p class="item-desc">' + esc(r.description) + '</p>' : ''}
-        ${details}
-        <div class="item-actions">
-          <form method="POST" action="/admin/status">
-            <input type="hidden" name="id" value="${r.id}">
-            <input type="hidden" name="status" value="${r.status === 'new' ? 'read' : 'new'}">
-            <button class="ghost" type="submit">Mark as ${r.status === 'new' ? 'read' : 'new'}</button>
-          </form>
-          <form method="POST" action="/admin/delete" onsubmit="return confirm('Delete this submission?')">
-            <input type="hidden" name="id" value="${r.id}">
-            <button class="ghost danger" type="submit">Delete</button>
-          </form>
-        </div>
-      </div>`;
+      </details>`;
         })
         .join('')
     : '<div class="empty">No submissions yet.</div>';
@@ -343,29 +351,38 @@ function adminPage(rows) {
   .logout:hover{color:#F59E0B;border-color:#F59E0B}
   h1{font-family:'Sora',sans-serif;font-size:2rem;font-weight:500;letter-spacing:-.02em;color:#FFF9EC;margin:2rem 0 .35rem}
   .sub{font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.08em;color:#8B95A5;text-transform:uppercase;margin-bottom:2rem}
-  .item{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:5px;padding:1.4rem;margin-bottom:1rem}
+  .item{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:5px;margin-bottom:.5rem;overflow:hidden}
   .item.is-new{border-left:3px solid #F59E0B}
-  .item-head{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.75rem}
-  .item-name{font-family:'Sora',sans-serif;font-size:1.1rem;font-weight:500;color:#FFF9EC;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
-  .kind{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.1em;padding:2px 6px;border-radius:2px}
+  .item[open]{background:rgba(255,255,255,.05)}
+  summary{list-style:none;cursor:pointer;padding:.85rem 1.1rem;display:flex;align-items:center;gap:.75rem;user-select:none}
+  summary::-webkit-details-marker{display:none}
+  summary:hover{background:rgba(255,255,255,.03)}
+  .chev{color:#6B7688;font-size:.8rem;transition:transform .15s;flex-shrink:0}
+  .item[open] .chev{transform:rotate(90deg);color:#F59E0B}
+  .sum-main{flex:1;min-width:0;display:flex;align-items:center;gap:.55rem;flex-wrap:wrap}
+  .sum-name{font-family:'Sora',sans-serif;font-size:.97rem;color:#FFF9EC;font-weight:500}
+  .sum-line{color:#6B7688;font-size:.84rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+  .sum-date{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#6B7688;flex-shrink:0}
+  .kind{font-family:'JetBrains Mono',monospace;font-size:.58rem;font-weight:700;letter-spacing:.1em;padding:2px 5px;border-radius:2px;flex-shrink:0}
   .kind-quote{background:rgba(245,158,11,.15);color:#F59E0B;border:1px solid rgba(245,158,11,.4)}
   .kind-contact{background:rgba(255,255,255,.07);color:#8B95A5;border:1px solid rgba(255,255,255,.14)}
-  .item-email{font-size:.88rem;color:#8B95A5;text-decoration:none;display:block;margin-top:.25rem}
-  .item-email:hover{color:#F59E0B}
-  .item-phone{display:block;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:#8B95A5;text-decoration:none;margin-top:.2rem}
-  .item-phone:hover{color:#F59E0B}
-  .item-meta{text-align:right;display:flex;align-items:center;gap:.6rem}
-  .date{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:#6B7688}
-  .tag{background:#F59E0B;color:#0A1428;font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:700;padding:2px 6px;border-radius:2px;letter-spacing:.08em}
-  .item-desc{font-size:.94rem;color:#C9CFD9;white-space:pre-wrap;padding-top:.75rem;border-top:1px solid rgba(255,255,255,.06)}
-  .details{margin-top:.9rem;padding-top:.75rem;border-top:1px solid rgba(255,255,255,.06)}
-  .d-row{display:flex;justify-content:space-between;gap:1rem;padding:.3rem 0;font-size:.85rem}
+  .tag{background:#F59E0B;color:#0A1428;font-family:'JetBrains Mono',monospace;font-size:.58rem;font-weight:700;padding:2px 5px;border-radius:2px;letter-spacing:.08em;flex-shrink:0}
+  .body{padding:0 1.1rem 1.1rem;border-top:1px solid rgba(255,255,255,.06);margin-top:.2rem}
+  .contactbar{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;padding:.85rem 0}
+  .contactbar a{color:#8B95A5;text-decoration:none;font-size:.86rem}
+  .contactbar a:hover{color:#F59E0B}
+  .full-date{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#4a5568;margin-left:auto}
+  .item-desc{font-size:.92rem;color:#C9CFD9;white-space:pre-wrap;padding:.9rem 1rem;background:rgba(0,0,0,.2);border-radius:4px;margin-bottom:.9rem}
+  .details{margin-bottom:.9rem}
+  .d-row{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;font-size:.85rem;border-bottom:1px solid rgba(255,255,255,.05)}
+  .d-row:last-child{border-bottom:none}
   .d-k{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:#6B7688;flex-shrink:0}
   .d-v{color:#C9CFD9;text-align:right}
-  .item-actions{display:flex;gap:.5rem;margin-top:1rem}
-  .ghost{background:transparent;border:1px solid rgba(255,255,255,.14);color:#8B95A5;padding:.4rem .75rem;border-radius:3px;font-size:.78rem;font-family:'JetBrains Mono',monospace;cursor:pointer}
+  .item-actions{display:flex;gap:.5rem}
+  .ghost{background:transparent;border:1px solid rgba(255,255,255,.14);color:#8B95A5;padding:.4rem .75rem;border-radius:3px;font-size:.76rem;font-family:'JetBrains Mono',monospace;cursor:pointer}
   .ghost:hover{border-color:#F59E0B;color:#F59E0B}
   .ghost.danger:hover{border-color:#F87171;color:#F87171}
+  @media(max-width:560px){.sum-line{display:none}}
   .empty{padding:3rem;text-align:center;color:#6B7688;border:1px dashed rgba(255,255,255,.12);border-radius:5px}
 </style></head><body>
   <div class="wrap">
