@@ -10,7 +10,7 @@
     {
       "binding": "DB",
       "database_name": "dkinstaweb",
-      "database_id": "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+      "database_id": "f88b4adc-b7f3-487f-be28-cb8a37a3d02a"
     }
   ],
   "observability": {
