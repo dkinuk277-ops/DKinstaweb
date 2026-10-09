@@ -92,7 +92,8 @@ async function ensureSchema(env) {
 
 /* ---------------- Email ---------------- */
 
-async function sendEmail(env, subject, lines, replyTo) {
+async function sendEmail(env, subject, lines, replyTo, opts) {
+  opts = opts || {};
   const missing = [];
   if (!env.RESEND_API_KEY) missing.push('RESEND_API_KEY');
   if (!env.NOTIFY_TO) missing.push('NOTIFY_TO');
@@ -103,10 +104,11 @@ async function sendEmail(env, subject, lines, replyTo) {
 
   const payload = {
     from: env.NOTIFY_FROM,
-    to: [env.NOTIFY_TO],
+    to: [opts.to || env.NOTIFY_TO],
     subject,
     text: lines.join('\n')
   };
+  if (opts.html) payload.html = opts.html;
   if (replyTo) payload.reply_to = replyTo;
 
   try {
@@ -128,6 +130,66 @@ async function sendEmail(env, subject, lines, replyTo) {
     console.log('Resend error', err && err.message);
     return { ok: false, error: 'Network error: ' + (err && err.message) };
   }
+}
+
+
+/* ---------------- Customer confirmation ---------------- */
+
+function customerEmailHtml(opts) {
+  const rows = (opts.rows || [])
+    .filter(function (r) { return r[1]; })
+    .map(function (r) {
+      return (
+        '<tr>' +
+        '<td style="padding:8px 0;color:#6B7688;font-size:13px;font-family:Arial,sans-serif;">' + esc(r[0]) + '</td>' +
+        '<td style="padding:8px 0;color:#1a2332;font-size:14px;font-family:Arial,sans-serif;text-align:right;">' + esc(r[1]) + '</td>' +
+        '</tr>'
+      );
+    })
+    .join('');
+
+  const planBlock = opts.plan
+    ? '<table width="100%" cellpadding="0" cellspacing="0" style="background:#0A1428;border-radius:6px;margin:0 0 28px;">' +
+      '<tr><td style="padding:24px;text-align:center;">' +
+      '<div style="color:#F59E0B;font-size:11px;letter-spacing:2px;font-family:Arial,sans-serif;text-transform:uppercase;margin-bottom:8px;">Your plan</div>' +
+      '<div style="color:#FFF9EC;font-size:24px;font-family:Georgia,serif;margin-bottom:6px;">' + esc(opts.plan) + '</div>' +
+      (opts.price ? '<div style="color:#F59E0B;font-size:20px;font-family:Arial,sans-serif;font-weight:bold;">' + esc(opts.price) + '</div>' : '') +
+      '</td></tr></table>'
+    : '';
+
+  return (
+    '<!DOCTYPE html><html><head><meta charset="UTF-8">' +
+    '<meta name="viewport" content="width=device-width,initial-scale=1"></head>' +
+    '<body style="margin:0;padding:0;background:#f4f4f1;">' +
+    '<table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f1;padding:32px 16px;">' +
+    '<tr><td align="center">' +
+    '<table width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;background:#ffffff;border-radius:8px;overflow:hidden;">' +
+
+    '<tr><td style="background:#0A1428;padding:24px;">' +
+    '<span style="background:#F59E0B;color:#0A1428;padding:4px 8px;border-radius:3px;font-size:12px;letter-spacing:2px;font-weight:bold;font-family:Arial,sans-serif;">DK</span>' +
+    '<span style="color:#FFF9EC;font-size:17px;font-family:Arial,sans-serif;margin-left:8px;">Instaweb</span>' +
+    '</td></tr>' +
+
+    '<tr><td style="padding:32px 28px 8px;">' +
+    '<h1 style="margin:0 0 14px;font-size:22px;font-family:Georgia,serif;color:#0A1428;font-weight:normal;">' + esc(opts.heading) + '</h1>' +
+    '<p style="margin:0 0 24px;font-size:15px;line-height:1.65;color:#4a5568;font-family:Arial,sans-serif;">' + opts.intro + '</p>' +
+    planBlock +
+    (rows
+      ? '<div style="font-size:11px;letter-spacing:2px;color:#6B7688;font-family:Arial,sans-serif;text-transform:uppercase;margin-bottom:6px;">What you told us</div>' +
+        '<table width="100%" cellpadding="0" cellspacing="0" style="border-top:1px solid #e8e8e4;margin-bottom:26px;">' + rows + '</table>'
+      : '') +
+    '<p style="margin:0 0 8px;font-size:15px;line-height:1.65;color:#4a5568;font-family:Arial,sans-serif;">' +
+    "If anything above looks wrong, just reply to this email and we'll put it right." +
+    '</p>' +
+    '</td></tr>' +
+
+    '<tr><td style="padding:16px 28px 32px;">' +
+    '<p style="margin:0;font-size:13px;color:#8a94a6;font-family:Arial,sans-serif;line-height:1.6;">' +
+    'DK Instaweb &middot; <a href="https://dkinstaweb.com" style="color:#B8823B;text-decoration:none;">dkinstaweb.com</a>' +
+    '</p></td></tr>' +
+
+    '</table></td></tr></table></body></html>'
+  );
 }
 
 /* ---------------- Pages ---------------- */
@@ -334,6 +396,36 @@ export default {
           )
         );
 
+        ctx.waitUntil(
+          sendEmail(
+            env,
+            "Thanks for getting in touch — DK Instaweb",
+            [
+              'Hi ' + first + ',',
+              '',
+              "Thanks for your message — we've got it and we'll come back to you within 24 hours.",
+              '',
+              'What you sent us:',
+              description,
+              '',
+              "If anything looks wrong, just reply to this email.",
+              '',
+              '--',
+              'DK Instaweb — dkinstaweb.com'
+            ],
+            env.NOTIFY_TO,
+            {
+              to: email,
+              html: customerEmailHtml({
+                heading: 'Thanks, ' + first + '.',
+                intro:
+                  "We've got your message and we'll come back to you within 24 hours with next steps.",
+                rows: [['Message', description]]
+              })
+            }
+          )
+        );
+
         return json({ ok: true });
       } catch (err) {
         return json({ error: 'Server error.' }, 500);
@@ -417,6 +509,42 @@ export default {
           )
         );
 
+        const isPriced = region === 'uk' || region === 'in';
+        if (!isPriced) {
+          const summaryRows = [
+            ['Country', regionOther],
+            ['Organisation', clean(b.org_type, 60)],
+            ['Industry', clean(b.industry, 60)],
+            ['Size', clean(b.pages, 40)],
+            ['Main goal', clean(b.purpose, 60)]
+          ];
+          ctx.waitUntil(
+            sendEmail(
+              env,
+              'Your enquiry — DK Instaweb',
+              [
+                'Hi ' + first + ',',
+                '',
+                "Thanks for telling us about your project. We price international work individually,",
+                "so we'll review what you sent and come back within 24 hours with a fixed price and timeline.",
+                '',
+                '--',
+                'DK Instaweb — dkinstaweb.com'
+              ],
+              env.NOTIFY_TO,
+              {
+                to: email,
+                html: customerEmailHtml({
+                  heading: 'Thanks, ' + first + '.',
+                  intro:
+                    "We price international projects individually rather than from a standard list, so we'll review what you've told us and come back within 24 hours with a fixed price and timeline.",
+                  rows: summaryRows
+                })
+              }
+            )
+          );
+        }
+
         return json({ ok: true, id: res.meta && res.meta.last_row_id });
       } catch (err) {
         return json({ error: 'Server error.' }, 500);
@@ -474,6 +602,56 @@ export default {
                 'View all: https://dkinstaweb.com/admin'
               ],
               row.email
+            )
+          );
+        }
+
+        if (row) {
+          const custRows = [
+            ['Organisation', row.org_type],
+            ['Industry', row.industry],
+            ['Size', row.pages],
+            ['Main goal', row.purpose],
+            ['Content areas', row.features],
+            ['Content ready', row.content_state],
+            ['After launch', row.ongoing]
+          ];
+
+          ctx.waitUntil(
+            sendEmail(
+              env,
+              'Your quote: ' + plan + (price ? ' — ' + price : '') + ' — DK Instaweb',
+              [
+                'Hi ' + row.first_name + ',',
+                '',
+                'Thanks for requesting a quote on the ' + plan + ' plan' + (price ? ' (' + price + ')' : '') + '.',
+                '',
+                "This is an indicative starting price based on what you told us. We'll confirm a fixed",
+                "price and timeline within 24 hours — and it won't change once you approve it.",
+                '',
+                'What you told us:',
+                custRows
+                  .filter(function (r) { return r[1]; })
+                  .map(function (r) { return r[0] + ': ' + r[1]; })
+                  .join('\n'),
+                '',
+                'If anything looks wrong, just reply to this email.',
+                '',
+                '--',
+                'DK Instaweb — dkinstaweb.com'
+              ],
+              env.NOTIFY_TO,
+              {
+                to: row.email,
+                html: customerEmailHtml({
+                  heading: 'Thanks, ' + row.first_name + '.',
+                  intro:
+                    "Here's the plan you asked about. This is an indicative starting price — we'll confirm a fixed price and timeline within 24 hours, and it won't change once you approve it.",
+                  plan: plan,
+                  price: price,
+                  rows: custRows
+                })
+              }
             )
           );
         }
