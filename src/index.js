@@ -93,7 +93,13 @@ async function ensureSchema(env) {
 /* ---------------- Email ---------------- */
 
 async function sendEmail(env, subject, lines, replyTo) {
-  if (!env.RESEND_API_KEY || !env.NOTIFY_TO || !env.NOTIFY_FROM) return;
+  const missing = [];
+  if (!env.RESEND_API_KEY) missing.push('RESEND_API_KEY');
+  if (!env.NOTIFY_TO) missing.push('NOTIFY_TO');
+  if (!env.NOTIFY_FROM) missing.push('NOTIFY_FROM');
+  if (missing.length) {
+    return { ok: false, error: 'Missing secrets: ' + missing.join(', ') };
+  }
 
   const payload = {
     from: env.NOTIFY_FROM,
@@ -112,11 +118,15 @@ async function sendEmail(env, subject, lines, replyTo) {
       },
       body: JSON.stringify(payload)
     });
+    const body = await res.text();
     if (!res.ok) {
-      console.log('Resend failed', res.status, await res.text());
+      console.log('Resend failed', res.status, body);
+      return { ok: false, error: 'Resend returned ' + res.status + ': ' + body };
     }
+    return { ok: true, detail: body };
   } catch (err) {
     console.log('Resend error', err && err.message);
+    return { ok: false, error: 'Network error: ' + (err && err.message) };
   }
 }
 
@@ -261,7 +271,10 @@ function adminPage(rows) {
   <div class="wrap">
     <header>
       <div class="brand"><span class="badge">DK</span><span>Instaweb</span></div>
-      <a class="logout" href="/admin/logout">SIGN OUT</a>
+      <div style="display:flex;gap:.5rem">
+        <a class="logout" href="/admin/test-email">TEST EMAIL</a>
+        <a class="logout" href="/admin/logout">SIGN OUT</a>
+      </div>
     </header>
     <h1>Submissions</h1>
     <div class="sub">${total} total · ${newCount} new · ${quotes} from quote survey</div>
@@ -514,6 +527,59 @@ export default {
         }
       }
       return new Response(null, { status: 302, headers: { Location: '/admin' } });
+    }
+
+    /* ---- Email diagnostics ---- */
+    if (path === '/admin/test-email') {
+      if (!(await isAuthed(request, env))) return html(loginPage(null), 401);
+
+      const cfg = [
+        ['RESEND_API_KEY', env.RESEND_API_KEY ? 'set (' + String(env.RESEND_API_KEY).slice(0, 6) + '…)' : 'MISSING'],
+        ['NOTIFY_FROM', env.NOTIFY_FROM || 'MISSING'],
+        ['NOTIFY_TO', env.NOTIFY_TO || 'MISSING']
+      ];
+
+      const result = await sendEmail(
+        env,
+        'DK Instaweb — test email',
+        ['This is a test from /admin/test-email.', '', 'If you are reading this, notifications are working.'],
+        null
+      );
+
+      const rows = cfg
+        .map(function (c) {
+          return '<div class="d-row"><span class="d-k">' + esc(c[0]) + '</span><span class="d-v">' + esc(c[1]) + '</span></div>';
+        })
+        .join('');
+
+      return html(
+        '<!DOCTYPE html><html><head><meta charset="UTF-8">' +
+          '<meta name="viewport" content="width=device-width, initial-scale=1.0">' +
+          '<title>Email test</title>' +
+          '<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">' +
+          '<style>' + BASE_CSS +
+          '.wrap{max-width:720px;margin:0 auto;padding:3rem 1.5rem}' +
+          'h1{font-family:Sora,sans-serif;font-weight:500;font-size:1.6rem;color:#FFF9EC;margin:1.25rem 0 1.5rem}' +
+          '.box{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:5px;padding:1.4rem;margin-bottom:1.25rem}' +
+          '.d-row{display:flex;justify-content:space-between;gap:1rem;padding:.4rem 0;font-size:.88rem;border-bottom:1px solid rgba(255,255,255,.06)}' +
+          '.d-row:last-child{border-bottom:none}' +
+          '.d-k{font-family:JetBrains Mono,monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:#6B7688}' +
+          '.d-v{color:#C9CFD9;text-align:right;word-break:break-all}' +
+          '.good{border-color:#4ADE80;color:#4ADE80}.bad{border-color:#F87171;color:#F87171}' +
+          '.res{padding:1.1rem 1.3rem;border-radius:5px;border:1px solid;font-size:.9rem;line-height:1.6;word-break:break-word}' +
+          'a.back{font-family:JetBrains Mono,monospace;font-size:.78rem;color:#8B95A5;text-decoration:none}' +
+          'a.back:hover{color:#F59E0B}' +
+          '</style></head><body><div class="wrap">' +
+          '<span class="badge">DK</span><h1>Email test</h1>' +
+          '<div class="box">' + rows + '</div>' +
+          '<div class="res ' + (result && result.ok ? 'good' : 'bad') + '">' +
+          (result && result.ok
+            ? 'Resend accepted the message. Check ' + esc(env.NOTIFY_TO || '') + ' (including spam).'
+            : esc((result && result.error) || 'Unknown error')) +
+          '</div>' +
+          '<p style="margin-top:1.5rem"><a class="back" href="/admin">&larr; BACK TO SUBMISSIONS</a></p>' +
+          '</div></body></html>'
+      );
     }
 
     /* ---- Admin console ---- */
