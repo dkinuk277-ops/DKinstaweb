@@ -315,7 +315,7 @@
     </div>
 
     <div class="result-note">
-      <strong>These are starting estimates, not a final quote.</strong> Prices depend on final page count, content complexity, and any integrations. Request a quote and we'll confirm a fixed price within 24 hours — no obligation, and it doesn't change once you approve it.
+      <strong>These are indicative starting prices, not a final quote.</strong> What you pay depends on your final page count, how much content support you need, and any integrations. Request a quote and one of us will be in touch shortly to talk it through properly — no obligation, and the price we agree is the price you pay.
     </div>
 
     <button class="restart" onclick="location.reload()">↺ Start over</button>
@@ -610,8 +610,11 @@
           b.textContent = b === btn ? '\u2713 Requested' : 'Request this quote';
         });
         var bar = document.getElementById('plan-confirm');
-        bar.innerHTML = '<strong>' + plan + (planPrice ? ' — ' + planPrice : '') + ' requested.</strong> We\'ll email ' +
-          (answers.email || 'you') + ' within 24 hours with a fixed price and timeline.';
+        bar.innerHTML =
+          '<strong>Thank you — your ' + plan + ' enquiry is with us.</strong><br>' +
+          'We\'ve sent a copy to ' + (answers.email || 'your inbox') + '. ' +
+          'One of us will be in touch shortly to arrange a short call, talk through your requirements ' +
+          'in detail, and confirm a fixed price. The figure above is indicative — there\'s no obligation at any stage.';
         bar.classList.add('show');
         bar.scrollIntoView({ behavior: 'smooth', block: 'center' });
       });

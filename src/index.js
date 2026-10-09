@@ -212,12 +212,36 @@ function customerEmailHtml(opts) {
     '<h1 style="margin:0 0 14px;font-size:22px;font-family:Georgia,serif;color:#0A1428;font-weight:normal;">' + esc(opts.heading) + '</h1>' +
     '<p style="margin:0 0 24px;font-size:15px;line-height:1.65;color:#4a5568;font-family:Arial,sans-serif;">' + opts.intro + '</p>' +
     planBlock +
+    (opts.indicative
+      ? '<table width="100%" cellpadding="0" cellspacing="0" style="background:#fdf6e9;border-left:3px solid #F59E0B;border-radius:4px;margin:0 0 26px;">' +
+        '<tr><td style="padding:14px 16px;color:#6b5a3a;font-size:13px;line-height:1.6;font-family:Arial,sans-serif;">' +
+        '<strong>This is an indicative price, not a final quote.</strong> ' +
+        'Every project is a little different, so we confirm the exact figure once we understand your requirements properly.' +
+        '</td></tr></table>'
+      : '') +
     (rows
       ? '<div style="font-size:11px;letter-spacing:2px;color:#6B7688;font-family:Arial,sans-serif;text-transform:uppercase;margin-bottom:6px;">What you told us</div>' +
         '<table width="100%" cellpadding="0" cellspacing="0" style="border-top:1px solid #e8e8e4;margin-bottom:26px;">' + rows + '</table>'
       : '') +
+    (opts.steps && opts.steps.length
+      ? '<div style="font-size:11px;letter-spacing:2px;color:#6B7688;font-family:Arial,sans-serif;text-transform:uppercase;margin-bottom:10px;">What happens next</div>' +
+        '<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:26px;">' +
+        opts.steps
+          .map(function (st, i) {
+            return (
+              '<tr>' +
+              '<td width="26" valign="top" style="padding:0 0 12px;">' +
+              '<div style="width:20px;height:20px;border-radius:50%;background:#0A1428;color:#F59E0B;font-size:11px;font-weight:bold;text-align:center;line-height:20px;font-family:Arial,sans-serif;">' + (i + 1) + '</div>' +
+              '</td>' +
+              '<td valign="top" style="padding:0 0 12px 10px;color:#4a5568;font-size:14px;line-height:1.55;font-family:Arial,sans-serif;">' + esc(st) + '</td>' +
+              '</tr>'
+            );
+          })
+          .join('') +
+        '</table>'
+      : '') +
     '<p style="margin:0 0 8px;font-size:15px;line-height:1.65;color:#4a5568;font-family:Arial,sans-serif;">' +
-    "If anything above looks wrong, just reply to this email and we'll put it right." +
+    (opts.closing || "If anything above looks wrong, just reply to this email and we'll put it right.") +
     '</p>' +
     '</td></tr>' +
 
@@ -472,10 +496,17 @@ export default {
             {
               to: email,
               html: customerEmailHtml({
-                heading: 'Thanks, ' + first + '.',
+                heading: 'Thank you, ' + first + '.',
                 intro:
-                  "We've got your message and we'll come back to you within 24 hours with next steps.",
-                rows: [['Message', description]]
+                  "We've received your message and it's with us now. One of us will be in touch shortly to talk through what you need.",
+                rows: [['Your message', description]],
+                steps: [
+                  'We read through what you’ve sent and get in touch shortly.',
+                  'A short, no-obligation call to understand your requirements properly.',
+                  'A fixed quote and timeline, confirmed in writing.'
+                ],
+                closing:
+                  "If you'd like to add anything before we speak, just reply to this email — it comes straight to us. We look forward to speaking with you."
               })
             }
           )
@@ -590,10 +621,17 @@ export default {
               {
                 to: email,
                 html: customerEmailHtml({
-                  heading: 'Thanks, ' + first + '.',
+                  heading: 'Thank you, ' + first + '.',
                   intro:
-                    "We price international projects individually rather than from a standard list, so we'll review what you've told us and come back within 24 hours with a fixed price and timeline.",
-                  rows: summaryRows
+                    "Thanks for telling us about your project. We price international work individually rather than from a standard list, so that what you pay reflects what you actually need.",
+                  rows: summaryRows,
+                  steps: [
+                    'We review what you’ve told us and get in touch shortly.',
+                    'A short call to understand your requirements and your local context.',
+                    'A fixed quote and timeline, confirmed in writing. No obligation at any stage.'
+                  ],
+                  closing:
+                    "If anything above looks wrong, or you'd like to add something before we speak, just reply to this email — it comes straight to us. We look forward to speaking with you."
                 })
               }
             )
@@ -679,10 +717,14 @@ export default {
               [
                 'Hi ' + row.first_name + ',',
                 '',
-                'Thanks for requesting a quote on the ' + plan + ' plan' + (price ? ' (' + price + ')' : '') + '.',
+                'Thank you for your interest in working with us — and for taking the time to tell us about your project.',
                 '',
-                "This is an indicative starting price based on what you told us. We'll confirm a fixed",
-                "price and timeline within 24 hours — and it won't change once you approve it.",
+                "Based on what you've shared, the " + plan + ' plan' + (price ? ' (' + price + ')' : '') + ' looks like a good starting point.',
+                'Please treat that as an indicative price rather than a final quote: every project is a little',
+                'different, and we would rather understand your requirements properly than guess at them.',
+                '',
+                'One of us will be in touch shortly to arrange a short call, talk through what you need in detail,',
+                'and confirm a fixed price and timeline. There is no obligation at any stage.',
                 '',
                 'What you told us:',
                 custRows
@@ -690,7 +732,16 @@ export default {
                   .map(function (r) { return r[0] + ': ' + r[1]; })
                   .join('\n'),
                 '',
-                'If anything looks wrong, just reply to this email.',
+                '',
+                'What happens next:',
+                '1. We review what you have told us and get in touch shortly.',
+                '2. A short call to understand your requirements in detail.',
+                '3. A fixed quote and timeline, confirmed in writing.',
+                '',
+                'In the meantime, if anything above looks wrong or you would like to add something,',
+                'simply reply to this email — it comes straight to us.',
+                '',
+                'We look forward to speaking with you.',
                 '',
                 '--',
                 'DK Instaweb — dkinstaweb.com'
@@ -699,12 +750,20 @@ export default {
               {
                 to: row.email,
                 html: customerEmailHtml({
-                  heading: 'Thanks, ' + row.first_name + '.',
+                  heading: 'Thank you, ' + row.first_name + '.',
                   intro:
-                    "Here's the plan you asked about. This is an indicative starting price — we'll confirm a fixed price and timeline within 24 hours, and it won't change once you approve it.",
+                    "Thanks for taking the time to tell us about your project. Based on what you've shared, here's the plan that looks like the right starting point for you.",
                   plan: plan,
                   price: price,
-                  rows: custRows
+                  indicative: true,
+                  rows: custRows,
+                  steps: [
+                    'One of us will be in touch shortly to arrange a short call at a time that suits you.',
+                    "We'll talk through your requirements in detail — what you need, and just as importantly what you don't.",
+                    "You'll get a fixed quote and a clear timeline in writing. No obligation at any stage."
+                  ],
+                  closing:
+                    "If anything above looks wrong, or you'd like to add something before we speak, just reply to this email — it comes straight to us. We look forward to speaking with you."
                 })
               }
             )
