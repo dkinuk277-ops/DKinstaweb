@@ -433,8 +433,9 @@
   }
 
   var submissionId = null;
+  var pendingPlan = null;
 
-  function submitQuote(scopeLabel, recommendedPlan){
+  function submitQuote(scopeLabel, recommendedPlan, recommendedPrice){
     var payload = {
       first_name: answers.firstName,
       last_name: answers.lastName,
@@ -449,7 +450,8 @@
       content_state: LABELS[answers.content] || answers.content || '',
       ongoing: LABELS[answers.ongoing] || answers.ongoing || '',
       scope: scopeLabel || '',
-      recommended_plan: recommendedPlan || ''
+      recommended_plan: recommendedPlan || '',
+      recommended_price: recommendedPrice || ''
     };
     fetch('/api/quote', {
       method: 'POST',
@@ -457,16 +459,27 @@
       body: JSON.stringify(payload)
     })
       .then(function(r){ return r.ok ? r.json() : null; })
-      .then(function(d){ if(d && d.id) submissionId = d.id; })
+      .then(function(d){
+        if(d && d.id){
+          submissionId = d.id;
+          if(pendingPlan){
+            recordPlanClick(pendingPlan.plan, pendingPlan.price);
+            pendingPlan = null;
+          }
+        }
+      })
       .catch(function(){});
   }
 
-  function recordPlanClick(planName){
-    if(!submissionId) return;
+  function recordPlanClick(planName, planPrice){
+    if(!submissionId){
+      pendingPlan = { plan: planName, price: planPrice };
+      return;
+    }
     fetch('/api/quote/plan', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: submissionId, plan: planName })
+      body: JSON.stringify({ id: submissionId, plan: planName, price: planPrice || '' })
     }).catch(function(){});
   }
 
@@ -566,7 +579,7 @@
         '<div class="plan-price"><span class="plan-from">From</span><span class="plan-amt">' + t.price[region] + '</span></div>' +
         '<div class="plan-timeline">' + t.time + '</div>' +
         '<ul class="plan-feats">' + t.feats.map(function(f){ return '<li>' + f + '</li>'; }).join('') + extraLis + '</ul>' +
-        '<button type="button" class="btn ' + (isRec ? 'btn-primary' : 'btn-outline') + ' plan-cta" data-plan="' + t.name + '">Request this quote</button>' +
+        '<button type="button" class="btn ' + (isRec ? 'btn-primary' : 'btn-outline') + ' plan-cta" data-plan="' + t.name + '" data-price="' + t.price[region] + '">Request this quote</button>' +
       '</div>';
     }).join('');
 
@@ -585,18 +598,19 @@
     };
     document.getElementById('result-title').textContent = titles[scopeLabel];
 
-    submitQuote(scopeLabel, TIERS[recIdx].name);
+    submitQuote(scopeLabel, TIERS[recIdx].name, TIERS[recIdx].price[region]);
 
     document.querySelectorAll('.plan-cta').forEach(function(btn){
       btn.addEventListener('click', function(){
         var plan = btn.getAttribute('data-plan') || '';
-        recordPlanClick(plan);
+        var planPrice = btn.getAttribute('data-price') || '';
+        recordPlanClick(plan, planPrice);
         document.querySelectorAll('.plan-cta').forEach(function(b){
           b.disabled = true;
           b.textContent = b === btn ? '\u2713 Requested' : 'Request this quote';
         });
         var bar = document.getElementById('plan-confirm');
-        bar.innerHTML = '<strong>' + plan + ' requested.</strong> We\'ll email ' +
+        bar.innerHTML = '<strong>' + plan + (planPrice ? ' — ' + planPrice : '') + ' requested.</strong> We\'ll email ' +
           (answers.email || 'you') + ' within 24 hours with a fixed price and timeline.';
         bar.classList.add('show');
         bar.scrollIntoView({ behavior: 'smooth', block: 'center' });

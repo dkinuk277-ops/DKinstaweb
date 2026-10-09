@@ -71,11 +71,23 @@ async function ensureSchema(env) {
       ongoing TEXT,
       scope TEXT,
       recommended_plan TEXT,
+      recommended_price TEXT,
       selected_plan TEXT,
+      selected_price TEXT,
       created_at TEXT NOT NULL,
       status TEXT NOT NULL DEFAULT 'new'
     )`
   ).run();
+
+  // Additive migrations for databases created before these columns existed.
+  const extras = ['recommended_price TEXT', 'selected_price TEXT'];
+  for (const col of extras) {
+    try {
+      await env.DB.prepare('ALTER TABLE submissions ADD COLUMN ' + col).run();
+    } catch (_) {
+      // Column already present.
+    }
+  }
 }
 
 /* ---------------- Email ---------------- */
@@ -171,8 +183,8 @@ function adminPage(rows) {
               detailRow('Content ready', r.content_state) +
               detailRow('After launch', r.ongoing) +
               detailRow('Assessed scope', r.scope) +
-              detailRow('Recommended', r.recommended_plan) +
-              detailRow('Clicked plan', r.selected_plan) +
+              detailRow('Recommended', r.recommended_plan ? r.recommended_plan + (r.recommended_price ? ' — ' + r.recommended_price : '') : '') +
+              detailRow('Plan requested', r.selected_plan ? r.selected_plan + (r.selected_price ? ' — ' + r.selected_price : '') : '') +
               '</div>'
             : '';
 
@@ -336,8 +348,9 @@ export default {
         const res = await env.DB.prepare(
           `INSERT INTO submissions
              (kind, first_name, last_name, email, region, region_other, org_type, industry,
-              pages, purpose, features, content_state, ongoing, scope, recommended_plan, created_at, status)
-           VALUES ('quote', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'new')`
+              pages, purpose, features, content_state, ongoing, scope, recommended_plan,
+              recommended_price, created_at, status)
+           VALUES ('quote', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'new')`
         )
           .bind(
             first,
@@ -354,6 +367,7 @@ export default {
             clean(b.ongoing, 60) || null,
             clean(b.scope, 40) || null,
             clean(b.recommended_plan, 60) || null,
+            clean(b.recommended_price, 60) || null,
             created_at
           )
           .run();
@@ -381,6 +395,7 @@ export default {
               '',
               'Assessed scope: ' + (clean(b.scope, 40) || '-'),
               'Recommended plan: ' + (clean(b.recommended_plan, 60) || '-'),
+              'Quoted price: ' + (clean(b.recommended_price, 60) || '-'),
               '',
               '--',
               'View all: https://dkinstaweb.com/admin'
@@ -401,10 +416,55 @@ export default {
         const b = await request.json();
         const id = parseInt(b.id, 10);
         const plan = clean(b.plan, 60);
+        const price = clean(b.price, 60);
         if (!Number.isFinite(id) || !plan) return json({ error: 'Bad request.' }, 400);
 
         await ensureSchema(env);
-        await env.DB.prepare('UPDATE submissions SET selected_plan = ? WHERE id = ?').bind(plan, id).run();
+        await env.DB.prepare(
+          'UPDATE submissions SET selected_plan = ?, selected_price = ?, status = ? WHERE id = ?'
+        )
+          .bind(plan, price || null, 'new', id)
+          .run();
+
+        const { results } = await env.DB.prepare('SELECT * FROM submissions WHERE id = ?').bind(id).all();
+        const row = results && results[0];
+
+        if (row) {
+          const regionLabel =
+            row.region === 'in' ? 'India' : row.region === 'uk' ? 'United Kingdom' : row.region_other || 'International';
+
+          ctx.waitUntil(
+            sendEmail(
+              env,
+              'Plan requested: ' + plan + ' — ' + row.first_name + ' ' + row.last_name,
+              [
+                row.first_name + ' ' + row.last_name + ' asked for a quote on the ' + plan + ' plan.',
+                '',
+                'PLAN REQUESTED: ' + plan + (price ? ' (' + price + ')' : ''),
+                '',
+                'Email: ' + row.email,
+                'Region: ' + regionLabel,
+                '',
+                'Organisation: ' + (row.org_type || '-'),
+                'Industry: ' + (row.industry || '-'),
+                'Pages: ' + (row.pages || '-'),
+                'Goal: ' + (row.purpose || '-'),
+                'Content areas: ' + (row.features || '-'),
+                'Content ready: ' + (row.content_state || '-'),
+                'After launch: ' + (row.ongoing || '-'),
+                '',
+                'Assessed scope: ' + (row.scope || '-'),
+                'We recommended: ' + (row.recommended_plan || '-') +
+                  (row.recommended_price ? ' (' + row.recommended_price + ')' : ''),
+                '',
+                '--',
+                'View all: https://dkinstaweb.com/admin'
+              ],
+              row.email
+            )
+          );
+        }
+
         return json({ ok: true });
       } catch (err) {
         return json({ error: 'Server error.' }, 500);
