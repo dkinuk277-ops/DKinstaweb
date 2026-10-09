@@ -596,6 +596,69 @@ export default {
         );
 
         const isPriced = region === 'uk' || region === 'in';
+
+        if (isPriced) {
+          const recPlan = clean(b.recommended_plan, 60);
+          const recPrice = clean(b.recommended_price, 60);
+          const sumRows = [
+            ['Organisation', clean(b.org_type, 60)],
+            ['Industry', clean(b.industry, 60)],
+            ['Size', clean(b.pages, 40)],
+            ['Main goal', clean(b.purpose, 60)],
+            ['Content ready', clean(b.content_state, 40)],
+            ['After launch', clean(b.ongoing, 60)]
+          ];
+
+          ctx.waitUntil(
+            sendEmail(
+              env,
+              'Your indicative quote — DK Instaweb',
+              [
+                'Hi ' + first + ',',
+                '',
+                'Thank you for taking the time to tell us about your project.',
+                '',
+                "Based on what you've shared, the " + (recPlan || 'recommended') + ' plan' +
+                  (recPrice ? ' (' + recPrice + ')' : '') + ' looks like the right starting point.',
+                'Please treat that as an indicative price rather than a final quote — every project is a',
+                'little different, and we would rather understand your requirements properly than guess.',
+                '',
+                'What happens next:',
+                '1. We review what you have told us and get in touch shortly.',
+                '2. A short, no-obligation call to understand your requirements in detail.',
+                '3. A fixed quote and timeline, confirmed in writing.',
+                '',
+                'If you would like to add anything before we speak, simply reply to this email.',
+                '',
+                'We look forward to speaking with you.',
+                '',
+                '--',
+                'DK Instaweb — dkinstaweb.com'
+              ],
+              env.NOTIFY_TO,
+              {
+                to: email,
+                html: customerEmailHtml({
+                  heading: 'Thank you, ' + first + '.',
+                  intro:
+                    "Thanks for taking the time to tell us about your project. Based on what you've shared, here's the plan that looks like the right starting point for you.",
+                  plan: recPlan,
+                  price: recPrice,
+                  indicative: true,
+                  rows: sumRows,
+                  steps: [
+                    'One of us will be in touch shortly to arrange a short call at a time that suits you.',
+                    "We'll talk through your requirements in detail — what you need, and just as importantly what you don't.",
+                    "You'll get a fixed quote and a clear timeline in writing. No obligation at any stage."
+                  ],
+                  closing:
+                    "If you'd like to add anything before we speak, just reply to this email — it comes straight to us. We look forward to speaking with you."
+                })
+              }
+            )
+          );
+        }
+
         if (!isPriced) {
           const summaryRows = [
             ['Country', regionOther],
@@ -710,7 +773,12 @@ export default {
             ['After launch', row.ongoing]
           ];
 
-          ctx.waitUntil(
+          const alreadyEmailed =
+            (row.region === 'uk' || row.region === 'in') &&
+            row.recommended_plan &&
+            row.recommended_plan === plan;
+
+          if (!alreadyEmailed) ctx.waitUntil(
             sendEmail(
               env,
               'Your quote: ' + plan + (price ? ' — ' + price : '') + ' — DK Instaweb',
