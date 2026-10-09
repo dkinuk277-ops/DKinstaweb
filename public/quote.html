@@ -120,6 +120,9 @@
   .plan-feats li.extra{color:var(--accent-hot)}
   .plan-cta{width:100%;justify-content:center}
 
+  .plan-confirm{display:none;padding:1.1rem 1.4rem;background:rgba(245,158,11,.08);border:1px solid var(--accent);border-radius:5px;color:var(--text);font-size:.92rem;margin-bottom:1.5rem;text-align:center;line-height:1.6}
+  .plan-confirm.show{display:block;animation:fade .3s ease}
+  .plan-cta:disabled{opacity:.5;cursor:default}
   .result-note{padding:1.2rem 1.4rem;background:var(--surface);border-left:3px solid var(--accent);border-radius:2px;font-size:.9rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.6}
   .result-note strong{color:var(--text)}
   .region-note{text-align:center;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.06em;color:var(--muted-2);margin-top:-1rem;margin-bottom:1.75rem}
@@ -301,6 +304,7 @@
 
     <div class="region-note" id="region-note"></div>
     <div class="plans" id="plans"></div>
+    <div class="plan-confirm" id="plan-confirm"></div>
     <div class="contact-screen" id="contact-screen" style="display:none">
       <div class="contact-icon">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -562,7 +566,7 @@
         '<div class="plan-price"><span class="plan-from">From</span><span class="plan-amt">' + t.price[region] + '</span></div>' +
         '<div class="plan-timeline">' + t.time + '</div>' +
         '<ul class="plan-feats">' + t.feats.map(function(f){ return '<li>' + f + '</li>'; }).join('') + extraLis + '</ul>' +
-        '<a href="/#contact" class="btn ' + (isRec ? 'btn-primary' : 'btn-outline') + ' plan-cta" data-plan="' + t.name + '">Request this quote</a>' +
+        '<button type="button" class="btn ' + (isRec ? 'btn-primary' : 'btn-outline') + ' plan-cta" data-plan="' + t.name + '">Request this quote</button>' +
       '</div>';
     }).join('');
 
@@ -585,7 +589,17 @@
 
     document.querySelectorAll('.plan-cta').forEach(function(btn){
       btn.addEventListener('click', function(){
-        recordPlanClick(btn.getAttribute('data-plan') || '');
+        var plan = btn.getAttribute('data-plan') || '';
+        recordPlanClick(plan);
+        document.querySelectorAll('.plan-cta').forEach(function(b){
+          b.disabled = true;
+          b.textContent = b === btn ? '\u2713 Requested' : 'Request this quote';
+        });
+        var bar = document.getElementById('plan-confirm');
+        bar.innerHTML = '<strong>' + plan + ' requested.</strong> We\'ll email ' +
+          (answers.email || 'you') + ' within 24 hours with a fixed price and timeline.';
+        bar.classList.add('show');
+        bar.scrollIntoView({ behavior: 'smooth', block: 'center' });
       });
     });
     document.getElementById('result-sub').textContent =
