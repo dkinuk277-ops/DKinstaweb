@@ -79,6 +79,17 @@ async function ensureSchema(env) {
     )`
   ).run();
 
+  await env.DB.prepare(
+    `CREATE TABLE IF NOT EXISTS email_log (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      recipient TEXT,
+      subject TEXT,
+      ok INTEGER NOT NULL DEFAULT 0,
+      detail TEXT,
+      created_at TEXT NOT NULL
+    )`
+  ).run();
+
   // Additive migrations for databases created before these columns existed.
   const extras = ['recommended_price TEXT', 'selected_price TEXT'];
   for (const col of extras) {
@@ -92,14 +103,35 @@ async function ensureSchema(env) {
 
 /* ---------------- Email ---------------- */
 
+async function logEmail(env, recipient, subject, result) {
+  try {
+    await env.DB.prepare(
+      'INSERT INTO email_log (recipient, subject, ok, detail, created_at) VALUES (?, ?, ?, ?, ?)'
+    )
+      .bind(
+        recipient || '',
+        subject || '',
+        result && result.ok ? 1 : 0,
+        result && result.ok ? (result.detail || 'sent') : (result && result.error) || 'unknown',
+        new Date().toISOString()
+      )
+      .run();
+  } catch (_) {
+    // Logging must never break a send.
+  }
+}
+
 async function sendEmail(env, subject, lines, replyTo, opts) {
   opts = opts || {};
+  const recipient = opts.to || env.NOTIFY_TO || '(unset)';
   const missing = [];
   if (!env.RESEND_API_KEY) missing.push('RESEND_API_KEY');
   if (!env.NOTIFY_TO) missing.push('NOTIFY_TO');
   if (!env.NOTIFY_FROM) missing.push('NOTIFY_FROM');
   if (missing.length) {
-    return { ok: false, error: 'Missing secrets: ' + missing.join(', ') };
+    const r = { ok: false, error: 'Missing secrets: ' + missing.join(', ') };
+    await logEmail(env, recipient, subject, r);
+    return r;
   }
 
   const payload = {
@@ -123,12 +155,18 @@ async function sendEmail(env, subject, lines, replyTo, opts) {
     const body = await res.text();
     if (!res.ok) {
       console.log('Resend failed', res.status, body);
-      return { ok: false, error: 'Resend returned ' + res.status + ': ' + body };
+      const r = { ok: false, error: 'Resend returned ' + res.status + ': ' + body };
+      await logEmail(env, recipient, subject, r);
+      return r;
     }
-    return { ok: true, detail: body };
+    const r = { ok: true, detail: body };
+    await logEmail(env, recipient, subject, r);
+    return r;
   } catch (err) {
     console.log('Resend error', err && err.message);
-    return { ok: false, error: 'Network error: ' + (err && err.message) };
+    const r = { ok: false, error: 'Network error: ' + (err && err.message) };
+    await logEmail(env, recipient, subject, r);
+    return r;
   }
 }
 
@@ -730,6 +768,26 @@ export default {
         })
         .join('');
 
+      const { results: logs } = await env.DB.prepare(
+        'SELECT * FROM email_log ORDER BY created_at DESC LIMIT 25'
+      ).all();
+
+      const logRows = (logs || []).length
+        ? (logs || [])
+            .map(function (l) {
+              return (
+                '<div class="logrow">' +
+                '<div><span class="dot ' + (l.ok ? 'ok' : 'no') + '"></span>' +
+                '<span class="to">' + esc(l.recipient) + '</span></div>' +
+                '<div class="subj">' + esc(l.subject) + '</div>' +
+                '<div class="det">' + esc(String(l.detail).slice(0, 300)) + '</div>' +
+                '<div class="when">' + esc(new Date(l.created_at).toLocaleString('en-GB')) + '</div>' +
+                '</div>'
+              );
+            })
+            .join('')
+        : '<p style="color:#6B7688;font-size:.9rem;">No send attempts recorded yet.</p>';
+
       return html(
         '<!DOCTYPE html><html><head><meta charset="UTF-8">' +
           '<meta name="viewport" content="width=device-width, initial-scale=1.0">' +
@@ -747,6 +805,14 @@ export default {
           '.res{padding:1.1rem 1.3rem;border-radius:5px;border:1px solid;font-size:.9rem;line-height:1.6;word-break:break-word}' +
           'a.back{font-family:JetBrains Mono,monospace;font-size:.78rem;color:#8B95A5;text-decoration:none}' +
           'a.back:hover{color:#F59E0B}' +
+          '.logrow{border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:.8rem 1rem;margin-bottom:.6rem;font-family:Arial,sans-serif}' +
+          '.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px}' +
+          '.dot.ok{background:#4ADE80}.dot.no{background:#F87171}' +
+          '.to{color:#F0EDE4;font-size:.88rem}' +
+          '.subj{color:#8B95A5;font-size:.8rem;margin:.25rem 0 0 16px}' +
+          '.det{color:#6B7688;font-size:.72rem;margin:.3rem 0 0 16px;word-break:break-all;font-family:JetBrains Mono,monospace}' +
+          '.when{color:#4a5568;font-size:.7rem;margin:.3rem 0 0 16px;font-family:JetBrains Mono,monospace}' +
+          'h2{font-family:Sora,sans-serif;font-weight:500;font-size:1.1rem;color:#FFF9EC;margin:2rem 0 1rem}' +
           '</style></head><body><div class="wrap">' +
           '<span class="badge">DK</span><h1>Email test</h1>' +
           '<div class="box">' + rows + '</div>' +
@@ -755,6 +821,7 @@ export default {
             ? 'Resend accepted the message. Check ' + esc(env.NOTIFY_TO || '') + ' (including spam).'
             : esc((result && result.error) || 'Unknown error')) +
           '</div>' +
+          '<h2>Recent send attempts</h2>' + logRows +
           '<p style="margin-top:1.5rem"><a class="back" href="/admin">&larr; BACK TO SUBMISSIONS</a></p>' +
           '</div></body></html>'
       );
