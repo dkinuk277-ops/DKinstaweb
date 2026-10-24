@@ -121,6 +121,30 @@ async function logEmail(env, recipient, subject, result) {
   }
 }
 
+const TEMPLATE_CATEGORY = {
+  meridian: 'Real Estate & Property',
+  pulse: 'Hospital & Healthcare',
+  console: 'Software & Admin Dashboards',
+  orbit: 'Startups & SaaS',
+  market: 'Textile, Retail & E-commerce',
+  forge: 'Manufacturing & Industrial',
+  civic: 'Government & Public Sector',
+  ledger: 'Accountancy & Professional Services',
+  campus: 'Education & Training',
+  vault: 'Banking & Fintech',
+  motion: 'Fitness & Wellness',
+  transit: 'Logistics & Transport',
+  kindred: 'Charity & Non-profit',
+  harvest: 'Restaurants & Hospitality',
+  atelier: 'Creative & Portfolio'
+};
+
+function interestOf(slug) {
+  if (!slug) return 'Browsing the library as a whole';
+  const cat = TEMPLATE_CATEGORY[String(slug).toLowerCase()];
+  return cat ? cat + ' (' + slug + ' template)' : slug + ' template';
+}
+
 async function sendEmail(env, subject, lines, replyTo, opts) {
   opts = opts || {};
   const recipient = opts.to || env.NOTIFY_TO || '(unset)';
@@ -886,13 +910,12 @@ export default {
             [
               first + ' ' + last + ' subscribed to unlock the template library.',
               '',
-              'Name:        ' + first + ' ' + last,
-              'Email:       ' + email,
-              'Phone:       ' + (phone || 'Not provided'),
-              'Interest:    ' + (template ? 'Clicked the ' + template + ' template' : 'The library as a whole'),
-              'Subscribed:  ' + when,
+              'Name:          ' + first + ' ' + last,
+              'Email:         ' + email,
+              'Phone:         ' + (phone || 'Not provided'),
+              'Interested in: ' + interestOf(template),
+              'Subscribed:    ' + when,
               '',
-              'A warm lead — they were browsing templates, not just reading the homepage.',
               'Reply to this email to reach them directly.',
               '',
               '--',
@@ -911,18 +934,12 @@ export default {
                   ['Name', first + ' ' + last],
                   ['Email', email],
                   ['Phone', phone || 'Not provided'],
-                  ['Interest', template ? 'Clicked the ' + template + ' template' : 'The library as a whole'],
+                  ['Interested in', interestOf(template)],
                   ['Subscribed', when]
-                ],
-                steps: [
-                  'We get in touch to understand your requirements in full — what the site is for, how many pages, what content you already have and when you need it live.',
-                  'We draft your site to your brand, structure and page count, then review it together and adjust until it is right. We stay flexible on scope and budget throughout.',
-                  'We build it properly, connect your domain, set up email, go live and keep it hosted and looked after. Quality work, delivered in days rather than months.'
                 ],
                 closing:
                   'They have been told we will contact them to understand their requirements in full. ' +
-                  'Every subscriber is also stored in the admin console at ' +
-                  '<a href="https://dkinstaweb.com/admin" style="color:#B8823B;text-decoration:none;">dkinstaweb.com/admin</a>.'
+                  'Also stored at <a href="https://dkinstaweb.com/admin" style="color:#B8823B;text-decoration:none;">dkinstaweb.com/admin</a>.'
               })
             }
           )
