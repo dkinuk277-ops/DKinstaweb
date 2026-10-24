@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Display options — DK Instaweb</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A1428;--bg-2:#0F1D38;--surface:rgba(255,255,255,.03);--surface-2:rgba(255,255,255,.06);
+    --accent:#F59E0B;--accent-hot:#FBBF24;--text:#F0EDE4;--text-strong:#FFF9EC;
+    --muted:#8B95A5;--muted-2:#6B7688;--line:rgba(255,255,255,.08);--line-strong:rgba(255,255,255,.14);
+    --fd:'Sora',sans-serif;--fb:'Inter',sans-serif;--fm:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--fb);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
+
+  header{padding:clamp(2.5rem,6vw,4rem) 0 2rem;border-bottom:1px solid var(--line)}
+  .badge{background:var(--accent);color:var(--bg);padding:4px 8px;border-radius:3px;font-size:.72rem;letter-spacing:.14em;font-weight:700;font-family:var(--fm)}
+  h1{font-family:var(--fd);font-size:clamp(1.9rem,4.4vw,2.9rem);font-weight:500;letter-spacing:-.03em;color:var(--text-strong);margin:1rem 0 .8rem}
+  .lead{color:var(--muted);max-width:60ch}
+
+  .opt{padding:clamp(2.5rem,6vw,4rem) 0;border-bottom:1px solid var(--line)}
+  .ohead{display:flex;align-items:flex-start;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.75rem}
+  .onum{font-family:var(--fm);font-size:.72rem;letter-spacing:.18em;color:var(--accent);margin-bottom:.5rem}
+  .ohead h2{font-family:var(--fd);font-size:clamp(1.4rem,2.8vw,1.95rem);font-weight:500;letter-spacing:-.025em;color:var(--text-strong);line-height:1.15}
+  .ohead p{color:var(--muted);font-size:.94rem;max-width:52ch;margin-top:.6rem}
+  .verdict{background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:.9rem 1.1rem;min-width:220px;max-width:280px}
+  .verdict b{display:block;font-family:var(--fm);font-size:.64rem;letter-spacing:.12em;color:var(--muted-2);margin-bottom:.4rem}
+  .verdict p{font-size:.84rem;color:var(--text);margin:0}
+  .pro{color:#4ADE80}.con{color:#F87171}
+
+  /* shared browser chrome */
+  .win{border:1px solid var(--line-strong);border-radius:10px;overflow:hidden;background:#0D1526;box-shadow:0 30px 70px -35px rgba(0,0,0,.8)}
+  .bar{display:flex;align-items:center;gap:.7rem;padding:.55rem .85rem;background:#121C30;border-bottom:1px solid var(--line)}
+  .dots{display:flex;gap:5px;flex-shrink:0}
+  .dots i{width:10px;height:10px;border-radius:50%;display:block}
+  .url{flex:1;background:#0A1428;border:1px solid var(--line);border-radius:5px;padding:.25rem .65rem;font-family:var(--fm);font-size:.7rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .vp{position:relative;overflow:hidden;background:#fff}
+  .vp iframe{position:absolute;top:0;left:0;border:0;transform-origin:0 0;pointer-events:none;background:#fff}
+
+  /* ---------- 1 device frames ---------- */
+  .devices{display:grid;grid-template-columns:1fr 300px;gap:2rem;align-items:end}
+  @media(max-width:900px){.devices{grid-template-columns:1fr;justify-items:center}}
+  .laptop .screen{border:12px solid #1A2438;border-bottom-width:14px;border-radius:12px 12px 4px 4px;overflow:hidden;background:#000}
+  .laptop .base{height:14px;background:linear-gradient(#2A3650,#141C2C);border-radius:0 0 12px 12px;position:relative}
+  .laptop .base::after{content:"";position:absolute;left:50%;top:0;transform:translateX(-50%);width:80px;height:5px;background:#0A1428;border-radius:0 0 5px 5px}
+  .phone{width:260px;border:11px solid #1A2438;border-radius:34px;overflow:hidden;position:relative;background:#000;box-shadow:0 24px 50px -24px rgba(0,0,0,.8)}
+  .phone::before{content:"";position:absolute;top:9px;left:50%;transform:translateX(-50%);width:76px;height:19px;background:#1A2438;border-radius:100px;z-index:3}
+  .dlabel{font-family:var(--fm);font-size:.68rem;letter-spacing:.14em;color:var(--muted-2);text-align:center;margin-top:.7rem}
+
+  /* ---------- 2 scroll-through ---------- */
+  .scrollvp{aspect-ratio:16/10}
+  .scrollvp iframe{animation:creep 26s linear infinite alternate}
+  @keyframes creep{from{top:0}to{top:-62%}}
+  .scrollvp:hover iframe{animation-play-state:paused}
+  .hint{position:absolute;right:.8rem;bottom:.8rem;z-index:4;background:rgba(10,20,40,.9);border:1px solid var(--line-strong);border-radius:100px;padding:.35rem .8rem;font-family:var(--fm);font-size:.66rem;letter-spacing:.08em;color:var(--muted)}
+
+  /* ---------- 3 tabbed ---------- */
+  .tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem}
+  .tab{background:var(--surface);border:1px solid var(--line);color:var(--muted);font-family:var(--fm);font-size:.74rem;
+    letter-spacing:.06em;padding:.5rem 1rem;border-radius:100px;cursor:pointer;transition:all .18s}
+  .tab:hover{border-color:var(--line-strong);color:var(--text)}
+  .tab.on{background:var(--accent);border-color:var(--accent);color:var(--bg);font-weight:700}
+  .tabvp{aspect-ratio:16/9}
+
+  /* ---------- 4 before/after ---------- */
+  .ba{position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:10px;border:1px solid var(--line-strong);cursor:ew-resize;user-select:none}
+  .ba .side{position:absolute;inset:0;overflow:hidden}
+  .ba .after{clip-path:inset(0 0 0 50%)}
+  .ba iframe{position:absolute;top:0;left:0;border:0;transform-origin:0 0;pointer-events:none}
+  .handle{position:absolute;top:0;bottom:0;left:50%;width:3px;background:var(--accent);z-index:6;pointer-events:none}
+  .handle::after{content:"⇄";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;
+    background:var(--accent);color:var(--bg);border-radius:50%;display:grid;place-items:center;font-size:1.05rem;font-weight:700;
+    box-shadow:0 6px 18px -4px rgba(0,0,0,.6)}
+  .batag{position:absolute;top:.8rem;z-index:5;font-family:var(--fm);font-size:.66rem;letter-spacing:.1em;
+    padding:.3rem .7rem;border-radius:100px;background:rgba(10,20,40,.88);border:1px solid var(--line-strong)}
+  /* the "old site" */
+  .old{position:absolute;inset:0;background:#E8E8E8;font-family:'Times New Roman',Times,serif;color:#000;overflow:hidden}
+  .old .oldtop{background:#003366;color:#fff;padding:10px 16px;font-size:20px;font-weight:bold}
+  .old .oldnav{background:#CCCCCC;border-bottom:2px solid #999;padding:5px 16px;font-size:12px}
+  .old .oldnav a{color:#0000EE;text-decoration:underline;margin-right:14px}
+  .old .oldbody{padding:14px 16px;display:flex;gap:14px}
+  .old h3{font-size:17px;margin-bottom:6px}
+  .old p{font-size:12px;line-height:1.45;margin-bottom:8px}
+  .old .oldimg{width:120px;height:86px;background:#B0B0B0;border:1px solid #777;flex-shrink:0;display:grid;place-items:center;font-size:9px;color:#555}
+  .old .marquee{background:#FFFF99;border:1px solid #CCA;font-size:11px;padding:3px 6px;margin-top:6px}
+
+  /* ---------- 5 static grid ---------- */
+  .grid5{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+  @media(max-width:900px){.grid5{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.grid5{grid-template-columns:1fr}}
+  .shot{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface);transition:all .22s}
+  .shot:hover{border-color:var(--accent);transform:translateY(-3px)}
+  .shotvp{aspect-ratio:16/11}
+  .shotb{padding:.75rem .9rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem;border-top:1px solid var(--line)}
+  .shotb b{font-family:var(--fd);font-size:.92rem;font-weight:500;color:var(--text-strong)}
+  .shotb span{font-family:var(--fm);font-size:.64rem;letter-spacing:.1em;color:var(--accent)}
+
+  /* ---------- 6 hover preview ---------- */
+  .hoverzone{position:relative;border:1px solid var(--line-strong);border-radius:10px;overflow:hidden;min-height:440px;background:#0D1526}
+  .hbg{position:absolute;inset:0;z-index:1}
+  .hbg .frame{position:absolute;inset:0;opacity:0;transition:opacity .45s;overflow:hidden}
+  .hbg .frame.on{opacity:1}
+  .hbg iframe{position:absolute;top:0;left:0;border:0;transform-origin:0 0;pointer-events:none}
+  .hscrim{position:absolute;inset:0;z-index:2;background:linear-gradient(90deg,rgba(10,20,40,.96) 0%,rgba(10,20,40,.88) 42%,rgba(10,20,40,.35) 100%)}
+  .hlist{position:relative;z-index:3;padding:clamp(1.5rem,4vw,2.5rem)}
+  .hrow{display:flex;align-items:baseline;gap:1rem;padding:.85rem 0;border-bottom:1px solid var(--line);cursor:pointer;transition:padding-left .25s}
+  .hrow:hover{padding-left:.7rem}
+  .hrow .hn{font-family:var(--fm);font-size:.68rem;color:var(--muted-2);width:26px;flex-shrink:0}
+  .hrow .ht{font-family:var(--fd);font-size:clamp(1.25rem,2.6vw,1.8rem);font-weight:500;letter-spacing:-.02em;color:var(--muted);transition:color .25s}
+  .hrow:hover .ht,.hrow.on .ht{color:var(--text-strong)}
+  .hrow .hs{font-family:var(--fm);font-size:.66rem;letter-spacing:.1em;color:var(--muted-2);margin-left:auto;opacity:0;transition:opacity .25s}
+  .hrow:hover .hs,.hrow.on .hs{opacity:1;color:var(--accent)}
+
+  footer{padding:3rem 0;text-align:center;color:var(--muted-2);font-size:.86rem}
+  footer a{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="badge">DK</span>
+    <h1>Six ways to show the templates</h1>
+    <p class="lead">All six are built and working below, using the real template pages. Scroll through, see which one you want, and I will rebuild the gallery around it.</p>
+  </div>
+</header>
+
+<!-- ========== 1 DEVICE FRAMES ========== -->
+<section class="opt">
+  <div class="wrap">
+    <div class="ohead">
+      <div>
+        <div class="onum">OPTION 01</div>
+        <h2>Device frames</h2>
+        <p>The same page in a laptop and a phone, side by side. Makes the point that every build is responsive without anyone having to say it.</p>
+      </div>
+      <div class="verdict">
+        <b>VERDICT</b>
+        <p><span class="pro">Strong</span> for buyers who worry about mobile. <span class="con">Heavy</span> — two frames per template, so maybe three on the page, not fifteen.</p>
+      </div>
+    </div>
+
+    <div class="devices">
+      <div class="laptop">
+        <div class="screen"><div class="vp" style="aspect-ratio:16/10"><iframe data-src="meridian/index.html" data-w="1440" loading="lazy"></iframe></div></div>
+        <div class="base"></div>
+        <div class="dlabel">DESKTOP · 1440px</div>
+      </div>
+      <div>
+        <div class="phone"><div class="vp" style="aspect-ratio:9/19"><iframe data-src="meridian/index.html" data-w="390" loading="lazy"></iframe></div></div>
+        <div class="dlabel">MOBILE · 390px</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 2 SCROLL-THROUGH ========== -->
+<section class="opt">
+  <div class="wrap">
+    <div class="ohead">
+      <div>
+        <div class="onum">OPTION 02</div>
+        <h2>Scroll-through</h2>
+        <p>The page creeps down inside the window on a loop, like a screen recording. No cursor, so nothing can fall out of sync. Hovering pauses it.</p>
+      </div>
+      <div class="verdict">
+        <b>VERDICT</b>
+        <p><span class="pro">Nothing to break</span> and it shows the whole page, not just the top. <span class="con">Passive</span> — no sense of someone using it.</p>
+      </div>
+    </div>
+
+    <div class="win">
+      <div class="bar">
+        <div class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></div>
+        <div class="url">pulseclinic.example</div>
+      </div>
+      <div class="vp scrollvp"><iframe data-src="pulse/index.html" data-w="1440" data-tall="1" loading="lazy"></iframe>
+        <div class="hint">HOVER TO PAUSE</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 3 TABBED SWITCHER ========== -->
+<section class="opt">
+  <div class="wrap">
+    <div class="ohead">
+      <div>
+        <div class="onum">OPTION 03</div>
+        <h2>Tabbed switcher</h2>
+        <p>One large window, every template a tab above it. The visitor does the clicking, so they stay in control and the page stays light.</p>
+      </div>
+      <div class="verdict">
+        <b>VERDICT</b>
+        <p><span class="pro">My pick.</span> One frame on the page, fifteen templates reachable, and people engage more when they drive.</p>
+      </div>
+    </div>
+
+    <div class="tabs" id="tabs">
+      <button class="tab on" data-t="meridian/index.html" data-u="meridian.example">MERIDIAN</button>
+      <button class="tab" data-t="pulse/index.html" data-u="pulseclinic.example">PULSE</button>
+      <button class="tab" data-t="console/index.html" data-u="app.console.example">CONSOLE</button>
+      <button class="tab" data-t="orbit/index.html" data-u="orbit.example">ORBIT</button>
+      <button class="tab" data-t="market/index.html" data-u="market.example">MARKET</button>
+      <button class="tab" data-t="vault/index.html" data-u="vault.example">VAULT</button>
+      <button class="tab" data-t="motion/index.html" data-u="motion.example">MOTION</button>
+      <button class="tab" data-t="harvest/index.html" data-u="harvest.example">HARVEST</button>
+      <button class="tab" data-t="transit/index.html" data-u="transit.example">TRANSIT</button>
+    </div>
+
+    <div class="win">
+      <div class="bar">
+        <div class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></div>
+        <div class="url" id="taburl">meridian.example</div>
+      </div>
+      <div class="vp tabvp"><iframe id="tabframe" data-src="meridian/index.html" data-w="1440" loading="lazy"></iframe></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 4 BEFORE / AFTER ========== -->
+<section class="opt">
+  <div class="wrap">
+    <div class="ohead">
+      <div>
+        <div class="onum">OPTION 04</div>
+        <h2>Before / after slider</h2>
+        <p>Drag the handle between a dated site and what it becomes. This is the one that makes someone recognise their own website in the "before".</p>
+      </div>
+      <div class="verdict">
+        <b>VERDICT</b>
+        <p><span class="pro">Most persuasive</span> of the six for cold visitors. <span class="con">Needs a real before</span> — ideally the client's own site.</p>
+      </div>
+    </div>
+
+    <div class="ba" id="ba">
+      <span class="batag" style="left:.8rem;color:#F87171">BEFORE</span>
+      <span class="batag" style="right:.8rem;color:#4ADE80">AFTER</span>
+
+      <div class="side">
+        <div class="old">
+          <div class="oldtop">Meridian Property Services Ltd.</div>
+          <div class="oldnav"><a href="#">Home</a><a href="#">Properties</a><a href="#">About Us</a><a href="#">Contact</a><a href="#">Links</a></div>
+          <div class="oldbody">
+            <div>
+              <h3>Welcome to our website!</h3>
+              <p>Meridian Property Services has been established since 1998 serving Cheshire and the surrounding areas. We specialise in residential sales and lettings.</p>
+              <p>Please browse our properties using the links above. For further information please do not hesitate to contact us on 0161 000 0000 during office hours.</p>
+              <div class="marquee">★ NEW: Three properties just added — click here to view! ★</div>
+            </div>
+            <div class="oldimg">photo.jpg</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="side after" id="baAfter">
+        <iframe data-src="meridian/index.html" data-w="1440" loading="lazy"></iframe>
+      </div>
+
+      <div class="handle" id="baHandle"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 5 STATIC GRID ========== -->
+<section class="opt">
+  <div class="wrap">
+    <div class="ohead">
+      <div>
+        <div class="onum">OPTION 05</div>
+        <h2>Still grid</h2>
+        <p>Plain thumbnails in a grid, nothing moving. In production these would be real screenshot images rather than frames, so the page would load instantly.</p>
+      </div>
+      <div class="verdict">
+        <b>VERDICT</b>
+        <p><span class="pro">Fastest and safest.</span> <span class="con">Forgettable</span> — it looks like every other template gallery on the internet.</p>
+      </div>
+    </div>
+
+    <div class="grid5">
+      <a class="shot" href="meridian/index.html" target="_blank" rel="noopener"><div class="vp shotvp"><iframe data-src="meridian/index.html" data-w="1440" loading="lazy"></iframe></div><div class="shotb"><b>Meridian</b><span>PROPERTY</span></div></a>
+      <a class="shot" href="ledger/index.html" target="_blank" rel="noopener"><div class="vp shotvp"><iframe data-src="ledger/index.html" data-w="1440" loading="lazy"></iframe></div><div class="shotb"><b>Ledger</b><span>ACCOUNTANCY</span></div></a>
+      <a class="shot" href="campus/index.html" target="_blank" rel="noopener"><div class="vp shotvp"><iframe data-src="campus/index.html" data-w="1440" loading="lazy"></iframe></div><div class="shotb"><b>Campus</b><span>EDUCATION</span></div></a>
+      <a class="shot" href="vault/index.html" target="_blank" rel="noopener"><div class="vp shotvp"><iframe data-src="vault/index.html" data-w="1440" loading="lazy"></iframe></div><div class="shotb"><b>Vault</b><span>FINTECH</span></div></a>
+      <a class="shot" href="motion/index.html" target="_blank" rel="noopener"><div class="vp shotvp"><iframe data-src="motion/index.html" data-w="1440" loading="lazy"></iframe></div><div class="shotb"><b>Motion</b><span>FITNESS</span></div></a>
+      <a class="shot" href="transit/index.html" target="_blank" rel="noopener"><div class="vp shotvp"><iframe data-src="transit/index.html" data-w="1440" loading="lazy"></iframe></div><div class="shotb"><b>Transit</b><span>LOGISTICS</span></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 6 HOVER PREVIEW ========== -->
+<section class="opt">
+  <div class="wrap">
+    <div class="ohead">
+      <div>
+        <div class="onum">OPTION 06</div>
+        <h2>Hover preview</h2>
+        <p>A list of names on the left. Move down it and the template fills the space behind. Quiet, fast to scan, and it feels like a studio rather than a shop.</p>
+      </div>
+      <div class="verdict">
+        <b>VERDICT</b>
+        <p><span class="pro">Elegant</span> and handles fifteen easily. <span class="con">Hover does not exist on phones</span> — needs a tap fallback.</p>
+      </div>
+    </div>
+
+    <div class="hoverzone" id="hz">
+      <div class="hbg" id="hbg">
+        <div class="frame on"><iframe data-src="meridian/index.html" data-w="1440" loading="lazy"></iframe></div>
+        <div class="frame"><iframe data-src="harvest/index.html" data-w="1440" loading="lazy"></iframe></div>
+        <div class="frame"><iframe data-src="atelier/index.html" data-w="1440" loading="lazy"></iframe></div>
+        <div class="frame"><iframe data-src="vault/index.html" data-w="1440" loading="lazy"></iframe></div>
+        <div class="frame"><iframe data-src="motion/index.html" data-w="1440" loading="lazy"></iframe></div>
+      </div>
+      <div class="hscrim"></div>
+      <div class="hlist" id="hlist">
+        <div class="hrow on" data-i="0"><span class="hn">01</span><span class="ht">Meridian</span><span class="hs">PROPERTY ↗</span></div>
+        <div class="hrow" data-i="1"><span class="hn">02</span><span class="ht">Harvest</span><span class="hs">RESTAURANT ↗</span></div>
+        <div class="hrow" data-i="2"><span class="hn">03</span><span class="ht">Atelier</span><span class="hs">PORTFOLIO ↗</span></div>
+        <div class="hrow" data-i="3"><span class="hn">04</span><span class="ht">Vault</span><span class="hs">FINTECH ↗</span></div>
+        <div class="hrow" data-i="4"><span class="hn">05</span><span class="ht">Motion</span><span class="hs">FITNESS ↗</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Tell me a number and I will rebuild the gallery around it. <a href="index.html">← Current gallery</a></div>
+</footer>
+
+<script>
+(function(){
+  // ---- scale every iframe to its container ----
+  function scaleAll(){
+    document.querySelectorAll('iframe[data-w]').forEach(function(fr){
+      var vp = fr.parentElement;
+      var w = parseInt(fr.getAttribute('data-w'), 10);
+      var s = vp.clientWidth / w;
+      fr.style.width = w + 'px';
+      fr.style.transform = 'scale(' + s + ')';
+      var tall = fr.getAttribute('data-tall') ? 2.6 : 1;
+      fr.style.height = ((vp.clientHeight / s) * tall) + 'px';
+    });
+  }
+
+  // ---- load frames only when they scroll near ----
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting) return;
+        var fr = e.target;
+        if(!fr.src && fr.getAttribute('data-src')) fr.src = fr.getAttribute('data-src');
+        io.unobserve(fr);
+      });
+    }, { rootMargin: '300px' });
+    document.querySelectorAll('iframe[data-src]').forEach(function(f){ io.observe(f); });
+  } else {
+    document.querySelectorAll('iframe[data-src]').forEach(function(f){ f.src = f.getAttribute('data-src'); });
+  }
+
+  scaleAll();
+  window.addEventListener('resize', scaleAll);
+  document.querySelectorAll('iframe').forEach(function(f){ f.addEventListener('load', scaleAll); });
+
+  // ---- 3. tabs ----
+  var tabFrame = document.getElementById('tabframe');
+  var tabUrl = document.getElementById('taburl');
+  document.querySelectorAll('#tabs .tab').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('#tabs .tab').forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on');
+      tabFrame.src = b.getAttribute('data-t');
+      tabUrl.textContent = b.getAttribute('data-u');
+    });
+  });
+
+  // ---- 4. before / after ----
+  var ba = document.getElementById('ba');
+  if(ba){
+    var after = document.getElementById('baAfter');
+    var handle = document.getElementById('baHandle');
+    function setPct(p){
+      p = Math.max(2, Math.min(98, p));
+      after.style.clipPath = 'inset(0 0 0 ' + p + '%)';
+      handle.style.left = p + '%';
+    }
+    function fromEvent(e){
+      var r = ba.getBoundingClientRect();
+      var x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
+      setPct((x / r.width) * 100);
+    }
+    var dragging = false;
+    ba.addEventListener('mousedown', function(e){ dragging = true; fromEvent(e); });
+    window.addEventListener('mousemove', function(e){ if(dragging) fromEvent(e); });
+    window.addEventListener('mouseup', function(){ dragging = false; });
+    ba.addEventListener('mousemove', function(e){ if(!dragging) fromEvent(e); });
+    ba.addEventListener('touchstart', function(e){ fromEvent(e); }, { passive: true });
+    ba.addEventListener('touchmove', function(e){ fromEvent(e); }, { passive: true });
+  }
+
+  // ---- 6. hover preview ----
+  var rows = document.querySelectorAll('#hlist .hrow');
+  var frames = document.querySelectorAll('#hbg .frame');
+  rows.forEach(function(r){
+    function pick(){
+      var n = parseInt(r.getAttribute('data-i'), 10);
+      rows.forEach(function(x){ x.classList.remove('on'); });
+      frames.forEach(function(f, k){ f.classList.toggle('on', k === n); });
+      r.classList.add('on');
+    }
+    r.addEventListener('mouseenter', pick);
+    r.addEventListener('click', pick);
+  });
+})();
+</script>
+</body>
+</html>
