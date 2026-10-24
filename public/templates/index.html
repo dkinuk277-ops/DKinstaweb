@@ -230,6 +230,15 @@
   .unlock-state{display:inline-flex;align-items:center;gap:.5rem;background:var(--surface);border:1px solid var(--line);
     border-radius:100px;padding:.45rem .95rem;font-family:var(--fm);font-size:.72rem;letter-spacing:.08em;color:var(--muted);white-space:nowrap}
   .unlock-state.done{border-color:#4ADE80;color:#4ADE80}
+  .lib-cta{display:flex;align-items:center;gap:.9rem;flex-wrap:wrap}
+  .sub-btn{display:inline-flex;align-items:center;gap:.55rem;background:var(--accent);color:var(--bg);border:none;
+    padding:.8rem 1.6rem;border-radius:4px;font-family:var(--fm);font-size:.8rem;font-weight:700;letter-spacing:.08em;
+    cursor:pointer;white-space:nowrap;transition:background .2s,transform .2s,box-shadow .2s;
+    box-shadow:0 14px 30px -14px rgba(245,158,11,.55)}
+  .sub-btn:hover{background:var(--accent-hot);transform:translateY(-2px)}
+  .sub-btn:active{transform:translateY(0)}
+  .sub-btn.done{background:transparent;border:1px solid #4ADE80;color:#4ADE80;box-shadow:none;cursor:default}
+  .sub-btn.done:hover{transform:none;background:transparent}
   .lib{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem}
   @media(max-width:1000px){.lib{grid-template-columns:repeat(3,1fr)}}
   @media(max-width:720px){.lib{grid-template-columns:1fr 1fr}}
@@ -262,7 +271,7 @@
   .mclose{position:absolute;top:.9rem;right:.9rem;width:32px;height:32px;border-radius:7px;background:var(--surface);
     border:1px solid var(--line);color:var(--muted);display:grid;place-items:center;cursor:pointer}
   .mclose:hover{color:var(--text);border-color:var(--line-strong)}
-  .modal h3{font-family:var(--fd);font-size:1.35rem;font-weight:500;color:var(--text-strong);letter-spacing:-.02em;margin-bottom:1.4rem}
+  .modal h3{font-family:var(--fd);font-size:1.35rem;font-weight:500;color:var(--text-strong);letter-spacing:-.02em;margin-bottom:.6rem}
   .frow2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
   @media(max-width:420px){.frow2{grid-template-columns:1fr}}
   .f{margin-bottom:.9rem;display:flex;flex-direction:column}
@@ -425,13 +434,19 @@
   <div class="wrap">
     <div class="lib-head">
       <div>
-        <div class="eyebrow">The rest of the library</div>
-        <h2 class="sc-h2">Eight more, behind one step</h2>
-        <p class="sc-p">Leave your name, email and phone and all eight open immediately. Free, no payment details.</p>
+        <div class="eyebrow">More templates</div>
+        <h2 class="sc-h2">Subscribe to unlock the rest</h2>
+        <p class="sc-p">Subscribe to show your interest and the remaining eight templates open straight away — plus access to new ones as we add them. Free, no payment details.</p>
       </div>
-      <div class="unlock-state" id="unlock-state">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
-        <span>8 locked</span>
+      <div class="lib-cta">
+        <div class="unlock-state" id="unlock-state">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+          <span>8 locked</span>
+        </div>
+        <button class="sub-btn" id="sub-btn" type="button">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 4h16v12H4z"/><path d="M4 7l8 5 8-5"/></svg>
+          SUBSCRIBE
+        </button>
       </div>
     </div>
 
@@ -523,7 +538,8 @@
     <button class="mclose" id="mclose" aria-label="Close">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
-    <h3 id="mtitle">Unlock all eight</h3>
+    <h3 id="mtitle">Subscribe for full access</h3>
+    <p class="msub">Show your interest and we will open the remaining eight templates right away, and send you new ones as they are added.</p>
 
     <form id="unlock-form" novalidate>
       <div class="frow2">
@@ -534,8 +550,8 @@
         <span class="ferr" id="e-email">Please enter a valid email address.</span></div>
       <div class="f"><label for="u-phone">Phone</label><input id="u-phone" type="tel" autocomplete="tel" required>
         <span class="ferr" id="e-phone">Please enter a contact number.</span></div>
-      <button type="submit" class="msubmit" id="u-submit">Submit</button>
-      <div class="mok" id="u-ok">Unlocked — all eight are open now.</div>
+      <button type="submit" class="msubmit" id="u-submit">Subscribe &amp; unlock</button>
+      <div class="mok" id="u-ok">Subscribed — all eight templates are open now.</div>
       <div class="merr" id="u-err">Something went wrong, but we have opened them anyway.</div>
     </form>
   </div>
@@ -714,7 +730,8 @@ var FREE = [
   var KEY='dk_tpl_unlocked';
   var modal=document.getElementById('mo'), form=document.getElementById('unlock-form'),
       okEl=document.getElementById('u-ok'), errEl=document.getElementById('u-err'),
-      btn=document.getElementById('u-submit'), state=document.getElementById('unlock-state');
+      btn=document.getElementById('u-submit'), state=document.getElementById('unlock-state'),
+      subBtn=document.getElementById('sub-btn');
   var pending=null;
 
   function unlocked(){ try{ return localStorage.getItem(KEY)==='1'; }catch(e){ return false; } }
@@ -731,18 +748,28 @@ var FREE = [
       state.classList.add('done');
       state.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>All unlocked</span>';
     }
+    if(subBtn){
+      subBtn.classList.add('done'); subBtn.disabled=true;
+      subBtn.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>SUBSCRIBED';
+    }
   }
 
   function close(){ modal.hidden=true; document.body.style.overflow=''; }
 
+  function openModal(slug){
+    pending=slug||null;
+    modal.hidden=false; document.body.style.overflow='hidden';
+    setTimeout(function(){ document.getElementById('u-first').focus(); },60);
+  }
+
   document.querySelectorAll('.ltile').forEach(function(t){
     t.addEventListener('click', function(){
       if(unlocked()){ window.open(t.dataset.slug+'/index.html','_blank','noopener'); return; }
-      pending=t.dataset.slug;
-      modal.hidden=false; document.body.style.overflow='hidden';
-      setTimeout(function(){ document.getElementById('u-first').focus(); },60);
+      openModal(t.dataset.slug);
     });
   });
+
+  if(subBtn) subBtn.addEventListener('click', function(){ if(!unlocked()) openModal(null); });
 
   document.getElementById('mclose').addEventListener('click', close);
   modal.addEventListener('click', function(e){ if(e.target===modal) close(); });
@@ -760,7 +787,7 @@ var FREE = [
   function done(){
     try{ localStorage.setItem(KEY,'1'); }catch(e){}
     close(); openAll();
-    btn.disabled=false; btn.textContent='Submit';
+    btn.disabled=false; btn.textContent='Subscribe & unlock';
     if(pending) window.open(pending+'/index.html','_blank','noopener');
   }
 
@@ -768,7 +795,7 @@ var FREE = [
     e.preventDefault();
     okEl.classList.remove('show'); errEl.classList.remove('show');
     if(!valid()) return;
-    btn.disabled=true; btn.textContent='Submitting…';
+    btn.disabled=true; btn.textContent='Subscribing…';
     fetch('/api/unlock',{method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
         first_name:document.getElementById('u-first').value.trim(),
@@ -777,7 +804,7 @@ var FREE = [
         phone:document.getElementById('u-phone').value.trim(),
         template:pending||''
       })
-    }).then(function(r){ if(!r.ok) throw 0; okEl.classList.add('show'); btn.textContent='Unlocked'; setTimeout(done,900); })
+    }).then(function(r){ if(!r.ok) throw 0; okEl.classList.add('show'); btn.textContent='Subscribed'; setTimeout(done,900); })
       .catch(function(){ errEl.classList.add('show'); setTimeout(done,1400); });
   });
 
