@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Templates — DK Instaweb</title>
-<meta name="description" content="Ten working website demos across ten industries. Watch them being used, then open any one and click through yourself.">
+<meta name="description" content="Fifteen sample website templates across fifteen industries. Every page runs live — watch them slide through, then open any one and click through yourself.">
 <meta name="theme-color" content="#0A1428">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -141,11 +141,22 @@
   .counter #cnum{color:var(--accent);font-weight:500}
 
   .carousel{display:flex;align-items:center;gap:clamp(.5rem,2vw,1.5rem)}
-  .arrow{flex-shrink:0;width:clamp(42px,5vw,56px);height:clamp(42px,5vw,56px);border-radius:50%;
+  .arrow{position:relative;flex-shrink:0;width:clamp(42px,5vw,56px);height:clamp(42px,5vw,56px);border-radius:50%;
     background:var(--surface);border:1px solid var(--line-strong);color:var(--text);display:grid;place-items:center;
-    cursor:pointer;transition:all .2s}
+    cursor:pointer;transition:background .2s,border-color .2s,color .2s,transform .2s,box-shadow .2s}
   .arrow:hover{background:var(--accent);border-color:var(--accent);color:var(--bg);transform:scale(1.06)}
   .arrow:active{transform:scale(.96)}
+  .arrow::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 12px);left:50%;
+    transform:translate(-50%,6px);background:#15213A;border:1px solid var(--line-strong);color:var(--text);
+    padding:.45rem .75rem;border-radius:6px;font-family:var(--fm);font-size:.64rem;letter-spacing:.07em;line-height:1.3;
+    white-space:nowrap;opacity:0;pointer-events:none;z-index:30;box-shadow:0 10px 24px -10px rgba(0,0,0,.8);
+    transition:opacity .22s,transform .22s}
+  .arrow::before{content:"";position:absolute;bottom:calc(100% + 6px);left:50%;margin-left:-5px;
+    border:5px solid transparent;border-top-color:var(--line-strong);opacity:0;pointer-events:none;z-index:30;transition:opacity .22s}
+  .arrow:hover::after,.arrow.tipon::after{opacity:1;transform:translate(-50%,0)}
+  .arrow:hover::before,.arrow.tipon::before{opacity:1}
+  .arrow.tipon{border-color:var(--accent);box-shadow:0 0 0 4px rgba(245,158,11,.12)}
+  @media(max-width:620px){.arrow::after{white-space:normal;width:150px;text-align:center}}
   .stage{flex:1;min-width:0}
 
   .win{border:1px solid var(--line-strong);border-radius:12px;overflow:hidden;background:#0D1526;
@@ -162,28 +173,34 @@
   @keyframes bl{0%,100%{opacity:1}50%{opacity:.25}}
   @media(max-width:620px){.live span{display:none}}
 
-  .loadbar{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:transparent;overflow:hidden;z-index:3}
-  .loadbar i{position:absolute;left:0;top:0;height:100%;width:0;background:var(--accent);display:block}
-  .loadbar.go i{animation:bar 1.1s cubic-bezier(.2,.8,.3,1) forwards}
-  @keyframes bar{0%{width:0;opacity:1}70%{width:82%;opacity:1}100%{width:100%;opacity:0}}
-  .bar{position:relative}
-  .vp{position:relative;width:100%;aspect-ratio:16/9.6;overflow:hidden;background:#0A1428}
-  .vp.nav iframe{opacity:.25;transition:opacity .18s}
-  .vp.arrive iframe{animation:arrive .55s ease-out}
-  @keyframes arrive{0%{opacity:.25;transform:scale(var(--s,1)) translateY(6px)}100%{opacity:1;transform:scale(var(--s,1)) translateY(0)}}
-  .vp iframe{position:absolute;top:0;left:0;width:1440px;height:900px;border:0;transform-origin:0 0;background:#fff;
-    pointer-events:none;transition:opacity .25s}
-  .vp.swap iframe{opacity:0}
-  .vp.loading::after{content:"Loading…";position:absolute;inset:0;display:grid;place-items:center;
-    font-family:var(--fm);font-size:.8rem;color:var(--muted-2);background:var(--bg);z-index:6}
+  /* page tabs inside the window chrome */
+  .ptabs{display:flex;gap:2px;padding:.45rem .55rem 0;background:#121C30;border-bottom:1px solid var(--line);overflow-x:auto;
+    scrollbar-width:none}
+  .ptabs::-webkit-scrollbar{display:none}
+  .ptab{flex-shrink:0;display:flex;align-items:center;gap:.45rem;padding:.5rem .95rem;border-radius:6px 6px 0 0;
+    font-family:var(--fm);font-size:.72rem;letter-spacing:.05em;color:var(--muted-2);background:transparent;border:none;
+    border-bottom:2px solid transparent;cursor:pointer;transition:all .2s;white-space:nowrap}
+  .ptab:hover{color:var(--text);background:rgba(255,255,255,.04)}
+  .ptab.on{color:var(--accent);background:#0D1526;border-bottom-color:var(--accent)}
+  .ptab i{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.45;display:block}
+  .ptab.on i{opacity:1}
+  @media(max-width:560px){.ptab{padding:.42rem .7rem;font-size:.66rem}}
 
-  .cur{position:absolute;z-index:8;pointer-events:none;width:28px;height:28px;
-    transition:transform 1.05s cubic-bezier(.33,.72,.25,1);transform:translate(50%,60%);opacity:0}
-  .cur.on{opacity:1}
-  .cur svg{filter:drop-shadow(0 2px 6px rgba(0,0,0,.55))}
-  .cur .ring{position:absolute;top:-6px;left:-6px;width:36px;height:36px;border-radius:50%;border:2px solid var(--accent);opacity:0;transform:scale(.3)}
-  .cur.click .ring{animation:tap .55s ease-out}
-  @keyframes tap{0%{opacity:.9;transform:scale(.3)}100%{opacity:0;transform:scale(1.5)}}
+  /* sliding viewport */
+  .vp{position:relative;width:100%;aspect-ratio:16/9.6;overflow:hidden;background:#0A1428}
+  .track{position:absolute;inset:0;display:flex;transition:transform .72s cubic-bezier(.65,.02,.2,1)}
+  .slide{position:relative;flex:0 0 100%;height:100%;overflow:hidden;background:#fff}
+  .slide iframe{position:absolute;top:0;left:0;width:1440px;height:900px;border:0;transform-origin:0 0;
+    pointer-events:none;background:#fff}
+  .prog{position:absolute;left:0;right:0;top:0;height:2px;background:rgba(255,255,255,.07);z-index:6}
+  .prog i{display:block;height:100%;background:var(--accent);width:0}
+  .prog.run i{animation:fill 4.2s linear forwards}
+  @keyframes fill{to{width:100%}}
+  .vp:hover .prog.run i{animation-play-state:paused}
+  .pausehint{position:absolute;right:1rem;bottom:1rem;z-index:5;background:rgba(10,20,40,.9);border:1px solid var(--line-strong);
+    border-radius:100px;padding:.3rem .75rem;font-family:var(--fm);font-size:.64rem;letter-spacing:.08em;color:var(--muted);
+    opacity:0;transition:opacity .25s;pointer-events:none}
+  .vp:hover .pausehint{opacity:1}
 
   .caption{position:absolute;left:1rem;bottom:1rem;z-index:7;background:rgba(10,20,40,.93);backdrop-filter:blur(8px);
     border:1px solid var(--line-strong);border-radius:6px;padding:.55rem .95rem;display:flex;align-items:center;gap:.6rem;
@@ -192,17 +209,15 @@
   @media(max-width:560px){.caption{font-size:.74rem;padding:.42rem .7rem;left:.6rem;bottom:.6rem}}
 
   .stage-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.9rem}
-  .stage-name{font-family:var(--fd);font-size:1.35rem;font-weight:500;color:var(--text-strong);letter-spacing:-.02em}
-  .stage-sec{font-family:var(--fm);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-top:.2rem}
+  .stage-name{font-family:var(--fd);font-size:clamp(1.3rem,2.6vw,1.65rem);font-weight:500;color:var(--text-strong);
+    font-family:var(--fd);letter-spacing:-.02em;margin-top:.25rem}
+  .stage-sec{font-family:var(--fm);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .stage-sub{font-size:.86rem;color:var(--muted);margin-top:.2rem}
   .open-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:var(--bg);padding:.65rem 1.25rem;
     border-radius:4px;font-family:var(--fm);font-size:.78rem;font-weight:700;letter-spacing:.06em;white-space:nowrap;transition:background .2s}
   .open-btn:hover{background:var(--accent-hot)}
   .stage-chips{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:1rem}
   .chip-f{font-family:var(--fm);font-size:.66rem;letter-spacing:.05em;color:var(--muted-2);border:1px solid var(--line);padding:.22rem .55rem;border-radius:100px}
-  .pages-list{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.7rem}
-  .pg-chip{font-family:var(--fm);font-size:.7rem;letter-spacing:.05em;color:var(--muted-2);border:1px solid var(--line);
-    padding:.24rem .6rem;border-radius:100px;transition:all .2s}
-  .pg-chip.now{border-color:var(--accent);color:var(--accent);background:rgba(245,158,11,.08)}
 
   .dotrow{display:flex;justify-content:center;gap:.5rem;margin-top:1.75rem}
   .dot{width:9px;height:9px;border-radius:50%;background:var(--line-strong);border:none;cursor:pointer;padding:0;transition:all .2s}
@@ -355,23 +370,23 @@
   <div class="wrap">
     <div class="sc-top">
       <div>
-        <div class="eyebrow">Live demos</div>
-        <h2 class="sc-h2">Seven to explore now</h2>
-        <p class="sc-p">Each one is a real page in a real browser. Watch the cursor click through it, or open the full demo and drive it yourself.</p>
+        <h2 class="sc-h2">Sample website templates</h2>
+        <p class="sc-p">Every page of each one, running live. They slide through on their own — hover to pause, click a page tab to jump straight to it, or open the full demo and drive it yourself.</p>
       </div>
       <div class="counter"><span id="cnum">1</span> / 7</div>
     </div>
 
     <div class="carousel">
-      <button class="arrow prev" id="prev" aria-label="Previous template">
+      <button class="arrow prev" id="prev" data-tip="Click here to see the previous template" aria-label="Previous template">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
       </button>
 
       <div class="stage">
         <div class="stage-head">
           <div>
-            <div class="stage-name" id="stage-name">Meridian</div>
-            <div class="stage-sec" id="stage-sec">Real estate · Property</div>
+            <div class="stage-sec">WEBSITE CATEGORY</div>
+            <div class="stage-name" id="stage-name">Real Estate &amp; Property</div>
+            <div class="stage-sub" id="stage-sec">Builders, estate agents, developments · 4 pages</div>
           </div>
           <a class="open-btn" id="stage-open" href="meridian/index.html" target="_blank" rel="noopener">OPEN FULL DEMO ↗</a>
         </div>
@@ -383,27 +398,25 @@
               <span id="stage-url">meridian.example</span>
             </div>
             <span class="live"><i></i><span>LIVE PAGE</span></span>
-            <div class="loadbar" id="loadbar"><i></i></div>
           </div>
-          <div class="vp loading" id="stage-vp">
-            <iframe id="stage-frame" title="Template demo"></iframe>
-            <div class="cur" id="stage-cur"><div class="ring"></div>
-              <svg width="24" height="24" viewBox="0 0 24 24"><path d="M5 2l14 10.5-6.2.6 3.4 7.1-2.8 1.3-3.3-7-4.1 4.3z" fill="#fff" stroke="#0A1428" stroke-width="1.3" stroke-linejoin="round"/></svg>
-            </div>
-            <div class="caption" id="stage-cap"><b>STEP 1</b><span>Landing page</span></div>
+          <div class="ptabs" id="stage-tabs"></div>
+          <div class="vp" id="stage-vp">
+            <div class="prog" id="stage-prog"><i></i></div>
+            <div class="track" id="stage-track"></div>
+            <div class="caption" id="stage-cap"><b>PAGE 1</b><span>Home</span></div>
+            <div class="pausehint">PAUSED</div>
           </div>
         </div>
 
         <div class="stage-chips" id="stage-chips"></div>
-        <div class="pages-list" id="stage-pages"></div>
       </div>
 
-      <button class="arrow next" id="next" aria-label="Next template">
+      <button class="arrow next" id="next" data-tip="Click here to see the next template" aria-label="Next template">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
       </button>
     </div>
 
-    <div class="dotrow"><button class="dot on" data-i="0" aria-label="Meridian"></button><button class="dot" data-i="1" aria-label="Pulse"></button><button class="dot" data-i="2" aria-label="Console"></button><button class="dot" data-i="3" aria-label="Orbit"></button><button class="dot" data-i="4" aria-label="Market"></button><button class="dot" data-i="5" aria-label="Forge"></button><button class="dot" data-i="6" aria-label="Civic"></button></div>
+    <div class="dotrow" id="dotrow"></div>
   </div>
 </section>
 
@@ -428,8 +441,8 @@
             <div class="lockveil"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
           </div>
           <div class="lb">
-            <h3>Ledger</h3>
-            <div class="lsec">Accountancy · Legal</div>
+            <h3>Accountancy &amp; Professional Services</h3>
+            <div class="lsec">Accountants, solicitors, consultants</div>
             <div class="feats"><span class="feat">Fee tiers</span><span class="feat">Key dates</span><span class="feat">Consultation form</span></div>
           </div>
         </article>        <article class="ltile" data-slug="campus" data-name="Campus">
@@ -437,8 +450,8 @@
             <div class="lockveil"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
           </div>
           <div class="lb">
-            <h3>Campus</h3>
-            <div class="lsec">Education · Colleges</div>
+            <h3>Education &amp; Training</h3>
+            <div class="lsec">Schools, colleges, course providers</div>
             <div class="feats"><span class="feat">Course finder</span><span class="feat">Application form</span><span class="feat">Open-day CTA</span></div>
           </div>
         </article>        <article class="ltile" data-slug="vault" data-name="Vault">
@@ -446,8 +459,8 @@
             <div class="lockveil"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
           </div>
           <div class="lb">
-            <h3>Vault</h3>
-            <div class="lsec">Fintech · Insurance</div>
+            <h3>Banking &amp; Fintech</h3>
+            <div class="lsec">Payments, lending, wealth management</div>
             <div class="feats"><span class="feat">Security matrix</span><span class="feat">Live data feed</span><span class="feat">Pricing tiers</span></div>
           </div>
         </article>        <article class="ltile" data-slug="motion" data-name="Motion">
@@ -455,8 +468,8 @@
             <div class="lockveil"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
           </div>
           <div class="lb">
-            <h3>Motion</h3>
-            <div class="lsec">Fitness · Wellness</div>
+            <h3>Fitness &amp; Wellness</h3>
+            <div class="lsec">Gyms, studios, personal training</div>
             <div class="feats"><span class="feat">Class timetable</span><span class="feat">Live capacity</span><span class="feat">Membership tiers</span></div>
           </div>
         </article>        <article class="ltile" data-slug="transit" data-name="Transit">
@@ -464,8 +477,8 @@
             <div class="lockveil"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
           </div>
           <div class="lb">
-            <h3>Transit</h3>
-            <div class="lsec">Logistics · Fleet</div>
+            <h3>Logistics &amp; Transport</h3>
+            <div class="lsec">Freight, courier, fleet operators</div>
             <div class="feats"><span class="feat">Shipment tracking</span><span class="feat">Live map</span><span class="feat">Service matrix</span></div>
           </div>
         </article>        <article class="ltile" data-slug="kindred" data-name="Kindred">
@@ -473,8 +486,8 @@
             <div class="lockveil"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
           </div>
           <div class="lb">
-            <h3>Kindred</h3>
-            <div class="lsec">Charity · NGO</div>
+            <h3>Charity &amp; Non-profit</h3>
+            <div class="lsec">NGOs, trusts, fundraising</div>
             <div class="feats"><span class="feat">Donation flow</span><span class="feat">Gift Aid</span><span class="feat">Impact charts</span></div>
           </div>
         </article>        <article class="ltile" data-slug="harvest" data-name="Harvest">
@@ -482,8 +495,8 @@
             <div class="lockveil"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
           </div>
           <div class="lb">
-            <h3>Harvest</h3>
-            <div class="lsec">Restaurant · Hospitality</div>
+            <h3>Restaurants &amp; Hospitality</h3>
+            <div class="lsec">Restaurants, cafés, hotels</div>
             <div class="feats"><span class="feat">Menu layout</span><span class="feat">Table booking</span><span class="feat">Calendar picker</span></div>
           </div>
         </article>        <article class="ltile" data-slug="atelier" data-name="Atelier">
@@ -491,8 +504,8 @@
             <div class="lockveil"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
           </div>
           <div class="lb">
-            <h3>Atelier</h3>
-            <div class="lsec">Creative · Portfolio</div>
+            <h3>Creative &amp; Portfolio</h3>
+            <div class="lsec">Studios, designers, photographers</div>
             <div class="feats"><span class="feat">Editorial type</span><span class="feat">Case-study grid</span><span class="feat">Studio page</span></div>
           </div>
         </article>
@@ -536,130 +549,163 @@
 </footer>
 
 <script>
-var FREE = [{"slug": "meridian", "name": "Meridian", "sector": "Real estate \u00b7 Property", "host": "meridian.example", "feats": ["Listings grid", "Property page", "Enquiry form"], "pages": ["Home", "Properties", "Property", "Contact"], "steps": [{"sel": "nav a[href=\"listings.html\"]", "t": "Opening Properties"}, {"sel": ".props a.card", "t": "Opening a property"}, {"sel": ".ticks li", "t": "Key features and floorplan", "hover": 1}, {"sel": "nav a[href=\"contact.html\"]", "t": "Opening Contact"}, {"sel": "nav a.logo", "t": "Back to the home page"}], "locked": false, "order": ["index.html", "listings.html", "property.html", "contact.html"]}, {"slug": "pulse", "name": "Pulse", "sector": "Healthcare \u00b7 Clinic", "host": "pulseclinic.example", "feats": ["Booking flow", "Service table", "Team profiles"], "pages": ["Home", "Services", "Book"], "steps": [{"sel": ".bookcard .slot:not(.off)", "t": "Choosing an appointment time", "nonav": 1}, {"sel": "nav a[href=\"services.html\"]", "t": "Opening Services"}, {"sel": ".svcs .svc", "t": "Fourteen services, with prices", "hover": 1}, {"sel": "nav a[href=\"book.html\"]", "t": "Opening the booking flow"}, {"sel": ".slots .slot:not(.off)", "t": "Picking a slot", "nonav": 1}], "locked": false}, {"slug": "console", "name": "Console", "sector": "SaaS \u00b7 Dashboard", "host": "app.console.example", "feats": ["Charts", "Data tables", "Settings UI"], "pages": ["Dashboard", "Customers", "Settings"], "steps": [{"sel": ".seg button:last-child", "t": "Switching the chart to 12 months", "nonav": 1}, {"sel": ".side a[href=\"customers.html\"]", "t": "Opening Customers"}, {"sel": "tbody .rowcheck", "t": "Selecting a row \u2014 bulk actions appear", "nonav": 1}, {"sel": ".side a[href=\"settings.html\"]", "t": "Opening Settings"}, {"sel": ".side a[href=\"index.html\"]", "t": "Back to the dashboard"}], "locked": false}, {"slug": "orbit", "name": "Orbit", "sector": "Startup \u00b7 SaaS marketing", "host": "orbit.example", "feats": ["Pricing table", "Feature grid", "Changelog"], "pages": ["Product", "Pricing", "Changelog"], "steps": [{"sel": "nav a[href=\"pricing.html\"]", "t": "Opening Pricing"}, {"sel": ".g3 .card.rec, .g3 .card", "t": "Three plans, interchange plus", "hover": 1}, {"sel": "details summary", "t": "Expanding a question", "nonav": 1}, {"sel": "nav a[href=\"changelog.html\"]", "t": "Opening the Changelog"}, {"sel": "nav a[href=\"index.html\"]", "t": "Back to the product page"}], "locked": false}, {"slug": "market", "name": "Market", "sector": "E-commerce \u00b7 Retail", "host": "market.example", "feats": ["Product grid", "Filters", "Slide-out basket"], "pages": ["Home", "Shop", "Product"], "steps": [{"sel": "nav a[href=\"shop.html\"]", "t": "Opening the shop"}, {"sel": "aside input[type=\"checkbox\"]", "t": "Filtering by category", "nonav": 1}, {"sel": "nav a[href=\"product.html\"]", "t": "Opening a product"}, {"sel": "button[onclick=\"openCart()\"]", "t": "Adding to basket \u2014 the drawer opens", "nonav": 1}, {"sel": "nav a[href=\"index.html\"]", "t": "Back to the storefront"}], "locked": false}, {"slug": "forge", "name": "Forge", "sector": "Manufacturing \u00b7 Industrial", "host": "forge-eng.example", "feats": ["Spec tables", "RFQ + upload", "Catalogue"], "pages": ["Home", "Capabilities", "Catalogue"], "steps": [{"sel": "nav a[href=\"capabilities.html\"]", "t": "Opening Capabilities"}, {"sel": "table tbody tr", "t": "Thirty-one machine tools listed", "hover": 1}, {"sel": "nav a[href=\"catalogue.html\"]", "t": "Opening the Catalogue"}, {"sel": ".cg .card", "t": "Parts currently in production", "hover": 1}, {"sel": "nav a[href=\"index.html\"]", "t": "Back to the home page"}], "locked": false}, {"slug": "civic", "name": "Civic", "sector": "Government \u00b7 Public sector", "host": "northbridge.example", "feats": ["WCAG 2.2 AA", "Multi-step form", "Service directory"], "pages": ["Home", "Services", "Apply"], "steps": [{"sel": "nav.main a[href=\"services.html\"]", "t": "Opening All services"}, {"sel": "table tbody tr", "t": "Every service, listed plainly", "hover": 1}, {"sel": "nav.main a[href=\"apply.html\"]", "t": "Starting an application"}, {"sel": "#pc", "t": "Entering a postcode", "nonav": 1}, {"sel": "nav.main a[href=\"index.html\"]", "t": "Back to the home page"}], "locked": false}];
+var FREE = [
+ {slug:"meridian",cat:"Real Estate &amp; Property",sub:"Builders, estate agents, developments",host:"meridian.example",
+  feats:["Listings grid","Property page","Enquiry form"],
+  pages:[["index.html","Home"],["listings.html","Properties"],["property.html","Property"],["contact.html","Contact"]]},
+ {slug:"pulse",cat:"Hospital &amp; Healthcare",sub:"Clinics, practices, diagnostics",host:"pulseclinic.example",
+  feats:["Booking flow","Service table","Team profiles"],
+  pages:[["index.html","Home"],["services.html","Services"],["book.html","Book"]]},
+ {slug:"console",cat:"Software &amp; Admin Dashboards",sub:"Internal tools, reporting portals",host:"app.console.example",
+  feats:["Charts","Data tables","Settings UI"],
+  pages:[["index.html","Dashboard"],["customers.html","Customers"],["settings.html","Settings"]]},
+ {slug:"orbit",cat:"Startups &amp; SaaS",sub:"Product launches, subscription services",host:"orbit.example",
+  feats:["Pricing table","Feature grid","Changelog"],
+  pages:[["index.html","Product"],["pricing.html","Pricing"],["changelog.html","Changelog"]]},
+ {slug:"market",cat:"Textile, Retail &amp; E-commerce",sub:"Shops, catalogues, online stores",host:"market.example",
+  feats:["Product grid","Filters","Slide-out basket"],
+  pages:[["index.html","Home"],["shop.html","Shop"],["product.html","Product"]]},
+ {slug:"forge",cat:"Manufacturing &amp; Industrial",sub:"Engineering, fabrication, suppliers",host:"forge-eng.example",
+  feats:["Spec tables","RFQ + upload","Catalogue"],
+  pages:[["index.html","Home"],["capabilities.html","Capabilities"],["catalogue.html","Catalogue"]]},
+ {slug:"civic",cat:"Government &amp; Public Sector",sub:"Councils, agencies, service portals",host:"northbridge.example",
+  feats:["WCAG 2.2 AA","Multi-step form","Service directory"],
+  pages:[["index.html","Home"],["services.html","Services"],["apply.html","Apply"]]}
+];
+
 (function(){
-  var FRAME_W = 1440;
+  var FRAME_W = 1440, DWELL = 4200;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var vp=document.getElementById('stage-vp'), fr=document.getElementById('stage-frame'),
-      cur=document.getElementById('stage-cur'), capEl=document.getElementById('stage-cap'),
-      urlEl=document.getElementById('stage-url'), nameEl=document.getElementById('stage-name'),
-      secEl=document.getElementById('stage-sec'), openEl=document.getElementById('stage-open'),
-      chipsEl=document.getElementById('stage-chips'), pagesEl=document.getElementById('stage-pages'),
-      cnum=document.getElementById('cnum');
-  var dots=[].slice.call(document.querySelectorAll('.dot'));
+  var vp=document.getElementById('stage-vp'), track=document.getElementById('stage-track'),
+      tabs=document.getElementById('stage-tabs'), prog=document.getElementById('stage-prog'),
+      capEl=document.getElementById('stage-cap'), urlEl=document.getElementById('stage-url'),
+      nameEl=document.getElementById('stage-name'), secEl=document.getElementById('stage-sec'),
+      openEl=document.getElementById('stage-open'), chipsEl=document.getElementById('stage-chips'),
+      dotrow=document.getElementById('dotrow'), cnum=document.getElementById('cnum');
 
-  var scale=1, active=-1, stepI=-1, timers=[], visible=false;
+  if(!vp || !track) return;
 
-  var loadbar=document.getElementById('loadbar');
-  function fit(){ scale=vp.clientWidth/FRAME_W; fr.style.setProperty('--s',scale); fr.style.transform='scale('+scale+')'; fr.style.height=(vp.clientHeight/scale)+'px'; }
-  fit(); window.addEventListener('resize', fit);
-  function clearAll(){ timers.forEach(clearTimeout); timers=[]; }
-  function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
-  function doc(){ try{ return fr.contentDocument; }catch(e){ return null; } }
+  var ti=-1, pi=0, timer=null, paused=false, visible=false;
 
-  function setPages(t,idx){
-    pagesEl.innerHTML = t.pages.map(function(p,n){ return '<span class="pg-chip'+(n===idx?' now':'')+'">'+p+'</span>'; }).join('');
+  function fitAll(){
+    var s = vp.clientWidth / FRAME_W;
+    var fs = track.querySelectorAll('iframe');
+    for(var i=0;i<fs.length;i++){
+      fs[i].style.transform = 'scale(' + s + ')';
+      fs[i].style.height = (vp.clientHeight / s) + 'px';
+    }
   }
-  function highlight(el, soft){
-    var d=doc(); if(!d) return;
-    var r=el.getBoundingClientRect(), b=d.createElement('div');
-    b.style.cssText='position:fixed;pointer-events:none;z-index:2147483647;border:2px solid #F59E0B;border-radius:6px;'
-      +'box-shadow:0 0 0 '+(soft?6:4)+'px rgba(245,158,11,'+(soft?.14:.22)+');transition:opacity .4s;opacity:0;'
-      +'left:'+(r.left-4)+'px;top:'+(r.top-4)+'px;width:'+(r.width+8)+'px;height:'+(r.height+8)+'px;';
-    d.body.appendChild(b);
-    requestAnimationFrame(function(){ b.style.opacity='1'; });
-    var hold = soft ? 1700 : 700;
-    setTimeout(function(){ b.style.opacity='0'; setTimeout(function(){ b.remove(); },420); },hold);
+  window.addEventListener('resize', fitAll);
+
+  function stop(){ clearTimeout(timer); prog.classList.remove('run'); }
+
+  function schedule(){
+    stop();
+    if(reduce || !visible || paused) return;
+    void prog.offsetWidth; prog.classList.add('run');
+    timer = setTimeout(function(){ goPage(pi+1); }, DWELL);
   }
 
-  function step(){
-    if(active<0 || !visible || reduce) return;
-    var t=FREE[active], d=doc();
-    if(!d||!d.body){ later(step,300); return; }
-    stepI=(stepI+1)%t.steps.length;
-    var st=t.steps[stepI], el=null;
-    try{ el=d.querySelector(st.sel); }catch(e){}
-    if(!el){ later(step,150); return; }
-    capEl.innerHTML='<b>STEP '+(stepI+1)+'</b><span>'+st.t+'</span>';
-    var r=el.getBoundingClientRect(), vh=fr.contentWindow.innerHeight;
-    if(r.top<40||r.bottom>vh-40){ try{ el.scrollIntoView({behavior:'smooth',block:'center'}); }catch(e){ el.scrollIntoView(); } }
-    later(function(){
-      if(!doc()||!visible) return;
-      var rr=el.getBoundingClientRect();
-      cur.classList.add('on');
-      cur.style.transform='translate('+((rr.left+rr.width/2)*scale)+'px,'+((rr.top+rr.height/2)*scale)+'px)';
-      later(function(){
-        if(st.hover){
-          // pointing, not clicking — outline it and let it breathe
-          highlight(el, true);
-          later(step, 2300);
-          return;
-        }
-        cur.classList.add('click'); highlight(el);
-        later(function(){ cur.classList.remove('click'); },560);
-        later(function(){
-          if(!st.nonav){
-            loadbar.classList.remove('go'); void loadbar.offsetWidth; loadbar.classList.add('go');
-            vp.classList.add('nav');
-            setTimeout(function(){ loadbar.classList.remove('go'); }, 1200);
-          }
-          try{ el.click(); }catch(e){}
-          later(step, st.nonav ? 1900 : 3400);
-        },300);
-      },1150);
-    },620);
+  function goPage(n){
+    var t = FREE[ti]; if(!t) return;
+    pi = (n + t.pages.length) % t.pages.length;
+    track.style.transform = 'translateX(' + (-pi * 100) + '%)';
+    urlEl.textContent = t.host + (pi === 0 ? '' : '/' + t.pages[pi][0].replace('.html',''));
+    capEl.innerHTML = '<b>PAGE ' + (pi+1) + '</b><span>' + t.pages[pi][1] + '</span>';
+    var bs = tabs.querySelectorAll('.ptab');
+    for(var i=0;i<bs.length;i++) bs[i].classList.toggle('on', i === pi);
+    schedule();
   }
 
-  fr.addEventListener('load', function(){
-    vp.classList.remove('loading','swap','nav'); fit();
-    vp.classList.remove('arrive'); void vp.offsetWidth; vp.classList.add('arrive');
-    setTimeout(function(){ vp.classList.remove('arrive'); }, 600);
-    var d=doc(); if(!d) return;
-    d.querySelectorAll('a[target="_blank"]').forEach(function(a){ a.removeAttribute('target'); });
-    var dn=d.querySelector('.dn, .demo-note'); if(dn) dn.style.display='none';
-    var t=FREE[active]; if(!t) return;
-    var file=(fr.contentWindow.location.pathname.split('/').pop())||'index.html';
-    urlEl.textContent=t.host+(file==='index.html'?'':'/'+file.replace('.html',''));
-    var order = t.order || ['index.html'];
-    if(!t.order){ t.steps.forEach(function(x){ var m=/href="([a-z-]+\.html)"/.exec(x.sel); if(m&&order.indexOf(m[1])===-1) order.push(m[1]); }); }
-    var i=order.indexOf(file); setPages(t,i<0?0:i);
-  });
+  function loadTemplate(i){
+    i = (i + FREE.length) % FREE.length;
+    if(i === ti) return;
+    ti = i; pi = 0; stop();
+    var t = FREE[i];
 
-  function go(i){
-    i=(i+FREE.length)%FREE.length;
-    if(i===active) return;
-    active=i; stepI=-1; clearAll(); cur.classList.remove('on','click');
-    var t=FREE[i];
-    nameEl.textContent=t.name; secEl.textContent=t.sector; urlEl.textContent=t.host;
-    openEl.href=t.slug+'/index.html';
-    chipsEl.innerHTML=t.feats.map(function(f){ return '<span class="chip-f">'+f+'</span>'; }).join('');
-    setPages(t,0);
-    cnum.textContent=i+1;
-    dots.forEach(function(d2,n){ d2.classList.toggle('on',n===i); });
-    vp.classList.add('swap');
-    fr.src=t.slug+'/index.html';
-    if(visible) later(step,1400);
+    nameEl.innerHTML   = t.cat;
+    secEl.textContent  = t.sub + ' · ' + t.pages.length + ' pages';
+    urlEl.textContent  = t.host;
+    openEl.href        = t.slug + '/index.html';
+    if(cnum) cnum.textContent = (i+1);
+
+    var ch = '';
+    for(var f=0; f<t.feats.length; f++) ch += '<span class="chip-f">' + t.feats[f] + '</span>';
+    chipsEl.innerHTML = ch;
+
+    var tb = '';
+    for(var p=0; p<t.pages.length; p++)
+      tb += '<button class="ptab' + (p===0?' on':'') + '" data-p="' + p + '"><i></i>' + t.pages[p][1] + '</button>';
+    tabs.innerHTML = tb;
+    tabs.querySelectorAll('.ptab').forEach(function(b){
+      b.addEventListener('click', function(){ goPage(parseInt(b.getAttribute('data-p'),10)); });
+    });
+
+    track.style.transition = 'none';
+    track.style.transform  = 'translateX(0)';
+    var html = '';
+    for(var q=0; q<t.pages.length; q++)
+      html += '<div class="slide"><iframe loading="lazy" title="' + t.pages[q][1] + ' page" src="' + t.slug + '/' + t.pages[q][0] + '"></iframe></div>';
+    track.innerHTML = html;
+    void track.offsetWidth;
+    track.style.transition = '';
+
+    track.querySelectorAll('iframe').forEach(function(f){
+      f.addEventListener('load', function(){
+        fitAll();
+        var d; try { d = f.contentDocument; } catch(e){}
+        if(d){ var dn = d.querySelector('.dn, .demo-note'); if(dn) dn.style.display='none'; }
+      });
+    });
+    fitAll();
+
+    capEl.innerHTML = '<b>PAGE 1</b><span>' + t.pages[0][1] + '</span>';
+    if(dotrow){
+      var ds = dotrow.querySelectorAll('.dot');
+      for(var k=0;k<ds.length;k++) ds[k].classList.toggle('on', k === i);
+    }
+    schedule();
   }
 
-  document.getElementById('prev').addEventListener('click', function(){ go(active-1); });
-  document.getElementById('next').addEventListener('click', function(){ go(active+1); });
-  dots.forEach(function(d2,i){ d2.addEventListener('click', function(){ go(i); }); });
+  if(dotrow){
+    var dh='';
+    for(var i=0;i<FREE.length;i++)
+      dh += '<button class="dot' + (i===0?' on':'') + '" data-i="' + i + '" aria-label="' + FREE[i].cat.replace(/&amp;/g,'&') + '"></button>';
+    dotrow.innerHTML = dh;
+    dotrow.querySelectorAll('.dot').forEach(function(d){
+      d.addEventListener('click', function(){ dropTip(); loadTemplate(parseInt(d.getAttribute('data-i'),10)); });
+    });
+  }
+
+  var bPrev=document.getElementById('prev'), bNext=document.getElementById('next');
+  function dropTip(){ if(bPrev) bPrev.classList.remove('tipon'); if(bNext) bNext.classList.remove('tipon'); }
+  if(bPrev) bPrev.addEventListener('click', function(){ dropTip(); loadTemplate(ti-1); });
+  if(bNext) bNext.addEventListener('click', function(){ dropTip(); loadTemplate(ti+1); });
   document.addEventListener('keydown', function(e){
-    if(e.key==='ArrowLeft') go(active-1);
-    if(e.key==='ArrowRight') go(active+1);
+    if(e.key==='ArrowLeft'){ dropTip(); loadTemplate(ti-1); }
+    if(e.key==='ArrowRight'){ dropTip(); loadTemplate(ti+1); }
   });
+
+  var tipShown=false;
+  function nudgeTip(){
+    if(tipShown || reduce || !bNext) return; tipShown=true;
+    setTimeout(function(){ bNext.classList.add('tipon'); setTimeout(dropTip, 4200); }, 900);
+  }
+
+  vp.addEventListener('mouseenter', function(){ paused=true; stop(); });
+  vp.addEventListener('mouseleave', function(){ paused=false; schedule(); });
 
   if('IntersectionObserver' in window){
     new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        visible=e.isIntersecting;
-        if(visible){ if(stepI<0) later(step,900); } else { clearAll(); cur.classList.remove('on','click'); }
-      });
-    },{threshold:.25}).observe(document.getElementById('showcase'));
-  } else { visible=true; }
+      for(var i=0;i<es.length;i++){
+        visible = es[i].isIntersecting;
+        if(visible){ schedule(); nudgeTip(); } else stop();
+      }
+    },{threshold:.25}).observe(vp);
+  } else { visible = true; nudgeTip(); }
 
-  go(0);
+  loadTemplate(0);
 })();
 </script>
 
@@ -738,7 +784,3 @@ var FREE = [{"slug": "meridian", "name": "Meridian", "sector": "Real estate \u00
   if(unlocked()) openAll();
 })();
 </script>
-
-
-</body>
-</html>
