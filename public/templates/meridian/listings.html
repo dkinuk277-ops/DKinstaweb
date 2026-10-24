@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Properties — Meridian</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --stone:#F5F2ED; --stone-2:#EAE4DB; --ink:#1C1A17; --ink-soft:#4A453D;
+    --clay:#A65F3E; --line:#DDD5CA; --white:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--stone);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem)}
+
+  nav{position:sticky;top:0;z-index:50;background:rgba(245,242,237,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:78px}
+  .logo{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:400;letter-spacing:-.02em}
+  .logo span{color:var(--clay)}
+  .links{display:flex;gap:2.25rem;align-items:center}
+  .links a{font-size:.9rem;color:var(--ink-soft);transition:color .2s}
+  .links a:hover,.links a.on{color:var(--clay)}
+  .btn{display:inline-block;padding:.7rem 1.4rem;border:1px solid var(--ink);font-size:.85rem;letter-spacing:.04em;transition:all .2s}
+  .btn:hover{background:var(--ink);color:var(--stone)}
+  .btn-solid{background:var(--ink);color:var(--stone)}
+  .btn-solid:hover{background:var(--clay);border-color:var(--clay)}
+  .burger{display:none;background:none;border:none;cursor:pointer}
+  @media(max-width:860px){.links{display:none}.burger{display:block}}
+
+  .hero{padding:clamp(3rem,8vw,6rem) 0 clamp(3rem,7vw,5rem)}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr}}
+  .eyebrow{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--clay);margin-bottom:1.5rem}
+  h1{font-family:'Fraunces',serif;font-size:clamp(2.6rem,6vw,4.4rem);font-weight:300;line-height:1.05;letter-spacing:-.025em;margin-bottom:1.5rem}
+  h1 em{font-style:italic;color:var(--clay)}
+  .lead{font-size:1.08rem;color:var(--ink-soft);max-width:46ch;margin-bottom:2.25rem}
+  .hero-cta{display:flex;gap:.9rem;flex-wrap:wrap}
+  .hero-img{aspect-ratio:4/5;background:linear-gradient(150deg,#C9BCAA,#8E7F6D);position:relative;overflow:hidden}
+  .hero-img::after{content:"";position:absolute;inset:0;background:
+    repeating-linear-gradient(90deg,transparent 0 48px,rgba(255,255,255,.07) 48px 49px),
+    repeating-linear-gradient(0deg,transparent 0 48px,rgba(255,255,255,.07) 48px 49px)}
+  .hero-img .badge{position:absolute;left:0;bottom:0;background:var(--stone);padding:1.1rem 1.4rem;z-index:2}
+  .hero-img .badge b{display:block;font-family:'Fraunces',serif;font-size:1.5rem;font-weight:400}
+  .hero-img .badge small{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+
+  .strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:2rem 0}
+  .strip-in{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
+  @media(max-width:700px){.strip-in{grid-template-columns:1fr 1fr;gap:1.5rem}}
+  .stat b{display:block;font-family:'Fraunces',serif;font-size:2rem;font-weight:300;letter-spacing:-.02em}
+  .stat small{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+
+  section{padding:clamp(3.5rem,8vw,6rem) 0}
+  .sec-head{max-width:640px;margin-bottom:3rem}
+  h2{font-family:'Fraunces',serif;font-size:clamp(1.9rem,3.6vw,2.8rem);font-weight:300;letter-spacing:-.02em;line-height:1.15;margin-bottom:.9rem}
+  .sec-head p{color:var(--ink-soft)}
+
+  .props{display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem}
+  @media(max-width:900px){.props{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.props{grid-template-columns:1fr}}
+  .card{background:var(--white);border:1px solid var(--line);transition:transform .25s,box-shadow .25s}
+  .card:hover{transform:translateY(-4px);box-shadow:0 18px 40px -18px rgba(28,26,23,.25)}
+  .card-img{aspect-ratio:3/2;position:relative}
+  .c1{background:linear-gradient(145deg,#B9A992,#7E7160)}
+  .c2{background:linear-gradient(145deg,#A8B0A4,#6C7A6E)}
+  .c3{background:linear-gradient(145deg,#C6B3A5,#8C7462)}
+  .tagp{position:absolute;top:1rem;left:1rem;background:var(--stone);padding:.3rem .7rem;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
+  .card-b{padding:1.4rem}
+  .card-b h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:400;margin-bottom:.3rem}
+  .where{font-size:.85rem;color:var(--ink-soft);margin-bottom:1rem}
+  .meta{display:flex;gap:1.25rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.8rem;color:var(--ink-soft)}
+  .price{font-family:'Fraunces',serif;font-size:1.2rem;color:var(--ink)}
+
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+  @media(max-width:860px){.split{grid-template-columns:1fr}}
+  .split-img{aspect-ratio:1;background:linear-gradient(160deg,#9FA896,#6A7363)}
+  ul.ticks{list-style:none;margin-top:1.5rem}
+  ul.ticks li{padding:.7rem 0 .7rem 1.6rem;border-bottom:1px solid var(--line);position:relative;font-size:.95rem}
+  ul.ticks li::before{content:"";position:absolute;left:0;top:1.15rem;width:8px;height:8px;border:1px solid var(--clay);border-radius:50%}
+
+  footer{background:var(--ink);color:var(--stone-2);padding:3.5rem 0 2rem;margin-top:2rem}
+  .f-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem}
+  @media(max-width:700px){.f-grid{grid-template-columns:1fr 1fr}}
+  footer .logo{color:var(--stone)}
+  footer h5{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#9A9287;margin-bottom:1rem}
+  footer li{list-style:none;margin-bottom:.5rem;font-size:.9rem}
+  footer a:hover{color:var(--clay)}
+  .f-base{border-top:1px solid #38342E;padding-top:1.75rem;font-size:.8rem;color:#8A827A;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+  .demo-note{position:fixed;left:50%;bottom:1.25rem;transform:translateX(-50%);background:var(--ink);color:var(--stone);padding:.55rem 1.1rem;border-radius:100px;font-size:.78rem;z-index:99;box-shadow:0 8px 24px -8px rgba(0,0,0,.4)}
+  .demo-note a{color:var(--clay)}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap nav-in">
+    <a href="index.html" class="logo">Meridian<span>.</span></a>
+    <div class="links">
+      <a href="index.html" >Home</a>
+      <a href="listings.html" class="on">Properties</a>
+      <a href="contact.html">Contact</a>
+      <a href="contact.html" class="btn btn-solid">Book a viewing</a>
+    </div>
+    <button class="burger" aria-label="Menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="wrap" style="padding-top:3.5rem">
+  <div class="eyebrow">Properties</div>
+  <h1 style="font-size:clamp(2.2rem,4.5vw,3.2rem);margin-bottom:1rem">Currently available</h1>
+  <p class="lead">Six homes on the market today. Register for early access and you will see them a fortnight before the portals do.</p>
+</div>
+
+<div class="wrap" style="padding:2rem 0 1rem">
+  <div style="display:flex;gap:.6rem;flex-wrap:wrap;padding-bottom:2rem;border-bottom:1px solid var(--line)">
+    <button class="btn btn-solid" style="cursor:pointer;font-family:inherit">All</button>
+    <button class="btn" style="cursor:pointer;font-family:inherit;background:none">Houses</button>
+    <button class="btn" style="cursor:pointer;font-family:inherit;background:none">Apartments</button>
+    <button class="btn" style="cursor:pointer;font-family:inherit;background:none">Under £500k</button>
+    <button class="btn" style="cursor:pointer;font-family:inherit;background:none">New this week</button>
+  </div>
+</div>
+
+<section class="wrap" style="padding-top:2.5rem">
+  <div class="props">
+    <article class="card">
+      <div class="card-img c1"><span class="tagp">New</span></div>
+      <div class="card-b">
+        <h3>The Old Rectory</h3>
+        <div class="where">Prestbury, Cheshire</div>
+        <div class="meta"><span>5 bed</span><span>3 bath</span><span>0.8 acre</span></div>
+        <div class="meta" style="border:none;padding-top:.8rem"><span class="price">£1,250,000</span></div>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-img c2"><span class="tagp">Viewing</span></div>
+      <div class="card-b">
+        <h3>Wharf Mill, Apt 12</h3>
+        <div class="where">Ancoats, Manchester</div>
+        <div class="meta"><span>2 bed</span><span>2 bath</span><span>1,140 sq ft</span></div>
+        <div class="meta" style="border:none;padding-top:.8rem"><span class="price">£425,000</span></div>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-img c3"><span class="tagp">Sold STC</span></div>
+      <div class="card-b">
+        <h3>Beech Barn</h3>
+        <div class="where">Alderley Edge</div>
+        <div class="meta"><span>4 bed</span><span>2 bath</span><span>Converted</span></div>
+        <div class="meta" style="border:none;padding-top:.8rem"><span class="price">£890,000</span></div>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-img c2"><span class="tagp">New</span></div>
+      <div class="card-b">
+        <h3>Granary House</h3>
+        <div class="where">Knutsford</div>
+        <div class="meta"><span>6 bed</span><span>4 bath</span><span>1.2 acre</span></div>
+        <div class="meta" style="border:none;padding-top:.8rem"><span class="price">£1,695,000</span></div>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-img c3"></div>
+      <div class="card-b">
+        <h3>12 Lark Row</h3>
+        <div class="where">Didsbury</div>
+        <div class="meta"><span>3 bed</span><span>1 bath</span><span>Period</span></div>
+        <div class="meta" style="border:none;padding-top:.8rem"><span class="price">£515,000</span></div>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-img c1"></div>
+      <div class="card-b">
+        <h3>Saltworks Loft</h3>
+        <div class="where">Northern Quarter</div>
+        <div class="meta"><span>1 bed</span><span>1 bath</span><span>720 sq ft</span></div>
+        <div class="meta" style="border:none;padding-top:.8rem"><span class="price">£289,000</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <div class="logo">Meridian<span style="color:var(--clay)">.</span></div>
+        <p style="margin-top:.9rem;font-size:.9rem;max-width:30ch;color:#9A9287">Independent estate agents. Cheshire and Greater Manchester.</p>
+      </div>
+      <div>
+        <h5>Navigate</h5>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="listings.html">Properties</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li>0161 000 0000</li>
+          <li>hello@meridian.example</li>
+          <li>Wilmslow, SK9</li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-base"><span>© 2026 Meridian Property</span><span>Demo template · DK Instaweb</span></div>
+  </div>
+</footer>
+
+<div class="demo-note">Template demo · <a href="../index.html">Back to all templates</a></div>
+</body>
+</html>

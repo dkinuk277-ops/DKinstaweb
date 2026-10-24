@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu — Harvest</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--dark:#241812;--dark2:#180F0A;--cream:#F7EFE2;--cream2:#EDE0CC;
+    --gold:#C9A227;--rust:#A8482A;--mut:#A89583;--line:rgba(247,239,226,.14);}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Jost',sans-serif;background:var(--dark);color:var(--cream);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2rem)}
+  .ser{font-family:'Cormorant Garamond',serif}
+  nav{position:sticky;top:0;z-index:50;background:rgba(36,24,18,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nv{display:flex;align-items:center;justify-content:space-between;height:80px}
+  .lg{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+  .lg span{color:var(--gold)}
+  .nl{display:flex;gap:2rem;align-items:center}
+  .nl a{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+  .nl a:hover,.nl a.on{color:var(--gold)}
+  .b{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.6rem;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--gold);color:var(--gold);background:transparent;cursor:pointer;font-family:inherit;transition:all .25s}
+  .b:hover{background:var(--gold);color:var(--dark2)}
+  .bf{background:var(--gold);color:var(--dark2)}.bf:hover{background:var(--cream);border-color:var(--cream)}
+  @media(max-width:840px){.nl a:not(.b){display:none}}
+  h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,7vw,5rem);font-weight:300;line-height:1.08;letter-spacing:.01em}
+  h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4.2vw,3rem);font-weight:300;line-height:1.15}
+  .eyebrow{font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:1.3rem}
+  section{padding:clamp(3rem,7vw,5.5rem) 0}
+  .rule{width:48px;height:1px;background:var(--gold);margin:1.2rem 0}
+  footer{background:var(--dark2);border-top:1px solid var(--line);padding:3rem 0 2rem;margin-top:2rem}
+  .fg{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2.5rem;margin-bottom:2rem}
+  @media(max-width:720px){.fg{grid-template-columns:1fr 1fr}}
+  footer h5{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem}
+  footer li{list-style:none;margin-bottom:.45rem;font-size:.92rem;color:var(--mut)}
+  .fb{border-top:1px solid var(--line);padding-top:1.4rem;font-size:.82rem;color:var(--mut);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .dn{position:fixed;left:50%;bottom:1rem;transform:translateX(-50%);background:var(--dark2);border:1px solid var(--line);padding:.5rem 1rem;font-size:.76rem;z-index:99}
+  .dn a{color:var(--gold)}
+</style></head><body>
+<nav><div class="wrap nv"><a href="index.html" class="lg">Harvest<span>.</span></a><div class="nl"><a href="index.html">Home</a><a href="menu.html" class="on">Menu</a><a href="book.html">Reservations</a><a href="book.html" class="b">Reserve</a></div></div></nav>
+
+<div class="wrap" style="padding:clamp(2.5rem,6vw,4rem) 0 1rem;text-align:center">
+  <div class="eyebrow">Week of 20 October</div>
+  <h1 style="font-size:clamp(2.2rem,5.4vw,3.6rem)">The menu</h1>
+  <div class="rule" style="margin:1.3rem auto"></div>
+  <p style="color:var(--mut);max-width:40ch;margin:0 auto">Six courses, £78 per person. Written each Monday, served Wednesday to Sunday.</p>
+</div>
+
+<section style="padding-top:2rem"><div class="wrap" style="max-width:640px">
+  <div style="margin-bottom:2.5rem"><div style="display:flex;align-items:center;gap:1.2rem;margin-bottom:1.1rem"><span class="eyebrow" style="margin:0">Snacks</span><span style="flex:1;height:1px;background:var(--line)"></span></div><p class="ser" style="font-size:1.35rem;font-weight:300;margin-bottom:.5rem">Cured trout, horseradish, rye</p><p class="ser" style="font-size:1.35rem;font-weight:300;margin-bottom:.5rem">Smoked cod roe, burnt onion</p><p class="ser" style="font-size:1.35rem;font-weight:300;margin-bottom:.5rem">Pork crackling, apple</p></div><div style="margin-bottom:2.5rem"><div style="display:flex;align-items:center;gap:1.2rem;margin-bottom:1.1rem"><span class="eyebrow" style="margin:0">First</span><span style="flex:1;height:1px;background:var(--line)"></span></div><p class="ser" style="font-size:1.35rem;font-weight:300;margin-bottom:.5rem">Hen of the woods, chicken fat, thyme</p><p class="ser" style="font-size:1.35rem;font-weight:300;margin-bottom:.5rem">Charred leek, hazelnut, aged ewe's cheese</p></div><div style="margin-bottom:2.5rem"><div style="display:flex;align-items:center;gap:1.2rem;margin-bottom:1.1rem"><span class="eyebrow" style="margin:0">Fish</span><span style="flex:1;height:1px;background:var(--line)"></span></div><p class="ser" style="font-size:1.35rem;font-weight:300;margin-bottom:.5rem">Turbot on the bone, mussel butter, sea herbs</p></div><div style="margin-bottom:2.5rem"><div style="display:flex;align-items:center;gap:1.2rem;margin-bottom:1.1rem"><span class="eyebrow" style="margin:0">Meat</span><span style="flex:1;height:1px;background:var(--line)"></span></div><p class="ser" style="font-size:1.35rem;font-weight:300;margin-bottom:.5rem">Dry-aged Dexter, embers, bone marrow</p><p class="ser" style="font-size:1.35rem;font-weight:300;margin-bottom:.5rem">Hogget shoulder, wild garlic</p></div><div style="margin-bottom:2.5rem"><div style="display:flex;align-items:center;gap:1.2rem;margin-bottom:1.1rem"><span class="eyebrow" style="margin:0">Cheese</span><span style="flex:1;height:1px;background:var(--line)"></span></div><p class="ser" style="font-size:1.35rem;font-weight:300;margin-bottom:.5rem">Appleby's Cheshire, quince, oatcake</p></div><div style="margin-bottom:2.5rem"><div style="display:flex;align-items:center;gap:1.2rem;margin-bottom:1.1rem"><span class="eyebrow" style="margin:0">Sweet</span><span style="flex:1;height:1px;background:var(--line)"></span></div><p class="ser" style="font-size:1.35rem;font-weight:300;margin-bottom:.5rem">Burnt honey tart, raw cream</p><p class="ser" style="font-size:1.35rem;font-weight:300;margin-bottom:.5rem">Pear, bay leaf, brown butter ice</p></div>
+  <div style="border:1px solid var(--line);padding:1.5rem;text-align:center;margin-top:1rem">
+    <p style="color:var(--mut);font-size:.95rem;margin-bottom:.8rem">Wine pairing £52 · Non-alcoholic pairing £34</p>
+    <p style="color:var(--mut);font-size:.88rem">Dietary requirements are handled with notice — tell us when you book and the kitchen will write you your own menu.</p>
+  </div>
+  <div style="text-align:center;margin-top:2rem"><a href="book.html" class="b bf">Reserve a table</a></div>
+</div></section>
+
+<footer><div class="wrap"><div class="fg">
+  <div><div class="lg">Harvest<span>.</span></div><p style="color:var(--mut);margin-top:.8rem;max-width:32ch;font-size:.92rem">Seasonal British cooking over fire. Twenty-four covers, one sitting.</p></div>
+  <div><h5>Hours</h5><ul><li>Wed – Sat · 6pm till late</li><li>Sunday lunch · 12 – 4pm</li><li>Closed Mon &amp; Tue</li></ul></div>
+  <div><h5>Find us</h5><ul><li>18 Tib Lane</li><li>Manchester M2 4JA</li><li>0161 000 0000</li></ul></div>
+</div><div class="fb"><span>© 2026 Harvest</span><span>Demo template · DK Instaweb</span></div></div></footer>
+<div class="dn">Template demo · <a href="../index.html">Back to all templates</a></div>
+</body></html>

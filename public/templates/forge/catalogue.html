@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catalogue — Forge Engineering</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#101316;--bg2:#171B20;--card:#1A1F25;--line:#2A3139;--line2:#3A434E;
+    --ink:#E6E9EC;--ink2:#FFFFFF;--mut:#8D97A3;--mut2:#5E6873;--or:#F97316;--steel:#64748B;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .mono{font-family:'IBM Plex Mono',monospace}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2rem)}
+  .tb{background:#0A0C0E;border-bottom:1px solid var(--line);font-size:.78rem;color:var(--mut);padding:.5rem 0}
+  .tbi{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  nav{position:sticky;top:0;z-index:50;background:rgba(16,19,22,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nv{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .lg{display:flex;align-items:center;gap:.6rem;font-weight:700;font-size:1.2rem;letter-spacing:.02em;text-transform:uppercase;color:var(--ink2)}
+  .lgm{width:30px;height:30px;background:var(--or);display:grid;place-items:center;color:#0A0C0E;font-weight:800;font-size:.9rem}
+  .nl{display:flex;gap:1.7rem;align-items:center}
+  .nl a{font-size:.86rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+  .nl a:hover,.nl a.on{color:var(--or)}
+  .b{display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.3rem;font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;font-family:inherit;transition:all .2s}
+  .bp{background:var(--or);color:#0A0C0E}.bp:hover{background:#FB8B3C}
+  .bo{background:transparent;color:var(--ink);border:1px solid var(--line2)}.bo:hover{border-color:var(--or);color:var(--or)}
+  @media(max-width:860px){.nl a:not(.b){display:none}}
+  h1{font-size:clamp(2.2rem,5.4vw,3.6rem);font-weight:700;line-height:1.05;letter-spacing:-.02em;color:var(--ink2);text-transform:uppercase}
+  h2{font-size:clamp(1.6rem,3.4vw,2.3rem);font-weight:700;letter-spacing:-.015em;color:var(--ink2);text-transform:uppercase;line-height:1.15}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--or);margin-bottom:1rem}
+  section{padding:clamp(3rem,7vw,4.5rem) 0}
+  .grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+  .card{background:var(--card);border:1px solid var(--line)}
+  table{width:100%;border-collapse:collapse}
+  th{text-align:left;font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut2);font-weight:500;padding:.75rem 1rem;background:#0E1114;border-bottom:1px solid var(--line)}
+  td{padding:.8rem 1rem;border-bottom:1px solid var(--line);font-size:.9rem}
+  tbody tr:hover{background:var(--bg2)}
+  footer{border-top:1px solid var(--line);padding:2.5rem 0;margin-top:1rem;background:#0A0C0E}
+  .fin{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.82rem;color:var(--mut2)}
+  .dn{position:fixed;left:50%;bottom:1rem;transform:translateX(-50%);background:var(--card);border:1px solid var(--line);padding:.5rem 1rem;font-size:.76rem;z-index:99}
+  .dn a{color:var(--or)}
+</style></head>
+<body>
+<div class="tb"><div class="wrap tbi"><span class="mono">ISO 9001:2015 · AS9100D · UKAS CALIBRATED</span><span class="mono">+44 161 000 0000</span></div></div>
+<nav><div class="wrap nv">
+  <a href="index.html" class="lg"><span class="lgm">F</span>Forge</a>
+  <div class="nl"><a href="index.html">Home</a><a href="capabilities.html">Capabilities</a><a href="catalogue.html" class='on'>Catalogue</a><a href="#q" class="b bp">Request a quote</a></div>
+</div></nav>
+
+<section style="padding-top:clamp(2.5rem,6vw,4rem)"><div class="wrap">
+  <div class="eyebrow">Catalogue</div>
+  <h1 style="font-size:clamp(1.9rem,4.4vw,2.8rem);margin-bottom:1rem">Representative work</h1>
+  <p style="color:var(--mut);max-width:60ch;margin-bottom:1.8rem">A sample of parts currently in production. Drawings redacted — full case studies available under NDA.</p>
+  <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem">
+    <button class="b bp" style="font-size:.74rem;padding:.45rem 1rem">All sectors</button>
+    <button class="b bo" style="font-size:.74rem;padding:.45rem 1rem">Aerospace</button><button class="b bo" style="font-size:.74rem;padding:.45rem 1rem">Energy</button><button class="b bo" style="font-size:.74rem;padding:.45rem 1rem">Motorsport</button><button class="b bo" style="font-size:.74rem;padding:.45rem 1rem">Medical</button>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem" class="cg"><div class="card" style="overflow:hidden">
+  <div style="aspect-ratio:4/3;background:linear-gradient(150deg,#262C33,#14181C);position:relative">
+    <svg viewBox="0 0 100 75" style="position:absolute;inset:0;width:100%;height:100%" fill="none" stroke="#F97316" stroke-width=".6" opacity=".5">
+      <rect x="22" y="18" width="56" height="40" rx="3"/><circle cx="34" cy="30" r="5"/><circle cx="66" cy="30" r="5"/><circle cx="50" cy="46" r="7"/><path d="M22 38h56" stroke-dasharray="2 2"/>
+    </svg>
+    <span class="mono" style="position:absolute;top:.6rem;left:.6rem;background:rgba(10,12,14,.8);padding:.2rem .5rem;font-size:.66rem;color:var(--or)">Aerospace</span>
+  </div>
+  <div style="padding:1rem">
+    <div class="mono" style="font-size:.7rem;color:var(--mut2);letter-spacing:.1em">FG-1140</div>
+    <b style="display:block;color:var(--ink2);font-size:1rem;margin:.2rem 0 .6rem">Turbine housing bracket</b>
+    <div style="display:flex;justify-content:space-between;padding-top:.7rem;border-top:1px solid var(--line);font-size:.8rem" class="mono">
+      <span style="color:var(--mut)">Inconel 718</span><span style="color:var(--or)">±0.008</span>
+    </div>
+  </div></div><div class="card" style="overflow:hidden">
+  <div style="aspect-ratio:4/3;background:linear-gradient(150deg,#262C33,#14181C);position:relative">
+    <svg viewBox="0 0 100 75" style="position:absolute;inset:0;width:100%;height:100%" fill="none" stroke="#F97316" stroke-width=".6" opacity=".5">
+      <rect x="22" y="18" width="56" height="40" rx="3"/><circle cx="34" cy="30" r="5"/><circle cx="66" cy="30" r="5"/><circle cx="50" cy="46" r="7"/><path d="M22 38h56" stroke-dasharray="2 2"/>
+    </svg>
+    <span class="mono" style="position:absolute;top:.6rem;left:.6rem;background:rgba(10,12,14,.8);padding:.2rem .5rem;font-size:.66rem;color:var(--or)">Energy</span>
+  </div>
+  <div style="padding:1rem">
+    <div class="mono" style="font-size:.7rem;color:var(--mut2);letter-spacing:.1em">FG-2208</div>
+    <b style="display:block;color:var(--ink2);font-size:1rem;margin:.2rem 0 .6rem">Hydraulic manifold block</b>
+    <div style="display:flex;justify-content:space-between;padding-top:.7rem;border-top:1px solid var(--line);font-size:.8rem" class="mono">
+      <span style="color:var(--mut)">Aluminium 6082</span><span style="color:var(--or)">±0.005</span>
+    </div>
+  </div></div><div class="card" style="overflow:hidden">
+  <div style="aspect-ratio:4/3;background:linear-gradient(150deg,#262C33,#14181C);position:relative">
+    <svg viewBox="0 0 100 75" style="position:absolute;inset:0;width:100%;height:100%" fill="none" stroke="#F97316" stroke-width=".6" opacity=".5">
+      <rect x="22" y="18" width="56" height="40" rx="3"/><circle cx="34" cy="30" r="5"/><circle cx="66" cy="30" r="5"/><circle cx="50" cy="46" r="7"/><path d="M22 38h56" stroke-dasharray="2 2"/>
+    </svg>
+    <span class="mono" style="position:absolute;top:.6rem;left:.6rem;background:rgba(10,12,14,.8);padding:.2rem .5rem;font-size:.66rem;color:var(--or)">Motorsport</span>
+  </div>
+  <div style="padding:1rem">
+    <div class="mono" style="font-size:.7rem;color:var(--mut2);letter-spacing:.1em">FG-3315</div>
+    <b style="display:block;color:var(--ink2);font-size:1rem;margin:.2rem 0 .6rem">Suspension upright</b>
+    <div style="display:flex;justify-content:space-between;padding-top:.7rem;border-top:1px solid var(--line);font-size:.8rem" class="mono">
+      <span style="color:var(--mut)">Titanium Ti-6Al-4V</span><span style="color:var(--or)">±0.010</span>
+    </div>
+  </div></div><div class="card" style="overflow:hidden">
+  <div style="aspect-ratio:4/3;background:linear-gradient(150deg,#262C33,#14181C);position:relative">
+    <svg viewBox="0 0 100 75" style="position:absolute;inset:0;width:100%;height:100%" fill="none" stroke="#F97316" stroke-width=".6" opacity=".5">
+      <rect x="22" y="18" width="56" height="40" rx="3"/><circle cx="34" cy="30" r="5"/><circle cx="66" cy="30" r="5"/><circle cx="50" cy="46" r="7"/><path d="M22 38h56" stroke-dasharray="2 2"/>
+    </svg>
+    <span class="mono" style="position:absolute;top:.6rem;left:.6rem;background:rgba(10,12,14,.8);padding:.2rem .5rem;font-size:.66rem;color:var(--or)">Energy</span>
+  </div>
+  <div style="padding:1rem">
+    <div class="mono" style="font-size:.7rem;color:var(--mut2);letter-spacing:.1em">FG-4027</div>
+    <b style="display:block;color:var(--ink2);font-size:1rem;margin:.2rem 0 .6rem">Valve body, 4-port</b>
+    <div style="display:flex;justify-content:space-between;padding-top:.7rem;border-top:1px solid var(--line);font-size:.8rem" class="mono">
+      <span style="color:var(--mut)">Stainless 316L</span><span style="color:var(--or)">±0.005</span>
+    </div>
+  </div></div><div class="card" style="overflow:hidden">
+  <div style="aspect-ratio:4/3;background:linear-gradient(150deg,#262C33,#14181C);position:relative">
+    <svg viewBox="0 0 100 75" style="position:absolute;inset:0;width:100%;height:100%" fill="none" stroke="#F97316" stroke-width=".6" opacity=".5">
+      <rect x="22" y="18" width="56" height="40" rx="3"/><circle cx="34" cy="30" r="5"/><circle cx="66" cy="30" r="5"/><circle cx="50" cy="46" r="7"/><path d="M22 38h56" stroke-dasharray="2 2"/>
+    </svg>
+    <span class="mono" style="position:absolute;top:.6rem;left:.6rem;background:rgba(10,12,14,.8);padding:.2rem .5rem;font-size:.66rem;color:var(--or)">Motorsport</span>
+  </div>
+  <div style="padding:1rem">
+    <div class="mono" style="font-size:.7rem;color:var(--mut2);letter-spacing:.1em">FG-5519</div>
+    <b style="display:block;color:var(--ink2);font-size:1rem;margin:.2rem 0 .6rem">Gearbox end cap</b>
+    <div style="display:flex;justify-content:space-between;padding-top:.7rem;border-top:1px solid var(--line);font-size:.8rem" class="mono">
+      <span style="color:var(--mut)">Aluminium 7075</span><span style="color:var(--or)">±0.006</span>
+    </div>
+  </div></div><div class="card" style="overflow:hidden">
+  <div style="aspect-ratio:4/3;background:linear-gradient(150deg,#262C33,#14181C);position:relative">
+    <svg viewBox="0 0 100 75" style="position:absolute;inset:0;width:100%;height:100%" fill="none" stroke="#F97316" stroke-width=".6" opacity=".5">
+      <rect x="22" y="18" width="56" height="40" rx="3"/><circle cx="34" cy="30" r="5"/><circle cx="66" cy="30" r="5"/><circle cx="50" cy="46" r="7"/><path d="M22 38h56" stroke-dasharray="2 2"/>
+    </svg>
+    <span class="mono" style="position:absolute;top:.6rem;left:.6rem;background:rgba(10,12,14,.8);padding:.2rem .5rem;font-size:.66rem;color:var(--or)">Medical</span>
+  </div>
+  <div style="padding:1rem">
+    <div class="mono" style="font-size:.7rem;color:var(--mut2);letter-spacing:.1em">FG-6602</div>
+    <b style="display:block;color:var(--ink2);font-size:1rem;margin:.2rem 0 .6rem">Sensor housing</b>
+    <div style="display:flex;justify-content:space-between;padding-top:.7rem;border-top:1px solid var(--line);font-size:.8rem" class="mono">
+      <span style="color:var(--mut)">PEEK</span><span style="color:var(--or)">±0.020</span>
+    </div>
+  </div></div></div>
+</div></section>
+
+<section style="background:#0E1114;border-top:1px solid var(--line)"><div class="wrap" style="text-align:center">
+  <h2 style="margin-bottom:.8rem">Need something similar?</h2>
+  <p style="color:var(--mut);max-width:46ch;margin:0 auto 1.5rem">Send a drawing and we will quote within one working day.</p>
+  <a href="index.html#q" class="b bp">Request a quote</a>
+</div></section>
+<style>@media(max-width:900px){.cg{grid-template-columns:1fr 1fr!important}}@media(max-width:600px){.cg{grid-template-columns:1fr!important}}</style>
+
+<footer><div class="wrap fin"><span>© 2026 Forge Engineering Ltd · Registered in England 00000000</span><span>Demo template · DK Instaweb</span></div></footer>
+<div class="dn">Template demo · <a href="../index.html">Back to all templates</a></div>
+</body></html>

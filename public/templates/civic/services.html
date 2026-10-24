@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Northbridge Council</title>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#FFFFFF;--bg2:#F3F5F9;--ink:#0B1B2B;--ink2:#000000;--body:#3D4C5C;
+    --navy:#15386B;--navy2:#0D2340;--line:#C9D3E0;--line2:#8E9EB2;--focus:#FFBF47;--green:#00703C;--red:#B10E1E;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Public Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;font-size:17px;-webkit-font-smoothing:antialiased}
+  a{color:var(--navy);text-decoration:underline;text-underline-offset:3px}
+  a:hover{color:var(--navy2)}
+  a:focus,button:focus,input:focus,select:focus,textarea:focus,summary:focus{outline:3px solid var(--focus);outline-offset:0;background:var(--focus);color:#000;text-decoration:none}
+  button:focus,input:focus,select:focus,textarea:focus{background:#fff;color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 clamp(1rem,4vw,1.5rem)}
+  .skip{position:absolute;left:-9999px;background:var(--focus);color:#000;padding:.8rem 1.2rem;font-weight:700;z-index:100}
+  .skip:focus{left:0;top:0;position:fixed}
+  .gov{background:var(--navy2);color:#fff;padding:.6rem 0;font-size:.85rem}
+  header.mast{background:var(--navy);color:#fff;padding:1rem 0}
+  .mi{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .crest{display:flex;align-items:center;gap:.75rem;color:#fff;text-decoration:none;font-weight:700;font-size:1.25rem}
+  .crest svg{flex-shrink:0}
+  nav.main{background:#fff;border-bottom:4px solid var(--navy)}
+  .nl{display:flex;gap:0;flex-wrap:wrap}
+  .nl a{padding:.9rem 1.1rem;text-decoration:none;color:var(--navy);font-weight:600;font-size:.95rem;border-bottom:4px solid transparent;margin-bottom:-4px}
+  .nl a:hover{background:var(--bg2)}
+  .nl a.on{border-bottom-color:var(--navy);color:var(--navy2)}
+  h1{font-size:clamp(2rem,4.6vw,2.9rem);font-weight:700;line-height:1.15;letter-spacing:-.01em;margin-bottom:1rem}
+  h2{font-size:clamp(1.4rem,2.8vw,1.9rem);font-weight:700;line-height:1.25;margin-bottom:.8rem}
+  h3{font-size:1.15rem;font-weight:700;margin-bottom:.4rem}
+  p{margin-bottom:1rem;max-width:72ch}
+  section{padding:clamp(2rem,5vw,3rem) 0}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--green);color:#fff;border:none;padding:.8rem 1.5rem;font-size:1.05rem;font-weight:700;font-family:inherit;cursor:pointer;text-decoration:none;box-shadow:0 2px 0 #004d29}
+  .btn:hover{background:#005a30;color:#fff}
+  .btn-s{background:#fff;color:var(--navy);border:2px solid var(--navy);box-shadow:none}
+  .btn-s:hover{background:var(--bg2);color:var(--navy)}
+  .panel{background:var(--bg2);border-left:6px solid var(--navy);padding:1.2rem 1.4rem;margin-bottom:1.5rem}
+  .warn{background:#FFF8E7;border-left:6px solid var(--focus);padding:1.2rem 1.4rem;margin-bottom:1.5rem}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+  @media(max-width:860px){.cards{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.cards{grid-template-columns:1fr}}
+  .svc{border:1px solid var(--line);padding:1.3rem;background:#fff;display:flex;flex-direction:column}
+  .svc h3 a{text-decoration:underline}
+  .svc p{font-size:.95rem;color:var(--body);flex:1;margin-bottom:.8rem}
+  label{display:block;font-weight:700;margin-bottom:.35rem}
+  .hint{font-size:.9rem;color:var(--body);margin-bottom:.5rem}
+  input[type=text],input[type=email],input[type=date],select,textarea{width:100%;max-width:520px;padding:.65rem .7rem;border:2px solid var(--ink);font-family:inherit;font-size:1rem}
+  fieldset{border:none;margin-bottom:1.6rem}
+  legend{font-weight:700;font-size:1.1rem;margin-bottom:.4rem}
+  .radio{display:flex;align-items:center;gap:.7rem;padding:.55rem 0}
+  .radio input{width:22px;height:22px;accent-color:var(--navy)}
+  footer{background:var(--navy2);color:#D5DEE9;padding:2.5rem 0 1.5rem;margin-top:2rem}
+  footer a{color:#fff}
+  .fg{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-bottom:2rem}
+  @media(max-width:700px){.fg{grid-template-columns:1fr 1fr}}
+  footer li{list-style:none;margin-bottom:.45rem;font-size:.92rem}
+  .fb{border-top:1px solid #2A4567;padding-top:1.3rem;font-size:.85rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .dn{position:fixed;left:50%;bottom:1rem;transform:translateX(-50%);background:var(--navy2);color:#fff;padding:.5rem 1rem;font-size:.8rem;z-index:99;border-radius:3px}
+  .dn a{color:var(--focus)}
+</style></head>
+<body>
+<a href="#main" class="skip">Skip to main content</a>
+<div class="gov"><div class="wrap">A service provided by Northbridge Metropolitan Borough Council</div></div>
+<header class="mast"><div class="wrap mi">
+  <a href="index.html" class="crest">
+    <svg width="34" height="34" viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="1.6"><path d="M16 3l11 5v8c0 7-4.6 12.4-11 13.8C9.6 28.4 5 23 5 16V8z"/><path d="M11 16h10M16 11v10"/></svg>
+    Northbridge Council
+  </a>
+  <span style="font-size:.9rem">Text size · Translate · <a href="#" style="color:#fff">Accessibility</a></span>
+</div></header>
+<nav class="main"><div class="wrap"><div class="nl"><a href="index.html">Home</a><a href="services.html" class='on'>Services</a><a href="apply.html">Apply</a></div></div></nav>
+<div class="wrap" style="padding-top:1rem;font-size:.9rem"><a href="index.html">Home</a> <span style="color:var(--line2)">›</span> <span>Services</span></div>
+<main id="main">
+
+<section><div class="wrap">
+  <h1>All services</h1>
+  <p>Everything the council does, listed alphabetically. If you cannot find what you need, <a href="#">contact us</a> and we will point you in the right direction.</p>
+
+  <div class="panel">
+    <h2 style="font-size:1.1rem;margin-bottom:.3rem">Need help using this site?</h2>
+    <p style="margin-bottom:0">This website meets WCAG 2.2 AA. Read our <a href="#">accessibility statement</a> or call us and we will complete any form with you over the phone.</p>
+  </div>
+
+  <div style="overflow-x:auto;border:1px solid var(--line)">
+    <table style="width:100%;border-collapse:collapse;min-width:560px">
+      <thead><tr style="background:var(--bg2)">
+        <th style="text-align:left;padding:.8rem 1rem;border-bottom:2px solid var(--navy)">Service</th>
+        <th style="text-align:left;padding:.8rem 1rem;border-bottom:2px solid var(--navy)">What you can do</th>
+        <th style="text-align:left;padding:.8rem 1rem;border-bottom:2px solid var(--navy)">How</th>
+      </tr></thead>
+      <tbody><tr><td style="padding:.9rem 1rem;border-bottom:1px solid var(--line)"><a href="apply.html" style="font-weight:600">Council tax</a></td><td style="padding:.9rem 1rem;border-bottom:1px solid var(--line);color:var(--body)">Pay, Direct Debit, discounts, moving home</td><td style="padding:.9rem 1rem;border-bottom:1px solid var(--line);font-size:.9rem">Online · Phone</td></tr><tr><td style="padding:.9rem 1rem;border-bottom:1px solid var(--line)"><a href="apply.html" style="font-weight:600">Bins and recycling</a></td><td style="padding:.9rem 1rem;border-bottom:1px solid var(--line);color:var(--body)">Collection days, missed bins, bulky waste</td><td style="padding:.9rem 1rem;border-bottom:1px solid var(--line);font-size:.9rem">Online</td></tr><tr><td style="padding:.9rem 1rem;border-bottom:1px solid var(--line)"><a href="apply.html" style="font-weight:600">Planning</a></td><td style="padding:.9rem 1rem;border-bottom:1px solid var(--line);color:var(--body)">Search, comment, apply for permission</td><td style="padding:.9rem 1rem;border-bottom:1px solid var(--line);font-size:.9rem">Online</td></tr><tr><td style="padding:.9rem 1rem;border-bottom:1px solid var(--line)"><a href="apply.html" style="font-weight:600">Housing</a></td><td style="padding:.9rem 1rem;border-bottom:1px solid var(--line);color:var(--body)">Register, repairs, homelessness</td><td style="padding:.9rem 1rem;border-bottom:1px solid var(--line);font-size:.9rem">Online · Phone · In person</td></tr><tr><td style="padding:.9rem 1rem;border-bottom:1px solid var(--line)"><a href="apply.html" style="font-weight:600">Parking</a></td><td style="padding:.9rem 1rem;border-bottom:1px solid var(--line);color:var(--body)">Permits, penalty charges, appeals</td><td style="padding:.9rem 1rem;border-bottom:1px solid var(--line);font-size:.9rem">Online</td></tr><tr><td style="padding:.9rem 1rem;border-bottom:1px solid var(--line)"><a href="apply.html" style="font-weight:600">Schools</a></td><td style="padding:.9rem 1rem;border-bottom:1px solid var(--line);color:var(--body)">Admissions, term dates, free school meals</td><td style="padding:.9rem 1rem;border-bottom:1px solid var(--line);font-size:.9rem">Online</td></tr><tr><td style="padding:.9rem 1rem;border-bottom:1px solid var(--line)"><a href="apply.html" style="font-weight:600">Licensing</a></td><td style="padding:.9rem 1rem;border-bottom:1px solid var(--line);color:var(--body)">Alcohol, taxi, street trading</td><td style="padding:.9rem 1rem;border-bottom:1px solid var(--line);font-size:.9rem">Online · Post</td></tr><tr><td style="padding:.9rem 1rem;border-bottom:1px solid var(--line)"><a href="apply.html" style="font-weight:600">Births and deaths</a></td><td style="padding:.9rem 1rem;border-bottom:1px solid var(--line);color:var(--body)">Register, certificates, ceremonies</td><td style="padding:.9rem 1rem;border-bottom:1px solid var(--line);font-size:.9rem">In person</td></tr></tbody>
+    </table>
+  </div>
+</div></section>
+
+</main>
+<footer><div class="wrap">
+  <div class="fg">
+    <div><h3 style="color:#fff;font-size:1rem">Services</h3><ul><li><a href="services.html">Council tax</a></li><li><a href="services.html">Bins and recycling</a></li><li><a href="services.html">Planning</a></li><li><a href="services.html">Housing</a></li></ul></div>
+    <div><h3 style="color:#fff;font-size:1rem">About</h3><ul><li><a href="#">Councillors</a></li><li><a href="#">Meetings and minutes</a></li><li><a href="#">Jobs</a></li><li><a href="#">Contact us</a></li></ul></div>
+    <div><h3 style="color:#fff;font-size:1rem">Legal</h3><ul><li><a href="#">Accessibility statement</a></li><li><a href="#">Privacy notice</a></li><li><a href="#">Freedom of information</a></li><li><a href="#">Cookies</a></li></ul></div>
+  </div>
+  <div class="fb"><span>© 2026 Northbridge Metropolitan Borough Council</span><span>Demo template · DK Instaweb</span></div>
+</div></footer>
+<div class="dn">Template demo · <a href="../index.html">Back to all templates</a></div>
+</body></html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book — Pulse Clinic</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F7FAFB; --card:#fff; --ink:#0F2E33; --body:#4A6B70;
+    --teal:#0E9A96; --teal-d:#0B7A77; --mint:#E3F5F2; --sun:#FFB84D;
+    --line:#E1ECEE; --radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
+
+  .topbar{background:var(--ink);color:#BFE0E0;font-size:.82rem;padding:.55rem 0}
+  .topbar-in{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .topbar b{color:#fff}
+
+  nav{position:sticky;top:0;z-index:50;background:rgba(247,250,251,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:76px}
+  .logo{display:flex;align-items:center;gap:.6rem;font-weight:800;font-size:1.25rem;letter-spacing:-.02em}
+  .mark{width:34px;height:34px;border-radius:10px;background:var(--teal);display:grid;place-items:center;color:#fff}
+  .links{display:flex;gap:1.9rem;align-items:center}
+  .links a{font-size:.92rem;font-weight:500;color:var(--body);transition:color .2s}
+  .links a:hover,.links a.on{color:var(--teal)}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.72rem 1.35rem;border-radius:100px;font-weight:600;font-size:.9rem;border:none;cursor:pointer;font-family:inherit;transition:all .2s}
+  .btn-p{background:var(--teal);color:#fff}
+  .btn-p:hover{background:var(--teal-d);transform:translateY(-1px)}
+  .btn-o{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+  .btn-o:hover{border-color:var(--teal);color:var(--teal)}
+  .burger{display:none;background:none;border:none;cursor:pointer;color:var(--ink)}
+  @media(max-width:880px){.links{display:none}.burger{display:block}}
+
+  .hero{padding:clamp(2.5rem,6vw,4.5rem) 0}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,3.5rem);align-items:center}
+  @media(max-width:880px){.hero-grid{grid-template-columns:1fr}}
+  .pill{display:inline-flex;align-items:center;gap:.5rem;background:var(--mint);color:var(--teal-d);padding:.4rem .9rem;border-radius:100px;font-size:.82rem;font-weight:600;margin-bottom:1.4rem}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--teal)}
+  h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;line-height:1.12;letter-spacing:-.03em;margin-bottom:1.1rem}
+  h1 span{color:var(--teal)}
+  .lead{font-size:1.06rem;color:var(--body);max-width:48ch;margin-bottom:2rem}
+  .cta{display:flex;gap:.8rem;flex-wrap:wrap}
+
+  .bookcard{background:var(--card);border-radius:var(--radius);padding:1.5rem;box-shadow:0 20px 50px -24px rgba(15,46,51,.25)}
+  .bookcard h3{font-size:1.1rem;font-weight:700;margin-bottom:1.1rem}
+  .field{margin-bottom:.9rem}
+  .field label{display:block;font-size:.78rem;font-weight:600;color:var(--body);margin-bottom:.35rem}
+  .field input,.field select{width:100%;padding:.7rem .85rem;border:1.5px solid var(--line);border-radius:10px;font-family:inherit;font-size:.92rem;color:var(--ink);background:#fff}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--teal)}
+  .slots{display:grid;grid-template-columns:repeat(4,1fr);gap:.45rem;margin-bottom:1.1rem}
+  .slot{padding:.5rem 0;text-align:center;border:1.5px solid var(--line);border-radius:9px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .18s;background:#fff}
+  .slot:hover{border-color:var(--teal);color:var(--teal)}
+  .slot.sel{background:var(--teal);border-color:var(--teal);color:#fff}
+  .slot.off{opacity:.35;cursor:not-allowed;text-decoration:line-through}
+
+  .trust{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;padding:2rem 0}
+  @media(max-width:760px){.trust{grid-template-columns:1fr 1fr}}
+  .t-item{background:var(--card);border-radius:12px;padding:1.1rem;display:flex;gap:.8rem;align-items:center;border:1px solid var(--line)}
+  .t-ic{width:38px;height:38px;border-radius:10px;background:var(--mint);display:grid;place-items:center;color:var(--teal);flex-shrink:0}
+  .t-item b{display:block;font-size:.92rem}
+  .t-item small{color:var(--body);font-size:.8rem}
+
+  section{padding:clamp(3rem,7vw,5rem) 0}
+  .sec-head{text-align:center;max-width:620px;margin:0 auto 3rem}
+  h2{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:800;letter-spacing:-.025em;line-height:1.18;margin-bottom:.8rem}
+  .sec-head p{color:var(--body)}
+
+  .svcs{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+  @media(max-width:880px){.svcs{grid-template-columns:1fr 1fr}}
+  @media(max-width:580px){.svcs{grid-template-columns:1fr}}
+  .svc{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.6rem;transition:all .25s}
+  .svc:hover{border-color:var(--teal);transform:translateY(-3px);box-shadow:0 16px 36px -20px rgba(14,154,150,.4)}
+  .svc .ic{width:46px;height:46px;border-radius:12px;background:var(--mint);display:grid;place-items:center;color:var(--teal);margin-bottom:1rem}
+  .svc h3{font-size:1.08rem;font-weight:700;margin-bottom:.4rem}
+  .svc p{font-size:.9rem;color:var(--body)}
+
+  .band{background:var(--ink);color:#D6EDED;border-radius:24px;padding:clamp(2rem,5vw,3.5rem);display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center}
+  @media(max-width:760px){.band{grid-template-columns:1fr}}
+  .band h2{color:#fff;margin-bottom:.6rem}
+
+  footer{padding:3rem 0 2rem;border-top:1px solid var(--line);margin-top:3rem}
+  .f-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;margin-bottom:2rem}
+  @media(max-width:760px){.f-grid{grid-template-columns:1fr 1fr}}
+  footer h5{font-size:.8rem;font-weight:700;margin-bottom:.9rem}
+  footer li{list-style:none;margin-bottom:.45rem;font-size:.88rem;color:var(--body)}
+  footer a:hover{color:var(--teal)}
+  .f-base{border-top:1px solid var(--line);padding-top:1.5rem;font-size:.82rem;color:var(--body);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .demo-note{position:fixed;left:50%;bottom:1.25rem;transform:translateX(-50%);background:var(--ink);color:#fff;padding:.55rem 1.1rem;border-radius:100px;font-size:.78rem;z-index:99;box-shadow:0 8px 24px -8px rgba(0,0,0,.35)}
+  .demo-note a{color:var(--sun)}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap topbar-in">
+    <span>Open today until 6:30pm · <b>Walk-ins welcome before 11am</b></span>
+    <span>0161 000 0000</span>
+  </div>
+</div>
+
+<nav>
+  <div class="wrap nav-in">
+    <a href="index.html" class="logo">
+      <span class="mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M3 12h4l2.5-7 4 14L16 12h5"/></svg></span>
+      Pulse Clinic
+    </a>
+    <div class="links">
+      <a href="index.html" >Home</a>
+      <a href="services.html">Services</a>
+      <a href="book.html" class="on">Book</a>
+      <a href="book.html" class="btn btn-p">Book appointment</a>
+    </div>
+    <button class="burger" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg></button>
+  </div>
+</nav>
+
+<div class="wrap" style="padding:3rem 0 0">
+  <div class="sec-head" style="margin-bottom:2.5rem">
+    <h1 style="font-size:clamp(2rem,4.4vw,3rem)">Book an appointment</h1>
+    <p>Three steps, about a minute. You will get a confirmation by text and email.</p>
+  </div>
+</div>
+
+<section class="wrap" style="padding-top:0">
+  <div style="max-width:720px;margin:0 auto">
+
+    <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:2rem">
+      <div style="flex:1;display:flex;align-items:center;gap:.6rem">
+        <span style="width:30px;height:30px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-size:.85rem;font-weight:700;flex-shrink:0">1</span>
+        <b style="font-size:.9rem">Service</b>
+      </div>
+      <div style="flex:1;height:2px;background:var(--teal)"></div>
+      <div style="flex:1;display:flex;align-items:center;gap:.6rem">
+        <span style="width:30px;height:30px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-size:.85rem;font-weight:700;flex-shrink:0">2</span>
+        <b style="font-size:.9rem">Time</b>
+      </div>
+      <div style="flex:1;height:2px;background:var(--line)"></div>
+      <div style="flex:1;display:flex;align-items:center;gap:.6rem">
+        <span style="width:30px;height:30px;border-radius:50%;background:var(--line);color:var(--body);display:grid;place-items:center;font-size:.85rem;font-weight:700;flex-shrink:0">3</span>
+        <b style="font-size:.9rem;color:var(--body)">Details</b>
+      </div>
+    </div>
+
+    <div class="bookcard" style="padding:clamp(1.5rem,3vw,2.2rem)">
+      <h3 style="font-size:1.25rem;margin-bottom:1.4rem">Choose a time</h3>
+
+      <div class="field"><label>Service</label>
+        <select><option>General consultation — 15 min · £45</option><option>Extended consultation — 30 min · £80</option><option>Full health screen — 60 min · £199</option><option>Physiotherapy — 45 min · £65</option></select>
+      </div>
+      <div class="field"><label>Clinician</label>
+        <select><option>No preference — earliest available</option><option>Dr Amara Osei</option><option>Dr James Whitfield</option><option>Priya Raman</option></select>
+      </div>
+
+      <label style="display:block;font-size:.78rem;font-weight:600;color:var(--body);margin:1.2rem 0 .5rem">Pick a day</label>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem;margin-bottom:1.2rem">
+        <div class="slot" style="padding:.7rem 0"><small style="display:block;font-weight:500;color:var(--body);font-size:.72rem">Mon</small>26</div>
+        <div class="slot sel" style="padding:.7rem 0"><small style="display:block;font-weight:500;font-size:.72rem;opacity:.8">Tue</small>27</div>
+        <div class="slot" style="padding:.7rem 0"><small style="display:block;font-weight:500;color:var(--body);font-size:.72rem">Wed</small>28</div>
+        <div class="slot" style="padding:.7rem 0"><small style="display:block;font-weight:500;color:var(--body);font-size:.72rem">Thu</small>29</div>
+        <div class="slot off" style="padding:.7rem 0"><small style="display:block;font-weight:500;color:var(--body);font-size:.72rem">Fri</small>30</div>
+      </div>
+
+      <label style="display:block;font-size:.78rem;font-weight:600;color:var(--body);margin-bottom:.5rem">Available times — Tuesday 27 October</label>
+      <div class="slots" style="grid-template-columns:repeat(4,1fr)">
+        <div class="slot off">08:30</div><div class="slot">09:00</div><div class="slot">09:30</div><div class="slot off">10:00</div>
+        <div class="slot sel">10:15</div><div class="slot">11:00</div><div class="slot">11:30</div><div class="slot off">13:00</div>
+        <div class="slot">13:30</div><div class="slot">14:15</div><div class="slot">15:00</div><div class="slot">16:30</div>
+      </div>
+
+      <div style="background:var(--mint);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.3rem;display:flex;gap:.8rem;align-items:flex-start">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0B7A77" stroke-width="2" style="flex-shrink:0;margin-top:2px"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+        <small style="color:var(--teal-d);font-size:.85rem">Need to be seen today? Call <b>0161 000 0000</b> before 11am and we will always find a slot.</small>
+      </div>
+
+      <button class="btn btn-p" style="width:100%;justify-content:center" onclick="document.getElementById('done').style.display='flex'">Continue to your details</button>
+      <div id="done" style="display:none;margin-top:1rem;padding:.9rem 1.1rem;background:#E7F6EC;border:1px solid #8FC9A4;border-radius:10px;font-size:.9rem;color:#17603A;gap:.6rem;align-items:center">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#17603A" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>
+        Slot held for 10 minutes — this is a demo, so nothing is booked.
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <div class="logo"><span class="mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M3 12h4l2.5-7 4 14L16 12h5"/></svg></span> Pulse Clinic</div>
+        <p style="margin-top:.8rem;font-size:.88rem;color:var(--body);max-width:30ch">A family practice in central Manchester. CQC registered.</p>
+      </div>
+      <div><h5>Clinic</h5><ul><li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li><li><a href="book.html">Book</a></li></ul></div>
+      <div><h5>Hours</h5><ul><li>Mon–Fri 8:00–18:30</li><li>Sat 9:00–14:00</li><li>Sun 10:00–13:00</li></ul></div>
+      <div><h5>Contact</h5><ul><li>0161 000 0000</li><li>hello@pulse.example</li><li>M1, Manchester</li></ul></div>
+    </div>
+    <div class="f-base"><span>© 2026 Pulse Clinic</span><span>Demo template · DK Instaweb</span></div>
+  </div>
+</footer>
+
+<div class="demo-note">Template demo · <a href="../index.html">Back to all templates</a></div>
+
+<script>
+  document.querySelectorAll('.slot:not(.off)').forEach(function(s){
+    s.addEventListener('click',function(){
+      var row = s.parentElement;
+      row.querySelectorAll('.slot').forEach(function(x){x.classList.remove('sel')});
+      s.classList.add('sel');
+    });
+  });
+</script>
+<div class="demo-note">Template demo · <a href="../index.html">Back to all templates</a></div>
+</body>
+</html>

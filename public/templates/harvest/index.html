@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home — Harvest</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--dark:#241812;--dark2:#180F0A;--cream:#F7EFE2;--cream2:#EDE0CC;
+    --gold:#C9A227;--rust:#A8482A;--mut:#A89583;--line:rgba(247,239,226,.14);}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Jost',sans-serif;background:var(--dark);color:var(--cream);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2rem)}
+  .ser{font-family:'Cormorant Garamond',serif}
+  nav{position:sticky;top:0;z-index:50;background:rgba(36,24,18,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nv{display:flex;align-items:center;justify-content:space-between;height:80px}
+  .lg{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+  .lg span{color:var(--gold)}
+  .nl{display:flex;gap:2rem;align-items:center}
+  .nl a{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+  .nl a:hover,.nl a.on{color:var(--gold)}
+  .b{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.6rem;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--gold);color:var(--gold);background:transparent;cursor:pointer;font-family:inherit;transition:all .25s}
+  .b:hover{background:var(--gold);color:var(--dark2)}
+  .bf{background:var(--gold);color:var(--dark2)}.bf:hover{background:var(--cream);border-color:var(--cream)}
+  @media(max-width:840px){.nl a:not(.b){display:none}}
+  h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,7vw,5rem);font-weight:300;line-height:1.08;letter-spacing:.01em}
+  h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4.2vw,3rem);font-weight:300;line-height:1.15}
+  .eyebrow{font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:1.3rem}
+  section{padding:clamp(3rem,7vw,5.5rem) 0}
+  .rule{width:48px;height:1px;background:var(--gold);margin:1.2rem 0}
+  footer{background:var(--dark2);border-top:1px solid var(--line);padding:3rem 0 2rem;margin-top:2rem}
+  .fg{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2.5rem;margin-bottom:2rem}
+  @media(max-width:720px){.fg{grid-template-columns:1fr 1fr}}
+  footer h5{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem}
+  footer li{list-style:none;margin-bottom:.45rem;font-size:.92rem;color:var(--mut)}
+  .fb{border-top:1px solid var(--line);padding-top:1.4rem;font-size:.82rem;color:var(--mut);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .dn{position:fixed;left:50%;bottom:1rem;transform:translateX(-50%);background:var(--dark2);border:1px solid var(--line);padding:.5rem 1rem;font-size:.76rem;z-index:99}
+  .dn a{color:var(--gold)}
+</style></head><body>
+<nav><div class="wrap nv"><a href="index.html" class="lg">Harvest<span>.</span></a><div class="nl"><a href="index.html" class="on">Home</a><a href="menu.html">Menu</a><a href="book.html">Reservations</a><a href="book.html" class="b">Reserve</a></div></div></nav>
+
+<div style="position:relative;min-height:clamp(420px,72vh,620px);display:grid;place-items:center;text-align:center;overflow:hidden;background:linear-gradient(170deg,#3A2718,#180F0A)">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 120%,rgba(201,162,39,.22),transparent 60%)"></div>
+  <div class="wrap" style="position:relative;padding:4rem 1.5rem">
+    <div class="eyebrow">Manchester · Est. 2019</div>
+    <h1>Cooked over fire,<br>grown down the road.</h1>
+    <div class="rule" style="margin:1.5rem auto"></div>
+    <p style="color:var(--mut);max-width:44ch;margin:0 auto 2rem;font-size:1.05rem">A short menu that changes every week, depending on what the farms and the weather allow.</p>
+    <div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap">
+      <a href="book.html" class="b bf">Reserve a table</a><a href="menu.html" class="b">View the menu</a>
+    </div>
+  </div>
+</div>
+
+<section><div class="wrap">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem);align-items:center" class="hg">
+    <div style="aspect-ratio:4/5;background:linear-gradient(150deg,#6B4A30,#2A1B12);position:relative">
+      <div style="position:absolute;inset:14px;border:1px solid rgba(201,162,39,.35)"></div>
+    </div>
+    <div>
+      <div class="eyebrow">The kitchen</div>
+      <h2>Twenty-four covers,<br>one sitting a night.</h2>
+      <div class="rule"></div>
+      <p style="color:var(--mut);margin-bottom:1.2rem">Everything comes off the hearth or out of the embers. We buy whole animals, mill our own flour, and the menu is written the morning of service once the deliveries land.</p>
+      <p style="color:var(--mut)">There is no à la carte. You eat what we cooked, and we think that is the point.</p>
+      <a href="menu.html" class="b" style="margin-top:1.5rem">This week's menu</a>
+    </div>
+  </div>
+</div></section>
+
+<section style="background:var(--dark2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap" style="text-align:center">
+    <div class="eyebrow">Praise</div>
+    <p class="ser" style="font-size:clamp(1.4rem,3vw,2rem);font-weight:300;line-height:1.4;max-width:24ch;margin:0 auto 1.2rem">"The best thing to happen to Manchester cooking in a decade."</p>
+    <div style="color:var(--gold);letter-spacing:.2em;font-size:.78rem;text-transform:uppercase">The Observer · 2025</div>
+  </div>
+</section>
+
+<section><div class="wrap">
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem" class="sg">
+    <div style="text-align:center;padding:1.5rem"><div class="ser" style="font-size:2.4rem;color:var(--gold);line-height:1">24</div><div class="rule" style="margin:.8rem auto"></div><p style="color:var(--mut);font-size:.95rem">Covers a night, one sitting at 7pm</p></div>
+    <div style="text-align:center;padding:1.5rem"><div class="ser" style="font-size:2.4rem;color:var(--gold);line-height:1">6</div><div class="rule" style="margin:.8rem auto"></div><p style="color:var(--mut);font-size:.95rem">Courses, decided that morning</p></div>
+    <div style="text-align:center;padding:1.5rem"><div class="ser" style="font-size:2.4rem;color:var(--gold);line-height:1">31mi</div><div class="rule" style="margin:.8rem auto"></div><p style="color:var(--mut);font-size:.95rem">Average distance to our growers</p></div>
+  </div>
+</div></section>
+<style>@media(max-width:860px){.hg{grid-template-columns:1fr!important}}@media(max-width:700px){.sg{grid-template-columns:1fr!important}}</style>
+
+<footer><div class="wrap"><div class="fg">
+  <div><div class="lg">Harvest<span>.</span></div><p style="color:var(--mut);margin-top:.8rem;max-width:32ch;font-size:.92rem">Seasonal British cooking over fire. Twenty-four covers, one sitting.</p></div>
+  <div><h5>Hours</h5><ul><li>Wed – Sat · 6pm till late</li><li>Sunday lunch · 12 – 4pm</li><li>Closed Mon &amp; Tue</li></ul></div>
+  <div><h5>Find us</h5><ul><li>18 Tib Lane</li><li>Manchester M2 4JA</li><li>0161 000 0000</li></ul></div>
+</div><div class="fb"><span>© 2026 Harvest</span><span>Demo template · DK Instaweb</span></div></div></footer>
+<div class="dn">Template demo · <a href="../index.html">Back to all templates</a></div>
+</body></html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Index — Atelier Nord</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#FAFAF8;--ink:#0C0C0B;--mut:#73736E;--line:#E2E2DD;--accent:#0C0C0B;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter Tight',sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1300px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem)}
+  nav{position:sticky;top:0;z-index:50;background:rgba(250,250,248,.9);backdrop-filter:blur(12px);mix-blend-mode:normal}
+  .nv{display:flex;align-items:center;justify-content:space-between;height:88px}
+  .lg{font-size:1.05rem;font-weight:600;letter-spacing:-.02em}
+  .nl{display:flex;gap:2.2rem}
+  .nl a{font-size:.88rem;color:var(--mut);transition:color .2s}
+  .nl a:hover,.nl a.on{color:var(--ink)}
+  h1{font-size:clamp(3rem,11vw,9rem);font-weight:500;line-height:.92;letter-spacing:-.05em}
+  h2{font-size:clamp(1.8rem,4.5vw,3.2rem);font-weight:500;line-height:1.05;letter-spacing:-.035em}
+  .mut{color:var(--mut)}
+  section{padding:clamp(3rem,9vw,7rem) 0}
+  .lbl{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+  .work{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(1rem,2.5vw,2rem)}
+  .w-item{position:relative;overflow:hidden;cursor:pointer}
+  .w-item .ph{width:100%;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+  .w-item:hover .ph{transform:scale(1.04)}
+  .w-meta{display:flex;justify-content:space-between;gap:1rem;padding-top:.85rem;font-size:.86rem}
+  .w-meta .mut{text-align:right}
+  footer{border-top:1px solid var(--line);padding:3rem 0 2rem;margin-top:2rem}
+  .dn{position:fixed;left:50%;bottom:1rem;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:.5rem 1rem;border-radius:100px;font-size:.76rem;z-index:99}
+  .dn a{color:#C9C9C2}
+</style></head><body>
+<nav><div class="wrap nv"><a href="index.html" class="lg">Atelier Nord</a><div class="nl"><a href="index.html" class='on'>Index</a><a href="work.html">Work</a><a href="about.html">About</a></div><a href="about.html" style="font-size:.88rem">hello@ateliernord.example</a></div></nav>
+
+<div class="wrap" style="padding:clamp(2rem,6vw,5rem) 0 clamp(2.5rem,6vw,4rem)">
+  <h1>Design<br>that holds<br>its nerve.</h1>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:clamp(2rem,5vw,3.5rem);max-width:900px" class="hg">
+    <p style="font-size:1.05rem">An independent studio working in identity, editorial and digital for people who would rather be remembered than noticed.</p>
+    <p class="mut" style="font-size:1.05rem">Founded 2016 in Manchester. Currently taking projects from March.</p>
+  </div>
+</div>
+
+<section style="padding-top:0"><div class="wrap">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2rem;border-top:1px solid var(--line);padding-top:1rem">
+    <span class="lbl">Selected work</span><span class="lbl">2025 — 2026</span>
+  </div>
+  <div class="work"><a class="w-item" href="work.html" style="grid-column:span 8">
+  <div class="ph" style="aspect-ratio:16/10;background:linear-gradient(150deg,#D8D4CB,#9C968A)"></div>
+  <div class="w-meta"><span>Seam</span><span class="mut">Brand identity · 2026</span></div></a><a class="w-item" href="work.html" style="grid-column:span 4">
+  <div class="ph" style="aspect-ratio:4/5;background:linear-gradient(150deg,#C7CFD6,#7E8A94)"></div>
+  <div class="w-meta"><span>Bellwether Press</span><span class="mut">Editorial & web · 2026</span></div></a><a class="w-item" href="work.html" style="grid-column:span 4">
+  <div class="ph" style="aspect-ratio:4/5;background:linear-gradient(150deg,#E0D3C8,#A89080)"></div>
+  <div class="w-meta"><span>Hollow Studio</span><span class="mut">Art direction · 2025</span></div></a><a class="w-item" href="work.html" style="grid-column:span 6">
+  <div class="ph" style="aspect-ratio:16/10;background:linear-gradient(150deg,#CBD6CE,#86978B)"></div>
+  <div class="w-meta"><span>Fathom</span><span class="mut">Packaging · 2025</span></div></a><a class="w-item" href="work.html" style="grid-column:span 6">
+  <div class="ph" style="aspect-ratio:16/10;background:linear-gradient(150deg,#DED6DF,#9C8FA3)"></div>
+  <div class="w-meta"><span>Quiet Hours</span><span class="mut">Identity & print · 2025</span></div></a></div>
+</div></section>
+
+<section><div class="wrap">
+  <div style="border-top:1px solid var(--line);padding-top:1rem;margin-bottom:2rem"><span class="lbl">Services</span></div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,4vw,3rem)" class="sg">
+    <div><h2 style="font-size:1.4rem;margin-bottom:.6rem">Identity</h2><p class="mut" style="font-size:.95rem">Naming, marks, type systems and the guidelines that keep them intact once we have gone.</p></div>
+    <div><h2 style="font-size:1.4rem;margin-bottom:.6rem">Editorial</h2><p class="mut" style="font-size:.95rem">Books, reports and periodicals. Grid-first, printed properly, built to be read not scrolled.</p></div>
+    <div><h2 style="font-size:1.4rem;margin-bottom:.6rem">Digital</h2><p class="mut" style="font-size:.95rem">Sites and interfaces that carry the identity rather than diluting it. Built, not themed.</p></div>
+  </div>
+</div></section>
+<style>@media(max-width:820px){.hg,.sg{grid-template-columns:1fr!important}.work .w-item{grid-column:span 12!important}}</style>
+
+<footer><div class="wrap" style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.84rem">
+<span class="mut">© 2026 Atelier Nord — Manchester</span><span class="mut">Demo template · DK Instaweb</span></div></footer>
+<div class="dn">Template demo · <a href="../index.html">Back to all templates</a></div>
+</body></html>

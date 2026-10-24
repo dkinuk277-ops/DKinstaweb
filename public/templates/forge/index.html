@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home — Forge Engineering</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#101316;--bg2:#171B20;--card:#1A1F25;--line:#2A3139;--line2:#3A434E;
+    --ink:#E6E9EC;--ink2:#FFFFFF;--mut:#8D97A3;--mut2:#5E6873;--or:#F97316;--steel:#64748B;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .mono{font-family:'IBM Plex Mono',monospace}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2rem)}
+  .tb{background:#0A0C0E;border-bottom:1px solid var(--line);font-size:.78rem;color:var(--mut);padding:.5rem 0}
+  .tbi{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  nav{position:sticky;top:0;z-index:50;background:rgba(16,19,22,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nv{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .lg{display:flex;align-items:center;gap:.6rem;font-weight:700;font-size:1.2rem;letter-spacing:.02em;text-transform:uppercase;color:var(--ink2)}
+  .lgm{width:30px;height:30px;background:var(--or);display:grid;place-items:center;color:#0A0C0E;font-weight:800;font-size:.9rem}
+  .nl{display:flex;gap:1.7rem;align-items:center}
+  .nl a{font-size:.86rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+  .nl a:hover,.nl a.on{color:var(--or)}
+  .b{display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.3rem;font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;font-family:inherit;transition:all .2s}
+  .bp{background:var(--or);color:#0A0C0E}.bp:hover{background:#FB8B3C}
+  .bo{background:transparent;color:var(--ink);border:1px solid var(--line2)}.bo:hover{border-color:var(--or);color:var(--or)}
+  @media(max-width:860px){.nl a:not(.b){display:none}}
+  h1{font-size:clamp(2.2rem,5.4vw,3.6rem);font-weight:700;line-height:1.05;letter-spacing:-.02em;color:var(--ink2);text-transform:uppercase}
+  h2{font-size:clamp(1.6rem,3.4vw,2.3rem);font-weight:700;letter-spacing:-.015em;color:var(--ink2);text-transform:uppercase;line-height:1.15}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--or);margin-bottom:1rem}
+  section{padding:clamp(3rem,7vw,4.5rem) 0}
+  .grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+  .card{background:var(--card);border:1px solid var(--line)}
+  table{width:100%;border-collapse:collapse}
+  th{text-align:left;font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut2);font-weight:500;padding:.75rem 1rem;background:#0E1114;border-bottom:1px solid var(--line)}
+  td{padding:.8rem 1rem;border-bottom:1px solid var(--line);font-size:.9rem}
+  tbody tr:hover{background:var(--bg2)}
+  footer{border-top:1px solid var(--line);padding:2.5rem 0;margin-top:1rem;background:#0A0C0E}
+  .fin{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.82rem;color:var(--mut2)}
+  .dn{position:fixed;left:50%;bottom:1rem;transform:translateX(-50%);background:var(--card);border:1px solid var(--line);padding:.5rem 1rem;font-size:.76rem;z-index:99}
+  .dn a{color:var(--or)}
+</style></head>
+<body>
+<div class="tb"><div class="wrap tbi"><span class="mono">ISO 9001:2015 · AS9100D · UKAS CALIBRATED</span><span class="mono">+44 161 000 0000</span></div></div>
+<nav><div class="wrap nv">
+  <a href="index.html" class="lg"><span class="lgm">F</span>Forge</a>
+  <div class="nl"><a href="index.html" class='on'>Home</a><a href="capabilities.html">Capabilities</a><a href="catalogue.html">Catalogue</a><a href="#q" class="b bp">Request a quote</a></div>
+</div></nav>
+
+<div style="position:relative;overflow:hidden;border-bottom:1px solid var(--line)">
+  <div class="grid-bg"></div>
+  <div class="wrap" style="padding:clamp(3rem,8vw,5.5rem) 0;position:relative">
+    <div style="display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center" class="hg">
+      <div>
+        <div class="eyebrow">Precision subcontract manufacturing · Est. 1974</div>
+        <h1>Tolerances<br>we can <span style="color:var(--or)">prove</span>.</h1>
+        <p style="color:var(--mut);font-size:1.05rem;max-width:46ch;margin:1.2rem 0 2rem">Five-axis machining, fabrication and assembly for aerospace, energy and motorsport. Every part leaves with a dimensional report, not a promise.</p>
+        <div style="display:flex;gap:.7rem;flex-wrap:wrap">
+          <a href="#q" class="b bp">Request a quote</a><a href="capabilities.html" class="b bo">Capabilities</a>
+        </div>
+      </div>
+      <div class="card" style="padding:0">
+        <div style="aspect-ratio:4/3;background:linear-gradient(145deg,#2B3138,#14181C);position:relative;overflow:hidden">
+          <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,transparent 0 10px,rgba(249,115,22,.05) 10px 11px)"></div>
+          <svg viewBox="0 0 200 150" style="position:absolute;inset:0;width:100%;height:100%" fill="none" stroke="#F97316" stroke-width=".8" opacity=".55">
+            <circle cx="100" cy="75" r="46"/><circle cx="100" cy="75" r="30"/><circle cx="100" cy="75" r="12"/>
+            <path d="M100 15v120M40 75h120"/>
+            <path d="M54 29l92 92M146 29l-92 92" stroke-dasharray="3 3"/>
+          </svg>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)">
+          <div style="padding:.9rem 1rem;border-right:1px solid var(--line)"><div class="mono" style="font-size:.66rem;color:var(--mut2);letter-spacing:.12em">TOLERANCE</div><div style="font-weight:700;color:var(--ink2)">±0.005 mm</div></div>
+          <div style="padding:.9rem 1rem"><div class="mono" style="font-size:.66rem;color:var(--mut2);letter-spacing:.12em">CAPACITY</div><div style="font-weight:700;color:var(--ink2)">1,200 mm</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="border-bottom:1px solid var(--line);background:#0E1114">
+  <div class="wrap" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;padding:1.6rem 0" class="st">
+    <div><div style="font-size:1.8rem;font-weight:700;color:var(--ink2)">52</div><div class="mono" style="font-size:.68rem;letter-spacing:.14em;color:var(--mut2)">YEARS TRADING</div></div>
+    <div><div style="font-size:1.8rem;font-weight:700;color:var(--ink2)">31</div><div class="mono" style="font-size:.68rem;letter-spacing:.14em;color:var(--mut2)">MACHINE TOOLS</div></div>
+    <div><div style="font-size:1.8rem;font-weight:700;color:var(--ink2)">99.4%</div><div class="mono" style="font-size:.68rem;letter-spacing:.14em;color:var(--mut2)">ON-TIME DELIVERY</div></div>
+    <div><div style="font-size:1.8rem;font-weight:700;color:var(--ink2)">24/5</div><div class="mono" style="font-size:.68rem;letter-spacing:.14em;color:var(--mut2)">LIGHTS-OUT RUNNING</div></div>
+  </div>
+</div>
+
+<section><div class="wrap">
+  <div class="eyebrow">What we do</div><h2 style="margin-bottom:2rem">Capabilities</h2>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem" class="cg"><div class="card" style="padding:1.5rem;position:relative">
+  <span class="mono" style="position:absolute;top:1.2rem;right:1.2rem;font-size:1.6rem;color:var(--line2);font-weight:500">01</span>
+  <h3 style="font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:var(--ink2);margin-bottom:.5rem">CNC machining</h3>
+  <p style="font-size:.9rem;color:var(--mut)">5-axis milling and turning to ±0.005 mm on parts up to 1,200 mm.</p></div><div class="card" style="padding:1.5rem;position:relative">
+  <span class="mono" style="position:absolute;top:1.2rem;right:1.2rem;font-size:1.6rem;color:var(--line2);font-weight:500">02</span>
+  <h3 style="font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:var(--ink2);margin-bottom:.5rem">Sheet metal</h3>
+  <p style="font-size:.9rem;color:var(--mut)">Laser cutting, forming and welding in steel, aluminium and Inconel.</p></div><div class="card" style="padding:1.5rem;position:relative">
+  <span class="mono" style="position:absolute;top:1.2rem;right:1.2rem;font-size:1.6rem;color:var(--line2);font-weight:500">03</span>
+  <h3 style="font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:var(--ink2);margin-bottom:.5rem">Assembly</h3>
+  <p style="font-size:.9rem;color:var(--mut)">Sub-assembly and full build with serialised traceability on every unit.</p></div><div class="card" style="padding:1.5rem;position:relative">
+  <span class="mono" style="position:absolute;top:1.2rem;right:1.2rem;font-size:1.6rem;color:var(--line2);font-weight:500">04</span>
+  <h3 style="font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:var(--ink2);margin-bottom:.5rem">Inspection</h3>
+  <p style="font-size:.9rem;color:var(--mut)">CMM and optical measurement, UKAS calibrated, full FAIR reports.</p></div></div>
+</div></section>
+
+<section id="q" style="background:#0E1114;border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start" class="hg">
+    <div>
+      <div class="eyebrow">Request a quote</div>
+      <h2 style="margin-bottom:1rem">Send us a drawing.</h2>
+      <p style="color:var(--mut);margin-bottom:1.5rem">Upload a STEP file or PDF and we will come back within one working day with price, lead time and any design-for-manufacture notes.</p>
+      <div class="mono" style="font-size:.82rem;color:var(--mut);line-height:2">
+        <div>ACCEPTED &nbsp;·&nbsp; .STEP .IGES .DXF .PDF</div>
+        <div>MAX SIZE &nbsp;·&nbsp; 50 MB PER FILE</div>
+        <div>NDA &nbsp;·&nbsp; SIGNED ON REQUEST BEFORE UPLOAD</div>
+      </div>
+    </div>
+    <div class="card" style="padding:1.5rem">
+      <form onsubmit="event.preventDefault();this.querySelector('.ok').style.display='block'">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:.8rem">
+          <div><label class="mono" style="display:block;font-size:.66rem;letter-spacing:.14em;color:var(--mut2);margin-bottom:.35rem">COMPANY</label><input style="width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line2);color:var(--ink);font-family:inherit"></div>
+          <div><label class="mono" style="display:block;font-size:.66rem;letter-spacing:.14em;color:var(--mut2);margin-bottom:.35rem">CONTACT</label><input style="width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line2);color:var(--ink);font-family:inherit"></div>
+        </div>
+        <div style="margin-bottom:.8rem"><label class="mono" style="display:block;font-size:.66rem;letter-spacing:.14em;color:var(--mut2);margin-bottom:.35rem">EMAIL</label><input type="email" style="width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line2);color:var(--ink);font-family:inherit"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:.8rem">
+          <div><label class="mono" style="display:block;font-size:.66rem;letter-spacing:.14em;color:var(--mut2);margin-bottom:.35rem">QUANTITY</label><input placeholder="e.g. 250" style="width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line2);color:var(--ink);font-family:inherit"></div>
+          <div><label class="mono" style="display:block;font-size:.66rem;letter-spacing:.14em;color:var(--mut2);margin-bottom:.35rem">MATERIAL</label>
+            <select style="width:100%;padding:.6rem .7rem;background:var(--bg);border:1px solid var(--line2);color:var(--ink);font-family:inherit"><option>Aluminium 6082</option><option>Stainless 316L</option><option>Titanium Ti-6Al-4V</option><option>Inconel 718</option><option>Other / specify</option></select></div>
+        </div>
+        <div style="border:1px dashed var(--line2);padding:1.3rem;text-align:center;margin-bottom:1rem;cursor:pointer">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5E6873" stroke-width="1.6" style="margin-bottom:.4rem"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+          <div class="mono" style="font-size:.74rem;color:var(--mut)">DROP DRAWING FILES HERE</div>
+        </div>
+        <button class="b bp" style="width:100%;justify-content:center">Submit RFQ</button>
+        <div class="ok" style="display:none;margin-top:.9rem;padding:.7rem;background:rgba(249,115,22,.1);border:1px solid var(--or);font-size:.85rem;color:var(--or)">RFQ received — reference FQ-2026-0441. Demo only.</div>
+      </form>
+    </div>
+  </div>
+</div></section>
+<style>@media(max-width:860px){.hg{grid-template-columns:1fr!important}}@media(max-width:900px){.cg{grid-template-columns:1fr 1fr!important}}@media(max-width:620px){.st{grid-template-columns:1fr 1fr!important}.cg{grid-template-columns:1fr!important}}</style>
+
+<footer><div class="wrap fin"><span>© 2026 Forge Engineering Ltd · Registered in England 00000000</span><span>Demo template · DK Instaweb</span></div></footer>
+<div class="dn">Template demo · <a href="../index.html">Back to all templates</a></div>
+</body></html>

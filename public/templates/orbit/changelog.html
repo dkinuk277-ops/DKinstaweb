@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Changelog — Orbit</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0B0917;--bg2:#120F22;--card:rgba(255,255,255,.035);--line:rgba(255,255,255,.09);
+    --ink:#EDEAFB;--ink2:#FFFFFF;--mut:#9B93C4;--mut2:#6B6490;
+    --v:#8B5CF6;--s:#38BDF8;--lime:#A3E635;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2rem)}
+  .glow{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;opacity:.5}
+  nav{position:sticky;top:0;z-index:50;background:rgba(11,9,23,.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .nv{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .lg{display:flex;align-items:center;gap:.55rem;font-weight:700;font-size:1.15rem;letter-spacing:-.02em;color:var(--ink2)}
+  .lgm{width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,var(--v),var(--s))}
+  .nl{display:flex;gap:1.8rem;align-items:center}
+  .nl a{font-size:.9rem;color:var(--mut)}.nl a:hover,.nl a.on{color:var(--ink2)}
+  .b{display:inline-flex;align-items:center;gap:.45rem;padding:.6rem 1.25rem;border-radius:9px;font-weight:600;font-size:.9rem;cursor:pointer;border:none;font-family:inherit;transition:all .2s}
+  .bp{background:linear-gradient(135deg,var(--v),var(--s));color:#fff}
+  .bp:hover{filter:brightness(1.12);transform:translateY(-1px)}
+  .bo{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+  .bo:hover{border-color:var(--v)}
+  @media(max-width:820px){.nl a:not(.b){display:none}}
+  .hero{padding:clamp(3rem,8vw,6rem) 0 clamp(2rem,5vw,4rem);text-align:center;position:relative;overflow:hidden}
+  .pill{display:inline-flex;align-items:center;gap:.5rem;background:var(--card);border:1px solid var(--line);padding:.35rem .85rem;border-radius:100px;font-size:.8rem;color:var(--mut);margin-bottom:1.5rem}
+  .pill b{color:var(--lime)}
+  h1{font-size:clamp(2.3rem,6vw,4rem);font-weight:700;line-height:1.05;letter-spacing:-.035em;color:var(--ink2);margin-bottom:1.2rem}
+  .grad{background:linear-gradient(120deg,var(--v),var(--s));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{color:var(--mut);font-size:1.08rem;max-width:56ch;margin:0 auto 2rem}
+  .cta{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap}
+  h2{font-size:clamp(1.8rem,3.8vw,2.6rem);font-weight:700;letter-spacing:-.03em;color:var(--ink2);line-height:1.15;margin-bottom:.75rem}
+  section{padding:clamp(3rem,7vw,5rem) 0;position:relative}
+  .sh{text-align:center;max-width:620px;margin:0 auto 3rem}
+  .sh p{color:var(--mut)}
+  .eyebrow{font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--v);margin-bottom:.8rem;font-weight:600}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.5rem;transition:all .25s}
+  .card:hover{border-color:rgba(139,92,246,.5);transform:translateY(-3px)}
+  .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+  @media(max-width:880px){.g3{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.g3{grid-template-columns:1fr}}
+  .ic{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,rgba(139,92,246,.25),rgba(56,189,248,.2));display:grid;place-items:center;color:var(--s);margin-bottom:.9rem}
+  .card h3{font-size:1.05rem;font-weight:600;color:var(--ink2);margin-bottom:.35rem}
+  .card p{font-size:.9rem;color:var(--mut)}
+  footer{border-top:1px solid var(--line);padding:2.5rem 0;margin-top:2rem}
+  .fin{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.85rem;color:var(--mut2)}
+  .dn{position:fixed;left:50%;bottom:1rem;transform:translateX(-50%);background:var(--bg2);border:1px solid var(--line);padding:.5rem 1rem;border-radius:100px;font-size:.76rem;z-index:99}
+  .dn a{color:var(--s)}
+</style></head>
+<body>
+<nav><div class="wrap nv">
+  <a href="index.html" class="lg"><span class="lgm"></span>Orbit</a>
+  <div class="nl"><a href="index.html">Product</a><a href="pricing.html">Pricing</a><a href="changelog.html" class='on'>Changelog</a><a href="pricing.html" class="b bp">Start free trial</a></div>
+</div></nav>
+
+<section style="padding-top:clamp(2.5rem,6vw,4rem)"><div class="wrap" style="max-width:860px">
+  <div class="eyebrow">Changelog</div>
+  <h2 style="margin-bottom:.6rem">What we shipped</h2>
+  <p style="color:var(--mut);margin-bottom:2rem">Every release, including the unglamorous ones. Subscribe and we will email you the interesting bits.</p>
+  <div style="display:flex;gap:.6rem;margin-bottom:1rem;flex-wrap:wrap">
+    <input placeholder="you@company.com" style="flex:1;min-width:200px;padding:.65rem .9rem;background:var(--card);border:1px solid var(--line);border-radius:9px;color:var(--ink);font-family:inherit">
+    <button class="b bp">Subscribe</button>
+  </div>
+  
+<div style="display:grid;grid-template-columns:120px 1fr;gap:2rem;padding:2rem 0;border-top:1px solid var(--line)" class="clrow">
+  <div>
+    <div style="font-weight:700;color:var(--ink2);font-size:1rem">4.2.0</div>
+    <div style="font-size:.8rem;color:var(--mut2)">24 October 2026</div>
+  </div>
+  <div>
+    <h3 style="font-size:1.25rem;font-weight:600;color:var(--ink2);margin-bottom:.5rem">Natural language queries</h3>
+    <p style="color:var(--mut);margin-bottom:1rem">Ask a question in plain English and Orbit writes the SQL, runs it and picks a sensible chart type. Works across every connected warehouse.</p>
+    <div style="display:flex;flex-direction:column;gap:.5rem">
+      <div style="display:flex;gap:.6rem;align-items:center;font-size:.88rem"><span style="background:rgba(163,230,53,.12);color:#A3E635;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:100px;flex-shrink:0">new</span>Natural language query bar</div><div style="display:flex;gap:.6rem;align-items:center;font-size:.88rem"><span style="background:rgba(163,230,53,.12);color:#A3E635;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:100px;flex-shrink:0">new</span>Chart type auto-selection</div><div style="display:flex;gap:.6rem;align-items:center;font-size:.88rem"><span style="background:rgba(245,158,11,.12);color:#F59E0B;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:100px;flex-shrink:0">fix</span>Timezone drift on scheduled reports</div>
+    </div>
+  </div>
+</div>
+<div style="display:grid;grid-template-columns:120px 1fr;gap:2rem;padding:2rem 0;border-top:1px solid var(--line)" class="clrow">
+  <div>
+    <div style="font-weight:700;color:var(--ink2);font-size:1rem">4.1.3</div>
+    <div style="font-size:.8rem;color:var(--mut2)">9 October 2026</div>
+  </div>
+  <div>
+    <h3 style="font-size:1.25rem;font-weight:600;color:var(--ink2);margin-bottom:.5rem">Faster cold starts</h3>
+    <p style="color:var(--mut);margin-bottom:1rem">Dashboards that had not been opened in a while were taking up to nine seconds to load. They now open in under one.</p>
+    <div style="display:flex;flex-direction:column;gap:.5rem">
+      <div style="display:flex;gap:.6rem;align-items:center;font-size:.88rem"><span style="background:rgba(56,189,248,.12);color:#38BDF8;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:100px;flex-shrink:0">improved</span>Query result caching</div><div style="display:flex;gap:.6rem;align-items:center;font-size:.88rem"><span style="background:rgba(245,158,11,.12);color:#F59E0B;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:100px;flex-shrink:0">fix</span>Legend overlap on narrow screens</div>
+    </div>
+  </div>
+</div>
+<div style="display:grid;grid-template-columns:120px 1fr;gap:2rem;padding:2rem 0;border-top:1px solid var(--line)" class="clrow">
+  <div>
+    <div style="font-weight:700;color:var(--ink2);font-size:1rem">4.1.0</div>
+    <div style="font-size:.8rem;color:var(--mut2)">28 September 2026</div>
+  </div>
+  <div>
+    <h3 style="font-size:1.25rem;font-weight:600;color:var(--ink2);margin-bottom:.5rem">Anomaly alerts</h3>
+    <p style="color:var(--mut);margin-bottom:1rem">Orbit now learns the normal range for any metric and notifies you in Slack when something moves outside it.</p>
+    <div style="display:flex;flex-direction:column;gap:.5rem">
+      <div style="display:flex;gap:.6rem;align-items:center;font-size:.88rem"><span style="background:rgba(163,230,53,.12);color:#A3E635;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:100px;flex-shrink:0">new</span>Anomaly detection</div><div style="display:flex;gap:.6rem;align-items:center;font-size:.88rem"><span style="background:rgba(163,230,53,.12);color:#A3E635;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:100px;flex-shrink:0">new</span>Slack integration</div><div style="display:flex;gap:.6rem;align-items:center;font-size:.88rem"><span style="background:rgba(56,189,248,.12);color:#38BDF8;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:100px;flex-shrink:0">improved</span>Alert digest grouping</div>
+    </div>
+  </div>
+</div>
+</div></section>
+<style>@media(max-width:640px){.clrow{grid-template-columns:1fr!important;gap:.6rem!important}}</style>
+
+<footer><div class="wrap fin">
+  <span>© 2026 Orbit Analytics</span><span>Demo template · DK Instaweb</span>
+</div></footer>
+<div class="dn">Template demo · <a href="../index.html">Back to all templates</a></div>
+</body></html>
