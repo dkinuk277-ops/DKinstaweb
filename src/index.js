@@ -220,7 +220,7 @@ function customerEmailHtml(opts) {
         '</td></tr></table>'
       : '') +
     (rows
-      ? '<div style="font-size:11px;letter-spacing:2px;color:#6B7688;font-family:Arial,sans-serif;text-transform:uppercase;margin-bottom:6px;">What you told us</div>' +
+      ? '<div style="font-size:11px;letter-spacing:2px;color:#6B7688;font-family:Arial,sans-serif;text-transform:uppercase;margin-bottom:6px;">' + esc(opts.rowsLabel || 'What you told us') + '</div>' +
         '<table width="100%" cellpadding="0" cellspacing="0" style="border-top:1px solid #e8e8e4;margin-bottom:26px;">' + rows + '</table>'
       : '') +
     (opts.steps && opts.steps.length
@@ -873,24 +873,57 @@ export default {
           .bind(first, last, email, phone || null, template || null, created_at)
           .run();
 
+        const when = new Date(created_at).toLocaleString('en-GB', {
+          timeZone: 'Europe/London',
+          day: '2-digit', month: 'short', year: 'numeric',
+          hour: '2-digit', minute: '2-digit'
+        });
+
         ctx.waitUntil(
           sendEmail(
             env,
-            'Template library unlocked — ' + first + ' ' + last,
+            'New subscriber — ' + first + ' ' + last,
             [
-              first + ' ' + last + ' unlocked the template library.',
+              first + ' ' + last + ' subscribed to unlock the template library.',
               '',
-              'Email: ' + email,
-              'Phone: ' + (phone || 'Not provided'),
-              'Clicked on: ' + (template || 'the library'),
-              'Received: ' + created_at,
+              'Name:        ' + first + ' ' + last,
+              'Email:       ' + email,
+              'Phone:       ' + (phone || 'Not provided'),
+              'Interest:    ' + (template ? 'Clicked the ' + template + ' template' : 'The library as a whole'),
+              'Subscribed:  ' + when,
               '',
-              'This is a warm lead — they were browsing templates, not just reading the homepage.',
+              'A warm lead — they were browsing templates, not just reading the homepage.',
+              'Reply to this email to reach them directly.',
               '',
               '--',
               'View all: https://dkinstaweb.com/admin'
             ],
-            email
+            email,
+            {
+              html: customerEmailHtml({
+                heading: 'New subscriber',
+                intro:
+                  '<strong>' + esc(first + ' ' + last) + '</strong> subscribed to unlock the template library. ' +
+                  'They were browsing templates rather than just reading the homepage, so this is a warm lead. ' +
+                  'Replying to this email goes straight to them.',
+                rowsLabel: 'Subscriber details',
+                rows: [
+                  ['Name', first + ' ' + last],
+                  ['Email', email],
+                  ['Phone', phone || 'Not provided'],
+                  ['Interest', template ? 'Clicked the ' + template + ' template' : 'The library as a whole'],
+                  ['Subscribed', when]
+                ],
+                steps: [
+                  'Reply to this email — it goes to ' + email + ' directly.',
+                  'Ask which template came closest to what they had in mind.',
+                  'Offer a discovery call and come back with a fixed price.'
+                ],
+                closing:
+                  'Every subscriber is also stored in the admin console at ' +
+                  '<a href="https://dkinstaweb.com/admin" style="color:#B8823B;text-decoration:none;">dkinstaweb.com/admin</a>.'
+              })
+            }
           )
         );
 
@@ -906,7 +939,7 @@ export default {
               '',
               'https://dkinstaweb.com/templates/',
               '',
-              'Each one has three working pages, so click the navigation and press the buttons.',
+              'Each one has three or four working pages, so click the navigation and press the buttons.',
               'If one is close to what you had in mind, reply to this email and tell us which —',
               'we will come back with what it would look like for your business.',
               '',
@@ -921,7 +954,7 @@ export default {
               html: customerEmailHtml({
                 heading: 'Thanks, ' + first + '.',
                 intro:
-                  'All fifteen demos are now unlocked. Head back to the library and click any of them — each has three working pages, so open the navigation and press the buttons.',
+                  'All fifteen demos are now unlocked. Head back to the library and click any of them — each has three or four working pages, so open the navigation and press the buttons.',
                 rows: [['Library', 'dkinstaweb.com/templates/']],
                 steps: [
                   'Browse the demos and find one that feels close to what you had in mind.',
