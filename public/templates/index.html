@@ -297,13 +297,7 @@
 
       <div class="win" data-demo
         data-base="meridian/"
-        data-steps='[
-          {"p":"index.html","x":58,"y":4.2,"t":"Landing page — hero, stats and featured properties"},
-          {"p":"listings.html","x":58,"y":4.2,"t":"Clicking through to Properties"},
-          {"p":"listings.html","x":22,"y":30,"t":"Filtering the listings grid"},
-          {"p":"contact.html","x":68,"y":4.2,"t":"Opening the contact page"},
-          {"p":"contact.html","x":74,"y":62,"t":"Filling in the enquiry form"}
-        ]'>
+        data-steps='[{"sel": "a[href=\"listings.html\"].btn-solid, a[href=\"listings.html\"]", "t": "Clicking through to Properties"}, {"sel": "button.btn, .btn-solid", "t": "Filtering the listings grid", "nonav": 1}, {"sel": "a[href=\"contact.html\"]", "t": "Opening the contact page"}, {"sel": "#first-name, input", "t": "Filling in the enquiry form", "nonav": 1}, {"sel": "a[href=\"index.html\"].logo, .logo", "t": "Back to the landing page"}]'>
         <div class="bar">
           <div class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></div>
           <div class="url">
@@ -348,13 +342,7 @@
 
       <div class="win" data-demo
         data-base="pulse/"
-        data-steps='[
-          {"p":"index.html","x":62,"y":30,"t":"Landing page with inline appointment booking"},
-          {"p":"index.html","x":76,"y":40,"t":"Choosing an available time slot"},
-          {"p":"services.html","x":56,"y":5.5,"t":"Opening the services list"},
-          {"p":"book.html","x":63,"y":5.5,"t":"Starting the full booking flow"},
-          {"p":"book.html","x":50,"y":55,"t":"Picking a day and time"}
-        ]'>
+        data-steps='[{"sel": ".slot:not(.off)", "t": "Choosing an appointment slot", "nonav": 1}, {"sel": "a[href=\"services.html\"]", "t": "Opening the services list"}, {"sel": ".svc", "t": "Scanning the service table", "nonav": 1}, {"sel": "a[href=\"book.html\"].btn-p, a[href=\"book.html\"]", "t": "Starting the booking flow"}, {"sel": ".slot.sel, .slot:not(.off)", "t": "Picking a day and time", "nonav": 1}]'>
         <div class="bar">
           <div class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></div>
           <div class="url">
@@ -399,13 +387,7 @@
 
       <div class="win" data-demo
         data-base="console/"
-        data-steps='[
-          {"p":"index.html","x":50,"y":45,"t":"Dashboard — KPIs, revenue chart and recent orders"},
-          {"p":"index.html","x":72,"y":37,"t":"Switching the chart range"},
-          {"p":"customers.html","x":9,"y":27,"t":"Opening Customers from the sidebar"},
-          {"p":"customers.html","x":13,"y":56,"t":"Selecting rows to reveal bulk actions"},
-          {"p":"settings.html","x":9,"y":46,"t":"Settings — toggles and workspace options"}
-        ]'>
+        data-steps='[{"sel": ".seg button:last-child", "t": "Switching the chart range", "nonav": 1}, {"sel": "a[href=\"customers.html\"]", "t": "Opening Customers from the sidebar"}, {"sel": ".rowcheck", "t": "Selecting rows for bulk actions", "nonav": 1}, {"sel": "a[href=\"settings.html\"]", "t": "Opening Settings"}, {"sel": "a[href=\"index.html\"]", "t": "Back to the dashboard"}]'>
         <div class="bar">
           <div class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></div>
           <div class="url">
@@ -450,13 +432,7 @@
 
       <div class="win" data-demo
         data-base="orbit/"
-        data-steps='[
-          {"p":"index.html","x":50,"y":48,"t":"Product page with live dashboard preview"},
-          {"p":"index.html","x":50,"y":72,"t":"Scrolling the capability grid"},
-          {"p":"pricing.html","x":52,"y":4.5,"t":"Opening pricing"},
-          {"p":"pricing.html","x":50,"y":60,"t":"Comparing the three plans"},
-          {"p":"changelog.html","x":61,"y":4.5,"t":"Changelog — what shipped and when"}
-        ]'>
+        data-steps='[{"sel": ".card", "t": "Reading the capability grid", "nonav": 1}, {"sel": "a[href=\"pricing.html\"]", "t": "Opening pricing"}, {"sel": ".card.rec, .card", "t": "Comparing the plans", "nonav": 1}, {"sel": "a[href=\"changelog.html\"]", "t": "Opening the changelog"}, {"sel": "a[href=\"index.html\"].lg, .lg", "t": "Back to the product page"}]'>
         <div class="bar">
           <div class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></div>
           <div class="url">
@@ -501,13 +477,7 @@
 
       <div class="win" data-demo
         data-base="market/"
-        data-steps='[
-          {"p":"index.html","x":50,"y":40,"t":"Storefront with the season collection"},
-          {"p":"shop.html","x":19,"y":5,"t":"Browsing the full shop"},
-          {"p":"shop.html","x":10,"y":42,"t":"Narrowing by category and price"},
-          {"p":"product.html","x":40,"y":50,"t":"Opening a product page"},
-          {"p":"product.html","x":72,"y":66,"t":"Adding to basket — the drawer slides out"}
-        ]'>
+        data-steps='[{"sel": ".pc", "t": "Browsing the collection", "nonav": 1}, {"sel": "a[href=\"shop.html\"]", "t": "Opening the full shop"}, {"sel": "aside .b, aside input, aside", "t": "Narrowing by category and price", "nonav": 1}, {"sel": "a[href=\"product.html\"]", "t": "Opening a product page"}, {"sel": "button[onclick=\"openCart()\"], .bp", "t": "Adding to basket \u2014 the drawer slides out", "nonav": 1}]'>
         <div class="bar">
           <div class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></div>
           <div class="url">
@@ -732,119 +702,158 @@
 
 <script>
 (function(){
-  var FRAME_W = 1440, FRAME_H = 900;
+  var FRAME_W = 1440;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function fit(win){
-    var vp = win.querySelector('.vp');
-    var fr = vp.querySelector('iframe');
-    var s = vp.clientWidth / FRAME_W;
-    fr.style.transform = 'scale(' + s + ')';
-    fr.style.height = (vp.clientHeight / s) + 'px';
-  }
-
   function setup(win){
-    var steps;
-    try { steps = JSON.parse(win.getAttribute('data-steps')); }
-    catch(e){ return; }
-    var base   = win.getAttribute('data-base');
-    var vp     = win.querySelector('.vp');
-    var fr     = vp.querySelector('iframe');
-    var cur    = vp.querySelector('.cur');
-    var capEl  = vp.querySelector('[data-cap]');
-    var capNum = vp.querySelector('.caption b');
-    var urlEl  = win.querySelector('[data-url]');
-    var host   = urlEl.textContent;
-    var chips  = win.parentElement.querySelectorAll('[data-chips] .pg-chip');
+    var steps; try { steps = JSON.parse(win.getAttribute('data-steps')); } catch(e){ return; }
+    var base  = win.getAttribute('data-base');
+    var vp    = win.querySelector('.vp');
+    var fr    = vp.querySelector('iframe');
+    var cur   = vp.querySelector('.cur');
+    var cap   = vp.querySelector('[data-cap]');
+    var capN  = vp.querySelector('.caption b');
+    var urlEl = win.querySelector('[data-url]');
+    var host  = urlEl.textContent;
+    var chips = win.parentElement.querySelectorAll('[data-chips] .pg-chip');
 
-    var i = -1, timers = [], running = false, loadedOnce = false;
+    var scale = 1, i = -1, timers = [], running = false, home = 'index.html';
 
-    fit(win);
+    function fit(){
+      scale = vp.clientWidth / FRAME_W;
+      fr.style.transform = 'scale(' + scale + ')';
+      fr.style.height = (vp.clientHeight / scale) + 'px';
+    }
+    fit();
+    window.addEventListener('resize', fit);
+
+    function clearAll(){ timers.forEach(clearTimeout); timers = []; }
+    function later(fn, ms){ timers.push(setTimeout(fn, ms)); }
+
+    function doc(){
+      try { return fr.contentDocument; } catch(e){ return null; }
+    }
+
+    function syncChrome(){
+      var d = doc(); if(!d) return;
+      var file = (fr.contentWindow.location.pathname.split('/').pop()) || 'index.html';
+      urlEl.textContent = host + (file === 'index.html' ? '' : '/' + file.replace('.html',''));
+      var order = [];
+      steps.forEach(function(st){
+        var m = /href="([a-z-]+\.html)"/.exec(st.sel);
+        if(m && order.indexOf(m[1]) === -1) order.push(m[1]);
+      });
+      order = [home].concat(order.filter(function(x){ return x !== home; }));
+      var idx = order.indexOf(file);
+      chips.forEach(function(c, n){ c.classList.toggle('now', n === (idx < 0 ? 0 : idx)); });
+    }
+
+    // place the cursor over a real element inside the frame
+    function aim(el){
+      var r = el.getBoundingClientRect();
+      var x = (r.left + r.width / 2) * scale;
+      var y = (r.top + r.height / 2) * scale;
+      cur.classList.add('on');
+      cur.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+      return { x: x, y: y };
+    }
+
+    function highlight(el){
+      var d = doc(); if(!d) return;
+      var r = el.getBoundingClientRect();
+      var box = d.createElement('div');
+      box.style.cssText = 'position:fixed;pointer-events:none;z-index:2147483647;border:2px solid #F59E0B;'
+        + 'border-radius:6px;box-shadow:0 0 0 4px rgba(245,158,11,.22);transition:opacity .4s;'
+        + 'left:' + (r.left - 4) + 'px;top:' + (r.top - 4) + 'px;width:' + (r.width + 8) + 'px;height:' + (r.height + 8) + 'px;';
+      d.body.appendChild(box);
+      setTimeout(function(){ box.style.opacity = '0'; setTimeout(function(){ box.remove(); }, 420); }, 700);
+    }
+
+    function step(){
+      var d = doc();
+      if(!d || !d.body){ later(step, 300); return; }
+
+      i = (i + 1) % steps.length;
+      var st = steps[i];
+      var el = null;
+      try { el = d.querySelector(st.sel); } catch(e){}
+
+      // nothing matched — skip to the next step rather than pointing at nothing
+      if(!el){ later(step, 120); return; }
+
+      capN.textContent = 'STEP ' + (i + 1);
+      cap.textContent = st.t;
+
+      // bring it into view inside the frame first
+      var r = el.getBoundingClientRect();
+      var vh = fr.contentWindow.innerHeight;
+      if(r.top < 40 || r.bottom > vh - 40){
+        try { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch(e){ el.scrollIntoView(); }
+      }
+
+      // 1. let any scrolling settle, then glide the cursor onto the element
+      later(function(){
+        if(!doc()) return;
+        aim(el);
+
+        // 2. arrive, pulse, outline the target
+        later(function(){
+          cur.classList.add('click');
+          highlight(el);
+          later(function(){ cur.classList.remove('click'); }, 560);
+
+          // 3. only now does the click happen
+          later(function(){
+            if(st.nonav){
+              try { el.click(); } catch(e){}
+              later(step, 1500);
+            } else {
+              try { el.click(); } catch(e){}
+              // navigation handled by the load listener
+              later(function(){ if(running) step(); }, 2600);
+            }
+          }, 300);
+        }, 1150);
+      }, 620);
+    }
 
     fr.addEventListener('load', function(){
       vp.classList.remove('loading');
-      loadedOnce = true;
-      fit(win);
+      fit();
+      syncChrome();
+      // keep links inside the frame from escaping into a new tab
+      var d = doc();
+      if(d){
+        d.querySelectorAll('a[target="_blank"]').forEach(function(a){ a.removeAttribute('target'); });
+        var dn = d.querySelector('.dn, .demo-note');
+        if(dn) dn.style.display = 'none';
+      }
     });
-
-    function pageIndex(p){
-      // first page = 0, others follow the order they first appear
-      var seen = [], idx = 0;
-      steps.forEach(function(s){ if(seen.indexOf(s.p) === -1) seen.push(s.p); });
-      idx = seen.indexOf(p);
-      return idx < 0 ? 0 : idx;
-    }
-
-    function go(){
-      i = (i + 1) % steps.length;
-      var st = steps[i];
-      var needNav = fr.getAttribute('data-p') !== st.p;
-
-      capNum.textContent = 'STEP ' + (i + 1);
-      capEl.textContent = st.t;
-
-      // 1. glide the cursor to its target
-      cur.classList.add('on');
-      cur.style.transform = 'translate(' + (st.x * vp.clientWidth / 100) + 'px,' +
-                                           (st.y * vp.clientHeight / 100) + 'px)';
-
-      // 2. once it has arrived, pulse
-      timers.push(setTimeout(function(){
-        cur.classList.add('click');
-        timers.push(setTimeout(function(){ cur.classList.remove('click'); }, 560));
-
-        // 3. only after the click does the page change
-        if(needNav){
-          timers.push(setTimeout(function(){
-            fr.setAttribute('data-p', st.p);
-            fr.src = base + st.p;
-            urlEl.textContent = host + (st.p === 'index.html' ? '' : '/' + st.p.replace('.html',''));
-            var pi = pageIndex(st.p);
-            chips.forEach(function(c, n){ c.classList.toggle('now', n === pi); });
-          }, 240));
-        }
-      }, 1120));
-
-      timers.push(setTimeout(go, 3900));
-    }
 
     function start(){
       if(running || reduce) return;
       running = true;
-      if(!fr.src){
-        fr.setAttribute('data-p', steps[0].p);
-        fr.src = base + steps[0].p;
-        urlEl.textContent = host;
-      }
-      go();
+      if(!fr.src){ fr.src = base + home; urlEl.textContent = host; }
+      later(step, 900);
     }
     function stop(){
       running = false;
-      timers.forEach(clearTimeout);
-      timers = [];
+      clearAll();
       cur.classList.remove('on','click');
     }
 
-    // only run while on screen
     if('IntersectionObserver' in window){
-      var io = new IntersectionObserver(function(es){
-        es.forEach(function(e){
-          if(e.isIntersecting) start(); else stop();
-        });
-      }, { threshold: 0.35 });
-      io.observe(win);
+      new IntersectionObserver(function(es){
+        es.forEach(function(e){ e.isIntersecting ? start() : stop(); });
+      }, { threshold: 0.4 }).observe(win);
     } else {
-      // no observer: just load the first page statically
-      fr.src = base + steps[0].p;
+      fr.src = base + home;
     }
 
-    // reduced motion: show the landing page, no animation
     if(reduce){
-      fr.src = base + steps[0].p;
-      vp.querySelector('.caption').style.display = 'none';
+      fr.src = base + home;
+      var c = vp.querySelector('.caption'); if(c) c.style.display = 'none';
     }
-
-    window.addEventListener('resize', function(){ fit(win); });
   }
 
   document.querySelectorAll('[data-demo]').forEach(setup);
