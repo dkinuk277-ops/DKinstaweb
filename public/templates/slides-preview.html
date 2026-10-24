@@ -26,16 +26,27 @@
   .lead{color:var(--muted);max-width:62ch}
 
   .sc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
-  .stage-name{font-family:var(--fd);font-size:1.35rem;font-weight:500;color:var(--text-strong);letter-spacing:-.02em}
-  .stage-sec{font-family:var(--fm);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-top:.2rem}
+  .stage-name{font-family:var(--fd);font-size:clamp(1.3rem,2.6vw,1.65rem);font-weight:500;color:var(--text-strong);letter-spacing:-.02em;margin-top:.25rem}
+  .stage-sec{font-family:var(--fm);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .stage-sub{font-size:.86rem;color:var(--muted);margin-top:.2rem}
   .open-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:var(--bg);padding:.65rem 1.25rem;
     border-radius:4px;font-family:var(--fm);font-size:.78rem;font-weight:700;letter-spacing:.06em;white-space:nowrap}
   .open-btn:hover{background:var(--accent-hot)}
 
   .carousel{display:flex;align-items:center;gap:clamp(.5rem,2vw,1.5rem)}
-  .arrow{flex-shrink:0;width:clamp(42px,5vw,56px);height:clamp(42px,5vw,56px);border-radius:50%;background:var(--surface);
-    border:1px solid var(--line-strong);color:var(--text);display:grid;place-items:center;cursor:pointer;transition:all .2s}
+  .arrow{position:relative;flex-shrink:0;width:clamp(42px,5vw,56px);height:clamp(42px,5vw,56px);border-radius:50%;background:var(--surface);
+    border:1px solid var(--line-strong);color:var(--text);display:grid;place-items:center;cursor:pointer;transition:background .2s,border-color .2s,color .2s,transform .2s}
   .arrow:hover{background:var(--accent);border-color:var(--accent);color:var(--bg);transform:scale(1.06)}
+  .arrow::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 12px);left:50%;
+    transform:translate(-50%,6px);background:#15213A;border:1px solid var(--line-strong);color:var(--text);
+    padding:.45rem .75rem;border-radius:6px;font-family:var(--fm);font-size:.64rem;letter-spacing:.07em;
+    line-height:1.3;white-space:nowrap;opacity:0;pointer-events:none;z-index:30;
+    box-shadow:0 10px 24px -10px rgba(0,0,0,.8);transition:opacity .22s,transform .22s}
+  .arrow::before{content:"";position:absolute;bottom:calc(100% + 6px);left:50%;margin-left:-5px;
+    border:5px solid transparent;border-top-color:var(--line-strong);opacity:0;pointer-events:none;z-index:30;transition:opacity .22s}
+  .arrow:hover::after,.arrow.tipon::after{opacity:1;transform:translate(-50%,0)}
+  .arrow:hover::before,.arrow.tipon::before{opacity:1}
+  .arrow.tipon{border-color:var(--accent);box-shadow:0 0 0 4px rgba(245,158,11,.12)}
   .stage{flex:1;min-width:0}
 
   /* window */
@@ -105,14 +116,15 @@
 <section class="wrap">
   <div class="sc-top">
     <div>
-      <div class="stage-name" id="sname">Meridian</div>
-      <div class="stage-sec" id="ssec">Real estate · Property</div>
+      <div class="stage-sec">WEBSITE CATEGORY</div>
+      <div class="stage-name" id="sname">Real Estate &amp; Property</div>
+      <div class="stage-sub" id="ssec">Marketing site · 4 pages</div>
     </div>
     <a class="open-btn" id="sopen" href="meridian/index.html" target="_blank" rel="noopener">OPEN FULL DEMO ↗</a>
   </div>
 
   <div class="carousel">
-    <button class="arrow" id="prev" aria-label="Previous">
+    <button class="arrow" id="prev" data-tip="Click here to see the previous template" aria-label="Previous template">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
     </button>
 
@@ -136,7 +148,7 @@
       <div class="stage-chips" id="schips"></div>
     </div>
 
-    <button class="arrow" id="next" aria-label="Next">
+    <button class="arrow" id="next" data-tip="Click here to see the next template" aria-label="Next template">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
     </button>
   </div>
@@ -152,19 +164,19 @@
 
 <script>
 var T = [
- {slug:"meridian",name:"Meridian",sector:"Real estate · Property",host:"meridian.example",
+ {slug:"meridian",cat:"Real Estate &amp; Property",sub:"Builders, estate agents, developments",host:"meridian.example",
   feats:["Listings grid","Property page","Enquiry form"],
   pages:[["index.html","Home"],["listings.html","Properties"],["property.html","Property"],["contact.html","Contact"]]},
- {slug:"pulse",name:"Pulse",sector:"Healthcare · Clinic",host:"pulseclinic.example",
+ {slug:"pulse",cat:"Hospital &amp; Healthcare",sub:"Clinics, practices, diagnostics",host:"pulseclinic.example",
   feats:["Booking flow","Service table","Team profiles"],
   pages:[["index.html","Home"],["services.html","Services"],["book.html","Book"]]},
- {slug:"console",name:"Console",sector:"SaaS · Dashboard",host:"app.console.example",
+ {slug:"console",cat:"Software &amp; Admin Dashboards",sub:"Internal tools, reporting portals",host:"app.console.example",
   feats:["Charts","Data tables","Settings UI"],
   pages:[["index.html","Dashboard"],["customers.html","Customers"],["settings.html","Settings"]]},
- {slug:"orbit",name:"Orbit",sector:"Startup · SaaS marketing",host:"orbit.example",
+ {slug:"orbit",cat:"Startups &amp; SaaS",sub:"Product launches, subscription services",host:"orbit.example",
   feats:["Pricing table","Feature grid","Changelog"],
   pages:[["index.html","Product"],["pricing.html","Pricing"],["changelog.html","Changelog"]]},
- {slug:"market",name:"Market",sector:"E-commerce · Retail",host:"market.example",
+ {slug:"market",cat:"Textile, Retail &amp; E-commerce",sub:"Shops, catalogues, online stores",host:"market.example",
   feats:["Product grid","Filters","Slide-out basket"],
   pages:[["index.html","Home"],["shop.html","Shop"],["product.html","Product"]]}
 ];
@@ -215,8 +227,8 @@ var T = [
     ti = i; pi = 0; stop();
     var t = T[i];
 
-    sname.textContent = t.name;
-    ssec.textContent  = t.sector;
+    sname.innerHTML   = t.cat;
+    ssec.textContent  = t.sub + ' · ' + t.pages.length + ' pages';
     surl.textContent  = t.host;
     sopen.href        = t.slug + '/index.html';
     schips.innerHTML  = t.feats.map(function(f){ return '<span class="chip-f">'+f+'</span>'; }).join('');
@@ -250,24 +262,35 @@ var T = [
     schedule();
   }
 
-  dotrow.innerHTML = T.map(function(t,i){ return '<button class="dot'+(i===0?' on':'')+'" data-i="'+i+'" aria-label="'+t.name+'"></button>'; }).join('');
+  dotrow.innerHTML = T.map(function(t,i){
+    return '<button class="dot'+(i===0?' on':'')+'" data-i="'+i+'" aria-label="'+t.cat.replace(/&amp;/g,'&')+'"></button>';
+  }).join('');
   dotrow.querySelectorAll('.dot').forEach(function(d){ d.addEventListener('click', function(){ loadTemplate(parseInt(d.dataset.i,10)); }); });
 
-  document.getElementById('prev').addEventListener('click', function(){ loadTemplate(ti-1); });
-  document.getElementById('next').addEventListener('click', function(){ loadTemplate(ti+1); });
+  var bPrev=document.getElementById('prev'), bNext=document.getElementById('next');
+  function dropTip(){ bPrev.classList.remove('tipon'); bNext.classList.remove('tipon'); }
+  bPrev.addEventListener('click', function(){ dropTip(); loadTemplate(ti-1); });
+  bNext.addEventListener('click', function(){ dropTip(); loadTemplate(ti+1); });
   document.addEventListener('keydown', function(e){
-    if(e.key==='ArrowLeft') loadTemplate(ti-1);
-    if(e.key==='ArrowRight') loadTemplate(ti+1);
+    if(e.key==='ArrowLeft'){ dropTip(); loadTemplate(ti-1); }
+    if(e.key==='ArrowRight'){ dropTip(); loadTemplate(ti+1); }
   });
+
+  // nudge the tip once, the first time the carousel is on screen
+  var tipShown=false;
+  function nudgeTip(){
+    if(tipShown || reduce) return; tipShown=true;
+    setTimeout(function(){ bNext.classList.add('tipon'); setTimeout(dropTip, 4200); }, 900);
+  }
 
   vp.addEventListener('mouseenter', function(){ paused=true; stop(); });
   vp.addEventListener('mouseleave', function(){ paused=false; schedule(); });
 
   if('IntersectionObserver' in window){
     new IntersectionObserver(function(es){
-      es.forEach(function(e){ visible=e.isIntersecting; visible ? schedule() : stop(); });
+      es.forEach(function(e){ visible=e.isIntersecting; if(visible){ schedule(); nudgeTip(); } else stop(); });
     },{threshold:.3}).observe(vp);
-  } else { visible=true; }
+  } else { visible=true; nudgeTip(); }
 
   loadTemplate(0);
 })();
