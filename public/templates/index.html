@@ -65,66 +65,6 @@
   .pnote{margin-top:1.5rem;background:var(--surface);border-left:3px solid var(--accent);border-radius:2px;padding:1.2rem 1.4rem;font-size:.92rem;color:var(--muted);line-height:1.65}
   .pnote strong{color:var(--text)}
 
-  /* ---------- Showcase ---------- */
-  .showcases{padding:clamp(2rem,5vw,3rem) 0}
-  .sc{padding:clamp(2rem,5vw,3.5rem) 0;border-top:1px solid var(--line)}
-  .sc-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
-  .sc-no{font-family:var(--fm);font-size:.72rem;letter-spacing:.18em;color:var(--muted-2);margin-bottom:.6rem}
-  .sc-head h2{font-family:var(--fd);font-size:clamp(1.5rem,3vw,2.1rem);font-weight:500;letter-spacing:-.025em;color:var(--text-strong);line-height:1.15}
-  .sc-sector{font-family:var(--fm);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-top:.45rem}
-  .sc-desc{color:var(--muted);font-size:.95rem;max-width:46ch;margin-top:.8rem}
-  .sc-side{display:flex;flex-direction:column;gap:.9rem;align-items:flex-start}
-  .sc-tags{display:flex;gap:.35rem;flex-wrap:wrap}
-  .tag{font-family:var(--fm);font-size:.66rem;letter-spacing:.06em;color:var(--muted-2);border:1px solid var(--line);padding:.22rem .55rem;border-radius:100px}
-  .open-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:var(--bg);padding:.65rem 1.2rem;border-radius:4px;font-family:var(--fm);font-size:.78rem;font-weight:700;letter-spacing:.06em;white-space:nowrap;transition:background .2s}
-  .open-btn:hover{background:var(--accent-hot)}
-
-  /* browser chrome */
-  .win{border:1px solid var(--line-strong);border-radius:10px;overflow:hidden;background:#0D1526;
-    box-shadow:0 40px 90px -40px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.03)}
-  .bar{display:flex;align-items:center;gap:.7rem;padding:.6rem .9rem;background:#121C30;border-bottom:1px solid var(--line)}
-  .dots{display:flex;gap:6px;flex-shrink:0}
-  .dots i{width:11px;height:11px;border-radius:50%;display:block}
-  .url{flex:1;background:#0A1428;border:1px solid var(--line);border-radius:5px;padding:.28rem .7rem;
-    font-family:var(--fm);font-size:.72rem;color:var(--muted);display:flex;align-items:center;gap:.45rem;min-width:0}
-  .url svg{flex-shrink:0;color:#4ADE80}
-  .url span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .live{display:flex;align-items:center;gap:.4rem;font-family:var(--fm);font-size:.66rem;letter-spacing:.1em;color:var(--muted-2);flex-shrink:0}
-  .live i{width:6px;height:6px;border-radius:50%;background:#4ADE80;display:block;animation:bl 2s infinite}
-  @keyframes bl{0%,100%{opacity:1}50%{opacity:.25}}
-  @media(max-width:620px){.live span{display:none}}
-
-  /* viewport + scaled iframe */
-  .vp{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:#0A1428}
-  .vp iframe{position:absolute;top:0;left:0;width:1440px;height:900px;border:0;transform-origin:0 0;background:#fff}
-  .vp iframe{pointer-events:none}
-  .shield{position:absolute;inset:0;z-index:5;cursor:default}
-  .vp.loading::after{content:"Loading demo…";position:absolute;inset:0;display:grid;place-items:center;
-    font-family:var(--fm);font-size:.78rem;color:var(--muted-2);background:var(--bg);z-index:6}
-
-  /* animated cursor */
-  .cur{position:absolute;z-index:8;pointer-events:none;width:26px;height:26px;
-    transition:transform 1.05s cubic-bezier(.33,.72,.25,1);transform:translate(50%,60%);opacity:0}
-  .cur.on{opacity:1}
-  .cur svg{filter:drop-shadow(0 2px 5px rgba(0,0,0,.5))}
-  .cur .ring{position:absolute;top:-6px;left:-6px;width:34px;height:34px;border-radius:50%;
-    border:2px solid var(--accent);opacity:0;transform:scale(.3)}
-  .cur.click .ring{animation:tap .55s ease-out}
-  @keyframes tap{0%{opacity:.9;transform:scale(.3)}100%{opacity:0;transform:scale(1.5)}}
-
-  /* step caption */
-  .caption{position:absolute;left:1rem;bottom:1rem;z-index:7;background:rgba(10,20,40,.92);backdrop-filter:blur(8px);
-    border:1px solid var(--line-strong);border-radius:6px;padding:.55rem .9rem;display:flex;align-items:center;gap:.6rem;
-    font-size:.82rem;color:var(--text);max-width:calc(100% - 2rem);transition:opacity .35s}
-  .caption b{font-family:var(--fm);font-size:.66rem;letter-spacing:.1em;color:var(--accent);flex-shrink:0}
-  @media(max-width:560px){.caption{font-size:.74rem;padding:.45rem .7rem;left:.6rem;bottom:.6rem}}
-
-  .sc-foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:1rem}
-  .pages-list{display:flex;gap:.4rem;flex-wrap:wrap}
-  .pg-chip{font-family:var(--fm);font-size:.7rem;letter-spacing:.05em;color:var(--muted-2);border:1px solid var(--line);
-    padding:.25rem .6rem;border-radius:100px;transition:all .2s}
-  .pg-chip.now{border-color:var(--accent);color:var(--accent);background:rgba(245,158,11,.08)}
-
   /* ---------- Library ---------- */
   .library{padding:clamp(3rem,7vw,4.5rem) 0;border-top:1px solid var(--line)}
   .lib-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-bottom:2rem}
@@ -189,7 +129,104 @@
   .merr{background:rgba(248,113,113,.1);border:1px solid #F87171;color:#F87171}
   .mok.show,.merr.show{display:block}
 
-  .note{background:var(--surface);border-left:3px solid var(--accent);border-radius:2px;padding:1.3rem 1.5rem;margin-top:2.5rem;font-size:.92rem;color:var(--muted);line-height:1.65}
+
+
+
+  /* ---------- Showcase ---------- */
+  .showcase{padding:clamp(2.5rem,6vw,4rem) 0;border-top:1px solid var(--line);position:relative;z-index:1}
+  .sc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-bottom:2rem}
+  .sc-h2{font-family:var(--fd);font-size:clamp(1.6rem,3.2vw,2.2rem);font-weight:500;letter-spacing:-.025em;color:var(--text-strong);line-height:1.15;margin-bottom:.6rem}
+  .sc-p{color:var(--muted);font-size:.96rem;max-width:54ch}
+  .unlock-state{display:inline-flex;align-items:center;gap:.5rem;background:var(--surface);border:1px solid var(--line);
+    border-radius:100px;padding:.45rem .95rem;font-family:var(--fm);font-size:.72rem;letter-spacing:.08em;color:var(--muted);white-space:nowrap}
+  .unlock-state.done{border-color:#4ADE80;color:#4ADE80}
+
+  .sc-grid{display:grid;grid-template-columns:minmax(260px,34%) 1fr;gap:clamp(1.5rem,3vw,2.5rem);align-items:start}
+  @media(max-width:960px){.sc-grid{grid-template-columns:1fr}}
+
+  /* list */
+  .sc-list{border-top:1px solid var(--line)}
+  .trow{display:flex;align-items:baseline;gap:.8rem;padding:.85rem .6rem;border-bottom:1px solid var(--line);
+    cursor:pointer;transition:background .2s,padding-left .22s;position:relative}
+  .trow:hover,.trow.on{background:var(--surface);padding-left:1.1rem}
+  .trow.on::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--accent)}
+  .tn{font-family:var(--fm);font-size:.66rem;color:var(--muted-2);flex-shrink:0;width:20px}
+  .tt{font-family:var(--fd);font-size:1.05rem;font-weight:500;letter-spacing:-.015em;color:var(--muted);transition:color .2s;flex-shrink:0}
+  .trow:hover .tt,.trow.on .tt{color:var(--text-strong)}
+  .tsec{font-family:var(--fm);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2);
+    margin-left:auto;text-align:right;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:45%}
+  .trow.on .tsec{color:var(--accent)}
+  .tgo,.tlock{font-family:var(--fm);font-size:.6rem;letter-spacing:.08em;color:var(--accent);opacity:0;transition:opacity .2s;flex-shrink:0}
+  .trow:hover .tgo,.trow.on .tgo,.trow .tlock{opacity:1}
+  .trow.locked .tsec{max-width:38%}
+  .trow.locked .tlock{color:var(--muted-2)}
+  .trow.locked.on .tlock{color:var(--accent)}
+  @media(max-width:620px){.tsec{display:none}}
+
+  /* stage */
+  .sc-stage{position:relative}
+  @media(min-width:961px){.stage-inner{position:sticky;top:92px}}
+  .win{border:1px solid var(--line-strong);border-radius:10px;overflow:hidden;background:#0D1526;
+    box-shadow:0 36px 80px -40px rgba(0,0,0,.85),0 0 0 1px rgba(255,255,255,.03)}
+  .bar{display:flex;align-items:center;gap:.7rem;padding:.55rem .85rem;background:#121C30;border-bottom:1px solid var(--line)}
+  .dots{display:flex;gap:6px;flex-shrink:0}
+  .dots i{width:10px;height:10px;border-radius:50%;display:block}
+  .url{flex:1;background:#0A1428;border:1px solid var(--line);border-radius:5px;padding:.26rem .65rem;
+    font-family:var(--fm);font-size:.7rem;color:var(--muted);display:flex;align-items:center;gap:.45rem;min-width:0}
+  .url svg{flex-shrink:0;color:#4ADE80}
+  .url span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .live{display:flex;align-items:center;gap:.4rem;font-family:var(--fm);font-size:.64rem;letter-spacing:.1em;color:var(--muted-2);flex-shrink:0}
+  .live i{width:6px;height:6px;border-radius:50%;background:#4ADE80;display:block;animation:bl 2s infinite}
+  @keyframes bl{0%,100%{opacity:1}50%{opacity:.25}}
+  @media(max-width:620px){.live span{display:none}}
+
+  .vp{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:#0A1428}
+  .vp iframe{position:absolute;top:0;left:0;width:1440px;height:900px;border:0;transform-origin:0 0;background:#fff;pointer-events:none;
+    transition:opacity .25s}
+  .vp.swap iframe{opacity:0}
+  .vp.loading::after{content:"Loading…";position:absolute;inset:0;display:grid;place-items:center;
+    font-family:var(--fm);font-size:.78rem;color:var(--muted-2);background:var(--bg);z-index:6}
+
+  .cur{position:absolute;z-index:8;pointer-events:none;width:26px;height:26px;
+    transition:transform 1.05s cubic-bezier(.33,.72,.25,1);transform:translate(50%,60%);opacity:0}
+  .cur.on{opacity:1}
+  .cur svg{filter:drop-shadow(0 2px 5px rgba(0,0,0,.5))}
+  .cur .ring{position:absolute;top:-6px;left:-6px;width:34px;height:34px;border-radius:50%;border:2px solid var(--accent);opacity:0;transform:scale(.3)}
+  .cur.click .ring{animation:tap .55s ease-out}
+  @keyframes tap{0%{opacity:.9;transform:scale(.3)}100%{opacity:0;transform:scale(1.5)}}
+
+  .caption{position:absolute;left:.9rem;bottom:.9rem;z-index:7;background:rgba(10,20,40,.92);backdrop-filter:blur(8px);
+    border:1px solid var(--line-strong);border-radius:6px;padding:.5rem .85rem;display:flex;align-items:center;gap:.6rem;
+    font-size:.8rem;color:var(--text);max-width:calc(100% - 1.8rem)}
+  .caption b{font-family:var(--fm);font-size:.64rem;letter-spacing:.1em;color:var(--accent);flex-shrink:0}
+  @media(max-width:560px){.caption{font-size:.72rem;padding:.4rem .65rem}}
+
+  .lockstage{position:absolute;inset:0;z-index:9;display:none;place-items:center;background:rgba(10,20,40,.72);backdrop-filter:blur(7px)}
+  .lockstage.on{display:grid}
+  .lockbox{text-align:center;max-width:300px;padding:1.5rem;color:var(--accent)}
+  .lockbox b{display:block;font-family:var(--fd);font-size:1.15rem;font-weight:500;color:var(--text-strong);margin:.7rem 0 .4rem}
+  .lockbox p{font-size:.85rem;color:var(--muted);margin-bottom:1.1rem;line-height:1.55}
+  .lockbox .unlock-btn{background:var(--accent);color:var(--bg);border:none;border-radius:4px;padding:.65rem 1.2rem;
+    font-family:var(--fm);font-size:.76rem;font-weight:700;letter-spacing:.06em;cursor:pointer}
+  .lockbox .unlock-btn:hover{background:var(--accent-hot)}
+
+  .stage-foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:1rem}
+  .stage-name{font-family:var(--fd);font-size:1.25rem;font-weight:500;color:var(--text-strong);letter-spacing:-.02em}
+  .stage-sec{font-family:var(--fm);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-top:.2rem}
+  .open-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:var(--bg);padding:.6rem 1.15rem;
+    border-radius:4px;font-family:var(--fm);font-size:.76rem;font-weight:700;letter-spacing:.06em;white-space:nowrap;transition:background .2s}
+  .open-btn:hover{background:var(--accent-hot)}
+  .open-btn.locked{background:var(--surface);color:var(--muted);border:1px solid var(--line-strong);cursor:pointer}
+
+  .stage-chips{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.9rem}
+  .chip-f{font-family:var(--fm);font-size:.64rem;letter-spacing:.05em;color:var(--muted-2);border:1px solid var(--line);padding:.2rem .5rem;border-radius:100px}
+  .pages-list{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.7rem}
+  .pg-chip{font-family:var(--fm);font-size:.68rem;letter-spacing:.05em;color:var(--muted-2);border:1px solid var(--line);
+    padding:.22rem .55rem;border-radius:100px;transition:all .2s}
+  .pg-chip.now{border-color:var(--accent);color:var(--accent);background:rgba(245,158,11,.08)}
+
+  .note{background:var(--surface);border-left:3px solid var(--accent);border-radius:2px;padding:1.3rem 1.5rem;margin-top:2.5rem;
+    font-size:.92rem;color:var(--muted);line-height:1.65}
   .note strong{color:var(--text)}
 
   footer{background:var(--bg-2);border-top:1px solid var(--line);padding:2.5rem 0;margin-top:2rem;position:relative;z-index:1}
@@ -276,244 +313,14 @@
   </div>
 </section>
 
-<!-- ============ SHOWCASES ============ -->
-<div class="showcases">
-
-  <!-- 1 MERIDIAN -->
-  <section class="sc">
-    <div class="wrap">
-      <div class="sc-head">
-        <div>
-          <div class="sc-no">01 / 15</div>
-          <h2>Meridian</h2>
-          <div class="sc-sector">Real estate · Property</div>
-          <p class="sc-desc">Editorial and unhurried. Large photography, serif headlines and a warm stone palette, for businesses selling something people fall in love with.</p>
-        </div>
-        <div class="sc-side">
-          <div class="sc-tags"><span class="tag">Listings grid</span><span class="tag">Filters</span><span class="tag">Enquiry form</span></div>
-          <a class="open-btn" href="meridian/index.html" target="_blank" rel="noopener">OPEN FULL DEMO ↗</a>
-        </div>
-      </div>
-
-      <div class="win" data-demo
-        data-base="meridian/"
-        data-steps='[{"sel": "a[href=\"listings.html\"].btn-solid, a[href=\"listings.html\"]", "t": "Clicking through to Properties"}, {"sel": "button.btn, .btn-solid", "t": "Filtering the listings grid", "nonav": 1}, {"sel": "a[href=\"contact.html\"]", "t": "Opening the contact page"}, {"sel": "#first-name, input", "t": "Filling in the enquiry form", "nonav": 1}, {"sel": "a[href=\"index.html\"].logo, .logo", "t": "Back to the landing page"}]'>
-        <div class="bar">
-          <div class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></div>
-          <div class="url">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
-            <span data-url>meridian.example</span>
-          </div>
-          <span class="live"><i></i><span>LIVE PAGE</span></span>
-        </div>
-        <div class="vp loading">
-          <iframe loading="lazy" title="Meridian demo"></iframe>
-          <div class="cur"><div class="ring"></div>
-            <svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 2l14 10.5-6.2.6 3.4 7.1-2.8 1.3-3.3-7-4.1 4.3z" fill="#fff" stroke="#0A1428" stroke-width="1.3" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="caption"><b>STEP 1</b><span data-cap>Landing page</span></div>
-          <div class="shield"></div>
-        </div>
-      </div>
-
-      <div class="sc-foot">
-        <div class="pages-list" data-chips>
-          <span class="pg-chip now">Home</span><span class="pg-chip">Properties</span><span class="pg-chip">Contact</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 2 PULSE -->
-  <section class="sc">
-    <div class="wrap">
-      <div class="sc-head">
-        <div>
-          <div class="sc-no">02 / 15</div>
-          <h2>Pulse</h2>
-          <div class="sc-sector">Healthcare · Clinic</div>
-          <p class="sc-desc">Calm, accessible and appointment-led. Soft teal, rounded shapes, and a booking widget that sits on the first screen instead of three clicks deep.</p>
-        </div>
-        <div class="sc-side">
-          <div class="sc-tags"><span class="tag">Booking flow</span><span class="tag">Service table</span><span class="tag">Team profiles</span></div>
-          <a class="open-btn" href="pulse/index.html" target="_blank" rel="noopener">OPEN FULL DEMO ↗</a>
-        </div>
-      </div>
-
-      <div class="win" data-demo
-        data-base="pulse/"
-        data-steps='[{"sel": ".slot:not(.off)", "t": "Choosing an appointment slot", "nonav": 1}, {"sel": "a[href=\"services.html\"]", "t": "Opening the services list"}, {"sel": ".svc", "t": "Scanning the service table", "nonav": 1}, {"sel": "a[href=\"book.html\"].btn-p, a[href=\"book.html\"]", "t": "Starting the booking flow"}, {"sel": ".slot.sel, .slot:not(.off)", "t": "Picking a day and time", "nonav": 1}]'>
-        <div class="bar">
-          <div class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></div>
-          <div class="url">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
-            <span data-url>pulseclinic.example</span>
-          </div>
-          <span class="live"><i></i><span>LIVE PAGE</span></span>
-        </div>
-        <div class="vp loading">
-          <iframe loading="lazy" title="Pulse demo"></iframe>
-          <div class="cur"><div class="ring"></div>
-            <svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 2l14 10.5-6.2.6 3.4 7.1-2.8 1.3-3.3-7-4.1 4.3z" fill="#fff" stroke="#0A1428" stroke-width="1.3" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="caption"><b>STEP 1</b><span data-cap>Landing page</span></div>
-          <div class="shield"></div>
-        </div>
-      </div>
-
-      <div class="sc-foot">
-        <div class="pages-list" data-chips>
-          <span class="pg-chip now">Home</span><span class="pg-chip">Services</span><span class="pg-chip">Book</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3 CONSOLE -->
-  <section class="sc">
-    <div class="wrap">
-      <div class="sc-head">
-        <div>
-          <div class="sc-no">03 / 15</div>
-          <h2>Console</h2>
-          <div class="sc-sector">SaaS · Dashboard · Internal tools</div>
-          <p class="sc-desc">A full application interface — sidebar navigation, live charts, data tables with bulk actions and a settings area. Proof we build more than brochures.</p>
-        </div>
-        <div class="sc-side">
-          <div class="sc-tags"><span class="tag">Charts</span><span class="tag">Data tables</span><span class="tag">Settings UI</span></div>
-          <a class="open-btn" href="console/index.html" target="_blank" rel="noopener">OPEN FULL DEMO ↗</a>
-        </div>
-      </div>
-
-      <div class="win" data-demo
-        data-base="console/"
-        data-steps='[{"sel": ".seg button:last-child", "t": "Switching the chart range", "nonav": 1}, {"sel": "a[href=\"customers.html\"]", "t": "Opening Customers from the sidebar"}, {"sel": ".rowcheck", "t": "Selecting rows for bulk actions", "nonav": 1}, {"sel": "a[href=\"settings.html\"]", "t": "Opening Settings"}, {"sel": "a[href=\"index.html\"]", "t": "Back to the dashboard"}]'>
-        <div class="bar">
-          <div class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></div>
-          <div class="url">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
-            <span data-url>app.console.example</span>
-          </div>
-          <span class="live"><i></i><span>LIVE PAGE</span></span>
-        </div>
-        <div class="vp loading">
-          <iframe loading="lazy" title="Console demo"></iframe>
-          <div class="cur"><div class="ring"></div>
-            <svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 2l14 10.5-6.2.6 3.4 7.1-2.8 1.3-3.3-7-4.1 4.3z" fill="#fff" stroke="#0A1428" stroke-width="1.3" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="caption"><b>STEP 1</b><span data-cap>Dashboard</span></div>
-          <div class="shield"></div>
-        </div>
-      </div>
-
-      <div class="sc-foot">
-        <div class="pages-list" data-chips>
-          <span class="pg-chip now">Dashboard</span><span class="pg-chip">Customers</span><span class="pg-chip">Settings</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4 ORBIT -->
-  <section class="sc">
-    <div class="wrap">
-      <div class="sc-head">
-        <div>
-          <div class="sc-no">04 / 15</div>
-          <h2>Orbit</h2>
-          <div class="sc-sector">Startup · SaaS marketing</div>
-          <p class="sc-desc">Dark, confident and product-led. Gradient accents, a feature grid, a pricing table that answers objections, and a changelog that shows the lights are on.</p>
-        </div>
-        <div class="sc-side">
-          <div class="sc-tags"><span class="tag">Pricing table</span><span class="tag">Feature grid</span><span class="tag">Changelog</span></div>
-          <a class="open-btn" href="orbit/index.html" target="_blank" rel="noopener">OPEN FULL DEMO ↗</a>
-        </div>
-      </div>
-
-      <div class="win" data-demo
-        data-base="orbit/"
-        data-steps='[{"sel": ".card", "t": "Reading the capability grid", "nonav": 1}, {"sel": "a[href=\"pricing.html\"]", "t": "Opening pricing"}, {"sel": ".card.rec, .card", "t": "Comparing the plans", "nonav": 1}, {"sel": "a[href=\"changelog.html\"]", "t": "Opening the changelog"}, {"sel": "a[href=\"index.html\"].lg, .lg", "t": "Back to the product page"}]'>
-        <div class="bar">
-          <div class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></div>
-          <div class="url">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
-            <span data-url>orbit.example</span>
-          </div>
-          <span class="live"><i></i><span>LIVE PAGE</span></span>
-        </div>
-        <div class="vp loading">
-          <iframe loading="lazy" title="Orbit demo"></iframe>
-          <div class="cur"><div class="ring"></div>
-            <svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 2l14 10.5-6.2.6 3.4 7.1-2.8 1.3-3.3-7-4.1 4.3z" fill="#fff" stroke="#0A1428" stroke-width="1.3" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="caption"><b>STEP 1</b><span data-cap>Product page</span></div>
-          <div class="shield"></div>
-        </div>
-      </div>
-
-      <div class="sc-foot">
-        <div class="pages-list" data-chips>
-          <span class="pg-chip now">Product</span><span class="pg-chip">Pricing</span><span class="pg-chip">Changelog</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 5 MARKET -->
-  <section class="sc">
-    <div class="wrap">
-      <div class="sc-head">
-        <div>
-          <div class="sc-no">05 / 15</div>
-          <h2>Market</h2>
-          <div class="sc-sector">E-commerce · Retail</div>
-          <p class="sc-desc">Product grid with working filters, a detail page with variants and specifications, and a slide-out basket. The groundwork for selling online properly.</p>
-        </div>
-        <div class="sc-side">
-          <div class="sc-tags"><span class="tag">Product grid</span><span class="tag">Filters</span><span class="tag">Basket</span></div>
-          <a class="open-btn" href="market/index.html" target="_blank" rel="noopener">OPEN FULL DEMO ↗</a>
-        </div>
-      </div>
-
-      <div class="win" data-demo
-        data-base="market/"
-        data-steps='[{"sel": ".pc", "t": "Browsing the collection", "nonav": 1}, {"sel": "a[href=\"shop.html\"]", "t": "Opening the full shop"}, {"sel": "aside .b, aside input, aside", "t": "Narrowing by category and price", "nonav": 1}, {"sel": "a[href=\"product.html\"]", "t": "Opening a product page"}, {"sel": "button[onclick=\"openCart()\"], .bp", "t": "Adding to basket \u2014 the drawer slides out", "nonav": 1}]'>
-        <div class="bar">
-          <div class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></div>
-          <div class="url">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
-            <span data-url>market.example</span>
-          </div>
-          <span class="live"><i></i><span>LIVE PAGE</span></span>
-        </div>
-        <div class="vp loading">
-          <iframe loading="lazy" title="Market demo"></iframe>
-          <div class="cur"><div class="ring"></div>
-            <svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 2l14 10.5-6.2.6 3.4 7.1-2.8 1.3-3.3-7-4.1 4.3z" fill="#fff" stroke="#0A1428" stroke-width="1.3" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="caption"><b>STEP 1</b><span data-cap>Storefront</span></div>
-          <div class="shield"></div>
-        </div>
-      </div>
-
-      <div class="sc-foot">
-        <div class="pages-list" data-chips>
-          <span class="pg-chip now">Home</span><span class="pg-chip">Shop</span><span class="pg-chip">Product</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</div>
-
-<!-- ============ LIBRARY ============ -->
-<section class="library" id="library">
+<!-- ============ SHOWCASE ============ -->
+<section class="showcase" id="showcase">
   <div class="wrap">
-    <div class="lib-head">
+    <div class="sc-top">
       <div>
-        <div class="eyebrow">The full library</div>
-        <h2>Ten more, ready to open</h2>
-        <p>Same treatment, same three working pages each. Two are open below — the rest unlock in one step, free, no payment details.</p>
+        <div class="eyebrow">The library</div>
+        <h2 class="sc-h2">Fifteen builds, one window</h2>
+        <p class="sc-p">Move down the list and each one loads on the right, with the cursor clicking through its pages. Seven are open — the rest unlock in one step, free.</p>
       </div>
       <div class="unlock-state" id="unlock-state">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
@@ -521,143 +328,125 @@
       </div>
     </div>
 
-    <div class="lib">
-      <article class="lcard" data-slug="forge" data-name="Forge">
-        <a href="forge/index.html" target="_blank" rel="noopener" style="display:contents">
-          <div class="lshot" style="background:#101316"><div class="mini"><div style="height:100%;background:#1A1F25;border-radius:3px;position:relative;overflow:hidden"><div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:13px 13px"></div><div style="position:absolute;top:20%;left:9%;width:58%;height:7px;background:#E6E9EC"></div><div style="position:absolute;top:36%;left:9%;width:32%;height:4px;background:#F97316"></div><div style="position:absolute;top:52%;left:9%;width:40px;height:9px;background:#F97316"></div></div></div></div>
-          <div class="lb">
-            <h3>Forge</h3>
-            <div class="lsec">Manufacturing</div>
-            <p>Spec tables, plant lists and an RFQ form with drawing upload. Built for engineers who want numbers, not adjectives.</p>
-            <div class="feats"><span class="feat">Spec tables</span><span class="feat">RFQ + file upload</span><span class="feat">Catalogue grid</span></div>
-            <span class="lopen">OPEN DEMO ↗</span>
+    <div class="sc-grid">
+      <div class="sc-list" id="tlist">
+        <div class="trow" data-i="0" data-slug="meridian" data-name="Meridian">
+          <span class="tn">01</span>
+          <span class="tt">Meridian</span>
+          <span class="tsec">Real estate · Property</span>
+          <span class="tgo">VIEW ↗</span>
+        </div>        <div class="trow" data-i="1" data-slug="pulse" data-name="Pulse">
+          <span class="tn">02</span>
+          <span class="tt">Pulse</span>
+          <span class="tsec">Healthcare · Clinic</span>
+          <span class="tgo">VIEW ↗</span>
+        </div>        <div class="trow" data-i="2" data-slug="console" data-name="Console">
+          <span class="tn">03</span>
+          <span class="tt">Console</span>
+          <span class="tsec">SaaS · Dashboard</span>
+          <span class="tgo">VIEW ↗</span>
+        </div>        <div class="trow" data-i="3" data-slug="orbit" data-name="Orbit">
+          <span class="tn">04</span>
+          <span class="tt">Orbit</span>
+          <span class="tsec">Startup · SaaS marketing</span>
+          <span class="tgo">VIEW ↗</span>
+        </div>        <div class="trow" data-i="4" data-slug="market" data-name="Market">
+          <span class="tn">05</span>
+          <span class="tt">Market</span>
+          <span class="tsec">E-commerce · Retail</span>
+          <span class="tgo">VIEW ↗</span>
+        </div>        <div class="trow" data-i="5" data-slug="forge" data-name="Forge">
+          <span class="tn">06</span>
+          <span class="tt">Forge</span>
+          <span class="tsec">Manufacturing · Industrial</span>
+          <span class="tgo">VIEW ↗</span>
+        </div>        <div class="trow" data-i="6" data-slug="civic" data-name="Civic">
+          <span class="tn">07</span>
+          <span class="tt">Civic</span>
+          <span class="tsec">Government · Public sector</span>
+          <span class="tgo">VIEW ↗</span>
+        </div>        <div class="trow locked" data-i="7" data-slug="ledger" data-name="Ledger">
+          <span class="tn">08</span>
+          <span class="tt">Ledger</span>
+          <span class="tsec">Accountancy · Legal</span>
+          <span class="tlock"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span>
+        </div>        <div class="trow locked" data-i="8" data-slug="campus" data-name="Campus">
+          <span class="tn">09</span>
+          <span class="tt">Campus</span>
+          <span class="tsec">Education · Colleges</span>
+          <span class="tlock"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span>
+        </div>        <div class="trow locked" data-i="9" data-slug="vault" data-name="Vault">
+          <span class="tn">10</span>
+          <span class="tt">Vault</span>
+          <span class="tsec">Fintech · Insurance</span>
+          <span class="tlock"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span>
+        </div>        <div class="trow locked" data-i="10" data-slug="motion" data-name="Motion">
+          <span class="tn">11</span>
+          <span class="tt">Motion</span>
+          <span class="tsec">Fitness · Wellness</span>
+          <span class="tlock"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span>
+        </div>        <div class="trow locked" data-i="11" data-slug="transit" data-name="Transit">
+          <span class="tn">12</span>
+          <span class="tt">Transit</span>
+          <span class="tsec">Logistics · Fleet</span>
+          <span class="tlock"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span>
+        </div>        <div class="trow locked" data-i="12" data-slug="kindred" data-name="Kindred">
+          <span class="tn">13</span>
+          <span class="tt">Kindred</span>
+          <span class="tsec">Charity · NGO</span>
+          <span class="tlock"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span>
+        </div>        <div class="trow locked" data-i="13" data-slug="harvest" data-name="Harvest">
+          <span class="tn">14</span>
+          <span class="tt">Harvest</span>
+          <span class="tsec">Restaurant · Hospitality</span>
+          <span class="tlock"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span>
+        </div>        <div class="trow locked" data-i="14" data-slug="atelier" data-name="Atelier">
+          <span class="tn">15</span>
+          <span class="tt">Atelier</span>
+          <span class="tsec">Creative · Portfolio</span>
+          <span class="tlock"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span>
+        </div>
+      </div>
+
+      <div class="sc-stage">
+        <div class="stage-inner">
+          <div class="win">
+            <div class="bar">
+              <div class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></div>
+              <div class="url">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+                <span id="stage-url">meridian.example</span>
+              </div>
+              <span class="live"><i></i><span>LIVE PAGE</span></span>
+            </div>
+            <div class="vp loading" id="stage-vp">
+              <iframe id="stage-frame" title="Template demo"></iframe>
+              <div class="cur" id="stage-cur"><div class="ring"></div>
+                <svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 2l14 10.5-6.2.6 3.4 7.1-2.8 1.3-3.3-7-4.1 4.3z" fill="#fff" stroke="#0A1428" stroke-width="1.3" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="caption" id="stage-cap"><b>STEP 1</b><span>Landing page</span></div>
+              <div class="lockstage" id="lockstage">
+                <div class="lockbox">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+                  <b id="lockname">Locked</b>
+                  <p>Unlock the full library free — name, email and phone, nothing else.</p>
+                  <button class="unlock-btn" type="button">Unlock all fifteen</button>
+                </div>
+              </div>
+            </div>
           </div>
-        </a>
-      </article>
-      <article class="lcard" data-slug="civic" data-name="Civic">
-        <a href="civic/index.html" target="_blank" rel="noopener" style="display:contents">
-          <div class="lshot" style="background:#F3F5F9"><div class="mini"><div style="height:9px;background:#0D2340"></div><div style="height:11px;background:#fff;border-bottom:3px solid #15386B;display:flex;align-items:center;padding:0 5px"><i style="width:20px;height:4px;background:#15386B;display:block"></i></div><div style="margin-top:6px"><i style="width:68%;height:7px;background:#0D2340;display:block"></i><i style="width:48%;height:3px;background:#9AA9BE;display:block;margin-top:4px"></i><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-top:5px"><i style="height:15px;background:#fff;border:1px solid #D4DCE8;display:block"></i><i style="height:15px;background:#fff;border:1px solid #D4DCE8;display:block"></i><i style="height:15px;background:#fff;border:1px solid #D4DCE8;display:block"></i></div></div></div></div>
-          <div class="lb">
-            <h3>Civic</h3>
-            <div class="lsec">Public sector</div>
-            <p>Built to WCAG 2.2 from the first line — skip links, visible focus, proper fieldsets and a multi-step application form.</p>
-            <div class="feats"><span class="feat">WCAG 2.2 AA</span><span class="feat">Multi-step form</span><span class="feat">Service directory</span></div>
-            <span class="lopen">OPEN DEMO ↗</span>
+
+          <div class="stage-foot">
+            <div>
+              <div class="stage-name" id="stage-name">Meridian</div>
+              <div class="stage-sec" id="stage-sec">Real estate · Property</div>
+            </div>
+            <a class="open-btn" id="stage-open" href="meridian/index.html" target="_blank" rel="noopener">OPEN FULL DEMO ↗</a>
           </div>
-        </a>
-      </article>
-      <article class="lcard locked" data-slug="kindred" data-name="Kindred">
-        <div class="lshot" style="background:#FFF8F0"><div class="mini"><div style="height:100%;border-radius:3px;background:linear-gradient(145deg,#F7D9B8,#D2572E);position:relative;overflow:hidden"><div style="position:absolute;left:8%;bottom:30%;width:70%;height:7px;background:#3A2415"></div><div style="position:absolute;left:8%;bottom:16%;width:44%;height:4px;background:rgba(58,36,21,.5)"></div><div style="position:absolute;left:8%;bottom:4%;width:30px;height:9px;background:#fff;border-radius:100px"></div></div></div>
-          <div class="lockveil">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
-          </div>
+          <div class="stage-chips" id="stage-chips"></div>
+          <div class="pages-list" id="stage-pages"></div>
         </div>
-        <div class="lb">
-          <h3>Kindred <span class="lockpill">LOCKED</span></h3>
-          <div class="lsec">Charity · NGO</div>
-          <p>Story-led with a donation flow, Gift Aid, suggested amounts and an impact page showing where every pound goes.</p>
-          <div class="feats"><span class="feat">Donation flow</span><span class="feat">Gift Aid</span><span class="feat">Impact charts</span></div>
-          <button class="lopen unlock-btn" type="button">UNLOCK TO VIEW ↗</button>
-        </div>
-      </article>
-      <article class="lcard locked" data-slug="atelier" data-name="Atelier">
-        <div class="lshot" style="background:#FAFAF8"><div class="mini"><div style="height:100%;display:flex;flex-direction:column;justify-content:center;gap:4px"><i style="width:76%;height:10px;background:#111;display:block"></i><i style="width:38%;height:10px;background:#111;display:block"></i><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-top:5px"><i style="aspect-ratio:1;background:#DEDAD2;display:block"></i><i style="aspect-ratio:1;background:#C4BEB2;display:block"></i><i style="aspect-ratio:1;background:#E8E4DC;display:block"></i></div></div></div>
-          <div class="lockveil">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
-          </div>
-        </div>
-        <div class="lb">
-          <h3>Atelier <span class="lockpill">LOCKED</span></h3>
-          <div class="lsec">Creative · Portfolio</div>
-          <p>Typography-first and almost bare. Oversized type and a case-study grid that lets the work carry the page.</p>
-          <div class="feats"><span class="feat">Editorial type</span><span class="feat">Case-study grid</span><span class="feat">Studio page</span></div>
-          <button class="lopen unlock-btn" type="button">UNLOCK TO VIEW ↗</button>
-        </div>
-      </article>
-      <article class="lcard locked" data-slug="harvest" data-name="Harvest">
-        <div class="lshot" style="background:#241812"><div class="mini"><div style="height:100%;border-radius:3px;background:linear-gradient(150deg,#4A3425,#180F0A);position:relative;overflow:hidden"><div style="position:absolute;left:50%;top:30%;transform:translateX(-50%);width:62%;height:9px;background:#F5E6D3"></div><div style="position:absolute;left:50%;top:50%;transform:translateX(-50%);width:26px;height:1px;background:#C9A227"></div><div style="position:absolute;left:50%;bottom:14%;transform:translateX(-50%);width:36px;height:10px;border:1px solid #C9A227"></div></div></div>
-          <div class="lockveil">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
-          </div>
-        </div>
-        <div class="lb">
-          <h3>Harvest <span class="lockpill">LOCKED</span></h3>
-          <div class="lsec">Restaurant</div>
-          <p>Warm and appetite-led, with a proper menu layout and a reservation flow that handles party size and sittings.</p>
-          <div class="feats"><span class="feat">Menu layout</span><span class="feat">Table booking</span><span class="feat">Calendar picker</span></div>
-          <button class="lopen unlock-btn" type="button">UNLOCK TO VIEW ↗</button>
-        </div>
-      </article>
-      <article class="lcard locked" data-slug="ledger" data-name="Ledger">
-        <div class="lshot" style="background:#FBFBF9"><div class="mini"><div style="height:10px;background:#12293F"></div><div style="height:11px;background:#fff;border-bottom:1px solid #E2E5E9;display:flex;align-items:center;padding:0 5px"><i style="width:26px;height:4px;background:#1B3A5C;display:block"></i></div><div style="margin-top:6px;display:flex;gap:4px"><div style="flex:1"><i style="width:80%;height:8px;background:#12293F;display:block"></i><i style="width:55%;height:3px;background:#A07A3C;display:block;margin-top:4px"></i><i style="width:34px;height:9px;background:#1B3A5C;display:block;margin-top:5px"></i></div><div style="flex:.7;background:#fff;border:1px solid #E2E5E9"><i style="display:block;height:7px;background:#1B3A5C"></i><i style="display:block;height:3px;background:#E2E5E9;margin:3px"></i><i style="display:block;height:3px;background:#E2E5E9;margin:3px"></i></div></div></div>
-          <div class="lockveil">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
-          </div>
-        </div>
-        <div class="lb">
-          <h3>Ledger <span class="lockpill">LOCKED</span></h3>
-          <div class="lsec">Accountancy · Legal</div>
-          <p>Published fee tiers, a key-dates panel and a consultation booking form. Quiet authority for professional practices.</p>
-          <div class="feats"><span class="feat">Fee tiers</span><span class="feat">Key dates panel</span><span class="feat">Consultation form</span></div>
-          <button class="lopen unlock-btn" type="button">UNLOCK TO VIEW ↗</button>
-        </div>
-      </article>
-      <article class="lcard locked" data-slug="campus" data-name="Campus">
-        <div class="lshot" style="background:#FFFDF8"><div class="mini"><div style="height:100%;position:relative"><div style="height:10px;background:#1E4A36;border-radius:2px"></div><div style="margin-top:6px"><i style="width:72%;height:8px;background:#1D2A1F;display:block"></i><i style="width:40%;height:4px;background:#2E6B4F;display:block;margin-top:4px"></i></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:7px"><i style="height:17px;background:#fff;border:1px solid #E3EBE4;border-radius:4px;display:block"></i><i style="height:17px;background:#F0A830;border-radius:4px;display:block"></i></div></div></div>
-          <div class="lockveil">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
-          </div>
-        </div>
-        <div class="lb">
-          <h3>Campus <span class="lockpill">LOCKED</span></h3>
-          <div class="lsec">Education</div>
-          <p>Course cards by level, a filterable prospectus and a save-and-return application form for sixth forms and colleges.</p>
-          <div class="feats"><span class="feat">Course finder</span><span class="feat">Application form</span><span class="feat">Open-day CTA</span></div>
-          <button class="lopen unlock-btn" type="button">UNLOCK TO VIEW ↗</button>
-        </div>
-      </article>
-      <article class="lcard locked" data-slug="vault" data-name="Vault">
-        <div class="lshot" style="background:#070B14"><div class="mini"><div style="height:100%;background:#0D1322;border-radius:3px;position:relative;overflow:hidden"><div style="position:absolute;top:18%;left:9%;width:60%;height:8px;background:#E7ECF5;border-radius:1px"></div><div style="position:absolute;top:36%;left:9%;width:36%;height:4px;background:#2DD4BF;border-radius:1px"></div><div style="position:absolute;top:52%;left:9%;width:34px;height:9px;background:#3B82F6;border-radius:3px"></div><div style="position:absolute;right:8%;top:22%;width:28%;height:52%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px"></div></div></div>
-          <div class="lockveil">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
-          </div>
-        </div>
-        <div class="lb">
-          <h3>Vault <span class="lockpill">LOCKED</span></h3>
-          <div class="lsec">Fintech · Insurance</div>
-          <p>A security page that answers the risk questionnaire, a live transaction feed and interchange-plus pricing laid out honestly.</p>
-          <div class="feats"><span class="feat">Security matrix</span><span class="feat">Live data feed</span><span class="feat">Pricing tiers</span></div>
-          <button class="lopen unlock-btn" type="button">UNLOCK TO VIEW ↗</button>
-        </div>
-      </article>
-      <article class="lcard locked" data-slug="motion" data-name="Motion">
-        <div class="lshot" style="background:#0F0F12"><div class="mini"><div style="height:100%;background:#17171C;border-radius:3px;position:relative;overflow:hidden"><div style="position:absolute;top:16%;left:8%;width:66%;height:11px;background:#F2F2F4"></div><div style="position:absolute;top:40%;left:8%;width:34%;height:11px;background:#C6F24E"></div><div style="position:absolute;bottom:12%;left:8%;width:38px;height:10px;background:#C6F24E;border-radius:100px"></div></div></div>
-          <div class="lockveil">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
-          </div>
-        </div>
-        <div class="lb">
-          <h3>Motion <span class="lockpill">LOCKED</span></h3>
-          <div class="lsec">Fitness · Wellness</div>
-          <p>A live class timetable with spaces remaining, waitlists and rolling membership tiers. Built for studios, not chains.</p>
-          <div class="feats"><span class="feat">Class timetable</span><span class="feat">Live capacity</span><span class="feat">Membership tiers</span></div>
-          <button class="lopen unlock-btn" type="button">UNLOCK TO VIEW ↗</button>
-        </div>
-      </article>
-      <article class="lcard locked" data-slug="transit" data-name="Transit">
-        <div class="lshot" style="background:#F4F6F8"><div class="mini"><div style="height:100%;position:relative"><div style="height:9px;background:#072838"></div><div style="margin-top:6px"><i style="width:70%;height:8px;background:#0E1B26;display:block"></i><i style="width:42%;height:4px;background:#06A5D6;display:block;margin-top:4px"></i></div><div style="margin-top:6px;height:28px;background:linear-gradient(150deg,#D8E4EC,#A8BECD);border-radius:3px;position:relative"><svg viewBox="0 0 100 30" style="position:absolute;inset:0;width:100%;height:100%" fill="none"><path d="M10 24 Q35 6 55 16 T92 8" stroke="#06A5D6" stroke-width="2" stroke-dasharray="3 2"/><circle cx="10" cy="24" r="3" fill="#0B3A5B"/><circle cx="92" cy="8" r="3" fill="#2E9E68"/></svg></div></div></div>
-          <div class="lockveil">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
-          </div>
-        </div>
-        <div class="lb">
-          <h3>Transit <span class="lockpill">LOCKED</span></h3>
-          <div class="lsec">Logistics · Fleet</div>
-          <p>Consignment tracking with a live map, event history and a network status board. For hauliers and freight forwarders.</p>
-          <div class="feats"><span class="feat">Shipment tracking</span><span class="feat">Live map</span><span class="feat">Service matrix</span></div>
-          <button class="lopen unlock-btn" type="button">UNLOCK TO VIEW ↗</button>
-        </div>
-      </article>
+      </div>
     </div>
 
     <div class="note">
@@ -701,162 +490,201 @@
 </footer>
 
 <script>
+var TPL = [{"slug": "meridian", "name": "Meridian", "sector": "Real estate \u00b7 Property", "host": "meridian.example", "feats": ["Listings grid", "Filters", "Enquiry form"], "pages": ["Home", "Properties", "Contact"], "steps": [{"sel": "a[href=\"listings.html\"]", "t": "Clicking through to Properties"}, {"sel": "button.btn", "t": "Filtering the listings grid", "nonav": 1}, {"sel": "a[href=\"contact.html\"]", "t": "Opening the contact page"}, {"sel": "#first-name", "t": "Filling in the enquiry form", "nonav": 1}, {"sel": ".logo", "t": "Back to the landing page"}], "locked": false}, {"slug": "pulse", "name": "Pulse", "sector": "Healthcare \u00b7 Clinic", "host": "pulseclinic.example", "feats": ["Booking flow", "Service table", "Team profiles"], "pages": ["Home", "Services", "Book"], "steps": [{"sel": ".slot:not(.off)", "t": "Choosing an appointment slot", "nonav": 1}, {"sel": "a[href=\"services.html\"]", "t": "Opening the services list"}, {"sel": ".svc", "t": "Scanning the service table", "nonav": 1}, {"sel": "a[href=\"book.html\"]", "t": "Starting the booking flow"}, {"sel": ".slot:not(.off)", "t": "Picking a day and time", "nonav": 1}], "locked": false}, {"slug": "console", "name": "Console", "sector": "SaaS \u00b7 Dashboard", "host": "app.console.example", "feats": ["Charts", "Data tables", "Settings UI"], "pages": ["Dashboard", "Customers", "Settings"], "steps": [{"sel": ".seg button:last-child", "t": "Switching the chart range", "nonav": 1}, {"sel": "a[href=\"customers.html\"]", "t": "Opening Customers"}, {"sel": ".rowcheck", "t": "Selecting rows for bulk actions", "nonav": 1}, {"sel": "a[href=\"settings.html\"]", "t": "Opening Settings"}, {"sel": "a[href=\"index.html\"]", "t": "Back to the dashboard"}], "locked": false}, {"slug": "orbit", "name": "Orbit", "sector": "Startup \u00b7 SaaS marketing", "host": "orbit.example", "feats": ["Pricing table", "Feature grid", "Changelog"], "pages": ["Product", "Pricing", "Changelog"], "steps": [{"sel": ".card", "t": "Reading the capability grid", "nonav": 1}, {"sel": "a[href=\"pricing.html\"]", "t": "Opening pricing"}, {"sel": ".card", "t": "Comparing the plans", "nonav": 1}, {"sel": "a[href=\"changelog.html\"]", "t": "Opening the changelog"}, {"sel": ".lg", "t": "Back to the product page"}], "locked": false}, {"slug": "market", "name": "Market", "sector": "E-commerce \u00b7 Retail", "host": "market.example", "feats": ["Product grid", "Filters", "Slide-out basket"], "pages": ["Home", "Shop", "Product"], "steps": [{"sel": ".pc", "t": "Browsing the collection", "nonav": 1}, {"sel": "a[href=\"shop.html\"]", "t": "Opening the full shop"}, {"sel": "aside", "t": "Narrowing by category and price", "nonav": 1}, {"sel": "a[href=\"product.html\"]", "t": "Opening a product page"}, {"sel": "button[onclick=\"openCart()\"]", "t": "Adding to basket", "nonav": 1}], "locked": false}, {"slug": "forge", "name": "Forge", "sector": "Manufacturing \u00b7 Industrial", "host": "forge-eng.example", "feats": ["Spec tables", "RFQ + upload", "Catalogue"], "pages": ["Home", "Capabilities", "Catalogue"], "steps": [{"sel": "a[href=\"capabilities.html\"]", "t": "Opening capabilities"}, {"sel": "table", "t": "Scanning the plant list", "nonav": 1}, {"sel": "a[href=\"catalogue.html\"]", "t": "Opening the catalogue"}, {"sel": ".card", "t": "Browsing representative parts", "nonav": 1}, {"sel": ".lg", "t": "Back to the home page"}], "locked": false}, {"slug": "civic", "name": "Civic", "sector": "Government \u00b7 Public sector", "host": "northbridge.example", "feats": ["WCAG 2.2 AA", "Multi-step form", "Service directory"], "pages": ["Home", "Services", "Apply"], "steps": [{"sel": "a[href=\"services.html\"]", "t": "Opening all services"}, {"sel": "table a", "t": "Choosing a service", "nonav": 1}, {"sel": "a[href=\"apply.html\"]", "t": "Starting an application"}, {"sel": "#pc", "t": "Entering a postcode", "nonav": 1}, {"sel": ".crest", "t": "Back to the home page"}], "locked": false}, {"slug": "ledger", "name": "Ledger", "sector": "Accountancy \u00b7 Legal", "host": "ledger.example", "feats": ["Fee tiers", "Key dates", "Consultation form"], "pages": ["Home", "Services", "Contact"], "steps": [{"sel": "a[href=\"services.html\"]", "t": "Opening services and fees"}, {"sel": ".card", "t": "Comparing the fee tiers", "nonav": 1}, {"sel": "a[href=\"contact.html\"]", "t": "Opening contact"}, {"sel": "input", "t": "Requesting a call back", "nonav": 1}, {"sel": ".lg", "t": "Back to the home page"}], "locked": true}, {"slug": "campus", "name": "Campus", "sector": "Education \u00b7 Colleges", "host": "campus.example", "feats": ["Course finder", "Application form", "Open-day CTA"], "pages": ["Home", "Courses", "Apply"], "steps": [{"sel": "a[href=\"courses.html\"]", "t": "Browsing the courses"}, {"sel": ".card", "t": "Filtering by level", "nonav": 1}, {"sel": "a[href=\"apply.html\"]", "t": "Starting an application"}, {"sel": "select", "t": "Choosing a course", "nonav": 1}, {"sel": ".lg", "t": "Back to the home page"}], "locked": true}, {"slug": "vault", "name": "Vault", "sector": "Fintech \u00b7 Insurance", "host": "vault.example", "feats": ["Security matrix", "Live data feed", "Pricing tiers"], "pages": ["Platform", "Security", "Pricing"], "steps": [{"sel": ".card", "t": "Watching the live feed", "nonav": 1}, {"sel": "a[href=\"security.html\"]", "t": "Opening the security page"}, {"sel": ".card", "t": "Reading the control matrix", "nonav": 1}, {"sel": "a[href=\"pricing.html\"]", "t": "Opening pricing"}, {"sel": ".lg", "t": "Back to the platform page"}], "locked": true}, {"slug": "motion", "name": "Motion", "sector": "Fitness \u00b7 Wellness", "host": "motion.example", "feats": ["Class timetable", "Live capacity", "Membership tiers"], "pages": ["Home", "Timetable", "Membership"], "steps": [{"sel": "a[href=\"timetable.html\"]", "t": "Opening the timetable"}, {"sel": ".b", "t": "Booking a class", "nonav": 1}, {"sel": "a[href=\"membership.html\"]", "t": "Opening membership"}, {"sel": ".card", "t": "Comparing the tiers", "nonav": 1}, {"sel": ".lg", "t": "Back to the home page"}], "locked": true}, {"slug": "transit", "name": "Transit", "sector": "Logistics \u00b7 Fleet", "host": "transitfreight.example", "feats": ["Shipment tracking", "Live map", "Service matrix"], "pages": ["Home", "Track", "Services"], "steps": [{"sel": "a[href=\"track.html\"]", "t": "Tracking a consignment"}, {"sel": ".card", "t": "Reading the event history", "nonav": 1}, {"sel": "a[href=\"services.html\"]", "t": "Opening services"}, {"sel": "table, .card", "t": "Comparing service levels", "nonav": 1}, {"sel": ".lg", "t": "Back to the home page"}], "locked": true}, {"slug": "kindred", "name": "Kindred", "sector": "Charity \u00b7 NGO", "host": "kindred.example", "feats": ["Donation flow", "Gift Aid", "Impact charts"], "pages": ["Our work", "Impact", "Donate"], "steps": [{"sel": "a[href=\"impact.html\"]", "t": "Opening the impact report"}, {"sel": ".card", "t": "Reading where the money goes", "nonav": 1}, {"sel": "a[href=\"donate.html\"]", "t": "Opening the donation page"}, {"sel": ".amt", "t": "Choosing a donation amount", "nonav": 1}, {"sel": ".lg", "t": "Back to our work"}], "locked": true}, {"slug": "harvest", "name": "Harvest", "sector": "Restaurant \u00b7 Hospitality", "host": "harvest.example", "feats": ["Menu layout", "Table booking", "Calendar picker"], "pages": ["Home", "Menu", "Reservations"], "steps": [{"sel": "a[href=\"menu.html\"]", "t": "Opening this week's menu"}, {"sel": ".ser", "t": "Reading the courses", "nonav": 1}, {"sel": "a[href=\"book.html\"]", "t": "Opening reservations"}, {"sel": ".pz", "t": "Choosing a party size", "nonav": 1}, {"sel": ".lg", "t": "Back to the home page"}], "locked": true}, {"slug": "atelier", "name": "Atelier", "sector": "Creative \u00b7 Portfolio", "host": "ateliernord.example", "feats": ["Editorial type", "Case-study grid", "Studio page"], "pages": ["Index", "Work", "About"], "steps": [{"sel": "a[href=\"work.html\"]", "t": "Opening the work index"}, {"sel": ".w-item", "t": "Browsing the case studies", "nonav": 1}, {"sel": "a[href=\"about.html\"]", "t": "Opening the studio page"}, {"sel": ".lg", "t": "Back to the index"}, {"sel": "a[href=\"work.html\"]", "t": "Returning to the work"}], "locked": true}];
 (function(){
   var FRAME_W = 1440;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var KEY = 'dk_tpl_unlocked';
 
-  function setup(win){
-    var steps; try { steps = JSON.parse(win.getAttribute('data-steps')); } catch(e){ return; }
-    var base  = win.getAttribute('data-base');
-    var vp    = win.querySelector('.vp');
-    var fr    = vp.querySelector('iframe');
-    var cur   = vp.querySelector('.cur');
-    var cap   = vp.querySelector('[data-cap]');
-    var capN  = vp.querySelector('.caption b');
-    var urlEl = win.querySelector('[data-url]');
-    var host  = urlEl.textContent;
-    var chips = win.parentElement.querySelectorAll('[data-chips] .pg-chip');
+  var vp    = document.getElementById('stage-vp');
+  var fr    = document.getElementById('stage-frame');
+  var cur   = document.getElementById('stage-cur');
+  var capEl = document.getElementById('stage-cap');
+  var urlEl = document.getElementById('stage-url');
+  var nameEl= document.getElementById('stage-name');
+  var secEl = document.getElementById('stage-sec');
+  var openEl= document.getElementById('stage-open');
+  var chipsEl=document.getElementById('stage-chips');
+  var pagesEl=document.getElementById('stage-pages');
+  var lockSt= document.getElementById('lockstage');
+  var lockNm= document.getElementById('lockname');
+  var state = document.getElementById('unlock-state');
+  var rows  = [].slice.call(document.querySelectorAll('.trow'));
 
-    var scale = 1, i = -1, timers = [], running = false, home = 'index.html';
+  var scale = 1, active = -1, timers = [], stepI = -1, hoverT = null, visible = false;
 
-    function fit(){
-      scale = vp.clientWidth / FRAME_W;
-      fr.style.transform = 'scale(' + scale + ')';
-      fr.style.height = (vp.clientHeight / scale) + 'px';
-    }
-    fit();
-    window.addEventListener('resize', fit);
+  function unlocked(){ try { return localStorage.getItem(KEY) === '1'; } catch(e){ return false; } }
 
-    function clearAll(){ timers.forEach(clearTimeout); timers = []; }
-    function later(fn, ms){ timers.push(setTimeout(fn, ms)); }
+  function fit(){
+    scale = vp.clientWidth / FRAME_W;
+    fr.style.transform = 'scale(' + scale + ')';
+    fr.style.height = (vp.clientHeight / scale) + 'px';
+  }
+  fit(); window.addEventListener('resize', fit);
 
-    function doc(){
-      try { return fr.contentDocument; } catch(e){ return null; }
-    }
+  function clearAll(){ timers.forEach(clearTimeout); timers = []; }
+  function later(fn, ms){ timers.push(setTimeout(fn, ms)); }
+  function doc(){ try { return fr.contentDocument; } catch(e){ return null; } }
 
-    function syncChrome(){
-      var d = doc(); if(!d) return;
-      var file = (fr.contentWindow.location.pathname.split('/').pop()) || 'index.html';
-      urlEl.textContent = host + (file === 'index.html' ? '' : '/' + file.replace('.html',''));
-      var order = [];
-      steps.forEach(function(st){
-        var m = /href="([a-z-]+\.html)"/.exec(st.sel);
-        if(m && order.indexOf(m[1]) === -1) order.push(m[1]);
-      });
-      order = [home].concat(order.filter(function(x){ return x !== home; }));
-      var idx = order.indexOf(file);
-      chips.forEach(function(c, n){ c.classList.toggle('now', n === (idx < 0 ? 0 : idx)); });
-    }
-
-    // place the cursor over a real element inside the frame
-    function aim(el){
-      var r = el.getBoundingClientRect();
-      var x = (r.left + r.width / 2) * scale;
-      var y = (r.top + r.height / 2) * scale;
-      cur.classList.add('on');
-      cur.style.transform = 'translate(' + x + 'px,' + y + 'px)';
-      return { x: x, y: y };
-    }
-
-    function highlight(el){
-      var d = doc(); if(!d) return;
-      var r = el.getBoundingClientRect();
-      var box = d.createElement('div');
-      box.style.cssText = 'position:fixed;pointer-events:none;z-index:2147483647;border:2px solid #F59E0B;'
-        + 'border-radius:6px;box-shadow:0 0 0 4px rgba(245,158,11,.22);transition:opacity .4s;'
-        + 'left:' + (r.left - 4) + 'px;top:' + (r.top - 4) + 'px;width:' + (r.width + 8) + 'px;height:' + (r.height + 8) + 'px;';
-      d.body.appendChild(box);
-      setTimeout(function(){ box.style.opacity = '0'; setTimeout(function(){ box.remove(); }, 420); }, 700);
-    }
-
-    function step(){
-      var d = doc();
-      if(!d || !d.body){ later(step, 300); return; }
-
-      i = (i + 1) % steps.length;
-      var st = steps[i];
-      var el = null;
-      try { el = d.querySelector(st.sel); } catch(e){}
-
-      // nothing matched — skip to the next step rather than pointing at nothing
-      if(!el){ later(step, 120); return; }
-
-      capN.textContent = 'STEP ' + (i + 1);
-      cap.textContent = st.t;
-
-      // bring it into view inside the frame first
-      var r = el.getBoundingClientRect();
-      var vh = fr.contentWindow.innerHeight;
-      if(r.top < 40 || r.bottom > vh - 40){
-        try { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch(e){ el.scrollIntoView(); }
-      }
-
-      // 1. let any scrolling settle, then glide the cursor onto the element
-      later(function(){
-        if(!doc()) return;
-        aim(el);
-
-        // 2. arrive, pulse, outline the target
-        later(function(){
-          cur.classList.add('click');
-          highlight(el);
-          later(function(){ cur.classList.remove('click'); }, 560);
-
-          // 3. only now does the click happen
-          later(function(){
-            if(st.nonav){
-              try { el.click(); } catch(e){}
-              later(step, 1500);
-            } else {
-              try { el.click(); } catch(e){}
-              // navigation handled by the load listener
-              later(function(){ if(running) step(); }, 2600);
-            }
-          }, 300);
-        }, 1150);
-      }, 620);
-    }
-
-    fr.addEventListener('load', function(){
-      vp.classList.remove('loading');
-      fit();
-      syncChrome();
-      // keep links inside the frame from escaping into a new tab
-      var d = doc();
-      if(d){
-        d.querySelectorAll('a[target="_blank"]').forEach(function(a){ a.removeAttribute('target'); });
-        var dn = d.querySelector('.dn, .demo-note');
-        if(dn) dn.style.display = 'none';
-      }
-    });
-
-    function start(){
-      if(running || reduce) return;
-      running = true;
-      if(!fr.src){ fr.src = base + home; urlEl.textContent = host; }
-      later(step, 900);
-    }
-    function stop(){
-      running = false;
-      clearAll();
-      cur.classList.remove('on','click');
-    }
-
-    if('IntersectionObserver' in window){
-      new IntersectionObserver(function(es){
-        es.forEach(function(e){ e.isIntersecting ? start() : stop(); });
-      }, { threshold: 0.4 }).observe(win);
-    } else {
-      fr.src = base + home;
-    }
-
-    if(reduce){
-      fr.src = base + home;
-      var c = vp.querySelector('.caption'); if(c) c.style.display = 'none';
-    }
+  function setPages(t, idx){
+    pagesEl.innerHTML = t.pages.map(function(p, n){
+      return '<span class="pg-chip' + (n === idx ? ' now' : '') + '">' + p + '</span>';
+    }).join('');
   }
 
-  document.querySelectorAll('[data-demo]').forEach(setup);
+  function aim(el){
+    var r = el.getBoundingClientRect();
+    cur.classList.add('on');
+    cur.style.transform = 'translate(' + ((r.left + r.width/2) * scale) + 'px,' + ((r.top + r.height/2) * scale) + 'px)';
+  }
+
+  function highlight(el){
+    var d = doc(); if(!d) return;
+    var r = el.getBoundingClientRect();
+    var box = d.createElement('div');
+    box.style.cssText = 'position:fixed;pointer-events:none;z-index:2147483647;border:2px solid #F59E0B;border-radius:6px;'
+      + 'box-shadow:0 0 0 4px rgba(245,158,11,.22);transition:opacity .4s;left:' + (r.left-4) + 'px;top:' + (r.top-4)
+      + 'px;width:' + (r.width+8) + 'px;height:' + (r.height+8) + 'px;';
+    d.body.appendChild(box);
+    setTimeout(function(){ box.style.opacity='0'; setTimeout(function(){ box.remove(); }, 420); }, 700);
+  }
+
+  function step(){
+    if(active < 0 || !visible) return;
+    var t = TPL[active];
+    var d = doc();
+    if(!d || !d.body){ later(step, 300); return; }
+
+    stepI = (stepI + 1) % t.steps.length;
+    var st = t.steps[stepI];
+    var el = null;
+    try { el = d.querySelector(st.sel); } catch(e){}
+    if(!el){ later(step, 150); return; }
+
+    capEl.innerHTML = '<b>STEP ' + (stepI + 1) + '</b><span>' + st.t + '</span>';
+
+    var r = el.getBoundingClientRect();
+    var vh = fr.contentWindow.innerHeight;
+    if(r.top < 40 || r.bottom > vh - 40){
+      try { el.scrollIntoView({behavior:'smooth', block:'center'}); } catch(e){ el.scrollIntoView(); }
+    }
+
+    later(function(){
+      if(!doc() || !visible) return;
+      aim(el);
+      later(function(){
+        cur.classList.add('click'); highlight(el);
+        later(function(){ cur.classList.remove('click'); }, 560);
+        later(function(){
+          try { el.click(); } catch(e){}
+          later(step, st.nonav ? 1600 : 2700);
+        }, 300);
+      }, 1150);
+    }, 620);
+  }
+
+  fr.addEventListener('load', function(){
+    vp.classList.remove('loading','swap');
+    fit();
+    var d = doc();
+    if(d){
+      d.querySelectorAll('a[target="_blank"]').forEach(function(a){ a.removeAttribute('target'); });
+      var dn = d.querySelector('.dn, .demo-note'); if(dn) dn.style.display = 'none';
+      var t = TPL[active];
+      if(t){
+        var file = (fr.contentWindow.location.pathname.split('/').pop()) || 'index.html';
+        urlEl.textContent = t.host + (file === 'index.html' ? '' : '/' + file.replace('.html',''));
+        var order = ['index.html'];
+        t.steps.forEach(function(s2){ var m = /href="([a-z-]+\.html)"/.exec(s2.sel); if(m && order.indexOf(m[1]) === -1) order.push(m[1]); });
+        var idx = order.indexOf(file);
+        setPages(t, idx < 0 ? 0 : idx);
+      }
+    }
+  });
+
+  function select(i, instant){
+    if(i === active) return;
+    active = i; stepI = -1;
+    clearAll();
+    cur.classList.remove('on','click');
+
+    var t = TPL[i];
+    rows.forEach(function(r2, n){ r2.classList.toggle('on', n === i); });
+
+    nameEl.textContent = t.name;
+    secEl.textContent  = t.sector;
+    urlEl.textContent  = t.host;
+    chipsEl.innerHTML  = t.feats.map(function(f){ return '<span class="chip-f">' + f + '</span>'; }).join('');
+    setPages(t, 0);
+
+    var locked = t.locked && !unlocked();
+    lockSt.classList.toggle('on', locked);
+    lockNm.textContent = t.name + ' is locked';
+    capEl.style.display = locked ? 'none' : 'flex';
+
+    if(locked){
+      openEl.className = 'open-btn locked';
+      openEl.removeAttribute('href');
+      openEl.textContent = 'UNLOCK TO OPEN';
+    } else {
+      openEl.className = 'open-btn';
+      openEl.href = t.slug + '/index.html';
+      openEl.textContent = 'OPEN FULL DEMO ↗';
+    }
+
+    vp.classList.add('swap');
+    fr.src = t.slug + '/index.html';
+
+    if(!locked && !reduce && visible) later(step, 1400);
+  }
+
+  // hover / tap on the list
+  rows.forEach(function(r2, i){
+    r2.addEventListener('mouseenter', function(){
+      clearTimeout(hoverT);
+      hoverT = setTimeout(function(){ select(i); }, 180);
+    });
+    r2.addEventListener('mouseleave', function(){ clearTimeout(hoverT); });
+    r2.addEventListener('click', function(){
+      clearTimeout(hoverT);
+      var t = TPL[i];
+      if(i !== active){ select(i); if(window.innerWidth <= 960) document.querySelector('.sc-stage').scrollIntoView({behavior:'smooth',block:'center'}); return; }
+      if(t.locked && !unlocked()){ window.openUnlock(t.slug, t.name); return; }
+      window.open(t.slug + '/index.html', '_blank', 'noopener');
+    });
+  });
+
+  openEl.addEventListener('click', function(e){
+    var t = TPL[active];
+    if(t && t.locked && !unlocked()){ e.preventDefault(); window.openUnlock(t.slug, t.name); }
+  });
+
+  // run only while the showcase is on screen
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        visible = e.isIntersecting;
+        if(visible){ if(stepI < 0 && active >= 0 && !reduce) later(step, 900); }
+        else { clearAll(); cur.classList.remove('on','click'); }
+      });
+    }, { threshold: 0.25 }).observe(document.getElementById('showcase'));
+  } else { visible = true; }
+
+  window.__refreshLocks = function(){
+    rows.forEach(function(r2){ r2.classList.remove('locked'); });
+    if(state){
+      state.classList.add('done');
+      state.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>All 15 unlocked</span>';
+    }
+    var t = TPL[active];
+    if(t){ lockSt.classList.remove('on'); capEl.style.display='flex';
+      openEl.className='open-btn'; openEl.href = t.slug + '/index.html'; openEl.textContent='OPEN FULL DEMO ↗';
+      if(!reduce && visible && stepI < 0) later(step, 600);
+    }
+  };
+
+  if(unlocked()) window.__refreshLocks();
+  select(0, true);
 })();
 </script>
 
@@ -869,88 +697,44 @@
   var errEl = document.getElementById('u-err');
   var btn   = document.getElementById('u-submit');
   var which = document.getElementById('mwhich');
-  var state = document.getElementById('unlock-state');
   var pending = null;
 
-  function stored(){
-    try { return localStorage.getItem(KEY) === '1'; } catch(e){ return false; }
-  }
-
-  function unlockAll(openSlug){
-    document.querySelectorAll('.lcard.locked').forEach(function(c){
-      c.classList.remove('locked');
-      c.classList.add('unlocked');
-      var slug = c.getAttribute('data-slug');
-      var b = c.querySelector('.unlock-btn');
-      if(b){
-        var a = document.createElement('a');
-        a.href = slug + '/index.html';
-        a.target = '_blank';
-        a.rel = 'noopener';
-        a.className = 'lopen';
-        a.textContent = 'OPEN DEMO ↗';
-        b.replaceWith(a);
-      }
-      var veil = c.querySelector('.lockveil');
-      if(veil) veil.remove();
-      var pill = c.querySelector('.lockpill');
-      if(pill) pill.remove();
-      // make the whole card clickable
-      c.style.cursor = 'pointer';
-      c.addEventListener('click', function(e){
-        if(e.target.closest('a')) return;
-        window.open(slug + '/index.html', '_blank', 'noopener');
-      });
-    });
-    if(state){
-      state.classList.add('done');
-      state.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>All 15 unlocked</span>';
-    }
-    if(openSlug) window.open(openSlug + '/index.html', '_blank', 'noopener');
-  }
-
-  if(stored()) unlockAll(null);
-
-  function open(slug, name){
+  window.openUnlock = function(slug, name){
     pending = slug;
     which.textContent = name;
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
     setTimeout(function(){ document.getElementById('u-first').focus(); }, 60);
-  }
-  function close(){
-    modal.hidden = true;
-    document.body.style.overflow = '';
-  }
+  };
+  function close(){ modal.hidden = true; document.body.style.overflow = ''; }
 
   document.addEventListener('click', function(e){
-    var b = e.target.closest('.unlock-btn');
-    if(b){
-      var card = b.closest('.lcard');
-      open(card.getAttribute('data-slug'), card.getAttribute('data-name'));
-      return;
-    }
-    var locked = e.target.closest('.lcard.locked');
-    if(locked){
-      open(locked.getAttribute('data-slug'), locked.getAttribute('data-name'));
+    if(e.target.closest('.unlock-btn')){
+      var n = document.getElementById('stage-name');
+      window.openUnlock('', n ? n.textContent : 'this one');
     }
   });
-
   document.getElementById('mclose').addEventListener('click', close);
   modal.addEventListener('click', function(e){ if(e.target === modal) close(); });
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !modal.hidden) close(); });
 
   function valid(){
-    var ok = true;
-    var em = document.getElementById('u-email').value.trim();
-    var ph = document.getElementById('u-phone').value.trim();
-    var f  = document.getElementById('u-first').value.trim();
-    var l  = document.getElementById('u-last').value.trim();
+    var f = document.getElementById('u-first').value.trim();
+    var l = document.getElementById('u-last').value.trim();
+    var em= document.getElementById('u-email').value.trim();
+    var ph= document.getElementById('u-phone').value.trim();
     var eOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
     document.getElementById('e-email').classList.toggle('show', !eOk);
     document.getElementById('e-phone').classList.toggle('show', ph.length < 6);
-    if(!eOk || ph.length < 6 || !f || !l) ok = false;
-    return ok;
+    return eOk && ph.length >= 6 && f && l;
+  }
+
+  function done(){
+    try { localStorage.setItem(KEY,'1'); } catch(e){}
+    close();
+    if(window.__refreshLocks) window.__refreshLocks();
+    btn.disabled = false; btn.textContent = 'Unlock all templates';
+    if(pending) window.open(pending + '/index.html', '_blank', 'noopener');
   }
 
   form.addEventListener('submit', function(e){
@@ -958,33 +742,26 @@
     okEl.classList.remove('show'); errEl.classList.remove('show');
     if(!valid()) return;
     btn.disabled = true; btn.textContent = 'Unlocking…';
-
-    var payload = {
-      first_name: document.getElementById('u-first').value.trim(),
-      last_name:  document.getElementById('u-last').value.trim(),
-      email:      document.getElementById('u-email').value.trim(),
-      phone:      document.getElementById('u-phone').value.trim(),
-      template:   pending || ''
-    };
-
     fetch('/api/unlock', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        first_name: document.getElementById('u-first').value.trim(),
+        last_name:  document.getElementById('u-last').value.trim(),
+        email:      document.getElementById('u-email').value.trim(),
+        phone:      document.getElementById('u-phone').value.trim(),
+        template:   pending || ''
+      })
     }).then(function(r){
       if(!r.ok) throw new Error('bad');
-      try { localStorage.setItem(KEY, '1'); } catch(e){}
-      okEl.classList.add('show');
-      btn.textContent = 'Unlocked';
-      setTimeout(function(){ close(); unlockAll(pending); btn.disabled = false; btn.textContent = 'Unlock all templates'; }, 900);
+      okEl.classList.add('show'); btn.textContent='Unlocked';
+      setTimeout(done, 900);
     }).catch(function(){
-      // never trap someone behind a failed request
-      try { localStorage.setItem(KEY, '1'); } catch(e){}
       errEl.classList.add('show');
-      setTimeout(function(){ close(); unlockAll(pending); btn.disabled = false; btn.textContent = 'Unlock all templates'; }, 1400);
+      setTimeout(done, 1400);
     });
   });
 })();
 </script>
+
 </body>
 </html>
