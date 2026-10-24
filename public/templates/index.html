@@ -97,7 +97,8 @@
   /* viewport + scaled iframe */
   .vp{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:#0A1428}
   .vp iframe{position:absolute;top:0;left:0;width:1440px;height:900px;border:0;transform-origin:0 0;background:#fff}
-  .shield{position:absolute;inset:0;z-index:5;cursor:pointer}
+  .vp iframe{pointer-events:none}
+  .shield{position:absolute;inset:0;z-index:5;cursor:default}
   .vp.loading::after{content:"Loading demo…";position:absolute;inset:0;display:grid;place-items:center;
     font-family:var(--fm);font-size:.78rem;color:var(--muted-2);background:var(--bg);z-index:6}
 
@@ -129,19 +130,64 @@
   .lib-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-bottom:2rem}
   .lib-head h2{font-family:var(--fd);font-size:clamp(1.5rem,3vw,2.1rem);font-weight:500;letter-spacing:-.025em;color:var(--text-strong)}
   .lib-head p{color:var(--muted);font-size:.95rem;max-width:54ch;margin-top:.5rem}
+
+
+  .lib-head .unlock-state{display:inline-flex;align-items:center;gap:.5rem;background:var(--surface);border:1px solid var(--line);
+    border-radius:100px;padding:.45rem .95rem;font-family:var(--fm);font-size:.72rem;letter-spacing:.08em;color:var(--muted)}
+  .lib-head .unlock-state.done{border-color:#4ADE80;color:#4ADE80}
   .lib{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem}
-  @media(max-width:1100px){.lib{grid-template-columns:repeat(3,1fr)}}
-  @media(max-width:760px){.lib{grid-template-columns:1fr 1fr}}
-  @media(max-width:520px){.lib{grid-template-columns:1fr}}
+  @media(max-width:1180px){.lib{grid-template-columns:repeat(4,1fr)}}
+  @media(max-width:980px){.lib{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:720px){.lib{grid-template-columns:1fr 1fr}}
+  @media(max-width:480px){.lib{grid-template-columns:1fr}}
   .lcard{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;transition:all .25s}
   .lcard:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 18px 40px -22px rgba(245,158,11,.4)}
   .lshot{aspect-ratio:4/3;position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
   .lshot .mini{position:absolute;inset:0;padding:9px}
+  .lcard.locked .mini{filter:blur(3px) saturate(.5);opacity:.5}
+  .lockveil{position:absolute;inset:0;display:grid;place-items:center;background:rgba(10,20,40,.55);color:var(--accent);z-index:2}
   .lb{padding:1rem;display:flex;flex-direction:column;flex:1}
-  .lb h3{font-family:var(--fd);font-size:1rem;font-weight:500;color:var(--text-strong)}
+  .lb h3{font-family:var(--fd);font-size:1rem;font-weight:500;color:var(--text-strong);display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+  .lockpill{font-family:var(--fm);font-size:.56rem;font-weight:700;letter-spacing:.1em;color:var(--accent);
+    border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.1);padding:1px 5px;border-radius:100px}
   .lsec{font-family:var(--fm);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:.25rem 0 .5rem}
   .lb p{font-size:.82rem;color:var(--muted);flex:1;line-height:1.55}
-  .lopen{margin-top:.9rem;padding-top:.75rem;border-top:1px solid var(--line);font-family:var(--fm);font-size:.72rem;font-weight:700;letter-spacing:.06em;color:var(--accent)}
+  .feats{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.7rem}
+  .feat{font-family:var(--fm);font-size:.6rem;letter-spacing:.05em;color:var(--muted-2);border:1px solid var(--line);padding:.18rem .45rem;border-radius:100px}
+  .lopen{margin-top:.9rem;padding-top:.75rem;border-top:1px solid var(--line);font-family:var(--fm);font-size:.7rem;font-weight:700;
+    letter-spacing:.06em;color:var(--accent);background:none;border-left:0;border-right:0;border-bottom:0;text-align:left;cursor:pointer;width:100%;font-family:var(--fm)}
+  .lcard.unlocked .lockveil,.lcard.unlocked .lockpill{display:none}
+  .lcard.unlocked .mini{filter:none;opacity:1}
+
+  /* modal */
+  .modal-ovl{position:fixed;inset:0;background:rgba(6,12,24,.78);backdrop-filter:blur(5px);z-index:200;display:grid;place-items:center;padding:1.25rem}
+  .modal-ovl[hidden]{display:none}
+  .modal{background:var(--bg-2);border:1px solid var(--line-strong);border-radius:12px;padding:clamp(1.5rem,4vw,2.25rem);
+    width:100%;max-width:440px;position:relative;box-shadow:0 40px 90px -30px rgba(0,0,0,.8)}
+  .mclose{position:absolute;top:.9rem;right:.9rem;width:32px;height:32px;border-radius:7px;background:var(--surface);
+    border:1px solid var(--line);color:var(--muted);display:grid;place-items:center;cursor:pointer}
+  .mclose:hover{color:var(--text);border-color:var(--line-strong)}
+  .modal h3{font-family:var(--fd);font-size:1.4rem;font-weight:500;color:var(--text-strong);letter-spacing:-.02em;margin-bottom:.6rem}
+  .msub{font-size:.9rem;color:var(--muted);line-height:1.6;margin-bottom:1.4rem}
+  .msub b{color:var(--accent);font-weight:600}
+  .frow2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+  @media(max-width:420px){.frow2{grid-template-columns:1fr}}
+  .f{margin-bottom:.9rem;display:flex;flex-direction:column}
+  .f label{font-family:var(--fm);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.35rem}
+  .f input{width:100%;padding:.72rem .85rem;background:var(--bg);border:1px solid var(--line-strong);border-radius:5px;
+    color:var(--text);font-family:var(--fb);font-size:.95rem}
+  .f input:focus{outline:none;border-color:var(--accent)}
+  .ferr{display:none;color:#F87171;font-size:.78rem;margin-top:.3rem}
+  .ferr.show{display:block}
+  .msubmit{width:100%;padding:.85rem;background:var(--accent);color:var(--bg);border:none;border-radius:5px;
+    font-family:var(--fb);font-weight:700;font-size:.95rem;cursor:pointer;transition:background .2s;margin-top:.3rem}
+  .msubmit:hover{background:var(--accent-hot)}
+  .msubmit:disabled{opacity:.55;cursor:not-allowed}
+  .mfine{font-size:.74rem;color:var(--muted-2);text-align:center;margin-top:.8rem;line-height:1.5}
+  .mok,.merr{display:none;margin-top:.9rem;padding:.75rem;border-radius:5px;font-size:.86rem;text-align:center}
+  .mok{background:rgba(74,222,128,.1);border:1px solid #4ADE80;color:#4ADE80}
+  .merr{background:rgba(248,113,113,.1);border:1px solid #F87171;color:#F87171}
+  .mok.show,.merr.show{display:block}
 
   .note{background:var(--surface);border-left:3px solid var(--accent);border-radius:2px;padding:1.3rem 1.5rem;margin-top:2.5rem;font-size:.92rem;color:var(--muted);line-height:1.65}
   .note strong{color:var(--text)}
@@ -170,7 +216,7 @@
   <div class="wrap">
     <div class="eyebrow">Template gallery</div>
     <h1>See it before <em>you buy it</em>.</h1>
-    <p class="lead">Most studios show you a mood board. We built ten working sites instead. Watch the first five being used below — that is a real page in a real browser, not a video — then open any of them and click through yourself.</p>
+    <p class="lead">Most studios show you a mood board. We built fifteen working sites instead. Watch the first five being used below — those are real pages in a real browser, not videos — then open any of them and click through yourself.</p>
   </div>
 </header>
 
@@ -180,7 +226,7 @@
     <div class="phead">
       <div class="eyebrow">How a project runs</div>
       <h2>Five steps from a demo to your site</h2>
-      <p>The ten here are where conversations start, not where they end. We have built sites that look nothing like any of them — the process is the same either way.</p>
+      <p>The fifteen here are where conversations start, not where they end. We have built sites that look nothing like any of them — the process is the same either way.</p>
     </div>
     <div class="psteps">
       <div class="pstep">
@@ -225,7 +271,7 @@
       </div>
     </div>
     <div class="pnote">
-      <strong>Not seeing your industry?</strong> That is normal — these ten cover the sectors we are asked about most, and they are a fraction of what we build. Tell us what you do and we will show you something closer, or start from a blank page.
+      <strong>Not seeing your industry?</strong> That is normal — these fifteen cover the sectors we are asked about most, and they are a fraction of what we build. Tell us what you do and we will show you something closer, or start from a blank page.
     </div>
   </div>
 </section>
@@ -238,7 +284,7 @@
     <div class="wrap">
       <div class="sc-head">
         <div>
-          <div class="sc-no">01 / 10</div>
+          <div class="sc-no">01 / 15</div>
           <h2>Meridian</h2>
           <div class="sc-sector">Real estate · Property</div>
           <p class="sc-desc">Editorial and unhurried. Large photography, serif headlines and a warm stone palette, for businesses selling something people fall in love with.</p>
@@ -272,7 +318,7 @@
             <svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 2l14 10.5-6.2.6 3.4 7.1-2.8 1.3-3.3-7-4.1 4.3z" fill="#fff" stroke="#0A1428" stroke-width="1.3" stroke-linejoin="round"/></svg>
           </div>
           <div class="caption"><b>STEP 1</b><span data-cap>Landing page</span></div>
-          <a class="shield" href="meridian/index.html" target="_blank" rel="noopener" aria-label="Open Meridian demo"></a>
+          <div class="shield"></div>
         </div>
       </div>
 
@@ -289,7 +335,7 @@
     <div class="wrap">
       <div class="sc-head">
         <div>
-          <div class="sc-no">02 / 10</div>
+          <div class="sc-no">02 / 15</div>
           <h2>Pulse</h2>
           <div class="sc-sector">Healthcare · Clinic</div>
           <p class="sc-desc">Calm, accessible and appointment-led. Soft teal, rounded shapes, and a booking widget that sits on the first screen instead of three clicks deep.</p>
@@ -323,7 +369,7 @@
             <svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 2l14 10.5-6.2.6 3.4 7.1-2.8 1.3-3.3-7-4.1 4.3z" fill="#fff" stroke="#0A1428" stroke-width="1.3" stroke-linejoin="round"/></svg>
           </div>
           <div class="caption"><b>STEP 1</b><span data-cap>Landing page</span></div>
-          <a class="shield" href="pulse/index.html" target="_blank" rel="noopener" aria-label="Open Pulse demo"></a>
+          <div class="shield"></div>
         </div>
       </div>
 
@@ -340,7 +386,7 @@
     <div class="wrap">
       <div class="sc-head">
         <div>
-          <div class="sc-no">03 / 10</div>
+          <div class="sc-no">03 / 15</div>
           <h2>Console</h2>
           <div class="sc-sector">SaaS · Dashboard · Internal tools</div>
           <p class="sc-desc">A full application interface — sidebar navigation, live charts, data tables with bulk actions and a settings area. Proof we build more than brochures.</p>
@@ -374,7 +420,7 @@
             <svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 2l14 10.5-6.2.6 3.4 7.1-2.8 1.3-3.3-7-4.1 4.3z" fill="#fff" stroke="#0A1428" stroke-width="1.3" stroke-linejoin="round"/></svg>
           </div>
           <div class="caption"><b>STEP 1</b><span data-cap>Dashboard</span></div>
-          <a class="shield" href="console/index.html" target="_blank" rel="noopener" aria-label="Open Console demo"></a>
+          <div class="shield"></div>
         </div>
       </div>
 
@@ -391,7 +437,7 @@
     <div class="wrap">
       <div class="sc-head">
         <div>
-          <div class="sc-no">04 / 10</div>
+          <div class="sc-no">04 / 15</div>
           <h2>Orbit</h2>
           <div class="sc-sector">Startup · SaaS marketing</div>
           <p class="sc-desc">Dark, confident and product-led. Gradient accents, a feature grid, a pricing table that answers objections, and a changelog that shows the lights are on.</p>
@@ -425,7 +471,7 @@
             <svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 2l14 10.5-6.2.6 3.4 7.1-2.8 1.3-3.3-7-4.1 4.3z" fill="#fff" stroke="#0A1428" stroke-width="1.3" stroke-linejoin="round"/></svg>
           </div>
           <div class="caption"><b>STEP 1</b><span data-cap>Product page</span></div>
-          <a class="shield" href="orbit/index.html" target="_blank" rel="noopener" aria-label="Open Orbit demo"></a>
+          <div class="shield"></div>
         </div>
       </div>
 
@@ -442,7 +488,7 @@
     <div class="wrap">
       <div class="sc-head">
         <div>
-          <div class="sc-no">05 / 10</div>
+          <div class="sc-no">05 / 15</div>
           <h2>Market</h2>
           <div class="sc-sector">E-commerce · Retail</div>
           <p class="sc-desc">Product grid with working filters, a detail page with variants and specifications, and a slide-out basket. The groundwork for selling online properly.</p>
@@ -476,7 +522,7 @@
             <svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 2l14 10.5-6.2.6 3.4 7.1-2.8 1.3-3.3-7-4.1 4.3z" fill="#fff" stroke="#0A1428" stroke-width="1.3" stroke-linejoin="round"/></svg>
           </div>
           <div class="caption"><b>STEP 1</b><span data-cap>Storefront</span></div>
-          <a class="shield" href="market/index.html" target="_blank" rel="noopener" aria-label="Open Market demo"></a>
+          <div class="shield"></div>
         </div>
       </div>
 
@@ -491,101 +537,157 @@
 </div>
 
 <!-- ============ LIBRARY ============ -->
-<section class="library">
+<section class="library" id="library">
   <div class="wrap">
     <div class="lib-head">
       <div>
-        <div class="eyebrow">The rest of the library</div>
-        <h2>Five more, ready to open</h2>
-        <p>Same treatment, same three working pages each — open any one in a new tab and click through it yourself.</p>
+        <div class="eyebrow">The full library</div>
+        <h2>Ten more, ready to open</h2>
+        <p>Same treatment, same three working pages each. Two are open below — the rest unlock in one step, free, no payment details.</p>
+      </div>
+      <div class="unlock-state" id="unlock-state">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+        <span>8 of 15 locked</span>
       </div>
     </div>
 
     <div class="lib">
-
-      <a class="lcard" href="forge/index.html" target="_blank" rel="noopener">
-        <div class="lshot" style="background:#101316">
-          <div class="mini"><div style="height:100%;background:#1A1F25;border-radius:3px;position:relative;overflow:hidden">
-            <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:13px 13px"></div>
-            <div style="position:absolute;top:20%;left:9%;width:58%;height:7px;background:#E6E9EC;border-radius:1px"></div>
-            <div style="position:absolute;top:36%;left:9%;width:32%;height:4px;background:#F97316;border-radius:1px"></div>
-            <div style="position:absolute;top:52%;left:9%;width:40px;height:9px;background:#F97316"></div>
-          </div></div>
-        </div>
-        <div class="lb">
-          <h3>Forge</h3>
-          <div class="lsec">Manufacturing</div>
-          <p>Spec tables, plant lists and an RFQ form with drawing upload. Built for engineers who want numbers, not adjectives.</p>
-          <div class="lopen">OPEN DEMO ↗</div>
-        </div>
-      </a>
-
-      <a class="lcard" href="civic/index.html" target="_blank" rel="noopener">
-        <div class="lshot" style="background:#F3F5F9">
-          <div class="mini">
-            <div style="height:9px;background:#0D2340"></div>
-            <div style="height:11px;background:#fff;border-bottom:3px solid #15386B;display:flex;align-items:center;padding:0 5px"><i style="width:20px;height:4px;background:#15386B;display:block"></i></div>
-            <div style="margin-top:6px"><i style="width:68%;height:7px;background:#0D2340;display:block"></i><i style="width:48%;height:3px;background:#9AA9BE;display:block;margin-top:4px"></i>
-              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-top:5px"><i style="height:15px;background:#fff;border:1px solid #D4DCE8;display:block"></i><i style="height:15px;background:#fff;border:1px solid #D4DCE8;display:block"></i><i style="height:15px;background:#fff;border:1px solid #D4DCE8;display:block"></i></div></div>
+      <article class="lcard" data-slug="forge" data-name="Forge">
+        <a href="forge/index.html" target="_blank" rel="noopener" style="display:contents">
+          <div class="lshot" style="background:#101316"><div class="mini"><div style="height:100%;background:#1A1F25;border-radius:3px;position:relative;overflow:hidden"><div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:13px 13px"></div><div style="position:absolute;top:20%;left:9%;width:58%;height:7px;background:#E6E9EC"></div><div style="position:absolute;top:36%;left:9%;width:32%;height:4px;background:#F97316"></div><div style="position:absolute;top:52%;left:9%;width:40px;height:9px;background:#F97316"></div></div></div></div>
+          <div class="lb">
+            <h3>Forge</h3>
+            <div class="lsec">Manufacturing</div>
+            <p>Spec tables, plant lists and an RFQ form with drawing upload. Built for engineers who want numbers, not adjectives.</p>
+            <div class="feats"><span class="feat">Spec tables</span><span class="feat">RFQ + file upload</span><span class="feat">Catalogue grid</span></div>
+            <span class="lopen">OPEN DEMO ↗</span>
+          </div>
+        </a>
+      </article>
+      <article class="lcard" data-slug="civic" data-name="Civic">
+        <a href="civic/index.html" target="_blank" rel="noopener" style="display:contents">
+          <div class="lshot" style="background:#F3F5F9"><div class="mini"><div style="height:9px;background:#0D2340"></div><div style="height:11px;background:#fff;border-bottom:3px solid #15386B;display:flex;align-items:center;padding:0 5px"><i style="width:20px;height:4px;background:#15386B;display:block"></i></div><div style="margin-top:6px"><i style="width:68%;height:7px;background:#0D2340;display:block"></i><i style="width:48%;height:3px;background:#9AA9BE;display:block;margin-top:4px"></i><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-top:5px"><i style="height:15px;background:#fff;border:1px solid #D4DCE8;display:block"></i><i style="height:15px;background:#fff;border:1px solid #D4DCE8;display:block"></i><i style="height:15px;background:#fff;border:1px solid #D4DCE8;display:block"></i></div></div></div></div>
+          <div class="lb">
+            <h3>Civic</h3>
+            <div class="lsec">Public sector</div>
+            <p>Built to WCAG 2.2 from the first line — skip links, visible focus, proper fieldsets and a multi-step application form.</p>
+            <div class="feats"><span class="feat">WCAG 2.2 AA</span><span class="feat">Multi-step form</span><span class="feat">Service directory</span></div>
+            <span class="lopen">OPEN DEMO ↗</span>
+          </div>
+        </a>
+      </article>
+      <article class="lcard locked" data-slug="kindred" data-name="Kindred">
+        <div class="lshot" style="background:#FFF8F0"><div class="mini"><div style="height:100%;border-radius:3px;background:linear-gradient(145deg,#F7D9B8,#D2572E);position:relative;overflow:hidden"><div style="position:absolute;left:8%;bottom:30%;width:70%;height:7px;background:#3A2415"></div><div style="position:absolute;left:8%;bottom:16%;width:44%;height:4px;background:rgba(58,36,21,.5)"></div><div style="position:absolute;left:8%;bottom:4%;width:30px;height:9px;background:#fff;border-radius:100px"></div></div></div>
+          <div class="lockveil">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
           </div>
         </div>
         <div class="lb">
-          <h3>Civic</h3>
-          <div class="lsec">Public sector</div>
-          <p>Built to WCAG 2.2 from the first line — skip links, visible focus, proper fieldsets and a multi-step application form.</p>
-          <div class="lopen">OPEN DEMO ↗</div>
-        </div>
-      </a>
-
-      <a class="lcard" href="kindred/index.html" target="_blank" rel="noopener">
-        <div class="lshot" style="background:#FFF8F0">
-          <div class="mini"><div style="height:100%;border-radius:3px;background:linear-gradient(145deg,#F7D9B8,#D2572E);position:relative;overflow:hidden">
-            <div style="position:absolute;left:8%;bottom:30%;width:70%;height:7px;background:#3A2415;border-radius:1px"></div>
-            <div style="position:absolute;left:8%;bottom:16%;width:44%;height:4px;background:rgba(58,36,21,.5);border-radius:1px"></div>
-            <div style="position:absolute;left:8%;bottom:4%;width:30px;height:9px;background:#fff;border-radius:100px"></div>
-          </div></div>
-        </div>
-        <div class="lb">
-          <h3>Kindred</h3>
+          <h3>Kindred <span class="lockpill">LOCKED</span></h3>
           <div class="lsec">Charity · NGO</div>
           <p>Story-led with a donation flow, Gift Aid, suggested amounts and an impact page showing where every pound goes.</p>
-          <div class="lopen">OPEN DEMO ↗</div>
+          <div class="feats"><span class="feat">Donation flow</span><span class="feat">Gift Aid</span><span class="feat">Impact charts</span></div>
+          <button class="lopen unlock-btn" type="button">UNLOCK TO VIEW ↗</button>
         </div>
-      </a>
-
-      <a class="lcard" href="atelier/index.html" target="_blank" rel="noopener">
-        <div class="lshot" style="background:#FAFAF8">
-          <div class="mini"><div style="height:100%;display:flex;flex-direction:column;justify-content:center;gap:4px">
-            <i style="width:76%;height:10px;background:#111;display:block"></i>
-            <i style="width:38%;height:10px;background:#111;display:block"></i>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-top:5px">
-              <i style="aspect-ratio:1;background:#DEDAD2;display:block"></i><i style="aspect-ratio:1;background:#C4BEB2;display:block"></i><i style="aspect-ratio:1;background:#E8E4DC;display:block"></i></div>
-          </div></div>
+      </article>
+      <article class="lcard locked" data-slug="atelier" data-name="Atelier">
+        <div class="lshot" style="background:#FAFAF8"><div class="mini"><div style="height:100%;display:flex;flex-direction:column;justify-content:center;gap:4px"><i style="width:76%;height:10px;background:#111;display:block"></i><i style="width:38%;height:10px;background:#111;display:block"></i><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-top:5px"><i style="aspect-ratio:1;background:#DEDAD2;display:block"></i><i style="aspect-ratio:1;background:#C4BEB2;display:block"></i><i style="aspect-ratio:1;background:#E8E4DC;display:block"></i></div></div></div>
+          <div class="lockveil">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+          </div>
         </div>
         <div class="lb">
-          <h3>Atelier</h3>
+          <h3>Atelier <span class="lockpill">LOCKED</span></h3>
           <div class="lsec">Creative · Portfolio</div>
           <p>Typography-first and almost bare. Oversized type and a case-study grid that lets the work carry the page.</p>
-          <div class="lopen">OPEN DEMO ↗</div>
+          <div class="feats"><span class="feat">Editorial type</span><span class="feat">Case-study grid</span><span class="feat">Studio page</span></div>
+          <button class="lopen unlock-btn" type="button">UNLOCK TO VIEW ↗</button>
         </div>
-      </a>
-
-      <a class="lcard" href="harvest/index.html" target="_blank" rel="noopener">
-        <div class="lshot" style="background:#241812">
-          <div class="mini"><div style="height:100%;border-radius:3px;background:linear-gradient(150deg,#4A3425,#180F0A);position:relative;overflow:hidden">
-            <div style="position:absolute;left:50%;top:30%;transform:translateX(-50%);width:62%;height:9px;background:#F5E6D3;border-radius:1px"></div>
-            <div style="position:absolute;left:50%;top:50%;transform:translateX(-50%);width:26px;height:1px;background:#C9A227"></div>
-            <div style="position:absolute;left:50%;bottom:14%;transform:translateX(-50%);width:36px;height:10px;border:1px solid #C9A227"></div>
-          </div></div>
+      </article>
+      <article class="lcard locked" data-slug="harvest" data-name="Harvest">
+        <div class="lshot" style="background:#241812"><div class="mini"><div style="height:100%;border-radius:3px;background:linear-gradient(150deg,#4A3425,#180F0A);position:relative;overflow:hidden"><div style="position:absolute;left:50%;top:30%;transform:translateX(-50%);width:62%;height:9px;background:#F5E6D3"></div><div style="position:absolute;left:50%;top:50%;transform:translateX(-50%);width:26px;height:1px;background:#C9A227"></div><div style="position:absolute;left:50%;bottom:14%;transform:translateX(-50%);width:36px;height:10px;border:1px solid #C9A227"></div></div></div>
+          <div class="lockveil">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+          </div>
         </div>
         <div class="lb">
-          <h3>Harvest</h3>
+          <h3>Harvest <span class="lockpill">LOCKED</span></h3>
           <div class="lsec">Restaurant</div>
           <p>Warm and appetite-led, with a proper menu layout and a reservation flow that handles party size and sittings.</p>
-          <div class="lopen">OPEN DEMO ↗</div>
+          <div class="feats"><span class="feat">Menu layout</span><span class="feat">Table booking</span><span class="feat">Calendar picker</span></div>
+          <button class="lopen unlock-btn" type="button">UNLOCK TO VIEW ↗</button>
         </div>
-      </a>
-
+      </article>
+      <article class="lcard locked" data-slug="ledger" data-name="Ledger">
+        <div class="lshot" style="background:#FBFBF9"><div class="mini"><div style="height:10px;background:#12293F"></div><div style="height:11px;background:#fff;border-bottom:1px solid #E2E5E9;display:flex;align-items:center;padding:0 5px"><i style="width:26px;height:4px;background:#1B3A5C;display:block"></i></div><div style="margin-top:6px;display:flex;gap:4px"><div style="flex:1"><i style="width:80%;height:8px;background:#12293F;display:block"></i><i style="width:55%;height:3px;background:#A07A3C;display:block;margin-top:4px"></i><i style="width:34px;height:9px;background:#1B3A5C;display:block;margin-top:5px"></i></div><div style="flex:.7;background:#fff;border:1px solid #E2E5E9"><i style="display:block;height:7px;background:#1B3A5C"></i><i style="display:block;height:3px;background:#E2E5E9;margin:3px"></i><i style="display:block;height:3px;background:#E2E5E9;margin:3px"></i></div></div></div>
+          <div class="lockveil">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+          </div>
+        </div>
+        <div class="lb">
+          <h3>Ledger <span class="lockpill">LOCKED</span></h3>
+          <div class="lsec">Accountancy · Legal</div>
+          <p>Published fee tiers, a key-dates panel and a consultation booking form. Quiet authority for professional practices.</p>
+          <div class="feats"><span class="feat">Fee tiers</span><span class="feat">Key dates panel</span><span class="feat">Consultation form</span></div>
+          <button class="lopen unlock-btn" type="button">UNLOCK TO VIEW ↗</button>
+        </div>
+      </article>
+      <article class="lcard locked" data-slug="campus" data-name="Campus">
+        <div class="lshot" style="background:#FFFDF8"><div class="mini"><div style="height:100%;position:relative"><div style="height:10px;background:#1E4A36;border-radius:2px"></div><div style="margin-top:6px"><i style="width:72%;height:8px;background:#1D2A1F;display:block"></i><i style="width:40%;height:4px;background:#2E6B4F;display:block;margin-top:4px"></i></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:7px"><i style="height:17px;background:#fff;border:1px solid #E3EBE4;border-radius:4px;display:block"></i><i style="height:17px;background:#F0A830;border-radius:4px;display:block"></i></div></div></div>
+          <div class="lockveil">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+          </div>
+        </div>
+        <div class="lb">
+          <h3>Campus <span class="lockpill">LOCKED</span></h3>
+          <div class="lsec">Education</div>
+          <p>Course cards by level, a filterable prospectus and a save-and-return application form for sixth forms and colleges.</p>
+          <div class="feats"><span class="feat">Course finder</span><span class="feat">Application form</span><span class="feat">Open-day CTA</span></div>
+          <button class="lopen unlock-btn" type="button">UNLOCK TO VIEW ↗</button>
+        </div>
+      </article>
+      <article class="lcard locked" data-slug="vault" data-name="Vault">
+        <div class="lshot" style="background:#070B14"><div class="mini"><div style="height:100%;background:#0D1322;border-radius:3px;position:relative;overflow:hidden"><div style="position:absolute;top:18%;left:9%;width:60%;height:8px;background:#E7ECF5;border-radius:1px"></div><div style="position:absolute;top:36%;left:9%;width:36%;height:4px;background:#2DD4BF;border-radius:1px"></div><div style="position:absolute;top:52%;left:9%;width:34px;height:9px;background:#3B82F6;border-radius:3px"></div><div style="position:absolute;right:8%;top:22%;width:28%;height:52%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px"></div></div></div>
+          <div class="lockveil">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+          </div>
+        </div>
+        <div class="lb">
+          <h3>Vault <span class="lockpill">LOCKED</span></h3>
+          <div class="lsec">Fintech · Insurance</div>
+          <p>A security page that answers the risk questionnaire, a live transaction feed and interchange-plus pricing laid out honestly.</p>
+          <div class="feats"><span class="feat">Security matrix</span><span class="feat">Live data feed</span><span class="feat">Pricing tiers</span></div>
+          <button class="lopen unlock-btn" type="button">UNLOCK TO VIEW ↗</button>
+        </div>
+      </article>
+      <article class="lcard locked" data-slug="motion" data-name="Motion">
+        <div class="lshot" style="background:#0F0F12"><div class="mini"><div style="height:100%;background:#17171C;border-radius:3px;position:relative;overflow:hidden"><div style="position:absolute;top:16%;left:8%;width:66%;height:11px;background:#F2F2F4"></div><div style="position:absolute;top:40%;left:8%;width:34%;height:11px;background:#C6F24E"></div><div style="position:absolute;bottom:12%;left:8%;width:38px;height:10px;background:#C6F24E;border-radius:100px"></div></div></div>
+          <div class="lockveil">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+          </div>
+        </div>
+        <div class="lb">
+          <h3>Motion <span class="lockpill">LOCKED</span></h3>
+          <div class="lsec">Fitness · Wellness</div>
+          <p>A live class timetable with spaces remaining, waitlists and rolling membership tiers. Built for studios, not chains.</p>
+          <div class="feats"><span class="feat">Class timetable</span><span class="feat">Live capacity</span><span class="feat">Membership tiers</span></div>
+          <button class="lopen unlock-btn" type="button">UNLOCK TO VIEW ↗</button>
+        </div>
+      </article>
+      <article class="lcard locked" data-slug="transit" data-name="Transit">
+        <div class="lshot" style="background:#F4F6F8"><div class="mini"><div style="height:100%;position:relative"><div style="height:9px;background:#072838"></div><div style="margin-top:6px"><i style="width:70%;height:8px;background:#0E1B26;display:block"></i><i style="width:42%;height:4px;background:#06A5D6;display:block;margin-top:4px"></i></div><div style="margin-top:6px;height:28px;background:linear-gradient(150deg,#D8E4EC,#A8BECD);border-radius:3px;position:relative"><svg viewBox="0 0 100 30" style="position:absolute;inset:0;width:100%;height:100%" fill="none"><path d="M10 24 Q35 6 55 16 T92 8" stroke="#06A5D6" stroke-width="2" stroke-dasharray="3 2"/><circle cx="10" cy="24" r="3" fill="#0B3A5B"/><circle cx="92" cy="8" r="3" fill="#2E9E68"/></svg></div></div></div>
+          <div class="lockveil">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+          </div>
+        </div>
+        <div class="lb">
+          <h3>Transit <span class="lockpill">LOCKED</span></h3>
+          <div class="lsec">Logistics · Fleet</div>
+          <p>Consignment tracking with a live map, event history and a network status board. For hauliers and freight forwarders.</p>
+          <div class="feats"><span class="feat">Shipment tracking</span><span class="feat">Live map</span><span class="feat">Service matrix</span></div>
+          <button class="lopen unlock-btn" type="button">UNLOCK TO VIEW ↗</button>
+        </div>
+      </article>
     </div>
 
     <div class="note">
@@ -593,6 +695,33 @@
     </div>
   </div>
 </section>
+
+<!-- ============ UNLOCK MODAL ============ -->
+<div class="modal-ovl" id="mo" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mtitle">
+    <button class="mclose" id="mclose" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="eyebrow">Free access</div>
+    <h3 id="mtitle">Unlock all fifteen demos</h3>
+    <p class="msub">Leave your details and every template opens immediately — including <b id="mwhich">this one</b>. No payment, no card, and we will not pass your details to anyone.</p>
+
+    <form id="unlock-form" novalidate>
+      <div class="frow2">
+        <div class="f"><label for="u-first">First name</label><input id="u-first" autocomplete="given-name" required></div>
+        <div class="f"><label for="u-last">Last name</label><input id="u-last" autocomplete="family-name" required></div>
+      </div>
+      <div class="f"><label for="u-email">Email</label><input id="u-email" type="email" autocomplete="email" required>
+        <span class="ferr" id="e-email">Please enter a valid email address.</span></div>
+      <div class="f"><label for="u-phone">Phone</label><input id="u-phone" type="tel" autocomplete="tel" required>
+        <span class="ferr" id="e-phone">Please enter a contact number.</span></div>
+      <button type="submit" class="msubmit" id="u-submit">Unlock all templates</button>
+      <p class="mfine">We will email you occasionally about what we build. Unsubscribe any time.</p>
+      <div class="mok" id="u-ok">Unlocked — every template is open now. Enjoy.</div>
+      <div class="merr" id="u-err">Something went wrong. Please email hellocompsilon@gmail.com and we will send you the links.</div>
+    </form>
+  </div>
+</div>
 
 <footer>
   <div class="wrap f-in">
@@ -628,7 +757,7 @@
     var host   = urlEl.textContent;
     var chips  = win.parentElement.querySelectorAll('[data-chips] .pg-chip');
 
-    var i = -1, timer = null, running = false, loadedOnce = false;
+    var i = -1, timers = [], running = false, loadedOnce = false;
 
     fit(win);
 
@@ -649,42 +778,51 @@
     function go(){
       i = (i + 1) % steps.length;
       var st = steps[i];
-      var samePage = fr.getAttribute('data-p') === st.p;
-
-      if(!samePage){
-        fr.setAttribute('data-p', st.p);
-        fr.src = base + st.p;
-        urlEl.textContent = host + (st.p === 'index.html' ? '' : '/' + st.p.replace('.html',''));
-        var pi = pageIndex(st.p);
-        chips.forEach(function(c, n){ c.classList.toggle('now', n === pi); });
-      }
-
-      // move cursor
-      cur.classList.add('on');
-      cur.style.transform = 'translate(' + (st.x * vp.clientWidth / 100) + 'px,' + (st.y * vp.clientHeight / 100) + 'px)';
-
-      // click pulse once it arrives
-      setTimeout(function(){
-        cur.classList.add('click');
-        setTimeout(function(){ cur.classList.remove('click'); }, 560);
-      }, 1050);
+      var needNav = fr.getAttribute('data-p') !== st.p;
 
       capNum.textContent = 'STEP ' + (i + 1);
       capEl.textContent = st.t;
 
-      timer = setTimeout(go, 3400);
+      // 1. glide the cursor to its target
+      cur.classList.add('on');
+      cur.style.transform = 'translate(' + (st.x * vp.clientWidth / 100) + 'px,' +
+                                           (st.y * vp.clientHeight / 100) + 'px)';
+
+      // 2. once it has arrived, pulse
+      timers.push(setTimeout(function(){
+        cur.classList.add('click');
+        timers.push(setTimeout(function(){ cur.classList.remove('click'); }, 560));
+
+        // 3. only after the click does the page change
+        if(needNav){
+          timers.push(setTimeout(function(){
+            fr.setAttribute('data-p', st.p);
+            fr.src = base + st.p;
+            urlEl.textContent = host + (st.p === 'index.html' ? '' : '/' + st.p.replace('.html',''));
+            var pi = pageIndex(st.p);
+            chips.forEach(function(c, n){ c.classList.toggle('now', n === pi); });
+          }, 240));
+        }
+      }, 1120));
+
+      timers.push(setTimeout(go, 3900));
     }
 
     function start(){
       if(running || reduce) return;
       running = true;
-      if(!loadedOnce && !fr.src){ fr.setAttribute('data-p',''); }
+      if(!fr.src){
+        fr.setAttribute('data-p', steps[0].p);
+        fr.src = base + steps[0].p;
+        urlEl.textContent = host;
+      }
       go();
     }
     function stop(){
       running = false;
-      clearTimeout(timer);
-      cur.classList.remove('on');
+      timers.forEach(clearTimeout);
+      timers = [];
+      cur.classList.remove('on','click');
     }
 
     // only run while on screen
@@ -710,6 +848,133 @@
   }
 
   document.querySelectorAll('[data-demo]').forEach(setup);
+})();
+</script>
+
+<script>
+(function(){
+  var KEY = 'dk_tpl_unlocked';
+  var modal = document.getElementById('mo');
+  var form  = document.getElementById('unlock-form');
+  var okEl  = document.getElementById('u-ok');
+  var errEl = document.getElementById('u-err');
+  var btn   = document.getElementById('u-submit');
+  var which = document.getElementById('mwhich');
+  var state = document.getElementById('unlock-state');
+  var pending = null;
+
+  function stored(){
+    try { return localStorage.getItem(KEY) === '1'; } catch(e){ return false; }
+  }
+
+  function unlockAll(openSlug){
+    document.querySelectorAll('.lcard.locked').forEach(function(c){
+      c.classList.remove('locked');
+      c.classList.add('unlocked');
+      var slug = c.getAttribute('data-slug');
+      var b = c.querySelector('.unlock-btn');
+      if(b){
+        var a = document.createElement('a');
+        a.href = slug + '/index.html';
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.className = 'lopen';
+        a.textContent = 'OPEN DEMO ↗';
+        b.replaceWith(a);
+      }
+      var veil = c.querySelector('.lockveil');
+      if(veil) veil.remove();
+      var pill = c.querySelector('.lockpill');
+      if(pill) pill.remove();
+      // make the whole card clickable
+      c.style.cursor = 'pointer';
+      c.addEventListener('click', function(e){
+        if(e.target.closest('a')) return;
+        window.open(slug + '/index.html', '_blank', 'noopener');
+      });
+    });
+    if(state){
+      state.classList.add('done');
+      state.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>All 15 unlocked</span>';
+    }
+    if(openSlug) window.open(openSlug + '/index.html', '_blank', 'noopener');
+  }
+
+  if(stored()) unlockAll(null);
+
+  function open(slug, name){
+    pending = slug;
+    which.textContent = name;
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    setTimeout(function(){ document.getElementById('u-first').focus(); }, 60);
+  }
+  function close(){
+    modal.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('click', function(e){
+    var b = e.target.closest('.unlock-btn');
+    if(b){
+      var card = b.closest('.lcard');
+      open(card.getAttribute('data-slug'), card.getAttribute('data-name'));
+      return;
+    }
+    var locked = e.target.closest('.lcard.locked');
+    if(locked){
+      open(locked.getAttribute('data-slug'), locked.getAttribute('data-name'));
+    }
+  });
+
+  document.getElementById('mclose').addEventListener('click', close);
+  modal.addEventListener('click', function(e){ if(e.target === modal) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !modal.hidden) close(); });
+
+  function valid(){
+    var ok = true;
+    var em = document.getElementById('u-email').value.trim();
+    var ph = document.getElementById('u-phone').value.trim();
+    var f  = document.getElementById('u-first').value.trim();
+    var l  = document.getElementById('u-last').value.trim();
+    var eOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
+    document.getElementById('e-email').classList.toggle('show', !eOk);
+    document.getElementById('e-phone').classList.toggle('show', ph.length < 6);
+    if(!eOk || ph.length < 6 || !f || !l) ok = false;
+    return ok;
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    okEl.classList.remove('show'); errEl.classList.remove('show');
+    if(!valid()) return;
+    btn.disabled = true; btn.textContent = 'Unlocking…';
+
+    var payload = {
+      first_name: document.getElementById('u-first').value.trim(),
+      last_name:  document.getElementById('u-last').value.trim(),
+      email:      document.getElementById('u-email').value.trim(),
+      phone:      document.getElementById('u-phone').value.trim(),
+      template:   pending || ''
+    };
+
+    fetch('/api/unlock', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(r){
+      if(!r.ok) throw new Error('bad');
+      try { localStorage.setItem(KEY, '1'); } catch(e){}
+      okEl.classList.add('show');
+      btn.textContent = 'Unlocked';
+      setTimeout(function(){ close(); unlockAll(pending); btn.disabled = false; btn.textContent = 'Unlock all templates'; }, 900);
+    }).catch(function(){
+      // never trap someone behind a failed request
+      try { localStorage.setItem(KEY, '1'); } catch(e){}
+      errEl.classList.add('show');
+      setTimeout(function(){ close(); unlockAll(pending); btn.disabled = false; btn.textContent = 'Unlock all templates'; }, 1400);
+    });
+  });
 })();
 </script>
 </body>

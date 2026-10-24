@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Security — Vault</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+ :root{--bg:#070B14;--bg2:#0D1322;--card:rgba(255,255,255,.035);--line:rgba(255,255,255,.09);
+  --ink:#E7ECF5;--ink2:#FFF;--mut:#8A96AD;--mut2:#5C6880;--blue:#3B82F6;--teal:#2DD4BF;--amber:#FBBF24;}
+ *{box-sizing:border-box;margin:0;padding:0}
+ body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+ a{color:inherit;text-decoration:none}
+ .wrap{max-width:1160px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2rem)}
+ .mono{font-family:'IBM Plex Mono',monospace}
+ nav{position:sticky;top:0;z-index:50;background:rgba(7,11,20,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+ .nv{display:flex;align-items:center;justify-content:space-between;height:72px}
+ .lg{display:flex;align-items:center;gap:.6rem;font-weight:800;font-size:1.18rem;letter-spacing:-.02em;color:var(--ink2)}
+ .lgm{width:30px;height:30px;border-radius:9px;background:linear-gradient(140deg,var(--blue),var(--teal));display:grid;place-items:center;color:#061018}
+ .nl{display:flex;gap:1.8rem;align-items:center}
+ .nl a{font-size:.9rem;color:var(--mut)}.nl a:hover,.nl a.on{color:var(--ink2)}
+ .b{display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.3rem;border-radius:8px;font-weight:700;font-size:.88rem;border:none;cursor:pointer;font-family:inherit;transition:all .2s}
+ .bp{background:var(--blue);color:#fff}.bp:hover{background:#2E6FE0}
+ .bo{background:var(--card);color:var(--ink);border:1px solid var(--line)}.bo:hover{border-color:var(--blue)}
+ @media(max-width:860px){.nl a:not(.b){display:none}}
+ h1{font-size:clamp(2.1rem,5vw,3.4rem);font-weight:800;line-height:1.08;letter-spacing:-.035em;color:var(--ink2)}
+ h2{font-size:clamp(1.6rem,3.2vw,2.3rem);font-weight:800;letter-spacing:-.03em;color:var(--ink2);line-height:1.16;margin-bottom:.7rem}
+ h3{font-weight:700;font-size:1.05rem;color:var(--ink2);margin-bottom:.35rem}
+ .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:.9rem}
+ section{padding:clamp(3rem,6.5vw,4.5rem) 0}
+ .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.5rem}
+ .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+ @media(max-width:880px){.g3{grid-template-columns:1fr 1fr}}
+ @media(max-width:560px){.g3{grid-template-columns:1fr}}
+ footer{border-top:1px solid var(--line);padding:2.5rem 0;margin-top:2rem}
+ .fb{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.84rem;color:var(--mut2)}
+ .dn{position:fixed;left:50%;bottom:1rem;transform:translateX(-50%);background:var(--bg2);border:1px solid var(--line);padding:.5rem 1rem;border-radius:100px;font-size:.76rem;z-index:99}
+ .dn a{color:var(--teal)}
+</style></head><body>
+<nav><div class="wrap nv"><a href="index.html" class="lg"><span class="lgm"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></span>Vault</a>
+<div class="nl"><a href="index.html">Platform</a><a href="security.html" class="on">Security</a><a href="pricing.html">Pricing</a><a href="pricing.html" class="b bp">Talk to sales</a></div></div></nav>
+
+<section><div class="wrap">
+  <div class="eyebrow">Security &amp; compliance</div>
+  <h1 style="font-size:clamp(1.9rem,4.2vw,2.9rem);margin-bottom:1rem">Built for people who get audited</h1>
+  <p style="color:var(--mut);max-width:58ch;margin-bottom:2.5rem">Every control below is evidenced, tested annually and available to your risk team under NDA. No security theatre.</p>
+
+  <div class="g3" style="margin-bottom:2.5rem">
+    <div class="card" style="display:flex;gap:.9rem;align-items:flex-start"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="1.8" style="flex-shrink:0"><path d="M12 2l8 4v6c0 5-3.4 9.3-8 10-4.6-.7-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg><div><b style="display:block;color:var(--ink2)">SOC 2 Type II</b><small style="color:var(--mut);font-size:.84rem;display:block">Security, availability, confidentiality</small><small class="mono" style="color:var(--mut2);font-size:.72rem">Audited Mar 2026</small></div></div><div class="card" style="display:flex;gap:.9rem;align-items:flex-start"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="1.8" style="flex-shrink:0"><path d="M12 2l8 4v6c0 5-3.4 9.3-8 10-4.6-.7-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg><div><b style="display:block;color:var(--ink2)">PCI DSS Level 1</b><small style="color:var(--mut);font-size:.84rem;display:block">Card data environment</small><small class="mono" style="color:var(--mut2);font-size:.72rem">QSA attested Jan 2026</small></div></div><div class="card" style="display:flex;gap:.9rem;align-items:flex-start"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="1.8" style="flex-shrink:0"><path d="M12 2l8 4v6c0 5-3.4 9.3-8 10-4.6-.7-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg><div><b style="display:block;color:var(--ink2)">ISO 27001:2022</b><small style="color:var(--mut);font-size:.84rem;display:block">Information security management</small><small class="mono" style="color:var(--mut2);font-size:.72rem">Valid to Nov 2028</small></div></div><div class="card" style="display:flex;gap:.9rem;align-items:flex-start"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="1.8" style="flex-shrink:0"><path d="M12 2l8 4v6c0 5-3.4 9.3-8 10-4.6-.7-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg><div><b style="display:block;color:var(--ink2)">FCA authorised</b><small style="color:var(--mut);font-size:.84rem;display:block">Payment institution</small><small class="mono" style="color:var(--mut2);font-size:.72rem">Reference 000000</small></div></div><div class="card" style="display:flex;gap:.9rem;align-items:flex-start"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="1.8" style="flex-shrink:0"><path d="M12 2l8 4v6c0 5-3.4 9.3-8 10-4.6-.7-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg><div><b style="display:block;color:var(--ink2)">UK GDPR</b><small style="color:var(--mut);font-size:.84rem;display:block">Data protection by design</small><small class="mono" style="color:var(--mut2);font-size:.72rem">DPIA on file</small></div></div><div class="card" style="display:flex;gap:.9rem;align-items:flex-start"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="1.8" style="flex-shrink:0"><path d="M12 2l8 4v6c0 5-3.4 9.3-8 10-4.6-.7-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg><div><b style="display:block;color:var(--ink2)">Cyber Essentials Plus</b><small style="color:var(--mut);font-size:.84rem;display:block">Technical controls</small><small class="mono" style="color:var(--mut2);font-size:.72rem">Renewed Jun 2026</small></div></div>
+  </div>
+
+  <h2 style="margin-bottom:1.2rem;font-size:1.5rem">Controls</h2>
+  <div class="card" style="padding:0;overflow:hidden">
+    <div style="display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:1rem;padding:.9rem 1.3rem;border-bottom:1px solid var(--line);font-size:.88rem;align-items:center"><div><b style="display:block;color:var(--ink2);font-weight:600">Encryption at rest</b><small style="color:var(--mut2);font-size:.8rem">AES-256, keys in HSM</small></div><span style="color:var(--mut)">All data stores</span><span class="mono" style="font-size:.76rem;color:var(--teal);text-align:right">VERIFIED</span></div><div style="display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:1rem;padding:.9rem 1.3rem;border-bottom:1px solid var(--line);font-size:.88rem;align-items:center"><div><b style="display:block;color:var(--ink2);font-weight:600">Encryption in transit</b><small style="color:var(--mut2);font-size:.8rem">TLS 1.3, HSTS preloaded</small></div><span style="color:var(--mut)">All endpoints</span><span class="mono" style="font-size:.76rem;color:var(--teal);text-align:right">VERIFIED</span></div><div style="display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:1rem;padding:.9rem 1.3rem;border-bottom:1px solid var(--line);font-size:.88rem;align-items:center"><div><b style="display:block;color:var(--ink2);font-weight:600">Tokenisation</b><small style="color:var(--mut2);font-size:.8rem">PAN never stored in plaintext</small></div><span style="color:var(--mut)">Card environment</span><span class="mono" style="font-size:.76rem;color:var(--teal);text-align:right">VERIFIED</span></div><div style="display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:1rem;padding:.9rem 1.3rem;border-bottom:1px solid var(--line);font-size:.88rem;align-items:center"><div><b style="display:block;color:var(--ink2);font-weight:600">Access review</b><small style="color:var(--mut2);font-size:.8rem">Quarterly, least privilege</small></div><span style="color:var(--mut)">All production</span><span class="mono" style="font-size:.76rem;color:var(--teal);text-align:right">Q3 2026</span></div><div style="display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:1rem;padding:.9rem 1.3rem;border-bottom:1px solid var(--line);font-size:.88rem;align-items:center"><div><b style="display:block;color:var(--ink2);font-weight:600">Penetration test</b><small style="color:var(--mut2);font-size:.8rem">CREST accredited, annual</small></div><span style="color:var(--mut)">Full scope</span><span class="mono" style="font-size:.76rem;color:var(--teal);text-align:right">Jul 2026</span></div><div style="display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:1rem;padding:.9rem 1.3rem;border-bottom:1px solid var(--line);font-size:.88rem;align-items:center"><div><b style="display:block;color:var(--ink2);font-weight:600">Disaster recovery</b><small style="color:var(--mut2);font-size:.8rem">RTO 4h · RPO 15min</small></div><span style="color:var(--mut)">Tested biannually</span><span class="mono" style="font-size:.76rem;color:var(--teal);text-align:right">Sep 2026</span></div>
+  </div>
+
+  <div class="card" style="margin-top:1.5rem;border-color:rgba(45,212,191,.35);background:rgba(45,212,191,.05)">
+    <h3 style="color:var(--teal)">Need our full control matrix?</h3>
+    <p style="color:var(--mut);font-size:.92rem;margin-bottom:1rem">We share SOC 2 Type II reports, pen test summaries and a completed CAIQ under mutual NDA, usually within one working day.</p>
+    <a href="pricing.html" class="b bo">Request documentation</a>
+  </div>
+</div></section>
+
+<footer><div class="wrap fb"><span>© 2026 Vault Payments Ltd · FCA reference 000000</span><span>Demo template · DK Instaweb</span></div></footer>
+<div class="dn">Template demo · <a href="../index.html">Back to all templates</a></div>
+</body></html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home — Transit Freight</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+ :root{--bg:#F4F6F8;--pap:#fff;--ink:#0E1B26;--body:#4A5B69;--mut:#7E8E9C;
+  --deep:#0B3A5B;--deep2:#072838;--cyan:#06A5D6;--amber:#F2A33C;--green:#2E9E68;--line:#DCE3E9;}
+ *{box-sizing:border-box;margin:0;padding:0}
+ body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--ink);line-height:1.62;-webkit-font-smoothing:antialiased}
+ a{color:inherit;text-decoration:none}
+ .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2rem)}
+ .tb{background:var(--deep2);color:#A9C6D8;font-size:.8rem;padding:.5rem 0}
+ .tbi{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+ nav{position:sticky;top:0;z-index:50;background:rgba(244,246,248,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+ .nv{display:flex;align-items:center;justify-content:space-between;height:74px}
+ .lg{display:flex;align-items:center;gap:.6rem;font-weight:700;font-size:1.25rem;letter-spacing:-.03em;color:var(--deep)}
+ .lgm{width:32px;height:32px;border-radius:8px;background:var(--deep);display:grid;place-items:center;color:var(--cyan)}
+ .nl{display:flex;gap:1.8rem;align-items:center}
+ .nl a{font-size:.9rem;font-weight:500;color:var(--body)}
+ .nl a:hover,.nl a.on{color:var(--cyan)}
+ .b{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.4rem;border-radius:6px;font-weight:700;font-size:.88rem;border:none;cursor:pointer;font-family:inherit;transition:all .2s}
+ .bp{background:var(--cyan);color:#042A38}.bp:hover{background:#2DB8E4}
+ .bo{background:transparent;color:var(--deep);border:1.5px solid var(--line)}.bo:hover{border-color:var(--cyan)}
+ @media(max-width:860px){.nl a:not(.b){display:none}}
+ h1{font-size:clamp(2.1rem,5vw,3.3rem);font-weight:700;line-height:1.08;letter-spacing:-.035em;color:var(--deep2)}
+ h2{font-size:clamp(1.6rem,3.2vw,2.2rem);font-weight:700;letter-spacing:-.03em;color:var(--deep2);line-height:1.18;margin-bottom:.7rem}
+ h3{font-weight:700;font-size:1.05rem;margin-bottom:.35rem}
+ .eyebrow{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);font-weight:700;margin-bottom:.9rem}
+ section{padding:clamp(3rem,6.5vw,4.5rem) 0}
+ .card{background:var(--pap);border:1px solid var(--line);border-radius:10px;padding:1.5rem}
+ .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+ @media(max-width:880px){.g3{grid-template-columns:1fr 1fr}}
+ @media(max-width:560px){.g3{grid-template-columns:1fr}}
+ footer{background:var(--deep2);color:#A9C6D8;padding:2.8rem 0 1.8rem;margin-top:2rem}
+ .fb{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.82rem}
+ .dn{position:fixed;left:50%;bottom:1rem;transform:translateX(-50%);background:var(--deep2);color:#fff;padding:.5rem 1rem;border-radius:5px;font-size:.76rem;z-index:99}
+ .dn a{color:var(--cyan)}
+</style></head><body>
+<div class="tb"><div class="wrap tbi"><span>FORS Gold · 142 vehicles · 24/7 operations desk</span><span>0161 000 0000</span></div></div>
+<nav><div class="wrap nv"><a href="index.html" class="lg"><span class="lgm"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="1" y="5" width="14" height="12"/><path d="M15 9h4l3 3v5h-7zM5.5 19.5a2 2 0 100 .01M18.5 19.5a2 2 0 100 .01"/></svg></span>Transit</a>
+<div class="nl"><a href="index.html" class="on">Home</a><a href="track.html">Track</a><a href="services.html">Services</a><a href="track.html" class="b bp">Track a shipment</a></div></div></nav>
+
+<section style="padding-bottom:0"><div class="wrap">
+  <div style="display:grid;grid-template-columns:1.05fr .95fr;gap:3rem;align-items:center" class="hg">
+    <div>
+      <div class="eyebrow">Palletised freight · UK &amp; Europe</div>
+      <h1>Your pallet,<br>where you expect it.</h1>
+      <p style="color:var(--body);font-size:1.05rem;max-width:46ch;margin:1.2rem 0 2rem">Next-day across the UK, groupage into Europe twice weekly, and a tracking page your customers can actually understand.</p>
+      <div class="card" style="padding:1.2rem">
+        <label style="display:block;font-size:.78rem;font-weight:700;color:var(--mut);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem">Track a shipment</label>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+          <input placeholder="Consignment number, e.g. TF-4820194" style="flex:1;min-width:200px;padding:.7rem .9rem;border:1.5px solid var(--line);border-radius:6px;font-family:inherit">
+          <a href="track.html" class="b bp">Track</a>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <div style="padding:1rem 1.2rem;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between">
+        <b style="font-size:.92rem">Network status</b><span style="font-size:.74rem;color:var(--green);font-weight:700">● ALL CLEAR</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:.8rem;padding:.8rem 1.2rem;border-bottom:1px solid var(--line)"><i style="width:8px;height:8px;border-radius:50%;background:#2E9E68;flex-shrink:0;display:block"></i><span style="font-size:.9rem">Manchester hub</span><span style="margin-left:auto;font-size:.82rem;color:var(--mut)">On schedule</span></div><div style="display:flex;align-items:center;gap:.8rem;padding:.8rem 1.2rem;border-bottom:1px solid var(--line)"><i style="width:8px;height:8px;border-radius:50%;background:#2E9E68;flex-shrink:0;display:block"></i><span style="font-size:.9rem">Midlands hub</span><span style="margin-left:auto;font-size:.82rem;color:var(--mut)">On schedule</span></div><div style="display:flex;align-items:center;gap:.8rem;padding:.8rem 1.2rem;border-bottom:1px solid var(--line)"><i style="width:8px;height:8px;border-radius:50%;background:#F2A33C;flex-shrink:0;display:block"></i><span style="font-size:.9rem">Dover crossing</span><span style="margin-left:auto;font-size:.82rem;color:var(--mut)">40 min delay</span></div><div style="display:flex;align-items:center;gap:.8rem;padding:.8rem 1.2rem;border-bottom:1px solid var(--line)"><i style="width:8px;height:8px;border-radius:50%;background:#2E9E68;flex-shrink:0;display:block"></i><span style="font-size:.9rem">Scotland trunk</span><span style="margin-left:auto;font-size:.82rem;color:var(--mut)">On schedule</span></div><div style="display:flex;align-items:center;gap:.8rem;padding:.8rem 1.2rem;border-bottom:1px solid var(--line)"><i style="width:8px;height:8px;border-radius:50%;background:#2E9E68;flex-shrink:0;display:block"></i><span style="font-size:.9rem">Ireland ferry</span><span style="margin-left:auto;font-size:.82rem;color:var(--mut)">On schedule</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">Services</div><h2 style="margin-bottom:2rem">How we move things</h2>
+  <div class="g3"><div class="card"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#06A5D6" stroke-width="1.8" style="margin-bottom:.8rem"><path d="M13 2L3 14h8l-1 8 10-12h-8z"/></svg><h3>Next-day pallets</h3><p style="color:var(--body);font-size:.92rem">Booked before 4pm, delivered next working day anywhere in mainland UK.</p></div><div class="card"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#06A5D6" stroke-width="1.8" style="margin-bottom:.8rem"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zM2 12h20"/></svg><h3>European groupage</h3><p style="color:var(--body);font-size:.92rem">Consolidated loads into France, Benelux and Germany, twice a week.</p></div><div class="card"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#06A5D6" stroke-width="1.8" style="margin-bottom:.8rem"><path d="M14 14V5a2 2 0 10-4 0v9a4 4 0 104 0z"/></svg><h3>Temperature controlled</h3><p style="color:var(--body);font-size:.92rem">Chilled and ambient in the same vehicle, logged end to end.</p></div><div class="card"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#06A5D6" stroke-width="1.8" style="margin-bottom:.8rem"><path d="M1 5h14v12H1zM15 9h4l3 3v5h-7"/></svg><h3>Dedicated vehicles</h3><p style="color:var(--body);font-size:.92rem">Your own truck and driver on contract, liveried if you want it.</p></div><div class="card"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#06A5D6" stroke-width="1.8" style="margin-bottom:.8rem"><path d="M3 21V8l9-5 9 5v13M9 21v-7h6v7"/></svg><h3>Warehousing</h3><p style="color:var(--body);font-size:.92rem">42,000 sq ft of racked storage with pick and pack.</p></div><div class="card"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#06A5D6" stroke-width="1.8" style="margin-bottom:.8rem"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg><h3>Customs clearance</h3><p style="color:var(--body);font-size:.92rem">In-house declarations for GB–EU movements. No third-party broker.</p></div></div>
+</div></section>
+
+<footer><div class="wrap fb"><span>© 2026 Transit Freight Ltd · Operator licence OB0000000</span><span>Demo template · DK Instaweb</span></div></footer>
+<div class="dn">Template demo · <a href="../index.html">Back to all templates</a></div>
+</body></html>

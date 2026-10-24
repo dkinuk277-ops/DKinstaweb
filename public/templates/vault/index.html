@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Platform — Vault</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+ :root{--bg:#070B14;--bg2:#0D1322;--card:rgba(255,255,255,.035);--line:rgba(255,255,255,.09);
+  --ink:#E7ECF5;--ink2:#FFF;--mut:#8A96AD;--mut2:#5C6880;--blue:#3B82F6;--teal:#2DD4BF;--amber:#FBBF24;}
+ *{box-sizing:border-box;margin:0;padding:0}
+ body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+ a{color:inherit;text-decoration:none}
+ .wrap{max-width:1160px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2rem)}
+ .mono{font-family:'IBM Plex Mono',monospace}
+ nav{position:sticky;top:0;z-index:50;background:rgba(7,11,20,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+ .nv{display:flex;align-items:center;justify-content:space-between;height:72px}
+ .lg{display:flex;align-items:center;gap:.6rem;font-weight:800;font-size:1.18rem;letter-spacing:-.02em;color:var(--ink2)}
+ .lgm{width:30px;height:30px;border-radius:9px;background:linear-gradient(140deg,var(--blue),var(--teal));display:grid;place-items:center;color:#061018}
+ .nl{display:flex;gap:1.8rem;align-items:center}
+ .nl a{font-size:.9rem;color:var(--mut)}.nl a:hover,.nl a.on{color:var(--ink2)}
+ .b{display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.3rem;border-radius:8px;font-weight:700;font-size:.88rem;border:none;cursor:pointer;font-family:inherit;transition:all .2s}
+ .bp{background:var(--blue);color:#fff}.bp:hover{background:#2E6FE0}
+ .bo{background:var(--card);color:var(--ink);border:1px solid var(--line)}.bo:hover{border-color:var(--blue)}
+ @media(max-width:860px){.nl a:not(.b){display:none}}
+ h1{font-size:clamp(2.1rem,5vw,3.4rem);font-weight:800;line-height:1.08;letter-spacing:-.035em;color:var(--ink2)}
+ h2{font-size:clamp(1.6rem,3.2vw,2.3rem);font-weight:800;letter-spacing:-.03em;color:var(--ink2);line-height:1.16;margin-bottom:.7rem}
+ h3{font-weight:700;font-size:1.05rem;color:var(--ink2);margin-bottom:.35rem}
+ .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:.9rem}
+ section{padding:clamp(3rem,6.5vw,4.5rem) 0}
+ .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.5rem}
+ .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+ @media(max-width:880px){.g3{grid-template-columns:1fr 1fr}}
+ @media(max-width:560px){.g3{grid-template-columns:1fr}}
+ footer{border-top:1px solid var(--line);padding:2.5rem 0;margin-top:2rem}
+ .fb{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.84rem;color:var(--mut2)}
+ .dn{position:fixed;left:50%;bottom:1rem;transform:translateX(-50%);background:var(--bg2);border:1px solid var(--line);padding:.5rem 1rem;border-radius:100px;font-size:.76rem;z-index:99}
+ .dn a{color:var(--teal)}
+</style></head><body>
+<nav><div class="wrap nv"><a href="index.html" class="lg"><span class="lgm"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></span>Vault</a>
+<div class="nl"><a href="index.html" class="on">Platform</a><a href="security.html">Security</a><a href="pricing.html">Pricing</a><a href="pricing.html" class="b bp">Talk to sales</a></div></div></nav>
+
+<section style="position:relative;overflow:hidden;padding-bottom:0">
+  <div style="position:absolute;top:-200px;left:50%;width:600px;height:600px;transform:translateX(-50%);background:radial-gradient(circle,rgba(59,130,246,.18),transparent 65%);pointer-events:none"></div>
+  <div class="wrap" style="position:relative">
+    <div style="display:grid;grid-template-columns:1.05fr .95fr;gap:3rem;align-items:center" class="hg">
+      <div>
+        <div class="eyebrow">FCA authorised · PCI DSS Level 1</div>
+        <h1>Payments infrastructure<br>that passes the audit.</h1>
+        <p style="color:var(--mut);font-size:1.05rem;max-width:46ch;margin:1.2rem 0 2rem">Vault handles card acquiring, settlement and reconciliation for regulated businesses. Built by people who have sat on the other side of a Section 166.</p>
+        <div style="display:flex;gap:.7rem;flex-wrap:wrap"><a href="pricing.html" class="b bp">Talk to sales</a><a href="security.html" class="b bo">Security overview</a></div>
+        <div style="display:flex;gap:1.8rem;margin-top:2rem;flex-wrap:wrap">
+          <div><div class="mono" style="font-size:1.4rem;color:var(--ink2);font-weight:500">99.995%</div><div style="font-size:.78rem;color:var(--mut2)">Uptime, 12 months</div></div>
+          <div><div class="mono" style="font-size:1.4rem;color:var(--ink2);font-weight:500">38ms</div><div style="font-size:.78rem;color:var(--mut2)">p99 auth latency</div></div>
+          <div><div class="mono" style="font-size:1.4rem;color:var(--ink2);font-weight:500">34</div><div style="font-size:.78rem;color:var(--mut2)">Settlement currencies</div></div>
+        </div>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden">
+        <div style="padding:1rem 1.2rem;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between">
+          <b style="font-size:.9rem">Live authorisations</b><span class="mono" style="font-size:.7rem;color:var(--teal)">● STREAMING</span>
+        </div>
+        <div style="padding:.6rem 1.2rem 1.2rem">
+          <div style="display:flex;align-items:center;gap:.7rem;padding:.6rem 0;border-bottom:1px solid var(--line)"><i style="width:7px;height:7px;border-radius:50%;background:#2DD4BF;flex-shrink:0;display:block"></i><span class="mono" style="font-size:.76rem;color:var(--mut2)">txn_8f2a</span><span style="font-size:.84rem;margin-left:auto">GBP · Visa</span><b style="font-size:.84rem;min-width:70px;text-align:right">£1,240.00</b></div><div style="display:flex;align-items:center;gap:.7rem;padding:.6rem 0;border-bottom:1px solid var(--line)"><i style="width:7px;height:7px;border-radius:50%;background:#2DD4BF;flex-shrink:0;display:block"></i><span class="mono" style="font-size:.76rem;color:var(--mut2)">txn_8f29</span><span style="font-size:.84rem;margin-left:auto">EUR · Mastercard</span><b style="font-size:.84rem;min-width:70px;text-align:right">€385.50</b></div><div style="display:flex;align-items:center;gap:.7rem;padding:.6rem 0;border-bottom:1px solid var(--line)"><i style="width:7px;height:7px;border-radius:50%;background:#2DD4BF;flex-shrink:0;display:block"></i><span class="mono" style="font-size:.76rem;color:var(--mut2)">txn_8f28</span><span style="font-size:.84rem;margin-left:auto">USD · Amex</span><b style="font-size:.84rem;min-width:70px;text-align:right">$2,900.00</b></div><div style="display:flex;align-items:center;gap:.7rem;padding:.6rem 0;border-bottom:1px solid var(--line)"><i style="width:7px;height:7px;border-radius:50%;background:#FBBF24;flex-shrink:0;display:block"></i><span class="mono" style="font-size:.76rem;color:var(--mut2)">txn_8f27</span><span style="font-size:.84rem;margin-left:auto">GBP · Visa</span><b style="font-size:.84rem;min-width:70px;text-align:right">£149.00</b></div><div style="display:flex;align-items:center;gap:.7rem;padding:.6rem 0;border-bottom:1px solid var(--line)"><i style="width:7px;height:7px;border-radius:50%;background:#2DD4BF;flex-shrink:0;display:block"></i><span class="mono" style="font-size:.76rem;color:var(--mut2)">txn_8f26</span><span style="font-size:.84rem;margin-left:auto">GBP · Mastercard</span><b style="font-size:.84rem;min-width:70px;text-align:right">£675.25</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section><div class="wrap">
+  <div class="eyebrow">Platform</div><h2 style="margin-bottom:2rem">What you get</h2>
+  <div class="g3"><div class="card"><span style="width:40px;height:40px;border-radius:11px;background:rgba(59,130,246,.14);display:grid;place-items:center;color:var(--blue);margin-bottom:.9rem"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h8l-1 8 10-12h-8z"/></svg></span><h3>Instant settlement</h3><p style="color:var(--mut);font-size:.9rem">Funds in the account the same working day, not three days later.</p></div><div class="card"><span style="width:40px;height:40px;border-radius:11px;background:rgba(59,130,246,.14);display:grid;place-items:center;color:var(--blue);margin-bottom:.9rem"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.4 9.3-8 10-4.6-.7-8-5-8-10V6z"/></svg></span><h3>Fraud scoring</h3><p style="color:var(--mut);font-size:.9rem">Every transaction scored in under 40ms against 200 behavioural signals.</p></div><div class="card"><span style="width:40px;height:40px;border-radius:11px;background:rgba(59,130,246,.14);display:grid;place-items:center;color:var(--blue);margin-bottom:.9rem"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></span><h3>Full audit trail</h3><p style="color:var(--mut);font-size:.9rem">Immutable, exportable and timestamped. Your auditors will stop emailing you.</p></div><div class="card"><span style="width:40px;height:40px;border-radius:11px;background:rgba(59,130,246,.14);display:grid;place-items:center;color:var(--blue);margin-bottom:.9rem"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zM2 12h20M12 2a15 15 0 010 20 15 15 0 010-20z"/></svg></span><h3>Multi-currency</h3><p style="color:var(--mut);font-size:.9rem">Hold and settle in 34 currencies without a separate account for each.</p></div><div class="card"><span style="width:40px;height:40px;border-radius:11px;background:rgba(59,130,246,.14);display:grid;place-items:center;color:var(--blue);margin-bottom:.9rem"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 3a4 4 0 100 8 4 4 0 000-8z"/></svg></span><h3>Role-based access</h3><p style="color:var(--mut);font-size:.9rem">Granular permissions mapped to your existing directory groups.</p></div><div class="card"><span style="width:40px;height:40px;border-radius:11px;background:rgba(59,130,246,.14);display:grid;place-items:center;color:var(--blue);margin-bottom:.9rem"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 00-2 2v3M16 3h3a2 2 0 012 2v3M8 21H5a2 2 0 01-2-2v-3M16 21h3a2 2 0 002-2v-3"/></svg></span><h3>Open API</h3><p style="color:var(--mut);font-size:.9rem">REST and webhooks, versioned, with a sandbox that mirrors production exactly.</p></div></div>
+</div></section>
+
+<footer><div class="wrap fb"><span>© 2026 Vault Payments Ltd · FCA reference 000000</span><span>Demo template · DK Instaweb</span></div></footer>
+<div class="dn">Template demo · <a href="../index.html">Back to all templates</a></div>
+</body></html>

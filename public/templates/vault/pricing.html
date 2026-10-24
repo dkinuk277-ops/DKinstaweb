@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — Vault</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+ :root{--bg:#070B14;--bg2:#0D1322;--card:rgba(255,255,255,.035);--line:rgba(255,255,255,.09);
+  --ink:#E7ECF5;--ink2:#FFF;--mut:#8A96AD;--mut2:#5C6880;--blue:#3B82F6;--teal:#2DD4BF;--amber:#FBBF24;}
+ *{box-sizing:border-box;margin:0;padding:0}
+ body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+ a{color:inherit;text-decoration:none}
+ .wrap{max-width:1160px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2rem)}
+ .mono{font-family:'IBM Plex Mono',monospace}
+ nav{position:sticky;top:0;z-index:50;background:rgba(7,11,20,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+ .nv{display:flex;align-items:center;justify-content:space-between;height:72px}
+ .lg{display:flex;align-items:center;gap:.6rem;font-weight:800;font-size:1.18rem;letter-spacing:-.02em;color:var(--ink2)}
+ .lgm{width:30px;height:30px;border-radius:9px;background:linear-gradient(140deg,var(--blue),var(--teal));display:grid;place-items:center;color:#061018}
+ .nl{display:flex;gap:1.8rem;align-items:center}
+ .nl a{font-size:.9rem;color:var(--mut)}.nl a:hover,.nl a.on{color:var(--ink2)}
+ .b{display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.3rem;border-radius:8px;font-weight:700;font-size:.88rem;border:none;cursor:pointer;font-family:inherit;transition:all .2s}
+ .bp{background:var(--blue);color:#fff}.bp:hover{background:#2E6FE0}
+ .bo{background:var(--card);color:var(--ink);border:1px solid var(--line)}.bo:hover{border-color:var(--blue)}
+ @media(max-width:860px){.nl a:not(.b){display:none}}
+ h1{font-size:clamp(2.1rem,5vw,3.4rem);font-weight:800;line-height:1.08;letter-spacing:-.035em;color:var(--ink2)}
+ h2{font-size:clamp(1.6rem,3.2vw,2.3rem);font-weight:800;letter-spacing:-.03em;color:var(--ink2);line-height:1.16;margin-bottom:.7rem}
+ h3{font-weight:700;font-size:1.05rem;color:var(--ink2);margin-bottom:.35rem}
+ .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:.9rem}
+ section{padding:clamp(3rem,6.5vw,4.5rem) 0}
+ .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.5rem}
+ .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+ @media(max-width:880px){.g3{grid-template-columns:1fr 1fr}}
+ @media(max-width:560px){.g3{grid-template-columns:1fr}}
+ footer{border-top:1px solid var(--line);padding:2.5rem 0;margin-top:2rem}
+ .fb{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.84rem;color:var(--mut2)}
+ .dn{position:fixed;left:50%;bottom:1rem;transform:translateX(-50%);background:var(--bg2);border:1px solid var(--line);padding:.5rem 1rem;border-radius:100px;font-size:.76rem;z-index:99}
+ .dn a{color:var(--teal)}
+</style></head><body>
+<nav><div class="wrap nv"><a href="index.html" class="lg"><span class="lgm"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></span>Vault</a>
+<div class="nl"><a href="index.html">Platform</a><a href="security.html">Security</a><a href="pricing.html" class="on">Pricing</a><a href="pricing.html" class="b bp">Talk to sales</a></div></div></nav>
+
+<section><div class="wrap">
+  <div style="text-align:center;max-width:620px;margin:0 auto 3rem">
+    <div class="eyebrow">Pricing</div>
+    <h1 style="font-size:clamp(1.9rem,4.2vw,2.9rem);margin-bottom:.8rem">Interchange plus, no hidden spread</h1>
+    <p style="color:var(--mut)">You see the interchange, the scheme fee and our margin as separate lines. Every month.</p>
+  </div>
+  <div class="g3" style="align-items:start">
+    <div class="card"><h3 style="font-size:1.2rem">Standard</h3><p style="color:var(--mut);font-size:.9rem;min-height:2.6em">For businesses processing under £250k a month</p><div style="padding:1.1rem 0;margin:1rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><span style="font-size:1.9rem;font-weight:800;color:var(--ink2);letter-spacing:-.03em">0.9% + 10p</span><span style="color:var(--mut2);font-size:.85rem"> per transaction</span></div><ul style="list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.3rem"><li style="font-size:.88rem;color:var(--ink);display:flex;gap:.5rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="2.6" style="flex-shrink:0;margin-top:4px"><path d="M20 6L9 17l-5-5"/></svg>Next-day settlement</li><li style="font-size:.88rem;color:var(--ink);display:flex;gap:.5rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="2.6" style="flex-shrink:0;margin-top:4px"><path d="M20 6L9 17l-5-5"/></svg>Fraud scoring</li><li style="font-size:.88rem;color:var(--ink);display:flex;gap:.5rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="2.6" style="flex-shrink:0;margin-top:4px"><path d="M20 6L9 17l-5-5"/></svg>Dashboard &amp; exports</li><li style="font-size:.88rem;color:var(--ink);display:flex;gap:.5rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="2.6" style="flex-shrink:0;margin-top:4px"><path d="M20 6L9 17l-5-5"/></svg>Email support</li></ul><a href="#" class="b bo" style="width:100%;justify-content:center">Get started</a></div><div class="card" style="border-color:var(--blue);background:rgba(59,130,246,.06);position:relative"><span style="position:absolute;top:-10px;left:1.5rem;background:var(--blue);color:#fff;font-size:.64rem;font-weight:800;letter-spacing:.1em;padding:3px 9px;border-radius:100px">MOST CHOSEN</span><h3 style="font-size:1.2rem">Scale</h3><p style="color:var(--mut);font-size:.9rem;min-height:2.6em">Where most regulated businesses land</p><div style="padding:1.1rem 0;margin:1rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><span style="font-size:1.9rem;font-weight:800;color:var(--ink2);letter-spacing:-.03em">0.6% + 8p</span><span style="color:var(--mut2);font-size:.85rem"> per transaction</span></div><ul style="list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.3rem"><li style="font-size:.88rem;color:var(--ink);display:flex;gap:.5rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="2.6" style="flex-shrink:0;margin-top:4px"><path d="M20 6L9 17l-5-5"/></svg>Same-day settlement</li><li style="font-size:.88rem;color:var(--ink);display:flex;gap:.5rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="2.6" style="flex-shrink:0;margin-top:4px"><path d="M20 6L9 17l-5-5"/></svg>Everything in Standard</li><li style="font-size:.88rem;color:var(--ink);display:flex;gap:.5rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="2.6" style="flex-shrink:0;margin-top:4px"><path d="M20 6L9 17l-5-5"/></svg>Multi-currency settlement</li><li style="font-size:.88rem;color:var(--ink);display:flex;gap:.5rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="2.6" style="flex-shrink:0;margin-top:4px"><path d="M20 6L9 17l-5-5"/></svg>Role-based access</li><li style="font-size:.88rem;color:var(--ink);display:flex;gap:.5rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="2.6" style="flex-shrink:0;margin-top:4px"><path d="M20 6L9 17l-5-5"/></svg>Named account manager</li></ul><a href="#" class="b bp" style="width:100%;justify-content:center">Talk to sales</a></div><div class="card"><h3 style="font-size:1.2rem">Enterprise</h3><p style="color:var(--mut);font-size:.9rem;min-height:2.6em">Over £2m monthly, or complex requirements</p><div style="padding:1.1rem 0;margin:1rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><span style="font-size:1.9rem;font-weight:800;color:var(--ink2);letter-spacing:-.03em">Custom</span><span style="color:var(--mut2);font-size:.85rem"> negotiated</span></div><ul style="list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.3rem"><li style="font-size:.88rem;color:var(--ink);display:flex;gap:.5rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="2.6" style="flex-shrink:0;margin-top:4px"><path d="M20 6L9 17l-5-5"/></svg>Everything in Scale</li><li style="font-size:.88rem;color:var(--ink);display:flex;gap:.5rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="2.6" style="flex-shrink:0;margin-top:4px"><path d="M20 6L9 17l-5-5"/></svg>Private interchange routing</li><li style="font-size:.88rem;color:var(--ink);display:flex;gap:.5rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="2.6" style="flex-shrink:0;margin-top:4px"><path d="M20 6L9 17l-5-5"/></svg>Dedicated infrastructure</li><li style="font-size:.88rem;color:var(--ink);display:flex;gap:.5rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="2.6" style="flex-shrink:0;margin-top:4px"><path d="M20 6L9 17l-5-5"/></svg>99.99% SLA with credits</li><li style="font-size:.88rem;color:var(--ink);display:flex;gap:.5rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="2.6" style="flex-shrink:0;margin-top:4px"><path d="M20 6L9 17l-5-5"/></svg>Quarterly risk review</li></ul><a href="#" class="b bo" style="width:100%;justify-content:center">Contact us</a></div>
+  </div>
+  <div class="card" style="margin-top:2rem;text-align:center">
+    <h3>Processing over £2m a month?</h3>
+    <p style="color:var(--mut);font-size:.92rem;margin-bottom:1rem">Rates are negotiated, and we will model your actual last quarter rather than quote a headline.</p>
+    <a href="#" class="b bp">Request a rate review</a>
+  </div>
+</div></section>
+
+<footer><div class="wrap fb"><span>© 2026 Vault Payments Ltd · FCA reference 000000</span><span>Demo template · DK Instaweb</span></div></footer>
+<div class="dn">Template demo · <a href="../index.html">Back to all templates</a></div>
+</body></html>

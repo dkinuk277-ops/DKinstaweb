@@ -91,7 +91,7 @@ async function ensureSchema(env) {
   ).run();
 
   // Additive migrations for databases created before these columns existed.
-  const extras = ['recommended_price TEXT', 'selected_price TEXT'];
+  const extras = ['recommended_price TEXT', 'selected_price TEXT', 'template TEXT'];
   for (const col of extras) {
     try {
       await env.DB.prepare('ALTER TABLE submissions ADD COLUMN ' + col).run();
@@ -297,16 +297,20 @@ function adminPage(rows) {
   const total = rows.length;
   const newCount = rows.filter((r) => r.status === 'new').length;
   const quotes = rows.filter((r) => r.kind === 'quote').length;
+  const unlocks = rows.filter((r) => r.kind === 'unlock').length;
 
   const items = rows.length
     ? rows
         .map((r) => {
           const name = [r.first_name, r.last_name].filter(Boolean).join(' ') || '(no name)';
           const isQuote = r.kind === 'quote';
+          const isUnlock = r.kind === 'unlock';
           const regionLabel =
             r.region === 'in' ? 'India' : r.region === 'uk' ? 'United Kingdom' : r.region_other || r.region || '';
 
-          const headline = isQuote
+          const headline = isUnlock
+            ? 'Unlocked the template library' + (r.template ? ' · clicked ' + r.template : '')
+            : isQuote
             ? (r.selected_plan
                 ? r.selected_plan + (r.selected_price ? ' — ' + r.selected_price : '')
                 : 'Viewed plans' + (r.recommended_plan ? ' · ' + r.recommended_plan + ' suggested' : ''))
@@ -324,7 +328,7 @@ function adminPage(rows) {
               detailRow('Assessed scope', r.scope) +
               detailRow('Recommended', r.recommended_plan ? r.recommended_plan + (r.recommended_price ? ' — ' + r.recommended_price : '') : '') +
               detailRow('Plan requested', r.selected_plan ? r.selected_plan + (r.selected_price ? ' — ' + r.selected_price : '') : '')
-            : detailRow('Phone', r.phone);
+            : detailRow('Phone', r.phone) + detailRow('Template clicked', r.template);
 
           return `
       <details class="item${r.status === 'new' ? ' is-new' : ''}">
@@ -332,7 +336,7 @@ function adminPage(rows) {
           <span class="chev">&#9656;</span>
           <span class="sum-main">
             <span class="sum-name">${esc(name)}</span>
-            <span class="kind kind-${isQuote ? 'quote' : 'contact'}">${isQuote ? 'QUOTE' : 'CONTACT'}</span>
+            <span class="kind kind-${isUnlock ? 'unlock' : isQuote ? 'quote' : 'contact'}">${isUnlock ? 'TEMPLATES' : isQuote ? 'QUOTE' : 'CONTACT'}</span>
             ${r.status === 'new' ? '<span class="tag">NEW</span>' : ''}
             <span class="sum-line">${esc(headline)}</span>
           </span>
@@ -390,6 +394,7 @@ function adminPage(rows) {
   .kind{font-family:'JetBrains Mono',monospace;font-size:.58rem;font-weight:700;letter-spacing:.1em;padding:2px 5px;border-radius:2px;flex-shrink:0}
   .kind-quote{background:rgba(245,158,11,.15);color:#F59E0B;border:1px solid rgba(245,158,11,.4)}
   .kind-contact{background:rgba(255,255,255,.07);color:#8B95A5;border:1px solid rgba(255,255,255,.14)}
+  .kind-unlock{background:rgba(56,189,248,.14);color:#38BDF8;border:1px solid rgba(56,189,248,.4)}
   .tag{background:#F59E0B;color:#0A1428;font-family:'JetBrains Mono',monospace;font-size:.58rem;font-weight:700;padding:2px 5px;border-radius:2px;letter-spacing:.08em;flex-shrink:0}
   .body{padding:0 1.1rem 1.1rem;border-top:1px solid rgba(255,255,255,.06);margin-top:.2rem}
   .contactbar{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;padding:.85rem 0}
@@ -418,7 +423,7 @@ function adminPage(rows) {
       </div>
     </header>
     <h1>Submissions</h1>
-    <div class="sub">${total} total · ${newCount} new · ${quotes} from quote survey</div>
+    <div class="sub">${total} total · ${newCount} new · ${quotes} from quote survey · ${unlocks} template unlocks</div>
     ${items}
   </div>
 </body></html>`;
@@ -837,6 +842,98 @@ export default {
             )
           );
         }
+
+        return json({ ok: true });
+      } catch (err) {
+        return json({ error: 'Server error.' }, 500);
+      }
+    }
+
+
+    /* ---- Template library unlock ---- */
+    if (path === '/api/unlock' && request.method === 'POST') {
+      try {
+        const b = await request.json();
+        const first = clean(b.first_name, 80);
+        const last = clean(b.last_name, 80);
+        const email = clean(b.email, 160);
+        const phone = clean(b.phone, 40);
+        const template = clean(b.template, 60);
+
+        if (!first || !last || !email) return json({ error: 'Missing details.' }, 400);
+        if (!validEmail(email)) return json({ error: 'Invalid email address.' }, 400);
+
+        await ensureSchema(env);
+        const created_at = new Date().toISOString();
+
+        await env.DB.prepare(
+          `INSERT INTO submissions (kind, first_name, last_name, email, phone, template, created_at, status)
+           VALUES ('unlock', ?, ?, ?, ?, ?, ?, 'new')`
+        )
+          .bind(first, last, email, phone || null, template || null, created_at)
+          .run();
+
+        ctx.waitUntil(
+          sendEmail(
+            env,
+            'Template library unlocked — ' + first + ' ' + last,
+            [
+              first + ' ' + last + ' unlocked the template library.',
+              '',
+              'Email: ' + email,
+              'Phone: ' + (phone || 'Not provided'),
+              'Clicked on: ' + (template || 'the library'),
+              'Received: ' + created_at,
+              '',
+              'This is a warm lead — they were browsing templates, not just reading the homepage.',
+              '',
+              '--',
+              'View all: https://dkinstaweb.com/admin'
+            ],
+            email
+          )
+        );
+
+        ctx.waitUntil(
+          sendEmail(
+            env,
+            'Your template library — DK Instaweb',
+            [
+              'Hi ' + first + ',',
+              '',
+              'Thanks for taking a look. All fifteen demos are now open on your browser —',
+              'just head back to the page and click any of them.',
+              '',
+              'https://dkinstaweb.com/templates/',
+              '',
+              'Each one has three working pages, so click the navigation and press the buttons.',
+              'If one is close to what you had in mind, reply to this email and tell us which —',
+              'we will come back with what it would look like for your business.',
+              '',
+              'No obligation at any stage.',
+              '',
+              '--',
+              'DK Instaweb — dkinstaweb.com'
+            ],
+            env.NOTIFY_TO,
+            {
+              to: email,
+              html: customerEmailHtml({
+                heading: 'Thanks, ' + first + '.',
+                intro:
+                  'All fifteen demos are now unlocked. Head back to the library and click any of them — each has three working pages, so open the navigation and press the buttons.',
+                rows: [['Library', 'dkinstaweb.com/templates/']],
+                steps: [
+                  'Browse the demos and find one that feels close to what you had in mind.',
+                  'Reply to this email and tell us which — or describe what you want instead.',
+                  'We will come back with what it would look like for your business, and a fixed price.'
+                ],
+                closing:
+                  "There is no obligation at any stage, and we will not chase you. Reply whenever you are ready — it comes straight to us."
+              })
+            }
+          )
+        );
 
         return json({ ok: true });
       } catch (err) {
