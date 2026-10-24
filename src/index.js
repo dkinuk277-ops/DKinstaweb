@@ -882,7 +882,7 @@ export default {
         ctx.waitUntil(
           sendEmail(
             env,
-            'New subscriber — ' + first + ' ' + last,
+            'DK Instaweb — user subscribed',
             [
               first + ' ' + last + ' subscribed to unlock the template library.',
               '',
@@ -915,11 +915,12 @@ export default {
                   ['Subscribed', when]
                 ],
                 steps: [
-                  'Reply to this email — it goes to ' + email + ' directly.',
-                  'Ask which template came closest to what they had in mind.',
-                  'Offer a discovery call and come back with a fixed price.'
+                  'We get in touch to understand your requirements in full — what the site is for, how many pages, what content you already have and when you need it live.',
+                  'We draft your site to your brand, structure and page count, then review it together and adjust until it is right. We stay flexible on scope and budget throughout.',
+                  'We build it properly, connect your domain, set up email, go live and keep it hosted and looked after. Quality work, delivered in days rather than months.'
                 ],
                 closing:
+                  'They have been told we will contact them to understand their requirements in full. ' +
                   'Every subscriber is also stored in the admin console at ' +
                   '<a href="https://dkinstaweb.com/admin" style="color:#B8823B;text-decoration:none;">dkinstaweb.com/admin</a>.'
               })
@@ -940,8 +941,10 @@ export default {
               'https://dkinstaweb.com/templates/',
               '',
               'Each one has three or four working pages, so click the navigation and press the buttons.',
-              'If one is close to what you had in mind, reply to this email and tell us which —',
-              'we will come back with what it would look like for your business.',
+              '',
+              'We will be in touch shortly to understand your requirements in full.',
+              'We are flexible on scope, pages and budget, and we build properly —',
+              'quality work delivered in days rather than months.',
               '',
               'No obligation at any stage.',
               '',
@@ -954,15 +957,17 @@ export default {
               html: customerEmailHtml({
                 heading: 'Thanks, ' + first + '.',
                 intro:
-                  'All fifteen demos are now unlocked. Head back to the library and click any of them — each has three or four working pages, so open the navigation and press the buttons.',
+                  'All fifteen demos are now unlocked. Head back to the library and click any of them — each has three or four working pages, so open the navigation and press the buttons. ' +
+                  '<strong>We will be in touch shortly to understand your requirements in full.</strong>',
                 rows: [['Library', 'dkinstaweb.com/templates/']],
                 steps: [
-                  'Browse the demos and find one that feels close to what you had in mind.',
-                  'Reply to this email and tell us which — or describe what you want instead.',
-                  'We will come back with what it would look like for your business, and a fixed price.'
+                  'We get in touch to understand your requirements in full — what the site is for, how many pages, what content you already have and when you need it live.',
+                  'We draft your site to your brand, structure and page count, then review it together and adjust until it is right. We stay flexible on scope and budget throughout.',
+                  'We build it properly, connect your domain, set up email, go live and keep it hosted and looked after. Quality work, delivered in days rather than months.'
                 ],
                 closing:
-                  "There is no obligation at any stage, and we will not chase you. Reply whenever you are ready — it comes straight to us."
+                  'We are flexible, and we take the quality of the finished site seriously — no templated recolouring, every build from scratch. ' +
+                  'There is no obligation at any stage. Reply to this email whenever you are ready and it comes straight to us.'
               })
             }
           )
