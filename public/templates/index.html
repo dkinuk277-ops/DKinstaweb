@@ -436,7 +436,7 @@
       <div>
         <div class="eyebrow">More templates</div>
         <h2 class="sc-h2">Subscribe to unlock the rest</h2>
-        <p class="sc-p">Subscribe to show your interest and the remaining eight templates open straight away — plus access to new ones as we add them. Free, no payment details.</p>
+        <p class="sc-p">Subscribe to show your interest and the remaining eight unlock straight away. Your preview stays open for one minute, and we will be in touch to walk you through any of them properly. Free, no payment details.</p>
       </div>
       <div class="lib-cta">
         <div class="unlock-state" id="unlock-state">
@@ -539,7 +539,7 @@
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
     <h3 id="mtitle">Subscribe for full access</h3>
-    <p class="msub">Show your interest and we will open the remaining eight templates right away, and send you new ones as they are added.</p>
+    <p class="msub">Show your interest and we will open the remaining eight templates right away for a one-minute preview. We will then be in touch to understand what you need and walk you through any of them in full.</p>
 
     <form id="unlock-form" novalidate>
       <div class="frow2">
@@ -551,7 +551,7 @@
       <div class="f"><label for="u-phone">Phone</label><input id="u-phone" type="tel" autocomplete="tel" required>
         <span class="ferr" id="e-phone">Please enter a contact number.</span></div>
       <button type="submit" class="msubmit" id="u-submit">Subscribe &amp; unlock</button>
-      <div class="mok" id="u-ok">Subscribed — all eight templates are open now.</div>
+      <div class="mok" id="u-ok">Subscribed — all eight are open for the next minute.</div>
       <div class="merr" id="u-err">Something went wrong, but we have opened them anyway.</div>
     </form>
   </div>
@@ -727,31 +727,58 @@ var FREE = [
 
 <script>
 (function(){
-  var KEY='dk_tpl_unlocked';
+  var KEY='dk_tpl_unlocked_at';   // timestamp of the unlock
+  var TTL=60000;                  // access window: 1 minute
+  var LOCK_SVG='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>';
+  var TICK_SVG='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>';
+  var MAIL_SVG='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 4h16v12H4z"/><path d="M4 7l8 5 8-5"/></svg>';
+
   var modal=document.getElementById('mo'), form=document.getElementById('unlock-form'),
       okEl=document.getElementById('u-ok'), errEl=document.getElementById('u-err'),
       btn=document.getElementById('u-submit'), state=document.getElementById('unlock-state'),
       subBtn=document.getElementById('sub-btn');
-  var pending=null;
+  var pending=null, relockTimer=null, countTimer=null;
 
-  function unlocked(){ try{ return localStorage.getItem(KEY)==='1'; }catch(e){ return false; } }
+  function stamp(){ try{ return parseInt(localStorage.getItem(KEY)||'0',10)||0; }catch(e){ return 0; } }
+  function unlocked(){ var t=stamp(); return t>0 && (Date.now()-t) < TTL; }
+  function leftMs(){ var t=stamp(); return t>0 ? Math.max(0, TTL-(Date.now()-t)) : 0; }
 
-  function openAll(){
-    document.querySelectorAll('.ltile').forEach(function(t){
-      t.classList.add('open');
-      if(!t.dataset.wired){
-        t.dataset.wired='1';
-        t.addEventListener('click', function(){ window.open(t.dataset.slug+'/index.html','_blank','noopener'); });
-      }
-    });
+  function countdown(){
+    clearInterval(countTimer);
+    if(!state) return;
+    function tick(){
+      var ms=leftMs();
+      if(ms<=0){ clearInterval(countTimer); return; }
+      state.innerHTML = TICK_SVG + '<span>Unlocked · ' + Math.ceil(ms/1000) + 's left</span>';
+    }
+    tick();
+    countTimer=setInterval(tick,1000);
+  }
+
+  function relock(){
+    clearTimeout(relockTimer); clearInterval(countTimer);
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    document.querySelectorAll('.ltile').forEach(function(t){ t.classList.remove('open'); });
     if(state){
-      state.classList.add('done');
-      state.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>All unlocked</span>';
+      state.classList.remove('done');
+      state.innerHTML = LOCK_SVG + '<span>8 locked</span>';
     }
     if(subBtn){
-      subBtn.classList.add('done'); subBtn.disabled=true;
-      subBtn.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>SUBSCRIBED';
+      subBtn.classList.remove('done'); subBtn.disabled=false;
+      subBtn.innerHTML = MAIL_SVG + 'SUBSCRIBE';
     }
+  }
+
+  function openAll(){
+    document.querySelectorAll('.ltile').forEach(function(t){ t.classList.add('open'); });
+    if(state) state.classList.add('done');
+    if(subBtn){
+      subBtn.classList.add('done'); subBtn.disabled=true;
+      subBtn.innerHTML = TICK_SVG + 'SUBSCRIBED';
+    }
+    countdown();
+    clearTimeout(relockTimer);
+    relockTimer=setTimeout(relock, leftMs());
   }
 
   function close(){ modal.hidden=true; document.body.style.overflow=''; }
@@ -785,7 +812,7 @@ var FREE = [
   }
 
   function done(){
-    try{ localStorage.setItem(KEY,'1'); }catch(e){}
+    try{ localStorage.setItem(KEY, String(Date.now())); }catch(e){}
     close(); openAll();
     btn.disabled=false; btn.textContent='Subscribe & unlock';
     if(pending) window.open(pending+'/index.html','_blank','noopener');
@@ -808,6 +835,6 @@ var FREE = [
       .catch(function(){ errEl.classList.add('show'); setTimeout(done,1400); });
   });
 
-  if(unlocked()) openAll();
+  if(unlocked()) openAll(); else relock();
 })();
 </script>
