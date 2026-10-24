@@ -243,6 +243,17 @@ function customerEmailHtml(opts) {
         'Every project is a little different, so we confirm the exact figure once we understand your requirements properly.' +
         '</td></tr></table>'
       : '') +
+    (opts.cta && opts.cta.url
+      ? '<table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 26px;">' +
+        '<tr><td align="center" style="padding:4px 0 0;">' +
+        '<a href="' + esc(opts.cta.url) + '" style="display:inline-block;background:#F59E0B;color:#0A1428;text-decoration:none;' +
+        'padding:14px 30px;border-radius:5px;font-family:Arial,sans-serif;font-size:14px;font-weight:bold;letter-spacing:1px;">' +
+        esc(opts.cta.label || 'GET A QUOTE') + '</a>' +
+        (opts.cta.note
+          ? '<div style="margin-top:12px;font-size:13px;line-height:1.6;color:#6B7688;font-family:Arial,sans-serif;">' + opts.cta.note + '</div>'
+          : '') +
+        '</td></tr></table>'
+      : '') +
     (rows
       ? '<div style="font-size:11px;letter-spacing:2px;color:#6B7688;font-family:Arial,sans-serif;text-transform:uppercase;margin-bottom:6px;">' + esc(opts.rowsLabel || 'What you told us') + '</div>' +
         '<table width="100%" cellpadding="0" cellspacing="0" style="border-top:1px solid #e8e8e4;margin-bottom:26px;">' + rows + '</table>'
@@ -952,10 +963,13 @@ export default {
             [
               'Hi ' + first + ',',
               '',
-              'Thanks for taking a look. All fifteen demos are now open on your browser —',
-              'just head back to the page and click any of them.',
+              'Thanks for subscribing and showing your interest. All fifteen demos are now',
+              'open on your browser — just head back to the page and click any of them.',
               '',
               'https://dkinstaweb.com/templates/',
+              '',
+              'Get a quote: https://dkinstaweb.com/quote',
+              'Answer a few short questions and you will see an indicative price straight away.',
               '',
               'Each one has three or four working pages, so click the navigation and press the buttons.',
               '',
@@ -972,11 +986,18 @@ export default {
             {
               to: email,
               html: customerEmailHtml({
-                heading: 'Thanks, ' + first + '.',
+                heading: 'Thanks for subscribing, ' + first + '.',
                 intro:
-                  'All fifteen demos are now unlocked. Head back to the library and click any of them — each has three or four working pages, so open the navigation and press the buttons. ' +
+                  'Thanks for showing your interest. All fifteen demos are now unlocked — head back to the library and click any of them. ' +
+                  'Each has three or four working pages, so open the navigation and press the buttons. ' +
                   '<strong>We will be in touch shortly to understand your requirements in full.</strong>',
-                rows: [['Library', 'dkinstaweb.com/templates/']],
+                cta: {
+                  url: 'https://dkinstaweb.com/quote',
+                  label: 'GET A QUOTE',
+                  note:
+                    'Answer a few short questions about what you need and you will see an indicative price straight away. ' +
+                    'Or simply reply to this email &mdash; it comes straight to us.'
+                },
                 steps: [
                   'We get in touch to understand your requirements in full — what the site is for, how many pages, what content you already have and when you need it live.',
                   'We draft your site to your brand, structure and page count, then review it together and adjust until it is right. We stay flexible on scope and budget throughout.',
