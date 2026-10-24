@@ -183,13 +183,13 @@
   .caption b{font-family:var(--fm);font-size:.66rem;letter-spacing:.1em;color:var(--accent);flex-shrink:0}
   @media(max-width:560px){.caption{font-size:.74rem;padding:.42rem .7rem;left:.6rem;bottom:.6rem}}
 
-  .stage-foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:1.1rem}
+  .stage-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.9rem}
   .stage-name{font-family:var(--fd);font-size:1.35rem;font-weight:500;color:var(--text-strong);letter-spacing:-.02em}
   .stage-sec{font-family:var(--fm);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-top:.2rem}
   .open-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:var(--bg);padding:.65rem 1.25rem;
     border-radius:4px;font-family:var(--fm);font-size:.78rem;font-weight:700;letter-spacing:.06em;white-space:nowrap;transition:background .2s}
   .open-btn:hover{background:var(--accent-hot)}
-  .stage-chips{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.9rem}
+  .stage-chips{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:1rem}
   .chip-f{font-family:var(--fm);font-size:.66rem;letter-spacing:.05em;color:var(--muted-2);border:1px solid var(--line);padding:.22rem .55rem;border-radius:100px}
   .pages-list{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.7rem}
   .pg-chip{font-family:var(--fm);font-size:.7rem;letter-spacing:.05em;color:var(--muted-2);border:1px solid var(--line);
@@ -214,17 +214,18 @@
   .ltile{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden;
     display:flex;flex-direction:column;cursor:pointer;transition:all .25s}
   .ltile:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 18px 40px -22px rgba(245,158,11,.4)}
+  .ltile:hover .lb h3{color:var(--accent-hot)}
   .lshot{aspect-ratio:4/3;position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
   .lshot .mini{position:absolute;inset:0;padding:9px;filter:blur(3px) saturate(.55);opacity:.5;transition:all .3s}
   .lockveil{position:absolute;inset:0;display:grid;place-items:center;background:rgba(10,20,40,.55);color:var(--accent);z-index:2;transition:opacity .3s}
   .ltile:hover .lockveil{background:rgba(10,20,40,.4)}
   .ltile.open .mini{filter:none;opacity:1}
   .ltile.open .lockveil{display:none}
-  .lb{padding:.95rem;display:flex;flex-direction:column;flex:1}
-  .lb h3{font-family:var(--fd);font-size:1rem;font-weight:500;color:var(--text-strong)}
-  .lsec{font-family:var(--fm);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:.25rem 0 .6rem}
+  .lb{padding:1.05rem;display:flex;flex-direction:column;flex:1;background:rgba(255,255,255,.045)}
+  .lb h3{font-family:var(--fd);font-size:1.08rem;font-weight:600;color:#FFFFFF;letter-spacing:-.01em}
+  .lsec{font-family:var(--fm);font-size:.66rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-hot);margin:.3rem 0 .7rem}
   .feats{display:flex;flex-wrap:wrap;gap:.28rem;margin-top:auto}
-  .feat{font-family:var(--fm);font-size:.6rem;letter-spacing:.04em;color:var(--muted-2);border:1px solid var(--line);padding:.16rem .45rem;border-radius:100px}
+  .feat{font-family:var(--fm);font-size:.63rem;letter-spacing:.04em;color:#B4BECB;background:rgba(255,255,255,.05);border:1px solid var(--line-strong);padding:.2rem .5rem;border-radius:100px}
 
   .note{background:var(--surface);border-left:3px solid var(--accent);border-radius:2px;padding:1.3rem 1.5rem;margin-top:2.5rem;
     font-size:.92rem;color:var(--muted);line-height:1.65}
@@ -359,6 +360,13 @@
       </button>
 
       <div class="stage">
+        <div class="stage-head">
+          <div>
+            <div class="stage-name" id="stage-name">Meridian</div>
+            <div class="stage-sec" id="stage-sec">Real estate · Property</div>
+          </div>
+          <a class="open-btn" id="stage-open" href="meridian/index.html" target="_blank" rel="noopener">OPEN FULL DEMO ↗</a>
+        </div>
         <div class="win">
           <div class="bar">
             <div class="dots-os"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></div>
@@ -377,13 +385,6 @@
           </div>
         </div>
 
-        <div class="stage-foot">
-          <div>
-            <div class="stage-name" id="stage-name">Meridian</div>
-            <div class="stage-sec" id="stage-sec">Real estate · Property</div>
-          </div>
-          <a class="open-btn" id="stage-open" href="meridian/index.html" target="_blank" rel="noopener">OPEN FULL DEMO ↗</a>
-        </div>
         <div class="stage-chips" id="stage-chips"></div>
         <div class="pages-list" id="stage-pages"></div>
       </div>
@@ -526,7 +527,7 @@
 </footer>
 
 <script>
-var FREE = [{"slug": "meridian", "name": "Meridian", "sector": "Real estate \u00b7 Property", "host": "meridian.example", "feats": ["Listings grid", "Filters", "Enquiry form"], "pages": ["Home", "Properties", "Contact"], "steps": [{"sel": "a[href=\"listings.html\"]", "t": "Clicking through to Properties"}, {"sel": "button.btn", "t": "Filtering the listings grid", "nonav": 1}, {"sel": "a[href=\"contact.html\"]", "t": "Opening the contact page"}, {"sel": "form input", "t": "Filling in the enquiry form", "nonav": 1}, {"sel": ".logo", "t": "Back to the landing page"}], "locked": false}, {"slug": "pulse", "name": "Pulse", "sector": "Healthcare \u00b7 Clinic", "host": "pulseclinic.example", "feats": ["Booking flow", "Service table", "Team profiles"], "pages": ["Home", "Services", "Book"], "steps": [{"sel": ".slot:not(.off)", "t": "Choosing an appointment slot", "nonav": 1}, {"sel": "a[href=\"services.html\"]", "t": "Opening the services list"}, {"sel": ".svc", "t": "Scanning the service table", "nonav": 1}, {"sel": "a[href=\"book.html\"]", "t": "Starting the booking flow"}, {"sel": ".slot:not(.off)", "t": "Picking a day and time", "nonav": 1}], "locked": false}, {"slug": "console", "name": "Console", "sector": "SaaS \u00b7 Dashboard", "host": "app.console.example", "feats": ["Charts", "Data tables", "Settings UI"], "pages": ["Dashboard", "Customers", "Settings"], "steps": [{"sel": ".seg button:last-child", "t": "Switching the chart range", "nonav": 1}, {"sel": "a[href=\"customers.html\"]", "t": "Opening Customers"}, {"sel": ".rowcheck", "t": "Selecting rows for bulk actions", "nonav": 1}, {"sel": "a[href=\"settings.html\"]", "t": "Opening Settings"}, {"sel": "a[href=\"index.html\"]", "t": "Back to the dashboard"}], "locked": false}, {"slug": "orbit", "name": "Orbit", "sector": "Startup \u00b7 SaaS marketing", "host": "orbit.example", "feats": ["Pricing table", "Feature grid", "Changelog"], "pages": ["Product", "Pricing", "Changelog"], "steps": [{"sel": ".card", "t": "Reading the capability grid", "nonav": 1}, {"sel": "a[href=\"pricing.html\"]", "t": "Opening pricing"}, {"sel": ".card", "t": "Comparing the plans", "nonav": 1}, {"sel": "a[href=\"changelog.html\"]", "t": "Opening the changelog"}, {"sel": ".lg", "t": "Back to the product page"}], "locked": false}, {"slug": "market", "name": "Market", "sector": "E-commerce \u00b7 Retail", "host": "market.example", "feats": ["Product grid", "Filters", "Slide-out basket"], "pages": ["Home", "Shop", "Product"], "steps": [{"sel": ".pc", "t": "Browsing the collection", "nonav": 1}, {"sel": "a[href=\"shop.html\"]", "t": "Opening the full shop"}, {"sel": "aside", "t": "Narrowing by category and price", "nonav": 1}, {"sel": "a[href=\"product.html\"]", "t": "Opening a product page"}, {"sel": "button[onclick=\"openCart()\"]", "t": "Adding to basket", "nonav": 1}], "locked": false}, {"slug": "forge", "name": "Forge", "sector": "Manufacturing \u00b7 Industrial", "host": "forge-eng.example", "feats": ["Spec tables", "RFQ + upload", "Catalogue"], "pages": ["Home", "Capabilities", "Catalogue"], "steps": [{"sel": "a[href=\"capabilities.html\"]", "t": "Opening capabilities"}, {"sel": "table", "t": "Scanning the plant list", "nonav": 1}, {"sel": "a[href=\"catalogue.html\"]", "t": "Opening the catalogue"}, {"sel": ".card", "t": "Browsing representative parts", "nonav": 1}, {"sel": ".lg", "t": "Back to the home page"}], "locked": false}, {"slug": "civic", "name": "Civic", "sector": "Government \u00b7 Public sector", "host": "northbridge.example", "feats": ["WCAG 2.2 AA", "Multi-step form", "Service directory"], "pages": ["Home", "Services", "Apply"], "steps": [{"sel": "a[href=\"services.html\"]", "t": "Opening all services"}, {"sel": "table a", "t": "Choosing a service", "nonav": 1}, {"sel": "a[href=\"apply.html\"]", "t": "Starting an application"}, {"sel": "#pc", "t": "Entering a postcode", "nonav": 1}, {"sel": ".crest", "t": "Back to the home page"}], "locked": false}];
+var FREE = [{"slug": "meridian", "name": "Meridian", "sector": "Real estate \u00b7 Property", "host": "meridian.example", "feats": ["Listings grid", "Filters", "Enquiry form"], "pages": ["Home", "Properties", "Contact"], "steps": [{"sel": "nav a[href=\"listings.html\"]", "t": "Opening Properties"}, {"sel": ".props .card", "t": "Browsing the listings", "nonav": 1}, {"sel": "nav a[href=\"contact.html\"]", "t": "Opening Contact"}, {"sel": "form input", "t": "Filling in the enquiry form", "nonav": 1}, {"sel": "nav a.logo", "t": "Back to the home page"}], "locked": false}, {"slug": "pulse", "name": "Pulse", "sector": "Healthcare \u00b7 Clinic", "host": "pulseclinic.example", "feats": ["Booking flow", "Service table", "Team profiles"], "pages": ["Home", "Services", "Book"], "steps": [{"sel": ".bookcard .slot:not(.off)", "t": "Choosing an appointment time", "nonav": 1}, {"sel": "nav a[href=\"services.html\"]", "t": "Opening Services"}, {"sel": ".svcs .svc", "t": "Scanning the services", "nonav": 1}, {"sel": "nav a[href=\"book.html\"]", "t": "Opening the booking flow"}, {"sel": ".slots .slot:not(.off)", "t": "Picking a slot", "nonav": 1}], "locked": false}, {"slug": "console", "name": "Console", "sector": "SaaS \u00b7 Dashboard", "host": "app.console.example", "feats": ["Charts", "Data tables", "Settings UI"], "pages": ["Dashboard", "Customers", "Settings"], "steps": [{"sel": ".seg button:last-child", "t": "Switching the chart range", "nonav": 1}, {"sel": ".side a[href=\"customers.html\"]", "t": "Opening Customers"}, {"sel": "tbody .rowcheck", "t": "Selecting rows for bulk actions", "nonav": 1}, {"sel": ".side a[href=\"settings.html\"]", "t": "Opening Settings"}, {"sel": ".side a[href=\"index.html\"]", "t": "Back to the dashboard"}], "locked": false}, {"slug": "orbit", "name": "Orbit", "sector": "Startup \u00b7 SaaS marketing", "host": "orbit.example", "feats": ["Pricing table", "Feature grid", "Changelog"], "pages": ["Product", "Pricing", "Changelog"], "steps": [{"sel": "nav a[href=\"pricing.html\"]", "t": "Opening Pricing"}, {"sel": ".g3 .card", "t": "Comparing the plans", "nonav": 1}, {"sel": "nav a[href=\"changelog.html\"]", "t": "Opening the Changelog"}, {"sel": ".clrow", "t": "Reading the latest release", "nonav": 1}, {"sel": "nav a[href=\"index.html\"]", "t": "Back to the product page"}], "locked": false}, {"slug": "market", "name": "Market", "sector": "E-commerce \u00b7 Retail", "host": "market.example", "feats": ["Product grid", "Filters", "Slide-out basket"], "pages": ["Home", "Shop", "Product"], "steps": [{"sel": "nav a[href=\"shop.html\"]", "t": "Opening the shop"}, {"sel": "aside input[type=\"range\"]", "t": "Filtering by price", "nonav": 1}, {"sel": "nav a[href=\"product.html\"]", "t": "Opening a product"}, {"sel": "button[onclick=\"openCart()\"]", "t": "Adding to basket", "nonav": 1}, {"sel": "nav a[href=\"index.html\"]", "t": "Back to the storefront"}], "locked": false}, {"slug": "forge", "name": "Forge", "sector": "Manufacturing \u00b7 Industrial", "host": "forge-eng.example", "feats": ["Spec tables", "RFQ + upload", "Catalogue"], "pages": ["Home", "Capabilities", "Catalogue"], "steps": [{"sel": "nav a[href=\"capabilities.html\"]", "t": "Opening Capabilities"}, {"sel": "table tbody tr", "t": "Scanning the plant list", "nonav": 1}, {"sel": "nav a[href=\"catalogue.html\"]", "t": "Opening the Catalogue"}, {"sel": ".cg .card", "t": "Browsing the parts", "nonav": 1}, {"sel": "nav a[href=\"index.html\"]", "t": "Back to the home page"}], "locked": false}, {"slug": "civic", "name": "Civic", "sector": "Government \u00b7 Public sector", "host": "northbridge.example", "feats": ["WCAG 2.2 AA", "Multi-step form", "Service directory"], "pages": ["Home", "Services", "Apply"], "steps": [{"sel": "nav.main a[href=\"services.html\"]", "t": "Opening All services"}, {"sel": "table tbody a", "t": "Choosing a service", "nonav": 1}, {"sel": "nav.main a[href=\"apply.html\"]", "t": "Starting an application"}, {"sel": "#pc", "t": "Entering a postcode", "nonav": 1}, {"sel": "nav.main a[href=\"index.html\"]", "t": "Back to the home page"}], "locked": false}];
 (function(){
   var FRAME_W = 1440;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
