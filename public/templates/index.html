@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Templates — DK Instaweb</title>
-<meta name="description" content="Ten starting points for your website, each shown as a working multi-page demo.">
+<meta name="description" content="Ten working website demos across ten industries. Watch them being used, then open any one and click through yourself.">
 <meta name="theme-color" content="#0A1428">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -24,78 +24,37 @@
   a{color:inherit;text-decoration:none}
   .wrap{max-width:1280px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem);position:relative;z-index:1}
 
-  nav{position:sticky;top:0;z-index:50;background:rgba(10,20,40,.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  /* ---------- Nav ---------- */
+  nav{position:sticky;top:0;z-index:50;background:rgba(10,20,40,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
   .nav-in{display:flex;align-items:center;justify-content:space-between;height:72px}
   .logo{display:flex;align-items:center;gap:.55rem;font-family:var(--fd);font-size:1.15rem;font-weight:600;color:var(--text-strong)}
   .badge{background:var(--accent);color:var(--bg);padding:4px 8px;border-radius:3px;font-size:.72rem;letter-spacing:.14em;font-weight:700;font-family:var(--fm)}
   .nav-l{display:flex;gap:1.75rem;align-items:center}
   .nav-l a{font-size:.9rem;color:var(--muted)}
-  .nav-l a:hover{color:var(--accent)}
+  .nav-l a:hover,.nav-l a.on{color:var(--accent)}
   .cta{background:var(--accent);color:var(--bg)!important;padding:.55rem 1rem;border-radius:3px;font-family:var(--fm);font-size:.85rem;font-weight:700;letter-spacing:.05em}
   .cta:hover{background:var(--accent-hot)}
-  @media(max-width:860px){.nav-l a:not(.cta){display:none}}
+  @media(max-width:900px){.nav-l a:not(.cta){display:none}}
 
+  /* ---------- Hero ---------- */
   header.hero{padding:clamp(3rem,7vw,5rem) 0 clamp(2rem,4vw,3rem);position:relative;overflow:hidden}
   header.hero::before{content:"";position:absolute;top:-220px;left:50%;width:760px;height:760px;transform:translateX(-50%);
-    background:radial-gradient(circle,rgba(245,158,11,.14) 0%,transparent 62%);pointer-events:none}
+    background:radial-gradient(circle,rgba(245,158,11,.13) 0%,transparent 62%);pointer-events:none}
   .eyebrow{font-family:var(--fm);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
-  h1{font-family:var(--fd);font-size:clamp(2.1rem,5vw,3.4rem);font-weight:500;letter-spacing:-.03em;line-height:1.08;margin-bottom:1.2rem;color:var(--text-strong);max-width:18ch}
+  h1{font-family:var(--fd);font-size:clamp(2.1rem,5vw,3.4rem);font-weight:500;letter-spacing:-.03em;line-height:1.08;margin-bottom:1.2rem;color:var(--text-strong);max-width:20ch}
   h1 em{font-style:italic;color:var(--accent)}
   .lead{color:var(--muted);font-size:1.05rem;max-width:62ch}
 
-  .filters{display:flex;gap:.5rem;flex-wrap:wrap;padding:0 0 2rem;position:relative;z-index:1}
-  .filters button{background:var(--surface);border:1px solid var(--line);color:var(--muted);font-family:var(--fm);font-size:.76rem;letter-spacing:.06em;padding:.45rem .9rem;border-radius:100px;cursor:pointer;transition:all .18s}
-  .filters button:hover{border-color:var(--line-strong);color:var(--text)}
-  .filters button.on{background:var(--accent);border-color:var(--accent);color:var(--bg);font-weight:700}
-
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;padding-bottom:4rem;position:relative;z-index:1}
-  @media(max-width:1000px){.grid{grid-template-columns:1fr 1fr}}
-  @media(max-width:640px){.grid{grid-template-columns:1fr}}
-
-  .t{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;transition:all .25s}
-  .t:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 22px 50px -24px rgba(245,158,11,.4)}
-  .t.hide{display:none}
-  .shot{aspect-ratio:16/10;position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
-  .shot .mini{position:absolute;inset:0;padding:10px}
-  .soon{position:absolute;inset:0;display:grid;place-items:center;background:rgba(10,20,40,.72);backdrop-filter:blur(2px)}
-  .soon span{font-family:var(--fm);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line-strong);padding:.4rem .8rem;border-radius:100px}
-
-  .t-b{padding:1.2rem;display:flex;flex-direction:column;flex:1}
-  .t-b h3{font-family:var(--fd);font-size:1.15rem;font-weight:500;color:var(--text-strong);letter-spacing:-.01em}
-  .sector{font-family:var(--fm);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:.3rem 0 .6rem}
-  .t-b p{font-size:.88rem;color:var(--muted);flex:1}
-  .tags{display:flex;gap:.35rem;flex-wrap:wrap;margin:.9rem 0 1rem}
-  .tag{font-family:var(--fm);font-size:.65rem;letter-spacing:.06em;color:var(--muted-2);border:1px solid var(--line);padding:.2rem .5rem;border-radius:100px}
-  .t-cta{display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding-top:.9rem;border-top:1px solid var(--line)}
-  .pages{font-family:var(--fm);font-size:.7rem;color:var(--muted-2)}
-  .view{font-family:var(--fm);font-size:.76rem;font-weight:700;letter-spacing:.06em;color:var(--accent)}
-  .view.off{color:var(--muted-2)}
-  .t a.block{display:contents}
-
-  .note{background:var(--surface);border-left:3px solid var(--accent);border-radius:2px;padding:1.3rem 1.5rem;margin-bottom:3rem;font-size:.92rem;color:var(--muted);line-height:1.65;position:relative;z-index:1}
-  .note strong{color:var(--text)}
-
-
-
-  html.rv-on [data-rv]{opacity:0;will-change:opacity,transform}
-  html.rv-on [data-rv="up"]{transform:translateY(28px)}
-  html.rv-on [data-rv="right"]{transform:translateX(34px)}
-  html.rv-on [data-rv="left"]{transform:translateX(-34px)}
-  html.rv-on [data-rv].rv-in{opacity:1;transform:none;
-    transition:opacity .7s cubic-bezier(.22,.8,.26,1),transform .7s cubic-bezier(.22,.8,.26,1)}
-  @media (prefers-reduced-motion:reduce){
-    html.rv-on [data-rv]{opacity:1!important;transform:none!important;transition:none!important}
-  }
-
-  .process{padding:clamp(2.5rem,6vw,4rem) 0 clamp(2rem,4vw,3rem);border-top:1px solid var(--line);position:relative;z-index:1}
+  /* ---------- Process ---------- */
+  .process{padding:clamp(2.5rem,6vw,4rem) 0;border-top:1px solid var(--line);position:relative;z-index:1}
   .phead{max-width:640px;margin-bottom:2.5rem}
   .phead h2{font-family:var(--fd);font-size:clamp(1.6rem,3.2vw,2.2rem);font-weight:500;letter-spacing:-.025em;color:var(--text-strong);margin-bottom:.7rem;line-height:1.15}
   .phead p{color:var(--muted);font-size:.98rem}
-  .psteps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--line)}
+  .psteps{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--line)}
   @media(max-width:1100px){.psteps{grid-template-columns:repeat(3,1fr)}}
   @media(max-width:760px){.psteps{grid-template-columns:1fr 1fr}}
   @media(max-width:560px){.psteps{grid-template-columns:1fr}}
-  .pstep{background:var(--bg);padding:1.5rem 1.3rem;display:flex;flex-direction:column;gap:.9rem;transition:background .2s;position:relative}
+  .pstep{background:var(--bg);padding:1.5rem 1.3rem;display:flex;flex-direction:column;gap:.9rem;transition:background .2s}
   .pstep:hover{background:var(--bg-2)}
   .pnum{font-family:var(--fm);font-size:1.6rem;font-weight:500;color:var(--accent);line-height:1;letter-spacing:-.02em}
   .pbody{display:flex;flex-direction:column;flex:1}
@@ -105,7 +64,89 @@
   .pwho{font-family:var(--fm);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);margin-top:1rem;padding-top:.8rem;border-top:1px solid var(--line)}
   .pnote{margin-top:1.5rem;background:var(--surface);border-left:3px solid var(--accent);border-radius:2px;padding:1.2rem 1.4rem;font-size:.92rem;color:var(--muted);line-height:1.65}
   .pnote strong{color:var(--text)}
-  footer{background:var(--bg-2);border-top:1px solid var(--line);padding:2.5rem 0;margin-top:1rem;position:relative;z-index:1}
+
+  /* ---------- Showcase ---------- */
+  .showcases{padding:clamp(2rem,5vw,3rem) 0}
+  .sc{padding:clamp(2rem,5vw,3.5rem) 0;border-top:1px solid var(--line)}
+  .sc-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+  .sc-no{font-family:var(--fm);font-size:.72rem;letter-spacing:.18em;color:var(--muted-2);margin-bottom:.6rem}
+  .sc-head h2{font-family:var(--fd);font-size:clamp(1.5rem,3vw,2.1rem);font-weight:500;letter-spacing:-.025em;color:var(--text-strong);line-height:1.15}
+  .sc-sector{font-family:var(--fm);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-top:.45rem}
+  .sc-desc{color:var(--muted);font-size:.95rem;max-width:46ch;margin-top:.8rem}
+  .sc-side{display:flex;flex-direction:column;gap:.9rem;align-items:flex-start}
+  .sc-tags{display:flex;gap:.35rem;flex-wrap:wrap}
+  .tag{font-family:var(--fm);font-size:.66rem;letter-spacing:.06em;color:var(--muted-2);border:1px solid var(--line);padding:.22rem .55rem;border-radius:100px}
+  .open-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:var(--bg);padding:.65rem 1.2rem;border-radius:4px;font-family:var(--fm);font-size:.78rem;font-weight:700;letter-spacing:.06em;white-space:nowrap;transition:background .2s}
+  .open-btn:hover{background:var(--accent-hot)}
+
+  /* browser chrome */
+  .win{border:1px solid var(--line-strong);border-radius:10px;overflow:hidden;background:#0D1526;
+    box-shadow:0 40px 90px -40px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.03)}
+  .bar{display:flex;align-items:center;gap:.7rem;padding:.6rem .9rem;background:#121C30;border-bottom:1px solid var(--line)}
+  .dots{display:flex;gap:6px;flex-shrink:0}
+  .dots i{width:11px;height:11px;border-radius:50%;display:block}
+  .url{flex:1;background:#0A1428;border:1px solid var(--line);border-radius:5px;padding:.28rem .7rem;
+    font-family:var(--fm);font-size:.72rem;color:var(--muted);display:flex;align-items:center;gap:.45rem;min-width:0}
+  .url svg{flex-shrink:0;color:#4ADE80}
+  .url span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .live{display:flex;align-items:center;gap:.4rem;font-family:var(--fm);font-size:.66rem;letter-spacing:.1em;color:var(--muted-2);flex-shrink:0}
+  .live i{width:6px;height:6px;border-radius:50%;background:#4ADE80;display:block;animation:bl 2s infinite}
+  @keyframes bl{0%,100%{opacity:1}50%{opacity:.25}}
+  @media(max-width:620px){.live span{display:none}}
+
+  /* viewport + scaled iframe */
+  .vp{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:#0A1428}
+  .vp iframe{position:absolute;top:0;left:0;width:1440px;height:900px;border:0;transform-origin:0 0;background:#fff}
+  .shield{position:absolute;inset:0;z-index:5;cursor:pointer}
+  .vp.loading::after{content:"Loading demo…";position:absolute;inset:0;display:grid;place-items:center;
+    font-family:var(--fm);font-size:.78rem;color:var(--muted-2);background:var(--bg);z-index:6}
+
+  /* animated cursor */
+  .cur{position:absolute;z-index:8;pointer-events:none;width:26px;height:26px;
+    transition:transform 1.05s cubic-bezier(.33,.72,.25,1);transform:translate(50%,60%);opacity:0}
+  .cur.on{opacity:1}
+  .cur svg{filter:drop-shadow(0 2px 5px rgba(0,0,0,.5))}
+  .cur .ring{position:absolute;top:-6px;left:-6px;width:34px;height:34px;border-radius:50%;
+    border:2px solid var(--accent);opacity:0;transform:scale(.3)}
+  .cur.click .ring{animation:tap .55s ease-out}
+  @keyframes tap{0%{opacity:.9;transform:scale(.3)}100%{opacity:0;transform:scale(1.5)}}
+
+  /* step caption */
+  .caption{position:absolute;left:1rem;bottom:1rem;z-index:7;background:rgba(10,20,40,.92);backdrop-filter:blur(8px);
+    border:1px solid var(--line-strong);border-radius:6px;padding:.55rem .9rem;display:flex;align-items:center;gap:.6rem;
+    font-size:.82rem;color:var(--text);max-width:calc(100% - 2rem);transition:opacity .35s}
+  .caption b{font-family:var(--fm);font-size:.66rem;letter-spacing:.1em;color:var(--accent);flex-shrink:0}
+  @media(max-width:560px){.caption{font-size:.74rem;padding:.45rem .7rem;left:.6rem;bottom:.6rem}}
+
+  .sc-foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:1rem}
+  .pages-list{display:flex;gap:.4rem;flex-wrap:wrap}
+  .pg-chip{font-family:var(--fm);font-size:.7rem;letter-spacing:.05em;color:var(--muted-2);border:1px solid var(--line);
+    padding:.25rem .6rem;border-radius:100px;transition:all .2s}
+  .pg-chip.now{border-color:var(--accent);color:var(--accent);background:rgba(245,158,11,.08)}
+
+  /* ---------- Library ---------- */
+  .library{padding:clamp(3rem,7vw,4.5rem) 0;border-top:1px solid var(--line)}
+  .lib-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-bottom:2rem}
+  .lib-head h2{font-family:var(--fd);font-size:clamp(1.5rem,3vw,2.1rem);font-weight:500;letter-spacing:-.025em;color:var(--text-strong)}
+  .lib-head p{color:var(--muted);font-size:.95rem;max-width:54ch;margin-top:.5rem}
+  .lib{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem}
+  @media(max-width:1100px){.lib{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:760px){.lib{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.lib{grid-template-columns:1fr}}
+  .lcard{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;transition:all .25s}
+  .lcard:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 18px 40px -22px rgba(245,158,11,.4)}
+  .lshot{aspect-ratio:4/3;position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .lshot .mini{position:absolute;inset:0;padding:9px}
+  .lb{padding:1rem;display:flex;flex-direction:column;flex:1}
+  .lb h3{font-family:var(--fd);font-size:1rem;font-weight:500;color:var(--text-strong)}
+  .lsec{font-family:var(--fm);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:.25rem 0 .5rem}
+  .lb p{font-size:.82rem;color:var(--muted);flex:1;line-height:1.55}
+  .lopen{margin-top:.9rem;padding-top:.75rem;border-top:1px solid var(--line);font-family:var(--fm);font-size:.72rem;font-weight:700;letter-spacing:.06em;color:var(--accent)}
+
+  .note{background:var(--surface);border-left:3px solid var(--accent);border-radius:2px;padding:1.3rem 1.5rem;margin-top:2.5rem;font-size:.92rem;color:var(--muted);line-height:1.65}
+  .note strong{color:var(--text)}
+
+  footer{background:var(--bg-2);border-top:1px solid var(--line);padding:2.5rem 0;margin-top:2rem;position:relative;z-index:1}
   .f-in{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;font-size:.85rem;color:var(--muted)}
   .f-in a:hover{color:var(--accent)}
 </style>
@@ -118,7 +159,7 @@
     <div class="nav-l">
       <a href="/#services">Services</a>
       <a href="/#industries">Industries</a>
-      <a href="/templates/">Templates</a>
+      <a href="/templates/" class="on">Templates</a>
       <a href="/#process">Process</a>
       <a href="/quote" class="cta">GET A QUOTE</a>
     </div>
@@ -127,30 +168,30 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow" data-rv="up">Template gallery</div>
-    <h1 data-rv="up" data-rv-d="80">See it before <em>you buy it</em>.</h1>
-    <p class="lead" data-rv="up" data-rv-d="160">Most studios show you a mood board. We built ten working sites instead — three real pages each, so you can open the navigation, press the buttons and see how it behaves on your phone. None of them is your site. All of them show you how we work.</p>
+    <div class="eyebrow">Template gallery</div>
+    <h1>See it before <em>you buy it</em>.</h1>
+    <p class="lead">Most studios show you a mood board. We built ten working sites instead. Watch the first five being used below — that is a real page in a real browser, not a video — then open any of them and click through yourself.</p>
   </div>
 </header>
 
-
+<!-- ============ PROCESS ============ -->
 <section class="process">
   <div class="wrap">
-    <div class="phead" data-rv="left">
+    <div class="phead">
       <div class="eyebrow">How a project runs</div>
       <h2>Five steps from a demo to your site</h2>
-      <p>The ten below are where conversations start, not where they end. We have built sites that look nothing like any of them — the process is the same either way.</p>
+      <p>The ten here are where conversations start, not where they end. We have built sites that look nothing like any of them — the process is the same either way.</p>
     </div>
     <div class="psteps">
-      <div class="pstep" data-rv="up" data-rv-d="0">
+      <div class="pstep">
         <div class="pnum">01</div>
         <div class="pbody">
           <h3>Start anywhere</h3>
-          <p>Pick one of the ten below, borrow pieces from several, send us a site you admire, or just describe what you have in mind. These are a vocabulary, not a catalogue — most projects begin as <em>"the Meridian layout, Pulse's booking form, our own colours"</em>.</p>
+          <p>Pick one below, borrow pieces from several, send us a site you admire, or just describe it. These are a vocabulary, not a catalogue — most projects begin as <em>"the Meridian layout, Pulse's booking form, our own colours"</em>.</p>
           <span class="pwho">You · 2 minutes</span>
         </div>
       </div>
-      <div class="pstep" data-rv="up" data-rv-d="80">
+      <div class="pstep">
         <div class="pnum">02</div>
         <div class="pbody">
           <h3>Discovery call</h3>
@@ -158,7 +199,7 @@
           <span class="pwho">Together · Day 1</span>
         </div>
       </div>
-      <div class="pstep" data-rv="up" data-rv-d="160">
+      <div class="pstep">
         <div class="pnum">03</div>
         <div class="pbody">
           <h3>Your design, drafted</h3>
@@ -166,7 +207,7 @@
           <span class="pwho">Us · Days 2–5</span>
         </div>
       </div>
-      <div class="pstep" data-rv="up" data-rv-d="240">
+      <div class="pstep">
         <div class="pnum">04</div>
         <div class="pbody">
           <h3>Review together</h3>
@@ -174,301 +215,384 @@
           <span class="pwho">Together · Days 5–8</span>
         </div>
       </div>
-      <div class="pstep" data-rv="up" data-rv-d="320">
+      <div class="pstep">
         <div class="pnum">05</div>
         <div class="pbody">
           <h3>Build, launch, look after</h3>
           <p>We connect your domain, configure email, submit to search engines and hand over a short walkthrough video. Then we keep it hosted, patched and running.</p>
           <span class="pwho">Us · Day 8 onwards</span>
         </div>
-      </div></div>
-    <div class="pnote" data-rv="up">
+      </div>
+    </div>
+    <div class="pnote">
       <strong>Not seeing your industry?</strong> That is normal — these ten cover the sectors we are asked about most, and they are a fraction of what we build. Tell us what you do and we will show you something closer, or start from a blank page.
     </div>
   </div>
 </section>
 
-<div class="wrap">
-  <div class="filters">
-    <button class="on" data-f="all">All templates</button>
-    <button data-f="business">Business</button>
-    <button data-f="public">Public sector &amp; NGO</button>
-    <button data-f="product">Product &amp; app</button>
-    <button data-f="visual">Visual &amp; retail</button>
-  </div>
+<!-- ============ SHOWCASES ============ -->
+<div class="showcases">
+
+  <!-- 1 MERIDIAN -->
+  <section class="sc">
+    <div class="wrap">
+      <div class="sc-head">
+        <div>
+          <div class="sc-no">01 / 10</div>
+          <h2>Meridian</h2>
+          <div class="sc-sector">Real estate · Property</div>
+          <p class="sc-desc">Editorial and unhurried. Large photography, serif headlines and a warm stone palette, for businesses selling something people fall in love with.</p>
+        </div>
+        <div class="sc-side">
+          <div class="sc-tags"><span class="tag">Listings grid</span><span class="tag">Filters</span><span class="tag">Enquiry form</span></div>
+          <a class="open-btn" href="meridian/index.html" target="_blank" rel="noopener">OPEN FULL DEMO ↗</a>
+        </div>
+      </div>
+
+      <div class="win" data-demo
+        data-base="meridian/"
+        data-steps='[
+          {"p":"index.html","x":58,"y":4.2,"t":"Landing page — hero, stats and featured properties"},
+          {"p":"listings.html","x":58,"y":4.2,"t":"Clicking through to Properties"},
+          {"p":"listings.html","x":22,"y":30,"t":"Filtering the listings grid"},
+          {"p":"contact.html","x":68,"y":4.2,"t":"Opening the contact page"},
+          {"p":"contact.html","x":74,"y":62,"t":"Filling in the enquiry form"}
+        ]'>
+        <div class="bar">
+          <div class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></div>
+          <div class="url">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+            <span data-url>meridian.example</span>
+          </div>
+          <span class="live"><i></i><span>LIVE PAGE</span></span>
+        </div>
+        <div class="vp loading">
+          <iframe loading="lazy" title="Meridian demo"></iframe>
+          <div class="cur"><div class="ring"></div>
+            <svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 2l14 10.5-6.2.6 3.4 7.1-2.8 1.3-3.3-7-4.1 4.3z" fill="#fff" stroke="#0A1428" stroke-width="1.3" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="caption"><b>STEP 1</b><span data-cap>Landing page</span></div>
+          <a class="shield" href="meridian/index.html" target="_blank" rel="noopener" aria-label="Open Meridian demo"></a>
+        </div>
+      </div>
+
+      <div class="sc-foot">
+        <div class="pages-list" data-chips>
+          <span class="pg-chip now">Home</span><span class="pg-chip">Properties</span><span class="pg-chip">Contact</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 PULSE -->
+  <section class="sc">
+    <div class="wrap">
+      <div class="sc-head">
+        <div>
+          <div class="sc-no">02 / 10</div>
+          <h2>Pulse</h2>
+          <div class="sc-sector">Healthcare · Clinic</div>
+          <p class="sc-desc">Calm, accessible and appointment-led. Soft teal, rounded shapes, and a booking widget that sits on the first screen instead of three clicks deep.</p>
+        </div>
+        <div class="sc-side">
+          <div class="sc-tags"><span class="tag">Booking flow</span><span class="tag">Service table</span><span class="tag">Team profiles</span></div>
+          <a class="open-btn" href="pulse/index.html" target="_blank" rel="noopener">OPEN FULL DEMO ↗</a>
+        </div>
+      </div>
+
+      <div class="win" data-demo
+        data-base="pulse/"
+        data-steps='[
+          {"p":"index.html","x":62,"y":30,"t":"Landing page with inline appointment booking"},
+          {"p":"index.html","x":76,"y":40,"t":"Choosing an available time slot"},
+          {"p":"services.html","x":56,"y":5.5,"t":"Opening the services list"},
+          {"p":"book.html","x":63,"y":5.5,"t":"Starting the full booking flow"},
+          {"p":"book.html","x":50,"y":55,"t":"Picking a day and time"}
+        ]'>
+        <div class="bar">
+          <div class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></div>
+          <div class="url">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+            <span data-url>pulseclinic.example</span>
+          </div>
+          <span class="live"><i></i><span>LIVE PAGE</span></span>
+        </div>
+        <div class="vp loading">
+          <iframe loading="lazy" title="Pulse demo"></iframe>
+          <div class="cur"><div class="ring"></div>
+            <svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 2l14 10.5-6.2.6 3.4 7.1-2.8 1.3-3.3-7-4.1 4.3z" fill="#fff" stroke="#0A1428" stroke-width="1.3" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="caption"><b>STEP 1</b><span data-cap>Landing page</span></div>
+          <a class="shield" href="pulse/index.html" target="_blank" rel="noopener" aria-label="Open Pulse demo"></a>
+        </div>
+      </div>
+
+      <div class="sc-foot">
+        <div class="pages-list" data-chips>
+          <span class="pg-chip now">Home</span><span class="pg-chip">Services</span><span class="pg-chip">Book</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 CONSOLE -->
+  <section class="sc">
+    <div class="wrap">
+      <div class="sc-head">
+        <div>
+          <div class="sc-no">03 / 10</div>
+          <h2>Console</h2>
+          <div class="sc-sector">SaaS · Dashboard · Internal tools</div>
+          <p class="sc-desc">A full application interface — sidebar navigation, live charts, data tables with bulk actions and a settings area. Proof we build more than brochures.</p>
+        </div>
+        <div class="sc-side">
+          <div class="sc-tags"><span class="tag">Charts</span><span class="tag">Data tables</span><span class="tag">Settings UI</span></div>
+          <a class="open-btn" href="console/index.html" target="_blank" rel="noopener">OPEN FULL DEMO ↗</a>
+        </div>
+      </div>
+
+      <div class="win" data-demo
+        data-base="console/"
+        data-steps='[
+          {"p":"index.html","x":50,"y":45,"t":"Dashboard — KPIs, revenue chart and recent orders"},
+          {"p":"index.html","x":72,"y":37,"t":"Switching the chart range"},
+          {"p":"customers.html","x":9,"y":27,"t":"Opening Customers from the sidebar"},
+          {"p":"customers.html","x":13,"y":56,"t":"Selecting rows to reveal bulk actions"},
+          {"p":"settings.html","x":9,"y":46,"t":"Settings — toggles and workspace options"}
+        ]'>
+        <div class="bar">
+          <div class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></div>
+          <div class="url">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+            <span data-url>app.console.example</span>
+          </div>
+          <span class="live"><i></i><span>LIVE PAGE</span></span>
+        </div>
+        <div class="vp loading">
+          <iframe loading="lazy" title="Console demo"></iframe>
+          <div class="cur"><div class="ring"></div>
+            <svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 2l14 10.5-6.2.6 3.4 7.1-2.8 1.3-3.3-7-4.1 4.3z" fill="#fff" stroke="#0A1428" stroke-width="1.3" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="caption"><b>STEP 1</b><span data-cap>Dashboard</span></div>
+          <a class="shield" href="console/index.html" target="_blank" rel="noopener" aria-label="Open Console demo"></a>
+        </div>
+      </div>
+
+      <div class="sc-foot">
+        <div class="pages-list" data-chips>
+          <span class="pg-chip now">Dashboard</span><span class="pg-chip">Customers</span><span class="pg-chip">Settings</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 ORBIT -->
+  <section class="sc">
+    <div class="wrap">
+      <div class="sc-head">
+        <div>
+          <div class="sc-no">04 / 10</div>
+          <h2>Orbit</h2>
+          <div class="sc-sector">Startup · SaaS marketing</div>
+          <p class="sc-desc">Dark, confident and product-led. Gradient accents, a feature grid, a pricing table that answers objections, and a changelog that shows the lights are on.</p>
+        </div>
+        <div class="sc-side">
+          <div class="sc-tags"><span class="tag">Pricing table</span><span class="tag">Feature grid</span><span class="tag">Changelog</span></div>
+          <a class="open-btn" href="orbit/index.html" target="_blank" rel="noopener">OPEN FULL DEMO ↗</a>
+        </div>
+      </div>
+
+      <div class="win" data-demo
+        data-base="orbit/"
+        data-steps='[
+          {"p":"index.html","x":50,"y":48,"t":"Product page with live dashboard preview"},
+          {"p":"index.html","x":50,"y":72,"t":"Scrolling the capability grid"},
+          {"p":"pricing.html","x":52,"y":4.5,"t":"Opening pricing"},
+          {"p":"pricing.html","x":50,"y":60,"t":"Comparing the three plans"},
+          {"p":"changelog.html","x":61,"y":4.5,"t":"Changelog — what shipped and when"}
+        ]'>
+        <div class="bar">
+          <div class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></div>
+          <div class="url">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+            <span data-url>orbit.example</span>
+          </div>
+          <span class="live"><i></i><span>LIVE PAGE</span></span>
+        </div>
+        <div class="vp loading">
+          <iframe loading="lazy" title="Orbit demo"></iframe>
+          <div class="cur"><div class="ring"></div>
+            <svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 2l14 10.5-6.2.6 3.4 7.1-2.8 1.3-3.3-7-4.1 4.3z" fill="#fff" stroke="#0A1428" stroke-width="1.3" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="caption"><b>STEP 1</b><span data-cap>Product page</span></div>
+          <a class="shield" href="orbit/index.html" target="_blank" rel="noopener" aria-label="Open Orbit demo"></a>
+        </div>
+      </div>
+
+      <div class="sc-foot">
+        <div class="pages-list" data-chips>
+          <span class="pg-chip now">Product</span><span class="pg-chip">Pricing</span><span class="pg-chip">Changelog</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 MARKET -->
+  <section class="sc">
+    <div class="wrap">
+      <div class="sc-head">
+        <div>
+          <div class="sc-no">05 / 10</div>
+          <h2>Market</h2>
+          <div class="sc-sector">E-commerce · Retail</div>
+          <p class="sc-desc">Product grid with working filters, a detail page with variants and specifications, and a slide-out basket. The groundwork for selling online properly.</p>
+        </div>
+        <div class="sc-side">
+          <div class="sc-tags"><span class="tag">Product grid</span><span class="tag">Filters</span><span class="tag">Basket</span></div>
+          <a class="open-btn" href="market/index.html" target="_blank" rel="noopener">OPEN FULL DEMO ↗</a>
+        </div>
+      </div>
+
+      <div class="win" data-demo
+        data-base="market/"
+        data-steps='[
+          {"p":"index.html","x":50,"y":40,"t":"Storefront with the season collection"},
+          {"p":"shop.html","x":19,"y":5,"t":"Browsing the full shop"},
+          {"p":"shop.html","x":10,"y":42,"t":"Narrowing by category and price"},
+          {"p":"product.html","x":40,"y":50,"t":"Opening a product page"},
+          {"p":"product.html","x":72,"y":66,"t":"Adding to basket — the drawer slides out"}
+        ]'>
+        <div class="bar">
+          <div class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></div>
+          <div class="url">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+            <span data-url>market.example</span>
+          </div>
+          <span class="live"><i></i><span>LIVE PAGE</span></span>
+        </div>
+        <div class="vp loading">
+          <iframe loading="lazy" title="Market demo"></iframe>
+          <div class="cur"><div class="ring"></div>
+            <svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 2l14 10.5-6.2.6 3.4 7.1-2.8 1.3-3.3-7-4.1 4.3z" fill="#fff" stroke="#0A1428" stroke-width="1.3" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="caption"><b>STEP 1</b><span data-cap>Storefront</span></div>
+          <a class="shield" href="market/index.html" target="_blank" rel="noopener" aria-label="Open Market demo"></a>
+        </div>
+      </div>
+
+      <div class="sc-foot">
+        <div class="pages-list" data-chips>
+          <span class="pg-chip now">Home</span><span class="pg-chip">Shop</span><span class="pg-chip">Product</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </div>
 
-<div class="wrap">
-  <div class="grid" id="grid">
+<!-- ============ LIBRARY ============ -->
+<section class="library">
+  <div class="wrap">
+    <div class="lib-head">
+      <div>
+        <div class="eyebrow">The rest of the library</div>
+        <h2>Five more, ready to open</h2>
+        <p>Same treatment, same three working pages each — open any one in a new tab and click through it yourself.</p>
+      </div>
+    </div>
 
-    <!-- MERIDIAN -->
-    <article class="t" data-rv="up" data-rv-d="0" data-cat="business visual">
-      <a class="block" href="meridian/index.html">
-        <div class="shot" style="background:#F5F2ED">
+    <div class="lib">
+
+      <a class="lcard" href="forge/index.html" target="_blank" rel="noopener">
+        <div class="lshot" style="background:#101316">
+          <div class="mini"><div style="height:100%;background:#1A1F25;border-radius:3px;position:relative;overflow:hidden">
+            <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:13px 13px"></div>
+            <div style="position:absolute;top:20%;left:9%;width:58%;height:7px;background:#E6E9EC;border-radius:1px"></div>
+            <div style="position:absolute;top:36%;left:9%;width:32%;height:4px;background:#F97316;border-radius:1px"></div>
+            <div style="position:absolute;top:52%;left:9%;width:40px;height:9px;background:#F97316"></div>
+          </div></div>
+        </div>
+        <div class="lb">
+          <h3>Forge</h3>
+          <div class="lsec">Manufacturing</div>
+          <p>Spec tables, plant lists and an RFQ form with drawing upload. Built for engineers who want numbers, not adjectives.</p>
+          <div class="lopen">OPEN DEMO ↗</div>
+        </div>
+      </a>
+
+      <a class="lcard" href="civic/index.html" target="_blank" rel="noopener">
+        <div class="lshot" style="background:#F3F5F9">
           <div class="mini">
-            <div style="height:14px;background:#fff;border-bottom:1px solid #DDD5CA;display:flex;align-items:center;padding:0 6px;gap:4px">
-              <span style="font-family:Georgia,serif;font-size:7px;color:#1C1A17">Meridian.</span>
-              <span style="margin-left:auto;display:flex;gap:4px"><i style="width:12px;height:3px;background:#DDD5CA;display:block"></i><i style="width:12px;height:3px;background:#DDD5CA;display:block"></i><i style="width:16px;height:6px;background:#1C1A17;display:block"></i></span>
-            </div>
-            <div style="display:flex;gap:6px;margin-top:8px;height:calc(100% - 26px)">
-              <div style="flex:1.1;display:flex;flex-direction:column;justify-content:center;gap:4px">
-                <i style="width:28px;height:3px;background:#A65F3E;display:block"></i>
-                <i style="width:86%;height:7px;background:#1C1A17;display:block"></i>
-                <i style="width:60%;height:7px;background:#1C1A17;display:block"></i>
-                <i style="width:70%;height:3px;background:#C3BAAD;display:block;margin-top:3px"></i>
-                <i style="width:52%;height:3px;background:#C3BAAD;display:block"></i>
-                <span style="display:flex;gap:4px;margin-top:5px"><i style="width:30px;height:9px;background:#1C1A17;display:block"></i><i style="width:30px;height:9px;border:1px solid #1C1A17;display:block"></i></span>
-              </div>
-              <div style="flex:.9;background:linear-gradient(150deg,#C9BCAA,#8E7F6D);position:relative">
-                <span style="position:absolute;left:0;bottom:0;background:#F5F2ED;padding:3px 5px;font-family:Georgia,serif;font-size:6px;color:#1C1A17">The Old Rectory</span>
-              </div>
-            </div>
+            <div style="height:9px;background:#0D2340"></div>
+            <div style="height:11px;background:#fff;border-bottom:3px solid #15386B;display:flex;align-items:center;padding:0 5px"><i style="width:20px;height:4px;background:#15386B;display:block"></i></div>
+            <div style="margin-top:6px"><i style="width:68%;height:7px;background:#0D2340;display:block"></i><i style="width:48%;height:3px;background:#9AA9BE;display:block;margin-top:4px"></i>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-top:5px"><i style="height:15px;background:#fff;border:1px solid #D4DCE8;display:block"></i><i style="height:15px;background:#fff;border:1px solid #D4DCE8;display:block"></i><i style="height:15px;background:#fff;border:1px solid #D4DCE8;display:block"></i></div></div>
           </div>
         </div>
-        <div class="t-b">
-          <h3>Meridian</h3>
-          <div class="sector">Real estate · Property</div>
-          <p>Editorial and unhurried. Large photography, serif headlines and a warm stone palette — for businesses selling something people fall in love with.</p>
-          <div class="tags"><span class="tag">Listings grid</span><span class="tag">Filters</span><span class="tag">Enquiry form</span></div>
-          <div class="t-cta"><span class="pages">3 pages</span><span class="view">VIEW DEMO →</span></div>
+        <div class="lb">
+          <h3>Civic</h3>
+          <div class="lsec">Public sector</div>
+          <p>Built to WCAG 2.2 from the first line — skip links, visible focus, proper fieldsets and a multi-step application form.</p>
+          <div class="lopen">OPEN DEMO ↗</div>
         </div>
       </a>
-    </article>
 
-    <!-- PULSE -->
-    <article class="t" data-rv="up" data-rv-d="90" data-cat="business public">
-      <a class="block" href="pulse/index.html">
-        <div class="shot" style="background:#F7FAFB">
-          <div class="mini">
-            <div style="height:6px;background:#0F2E33"></div>
-            <div style="height:14px;background:#fff;border-bottom:1px solid #E1ECEE;display:flex;align-items:center;padding:0 6px;gap:4px">
-              <i style="width:8px;height:8px;border-radius:3px;background:#0E9A96;display:block"></i>
-              <span style="font-size:6px;font-weight:800;color:#0F2E33">Pulse</span>
-              <span style="margin-left:auto;display:flex;gap:4px;align-items:center"><i style="width:10px;height:3px;background:#C9DCDE;display:block"></i><i style="width:10px;height:3px;background:#C9DCDE;display:block"></i><i style="width:20px;height:8px;border-radius:100px;background:#0E9A96;display:block"></i></span>
-            </div>
-            <div style="display:flex;gap:6px;margin-top:7px;height:calc(100% - 33px)">
-              <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:4px">
-                <i style="width:40px;height:7px;border-radius:100px;background:#E3F5F2;display:block"></i>
-                <i style="width:90%;height:7px;background:#0F2E33;border-radius:2px;display:block"></i>
-                <i style="width:55%;height:7px;background:#0E9A96;border-radius:2px;display:block"></i>
-                <i style="width:76%;height:3px;background:#B9CED1;display:block;margin-top:3px"></i>
-                <span style="display:flex;gap:4px;margin-top:5px"><i style="width:34px;height:9px;border-radius:100px;background:#0E9A96;display:block"></i><i style="width:28px;height:9px;border-radius:100px;border:1px solid #D4E4E6;display:block"></i></span>
-              </div>
-              <div style="flex:.85;background:#fff;border-radius:5px;box-shadow:0 4px 12px -4px rgba(15,46,51,.2);padding:5px">
-                <i style="width:60%;height:4px;background:#0F2E33;display:block;border-radius:1px"></i>
-                <i style="width:100%;height:7px;background:#F2F7F8;display:block;border-radius:2px;margin-top:4px"></i>
-                <i style="width:100%;height:7px;background:#F2F7F8;display:block;border-radius:2px;margin-top:3px"></i>
-                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:4px">
-                  <i style="height:7px;background:#F2F7F8;border-radius:2px;display:block"></i>
-                  <i style="height:7px;background:#0E9A96;border-radius:2px;display:block"></i>
-                  <i style="height:7px;background:#F2F7F8;border-radius:2px;display:block"></i>
-                  <i style="height:7px;background:#F2F7F8;border-radius:2px;display:block"></i>
-                </div>
-              </div>
-            </div>
-          </div>
+      <a class="lcard" href="kindred/index.html" target="_blank" rel="noopener">
+        <div class="lshot" style="background:#FFF8F0">
+          <div class="mini"><div style="height:100%;border-radius:3px;background:linear-gradient(145deg,#F7D9B8,#D2572E);position:relative;overflow:hidden">
+            <div style="position:absolute;left:8%;bottom:30%;width:70%;height:7px;background:#3A2415;border-radius:1px"></div>
+            <div style="position:absolute;left:8%;bottom:16%;width:44%;height:4px;background:rgba(58,36,21,.5);border-radius:1px"></div>
+            <div style="position:absolute;left:8%;bottom:4%;width:30px;height:9px;background:#fff;border-radius:100px"></div>
+          </div></div>
         </div>
-        <div class="t-b">
-          <h3>Pulse</h3>
-          <div class="sector">Healthcare · Clinic</div>
-          <p>Calm, accessible and appointment-led. Rounded shapes and a soft teal palette, with an inline booking widget that works on the first screen.</p>
-          <div class="tags"><span class="tag">Booking flow</span><span class="tag">Service table</span><span class="tag">Team profiles</span></div>
-          <div class="t-cta"><span class="pages">3 pages</span><span class="view">VIEW DEMO →</span></div>
+        <div class="lb">
+          <h3>Kindred</h3>
+          <div class="lsec">Charity · NGO</div>
+          <p>Story-led with a donation flow, Gift Aid, suggested amounts and an impact page showing where every pound goes.</p>
+          <div class="lopen">OPEN DEMO ↗</div>
         </div>
       </a>
-    </article>
 
-    <!-- CONSOLE -->
-    <article class="t" data-rv="up" data-rv-d="180" data-cat="product">
-      <a class="block" href="console/index.html">
-        <div class="shot" style="background:#0B0D10">
-          <div class="mini">
-            <div style="display:flex;gap:5px;height:100%">
-              <div style="width:28%;background:#13161B;border-radius:3px;padding:5px;display:flex;flex-direction:column;gap:3px">
-                <span style="display:flex;align-items:center;gap:3px"><i style="width:7px;height:7px;border-radius:2px;background:linear-gradient(135deg,#6366F1,#22D3EE);display:block"></i><i style="width:20px;height:3px;background:#E8EBF0;display:block"></i></span>
-                <i style="width:100%;height:5px;background:rgba(99,102,241,.2);border-radius:2px;display:block;margin-top:4px"></i>
-                <i style="width:100%;height:5px;background:#1A1E25;border-radius:2px;display:block"></i>
-                <i style="width:100%;height:5px;background:#1A1E25;border-radius:2px;display:block"></i>
-                <i style="width:100%;height:5px;background:#1A1E25;border-radius:2px;display:block"></i>
-              </div>
-              <div style="flex:1;display:flex;flex-direction:column;gap:4px">
-                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:3px">
-                  <div style="background:#13161B;border:1px solid #252A33;border-radius:3px;padding:3px"><i style="width:60%;height:2px;background:#5C6678;display:block"></i><i style="width:80%;height:5px;background:#E8EBF0;display:block;margin-top:2px"></i></div>
-                  <div style="background:#13161B;border:1px solid #252A33;border-radius:3px;padding:3px"><i style="width:60%;height:2px;background:#5C6678;display:block"></i><i style="width:70%;height:5px;background:#E8EBF0;display:block;margin-top:2px"></i></div>
-                  <div style="background:#13161B;border:1px solid #252A33;border-radius:3px;padding:3px"><i style="width:60%;height:2px;background:#5C6678;display:block"></i><i style="width:50%;height:5px;background:#E8EBF0;display:block;margin-top:2px"></i></div>
-                  <div style="background:#13161B;border:1px solid #252A33;border-radius:3px;padding:3px"><i style="width:60%;height:2px;background:#5C6678;display:block"></i><i style="width:65%;height:5px;background:#E8EBF0;display:block;margin-top:2px"></i></div>
-                </div>
-                <div style="flex:1;background:#13161B;border:1px solid #252A33;border-radius:3px;padding:4px;position:relative;overflow:hidden">
-                  <svg viewBox="0 0 120 40" style="width:100%;height:100%" preserveAspectRatio="none">
-                    <path d="M0,34 L0,28 20,24 40,27 60,18 80,20 100,10 120,6 L120,40 L0,40 Z" fill="rgba(99,102,241,.25)"/>
-                    <polyline points="0,28 20,24 40,27 60,18 80,20 100,10 120,6" fill="none" stroke="#6366F1" stroke-width="1.5"/>
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
+      <a class="lcard" href="atelier/index.html" target="_blank" rel="noopener">
+        <div class="lshot" style="background:#FAFAF8">
+          <div class="mini"><div style="height:100%;display:flex;flex-direction:column;justify-content:center;gap:4px">
+            <i style="width:76%;height:10px;background:#111;display:block"></i>
+            <i style="width:38%;height:10px;background:#111;display:block"></i>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-top:5px">
+              <i style="aspect-ratio:1;background:#DEDAD2;display:block"></i><i style="aspect-ratio:1;background:#C4BEB2;display:block"></i><i style="aspect-ratio:1;background:#E8E4DC;display:block"></i></div>
+          </div></div>
         </div>
-        <div class="t-b">
-          <h3>Console</h3>
-          <div class="sector">SaaS · Dashboard · Internal tools</div>
-          <p>A full application interface — sidebar navigation, live charts, data tables with bulk actions and a settings area. Proof that we build more than brochures.</p>
-          <div class="tags"><span class="tag">Charts</span><span class="tag">Data tables</span><span class="tag">Settings UI</span></div>
-          <div class="t-cta"><span class="pages">3 pages</span><span class="view">VIEW DEMO →</span></div>
+        <div class="lb">
+          <h3>Atelier</h3>
+          <div class="lsec">Creative · Portfolio</div>
+          <p>Typography-first and almost bare. Oversized type and a case-study grid that lets the work carry the page.</p>
+          <div class="lopen">OPEN DEMO ↗</div>
         </div>
       </a>
-    </article>
 
-    <!-- UPCOMING -->
-    <article class="t" data-rv="up" data-rv-d="0" data-cat="product">
-      <a class="block" href="orbit/index.html">
-        <div class="shot" style="background:#0D0B14">
-        <div class="mini"><div style="height:100%;background:linear-gradient(140deg,#1B1430,#0D0B14);border-radius:4px;position:relative;overflow:hidden">
-          <div style="position:absolute;top:20%;left:12%;width:60%;height:6px;background:linear-gradient(90deg,#A78BFA,#38BDF8);border-radius:2px"></div>
-          <div style="position:absolute;top:33%;left:12%;width:40%;height:6px;background:#2A2240;border-radius:2px"></div>
-          <div style="position:absolute;top:50%;left:12%;width:26px;height:9px;background:#A78BFA;border-radius:100px"></div>
-        </div></div>
-      </div>
-      <div class="t-b">
-        <h3>Orbit</h3>
-        <div class="sector">Startup · SaaS marketing</div>
-        <p>Dark, confident and product-led. Gradient accents, feature grids and pricing tables for companies selling software.</p>
-        <div class="tags"><span class="tag">Pricing table</span><span class="tag">Feature grid</span><span class="tag">Changelog</span></div>
-        <div class="t-cta"><span class="pages">3 pages</span><span class="view">VIEW DEMO →</span></div>
-      </div>
-      </a>
-    </article>
-
-    <article class="t" data-rv="up" data-rv-d="90" data-cat="business">
-      <a class="block" href="forge/index.html">
-        <div class="shot" style="background:#121417">
-        <div class="mini"><div style="height:100%;background:#1A1D21;border-radius:4px;position:relative;overflow:hidden">
-          <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:14px 14px"></div>
-          <div style="position:absolute;top:22%;left:10%;width:55%;height:7px;background:#E6E8EA;border-radius:1px"></div>
-          <div style="position:absolute;top:38%;left:10%;width:34%;height:4px;background:#F97316;border-radius:1px"></div>
-        </div></div>
-      </div>
-      <div class="t-b">
-        <h3>Forge</h3>
-        <div class="sector">Manufacturing · Industrial</div>
-        <p>Technical and precise. Spec tables, capability pages and downloadable datasheets for engineering-led buyers who want proof, not adjectives.</p>
-        <div class="tags"><span class="tag">Spec tables</span><span class="tag">Catalogue</span><span class="tag">Downloads</span></div>
-        <div class="t-cta"><span class="pages">3 pages</span><span class="view">VIEW DEMO →</span></div>
-      </div>
-      </a>
-    </article>
-
-    <article class="t" data-rv="up" data-rv-d="180" data-cat="public">
-      <a class="block" href="civic/index.html">
-        <div class="shot" style="background:#F3F5F9">
-        <div class="mini">
-          <div style="height:10px;background:#15386B"></div>
-          <div style="height:12px;background:#fff;border-bottom:2px solid #15386B;display:flex;align-items:center;padding:0 5px"><i style="width:22px;height:4px;background:#15386B;display:block"></i></div>
-          <div style="margin-top:7px"><i style="width:70%;height:7px;background:#0D2340;display:block"></i><i style="width:50%;height:3px;background:#9AA9BE;display:block;margin-top:4px"></i>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-top:6px"><i style="height:16px;background:#fff;border:1px solid #D4DCE8;display:block"></i><i style="height:16px;background:#fff;border:1px solid #D4DCE8;display:block"></i><i style="height:16px;background:#fff;border:1px solid #D4DCE8;display:block"></i></div>
-          </div>
+      <a class="lcard" href="harvest/index.html" target="_blank" rel="noopener">
+        <div class="lshot" style="background:#241812">
+          <div class="mini"><div style="height:100%;border-radius:3px;background:linear-gradient(150deg,#4A3425,#180F0A);position:relative;overflow:hidden">
+            <div style="position:absolute;left:50%;top:30%;transform:translateX(-50%);width:62%;height:9px;background:#F5E6D3;border-radius:1px"></div>
+            <div style="position:absolute;left:50%;top:50%;transform:translateX(-50%);width:26px;height:1px;background:#C9A227"></div>
+            <div style="position:absolute;left:50%;bottom:14%;transform:translateX(-50%);width:36px;height:10px;border:1px solid #C9A227"></div>
+          </div></div>
         </div>
-      </div>
-      <div class="t-b">
-        <h3>Civic</h3>
-        <div class="sector">Government · Public sector</div>
-        <p>Built to WCAG 2.2 from the first line. High contrast, clear hierarchy, plain-English navigation and forms that work with a screen reader.</p>
-        <div class="tags"><span class="tag">WCAG 2.2</span><span class="tag">Service pages</span><span class="tag">Accessible forms</span></div>
-        <div class="t-cta"><span class="pages">3 pages</span><span class="view">VIEW DEMO →</span></div>
-      </div>
-      </a>
-    </article>
-
-    <article class="t" data-rv="up" data-rv-d="0" data-cat="public">
-      <a class="block" href="kindred/index.html">
-        <div class="shot" style="background:#FFF8F0">
-        <div class="mini"><div style="height:100%;border-radius:4px;background:linear-gradient(145deg,#F7D9B8,#E09B6A);position:relative;overflow:hidden">
-          <div style="position:absolute;left:8%;bottom:14%;width:72%;height:7px;background:#3A2415;border-radius:1px"></div>
-          <div style="position:absolute;left:8%;bottom:4%;width:30px;height:10px;background:#D2572E;border-radius:100px"></div>
-        </div></div>
-      </div>
-      <div class="t-b">
-        <h3>Kindred</h3>
-        <div class="sector">Charity · NGO</div>
-        <p>Story-led and human. Impact figures, donation flow with suggested amounts, volunteer signup and a supporter newsletter.</p>
-        <div class="tags"><span class="tag">Donation flow</span><span class="tag">Impact stats</span><span class="tag">Volunteer form</span></div>
-        <div class="t-cta"><span class="pages">3 pages</span><span class="view">VIEW DEMO →</span></div>
-      </div>
-      </a>
-    </article>
-
-    <article class="t" data-rv="up" data-rv-d="90" data-cat="visual">
-      <a class="block" href="atelier/index.html">
-        <div class="shot" style="background:#FAFAF8">
-        <div class="mini"><div style="height:100%;display:flex;flex-direction:column;justify-content:center;gap:5px">
-          <i style="width:78%;height:11px;background:#111;display:block"></i>
-          <i style="width:40%;height:11px;background:#111;display:block"></i>
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin-top:6px">
-            <i style="aspect-ratio:1;background:#DEDAD2;display:block"></i><i style="aspect-ratio:1;background:#C4BEB2;display:block"></i><i style="aspect-ratio:1;background:#E8E4DC;display:block"></i>
-          </div>
-        </div></div>
-      </div>
-      <div class="t-b">
-        <h3>Atelier</h3>
-        <div class="sector">Creative · Portfolio · Agency</div>
-        <p>Typography-first and almost bare. Oversized type, generous whitespace and a case-study grid that lets the work carry the page.</p>
-        <div class="tags"><span class="tag">Case studies</span><span class="tag">Image grid</span><span class="tag">Big type</span></div>
-        <div class="t-cta"><span class="pages">3 pages</span><span class="view">VIEW DEMO →</span></div>
-      </div>
-      </a>
-    </article>
-
-    <article class="t" data-rv="up" data-rv-d="180" data-cat="visual">
-      <a class="block" href="harvest/index.html">
-        <div class="shot" style="background:#FFFBF5">
-        <div class="mini"><div style="height:100%;border-radius:4px;background:linear-gradient(150deg,#4A3425,#2A1D14);position:relative;overflow:hidden">
-          <div style="position:absolute;left:10%;top:28%;width:60%;height:9px;background:#F5E6D3;border-radius:1px"></div>
-          <div style="position:absolute;left:10%;top:48%;width:36%;height:4px;background:#C9A227;border-radius:1px"></div>
-          <div style="position:absolute;left:10%;bottom:12%;width:34px;height:10px;border:1px solid #F5E6D3;border-radius:1px"></div>
-        </div></div>
-      </div>
-      <div class="t-b">
-        <h3>Harvest</h3>
-        <div class="sector">Restaurant · Hospitality</div>
-        <p>Warm and appetite-led. Full-bleed imagery, a proper menu layout and table booking — built for places people choose with their eyes.</p>
-        <div class="tags"><span class="tag">Menu layout</span><span class="tag">Table booking</span><span class="tag">Gallery</span></div>
-        <div class="t-cta"><span class="pages">3 pages</span><span class="view">VIEW DEMO →</span></div>
-      </div>
-      </a>
-    </article>
-
-    <article class="t" data-rv="up" data-rv-d="0" data-cat="visual product">
-      <a class="block" href="market/index.html">
-        <div class="shot" style="background:#FCFCFD">
-        <div class="mini">
-          <div style="height:12px;background:#fff;border-bottom:1px solid #E6E8EC;display:flex;align-items:center;padding:0 5px;gap:3px">
-            <i style="width:18px;height:4px;background:#111;display:block"></i>
-            <i style="margin-left:auto;width:9px;height:9px;border:1.5px solid #111;border-radius:2px;display:block"></i>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin-top:6px">
-            <div><i style="aspect-ratio:1;background:#EFF1F4;display:block;border-radius:3px"></i><i style="width:70%;height:3px;background:#C8CCD4;display:block;margin-top:3px"></i></div>
-            <div><i style="aspect-ratio:1;background:#E4E8EE;display:block;border-radius:3px"></i><i style="width:60%;height:3px;background:#C8CCD4;display:block;margin-top:3px"></i></div>
-            <div><i style="aspect-ratio:1;background:#EFF1F4;display:block;border-radius:3px"></i><i style="width:75%;height:3px;background:#C8CCD4;display:block;margin-top:3px"></i></div>
-          </div>
+        <div class="lb">
+          <h3>Harvest</h3>
+          <div class="lsec">Restaurant</div>
+          <p>Warm and appetite-led, with a proper menu layout and a reservation flow that handles party size and sittings.</p>
+          <div class="lopen">OPEN DEMO ↗</div>
         </div>
-      </div>
-      <div class="t-b">
-        <h3>Market</h3>
-        <div class="sector">E-commerce · Retail</div>
-        <p>Product grid with filters, a detail page with variants, and a slide-out basket. The groundwork for selling online properly.</p>
-        <div class="tags"><span class="tag">Product grid</span><span class="tag">Filters</span><span class="tag">Basket</span></div>
-        <div class="t-cta"><span class="pages">3 pages</span><span class="view">VIEW DEMO →</span></div>
-      </div>
       </a>
-    </article>
 
+    </div>
+
+    <div class="note">
+      <strong>These are starting points, not fixed menus.</strong> Most clients pick a direction they like, then we change the colours, typography and structure to match their brand and what their customers actually need. Every one of these was built from scratch, and yours will be too.
+    </div>
   </div>
-</div>
-
-<div class="wrap">
-  <div class="note" data-rv="up">
-    <strong>These are starting points, not fixed menus.</strong> Most clients pick a direction they like, then we change the colours, typography and structure to match their brand and what their customers actually need. Nothing here is a locked-down theme — every one of these was built from scratch, and yours will be too.
-  </div>
-</div>
+</section>
 
 <footer>
   <div class="wrap f-in">
@@ -478,45 +602,114 @@
 </footer>
 
 <script>
-  document.querySelectorAll('.filters button').forEach(function(b){
-    b.addEventListener('click',function(){
-      document.querySelectorAll('.filters button').forEach(function(x){x.classList.remove('on')});
-      b.classList.add('on');
-      var f = b.dataset.f;
-      document.querySelectorAll('.t').forEach(function(t){
-        var show = f === 'all' || (t.dataset.cat || '').split(' ').indexOf(f) > -1;
-        t.classList.toggle('hide', !show);
-      });
-    });
-  });
-</script>
-
-<script>
 (function(){
+  var FRAME_W = 1440, FRAME_H = 900;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduce || !('IntersectionObserver' in window)) return;
-  document.documentElement.classList.add('rv-on');
-  function run(){
-    var els = document.querySelectorAll('[data-rv]');
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(!e.isIntersecting) return;
-        var el = e.target;
-        var d = parseInt(el.getAttribute('data-rv-d') || '0', 10);
-        setTimeout(function(){ el.classList.add('rv-in'); }, d);
-        io.unobserve(el);
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-    els.forEach(function(el){ io.observe(el); });
-    setTimeout(function(){
-      els.forEach(function(el){
-        var r = el.getBoundingClientRect();
-        if(r.top < window.innerHeight * 0.92) el.classList.add('rv-in');
-      });
-    }, 60);
+
+  function fit(win){
+    var vp = win.querySelector('.vp');
+    var fr = vp.querySelector('iframe');
+    var s = vp.clientWidth / FRAME_W;
+    fr.style.transform = 'scale(' + s + ')';
+    fr.style.height = (vp.clientHeight / s) + 'px';
   }
-  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
-  else run();
+
+  function setup(win){
+    var steps;
+    try { steps = JSON.parse(win.getAttribute('data-steps')); }
+    catch(e){ return; }
+    var base   = win.getAttribute('data-base');
+    var vp     = win.querySelector('.vp');
+    var fr     = vp.querySelector('iframe');
+    var cur    = vp.querySelector('.cur');
+    var capEl  = vp.querySelector('[data-cap]');
+    var capNum = vp.querySelector('.caption b');
+    var urlEl  = win.querySelector('[data-url]');
+    var host   = urlEl.textContent;
+    var chips  = win.parentElement.querySelectorAll('[data-chips] .pg-chip');
+
+    var i = -1, timer = null, running = false, loadedOnce = false;
+
+    fit(win);
+
+    fr.addEventListener('load', function(){
+      vp.classList.remove('loading');
+      loadedOnce = true;
+      fit(win);
+    });
+
+    function pageIndex(p){
+      // first page = 0, others follow the order they first appear
+      var seen = [], idx = 0;
+      steps.forEach(function(s){ if(seen.indexOf(s.p) === -1) seen.push(s.p); });
+      idx = seen.indexOf(p);
+      return idx < 0 ? 0 : idx;
+    }
+
+    function go(){
+      i = (i + 1) % steps.length;
+      var st = steps[i];
+      var samePage = fr.getAttribute('data-p') === st.p;
+
+      if(!samePage){
+        fr.setAttribute('data-p', st.p);
+        fr.src = base + st.p;
+        urlEl.textContent = host + (st.p === 'index.html' ? '' : '/' + st.p.replace('.html',''));
+        var pi = pageIndex(st.p);
+        chips.forEach(function(c, n){ c.classList.toggle('now', n === pi); });
+      }
+
+      // move cursor
+      cur.classList.add('on');
+      cur.style.transform = 'translate(' + (st.x * vp.clientWidth / 100) + 'px,' + (st.y * vp.clientHeight / 100) + 'px)';
+
+      // click pulse once it arrives
+      setTimeout(function(){
+        cur.classList.add('click');
+        setTimeout(function(){ cur.classList.remove('click'); }, 560);
+      }, 1050);
+
+      capNum.textContent = 'STEP ' + (i + 1);
+      capEl.textContent = st.t;
+
+      timer = setTimeout(go, 3400);
+    }
+
+    function start(){
+      if(running || reduce) return;
+      running = true;
+      if(!loadedOnce && !fr.src){ fr.setAttribute('data-p',''); }
+      go();
+    }
+    function stop(){
+      running = false;
+      clearTimeout(timer);
+      cur.classList.remove('on');
+    }
+
+    // only run while on screen
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(es){
+        es.forEach(function(e){
+          if(e.isIntersecting) start(); else stop();
+        });
+      }, { threshold: 0.35 });
+      io.observe(win);
+    } else {
+      // no observer: just load the first page statically
+      fr.src = base + steps[0].p;
+    }
+
+    // reduced motion: show the landing page, no animation
+    if(reduce){
+      fr.src = base + steps[0].p;
+      vp.querySelector('.caption').style.display = 'none';
+    }
+
+    window.addEventListener('resize', function(){ fit(win); });
+  }
+
+  document.querySelectorAll('[data-demo]').forEach(setup);
 })();
 </script>
 </body>
