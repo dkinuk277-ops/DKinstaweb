@@ -1,16 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice">
 <defs>
-<linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6B4A68"/><stop offset="1" stop-color="#2A1F38"/></linearGradient>
-<radialGradient id="g" cx="72%" cy="22%" r="58%"><stop offset="0" stop-color="#FFB4A2" stop-opacity=".85"/><stop offset="1" stop-color="#FFB4A2" stop-opacity="0"/></radialGradient>
-<linearGradient id="f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0A1428" stop-opacity="0"/><stop offset="1" stop-color="#0A1428" stop-opacity=".55"/></linearGradient>
+<linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6E4C6A"/><stop offset="1" stop-color="#2B2039"/></linearGradient>
+<radialGradient id="g" cx="74%" cy="20%" r="60%"><stop offset="0" stop-color="#FFB4A2" stop-opacity=".9"/><stop offset="1" stop-color="#FFB4A2" stop-opacity="0"/></radialGradient>
+<linearGradient id="f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0A1428" stop-opacity="0"/><stop offset="1" stop-color="#0A1428" stop-opacity=".5"/></linearGradient>
 </defs>
 <rect width="800" height="500" fill="url(#s)"/>
 <rect width="800" height="500" fill="url(#g)"/>
 
-<g fill="#E8E2D4" opacity=".22">
-<path d="M150 500c0-120 70-180 150-180 40 0 60 14 60 14l-26 46s-16-10-38-10c-50 0-76 48-76 130z"/>
-<path d="M650 500c0-120-70-180-150-180-40 0-60 14-60 14l26 46s16-10 38-10c50 0 76 48 76 130z"/></g>
-<path d="M400 320c-48-56-128-40-128 22 0 56 78 96 128 134 50-38 128-78 128-134 0-62-80-78-128-22z" fill="#F38B6B" opacity=".9"/>
-<g fill="#E8E2D4" opacity=".4"><circle cx="150" cy="130" r="6"/><circle cx="230" cy="90" r="4"/><circle cx="600" cy="110" r="5"/><circle cx="690" cy="170" r="4"/></g>
+<rect x="0" y="410" width="800" height="90" fill="#15283E" opacity=".8"/>
+<g fill="#081322"><circle cx="220" cy="250" r="19"/><path d="M191 388 L191 285 Q191 273 207 273 L233 273 Q249 273 249 285 L249 388 Z"/><circle cx="560" cy="252" r="19"/><path d="M531 390 L531 287 Q531 275 547 275 L573 275 Q589 275 589 287 L589 390 Z"/></g>
+<g stroke="#081322" fill="none"><path d="M250 300 L350 320" stroke-width="14" stroke-linecap="round"/><path d="M530 302 L440 320" stroke-width="14" stroke-linecap="round"/></g>
+<g fill="#F7B955" opacity=".9"><rect x="348" y="292" width="96" height="66" rx="5"/></g>
+<g stroke="#2B2039" stroke-opacity=".5" stroke-width="5" fill="none"><path d="M396 292v66M348 322h96"/></g>
+<path d="M396 150c-34-40-92-28-92 16 0 40 56 68 92 96 36-28 92-56 92-96 0-44-58-56-92-16z" fill="#F38B6B" opacity=".85"/>
+<g fill="#F3EADF" opacity=".35"><circle cx="120" cy="120" r="5"/><circle cx="188" cy="86" r="3"/><circle cx="676" cy="110" r="4"/><circle cx="724" cy="168" r="3"/></g>
 <rect width="800" height="500" fill="url(#f)"/>
 </svg>
