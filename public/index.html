@@ -48,6 +48,7 @@
     background: var(--bg);
     line-height: 1.55;
     font-size: 16px;
+    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
@@ -112,6 +113,10 @@
   html.rv-on [data-rv="up"]{transform:translateY(28px)}
   html.rv-on [data-rv="right"]{transform:translateX(34px)}
   html.rv-on [data-rv="left"]{transform:translateX(-34px)}
+  @media(max-width:760px){
+    html.rv-on [data-rv="right"],
+    html.rv-on [data-rv="left"]{transform:translateY(22px)}
+  }
   html.rv-on [data-rv="scale"]{transform:scale(.96)}
   html.rv-on [data-rv].rv-in{opacity:1;transform:none;
     transition:opacity .7s cubic-bezier(.22,.8,.26,1),transform .7s cubic-bezier(.22,.8,.26,1)}
@@ -388,45 +393,52 @@
   /* ---------- Industries ---------- */
   .industries-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.25rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.1rem;
   }
-  @media (max-width: 900px) { .industries-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 560px) { .industries-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 1040px) { .industries-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 760px)  { .industries-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 420px)  { .industries-grid { grid-template-columns: 1fr; } }
 
-  .industry-tile {
-    background: var(--surface);
+  .ind-tile {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 11;
+    border-radius: 14px;
+    overflow: hidden;
     border: 1px solid var(--line);
-    padding: 1.75rem;
-    border-radius: 4px;
-    transition: transform 0.25s, border-color 0.25s, background 0.25s;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    min-height: 170px;
+    background: #101B2F;
+    text-decoration: none;
+    transition: border-color .25s, transform .25s, box-shadow .25s;
   }
-  .industry-tile:hover {
-    transform: translateY(-3px);
-    border-color: var(--accent);
-    background: var(--surface-2);
+  .ind-tile .shot {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    transform: scale(1.01);
+    transition: transform .55s cubic-bezier(.2,.7,.3,1);
   }
-  .industry-tile .num {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--accent);
-    font-weight: 500;
-    margin-bottom: 0.4rem;
-    letter-spacing: 0.1em;
+  .ind-tile::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(5,11,22,.93) 0%, rgba(5,11,22,.62) 28%, rgba(5,11,22,.20) 58%, rgba(5,11,22,.06) 100%);
   }
-  .industry-tile h4 {
-    font-family: var(--font-display);
-    font-size: 1.15rem;
-    font-weight: 500;
-    color: var(--text-strong);
-    line-height: 1.25;
-    letter-spacing: -0.01em;
+  .ind-tile:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 22px 44px -26px rgba(245,158,11,.5); }
+  .ind-tile:hover .shot { transform: scale(1.08); }
+
+  .ind-ico {
+    position: absolute; top: 14px; left: 14px; z-index: 2;
+    width: 42px; height: 42px; border-radius: 12px;
+    background: rgba(255,255,255,.13);
+    border: 1px solid rgba(255,255,255,.22);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    display: grid; place-items: center; color: #fff;
   }
-  .industry-tile p { font-size: 0.88rem; color: var(--muted); }
+  .ind-tile:hover .ind-ico { background: rgba(245,158,11,.9); border-color: rgba(245,158,11,.9); color: #0A1428; }
+
+  .ind-name {
+    position: absolute; left: 16px; right: 16px; bottom: 14px; z-index: 2;
+    font-size: .95rem; font-weight: 700; color: #fff; line-height: 1.3; letter-spacing: -.01em;
+  }
+  @media (max-width: 480px) { .ind-name { font-size: .88rem; } }
 
   /* ---------- Process (6 steps) ---------- */
   .process-timeline {
@@ -799,41 +811,72 @@
         <h2 class="display">Industries we serve</h2>
       </div>
       <p class="lead" data-rv="right" data-rv-d="120">
-        Every sector asks something different of a website — from lead capture and project galleries to accessibility and compliance. We build to the standard yours expects.
+        Every sector asks something different of a website — from lead capture and project galleries to accessibility and compliance. We build to the standard yours expects. Pick the closest and tell us what you need.
       </p>
     </div>
 
     <div class="industries-grid">
-      <div class="industry-tile" data-rv="up" data-rv-d="0">
-        <span class="num">01</span>
-        <h4>Real estate &amp; property developers</h4>
-        <p>Project galleries, unit availability, brochure downloads, and lead-capture flows that respect the buyer's research journey.</p>
-      </div>
-      <div class="industry-tile" data-rv="up" data-rv-d="90">
-        <span class="num">02</span>
-        <h4>Small &amp; medium businesses</h4>
-        <p>Clear, credible marketing sites that finally do justice to what you offer — and give customers a reason to pick up the phone.</p>
-      </div>
-      <div class="industry-tile" data-rv="up" data-rv-d="180">
-        <span class="num">03</span>
-        <h4>Startups &amp; SaaS</h4>
-        <p>Landing pages, product sites, and MVP interfaces that ship fast and give you the metrics to iterate on.</p>
-      </div>
-      <div class="industry-tile" data-rv="up" data-rv-d="0">
-        <span class="num">04</span>
-        <h4>Manufacturing</h4>
-        <p>Capability sites, product catalogues, and technical documentation for engineering-led buyers who need proof, not fluff.</p>
-      </div>
-      <div class="industry-tile" data-rv="up" data-rv-d="90">
-        <span class="num">05</span>
-        <h4>Government &amp; public sector</h4>
-        <p>Accessible (WCAG 2.2), GDPR-compliant portals with clear information architecture and multi-language support where needed.</p>
-      </div>
-      <div class="industry-tile" data-rv="up" data-rv-d="180">
-        <span class="num">06</span>
-        <h4>NGOs, charities &amp; non-profits</h4>
-        <p>Story-driven sites with donation integration, volunteer signup, and impact reporting — built to a budget that respects the mission.</p>
-      </div>
+      <a class="ind-tile" href="/quote" data-rv="up" data-rv-d="0" aria-label="Real Estate and Property websites — get a quote">
+        <span class="shot" style="background-image:url(img/industries/real-estate.svg)"></span>
+        <span class="ind-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg></span>
+        <span class="ind-name">Real Estate &amp; Property</span>
+      </a>
+      <a class="ind-tile" href="/quote" data-rv="up" data-rv-d="70" aria-label="Small and Medium Business websites — get a quote">
+        <span class="shot" style="background-image:url(img/industries/small-business.svg)"></span>
+        <span class="ind-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M4 9v12h16V9"/><path d="M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0"/></svg></span>
+        <span class="ind-name">Small &amp; Medium Business</span>
+      </a>
+      <a class="ind-tile" href="/quote" data-rv="up" data-rv-d="140" aria-label="Startups and SaaS websites — get a quote">
+        <span class="shot" style="background-image:url(img/industries/startups.svg)"></span>
+        <span class="ind-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s5 2 5 9c0 4-2 7-5 9-3-2-5-5-5-9 0-7 5-9 5-9z"/><circle cx="12" cy="10" r="2"/><path d="M8 17l-3 4M16 17l3 4"/></svg></span>
+        <span class="ind-name">Startups &amp; SaaS</span>
+      </a>
+      <a class="ind-tile" href="/quote" data-rv="up" data-rv-d="210" aria-label="Manufacturing and Industrial websites — get a quote">
+        <span class="shot" style="background-image:url(img/industries/manufacturing.svg)"></span>
+        <span class="ind-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l6 4V9l6 4V4h6v17z"/><path d="M8 17h2M14 17h2"/></svg></span>
+        <span class="ind-name">Manufacturing &amp; Industrial</span>
+      </a>
+      <a class="ind-tile" href="/quote" data-rv="up" data-rv-d="0" aria-label="Government and Public Sector websites — get a quote">
+        <span class="shot" style="background-image:url(img/industries/government.svg)"></span>
+        <span class="ind-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M4 10h16M12 3l9 5H3z"/><path d="M6 10v8M10 10v8M14 10v8M18 10v8"/></svg></span>
+        <span class="ind-name">Government &amp; Public Sector</span>
+      </a>
+      <a class="ind-tile" href="/quote" data-rv="up" data-rv-d="70" aria-label="Charity and Non-profit websites — get a quote">
+        <span class="shot" style="background-image:url(img/industries/charity.svg)"></span>
+        <span class="ind-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 6.6a5 5 0 00-7.1 0L12 8.3l-1.7-1.7a5 5 0 10-7.1 7.1L12 22l8.8-8.3a5 5 0 000-7.1z"/></svg></span>
+        <span class="ind-name">Charity &amp; Non-profit</span>
+      </a>
+      <a class="ind-tile" href="/quote" data-rv="up" data-rv-d="140" aria-label="Healthcare and Clinics websites — get a quote">
+        <span class="shot" style="background-image:url(img/industries/healthcare.svg)"></span>
+        <span class="ind-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg></span>
+        <span class="ind-name">Healthcare &amp; Clinics</span>
+      </a>
+      <a class="ind-tile" href="/quote" data-rv="up" data-rv-d="210" aria-label="Education and Training websites — get a quote">
+        <span class="shot" style="background-image:url(img/industries/education.svg)"></span>
+        <span class="ind-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 9L12 4 2 9l10 5 10-5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/></svg></span>
+        <span class="ind-name">Education &amp; Training</span>
+      </a>
+      <a class="ind-tile" href="/quote" data-rv="up" data-rv-d="0" aria-label="Retail and E-commerce websites — get a quote">
+        <span class="shot" style="background-image:url(img/industries/retail.svg)"></span>
+        <span class="ind-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1 14H5z"/><path d="M9 7V5a3 3 0 016 0v2"/></svg></span>
+        <span class="ind-name">Retail &amp; E-commerce</span>
+      </a>
+      <a class="ind-tile" href="/quote" data-rv="up" data-rv-d="70" aria-label="Logistics and Transport websites — get a quote">
+        <span class="shot" style="background-image:url(img/industries/logistics.svg)"></span>
+        <span class="ind-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h12v10H2z"/><path d="M14 10h4l3 3v4h-7z"/><circle cx="6.5" cy="18.5" r="1.8"/><circle cx="17.5" cy="18.5" r="1.8"/></svg></span>
+        <span class="ind-name">Logistics &amp; Transport</span>
+      </a>
+      <a class="ind-tile" href="/quote" data-rv="up" data-rv-d="140" aria-label="Restaurants and Hospitality websites — get a quote">
+        <span class="shot" style="background-image:url(img/industries/hospitality.svg)"></span>
+        <span class="ind-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v8a2 2 0 004 0V3M7 11v10"/><path d="M17 3c-1.7 0-3 2.2-3 5s1.3 4 3 4v9"/></svg></span>
+        <span class="ind-name">Restaurants &amp; Hospitality</span>
+      </a>
+      <a class="ind-tile" href="/quote" data-rv="up" data-rv-d="210" aria-label="Professional Services websites — get a quote">
+        <span class="shot" style="background-image:url(img/industries/professional.svg)"></span>
+        <span class="ind-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3h10l6 6v12H4z"/><path d="M14 3v6h6"/><path d="M8 14h8M8 17h5"/></svg></span>
+        <span class="ind-name">Professional Services</span>
+      </a>
+    </div>
     </div>
   </div>
 </section>
